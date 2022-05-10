@@ -87,4 +87,8 @@ public class Trabajador implements Serializable {
     @JoinColumn(name = "id_cargo", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cargo idCargo;
+
+    public Trabajador(Integer id) {
+        this.id = id;
+    }
 }

@@ -19,7 +19,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlTransient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -56,5 +55,9 @@ public class Departamento implements Serializable {
     @JoinColumn(name = "id_unidad", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Unidad idUnidad;
+
+    public Departamento(Integer id) {
+        this.id = id;
+    }
 
 }

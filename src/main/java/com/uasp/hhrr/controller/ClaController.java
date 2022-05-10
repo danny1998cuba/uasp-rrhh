@@ -4,9 +4,14 @@
  */
 package com.uasp.hhrr.controller;
 
+import com.google.gson.Gson;
+import com.uasp.hhrr.MessageResponse;
+import com.uasp.hhrr.model.Cla;
+import com.uasp.hhrr.service.ClaService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,29 +30,57 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/api/cla")
 public class ClaController {
     
-    @GetMapping()
-    public List<Object> list() {
-        return null;
-    }
+    @Autowired
+    ClaService service;
     
+    @Autowired
+    Gson g;
+
+    @GetMapping("")
+    public ResponseEntity<?> list() {
+        return ResponseEntity.ok(service.findAll());
+    }
+
     @GetMapping("/{id}")
-    public Object get(@PathVariable String id) {
-        return null;
+    public ResponseEntity<?> get(@PathVariable int id) {
+        return ResponseEntity.of(service.findById(id));
     }
-    
+
     @PutMapping("/{id}")
-    public ResponseEntity<?> put(@PathVariable String id, @RequestBody Object input) {
-        return null;
+    public ResponseEntity<?> put(@PathVariable int id, @RequestBody Cla input) {
+        try {
+            int idRes = service.update(input, id);
+
+            if (idRes != -1) {
+                MessageResponse m = new MessageResponse("Elemento con id " + idRes + " modificado correctamente");
+                return ResponseEntity.ok(g.toJson(m));
+            } else {
+                MessageResponse m = new MessageResponse("No se encuentra el elemento con id " + id);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(m));
+            }
+
+        } catch (Exception e) {
+            MessageResponse m = new MessageResponse(e.getMessage());
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
+        }
     }
-    
-    @PostMapping
-    public ResponseEntity<?> post(@RequestBody Object input) {
-        return null;
+
+    @PostMapping("")
+    public ResponseEntity<?> post(@RequestBody Cla input) {
+        try {
+            int idRes = service.save(input);
+            MessageResponse m = new MessageResponse("Elemento creado con id " + idRes);
+            return ResponseEntity.status(HttpStatus.CREATED).body(g.toJson(m));
+        } catch (Exception e) {
+            MessageResponse m = new MessageResponse(e.getMessage());
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
+        }
     }
-    
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable String id) {
-        return null;
+    public ResponseEntity<?> delete(@PathVariable int id) {
+        MessageResponse m = new MessageResponse("No implementado");
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(g.toJson(m));
     }
     
 }

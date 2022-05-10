@@ -62,4 +62,8 @@ public class Cargo implements Serializable {
     @JsonIgnore
     private List<Trabajador> trabajadorList;
 
+    public Cargo(Integer id) {
+        this.id = id;
+    }
+
 }

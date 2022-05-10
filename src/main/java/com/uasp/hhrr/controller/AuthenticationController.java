@@ -36,8 +36,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 @RequestMapping("/")
 public class AuthenticationController {
 
-//    @Autowired
-//    AuthenticationManager auth;
+    @Autowired
+    AuthenticationManager auth;
 
     @Autowired
     UsuarioService userService;
@@ -47,34 +47,31 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserAuth input) {
-//        Authentication authObj;
-//
-//        try {
-//            authObj = auth.authenticate(
-//                    new UsernamePasswordAuthenticationToken(input.getUsername(), input.getPassword()));
-//            SecurityContextHolder.getContext().setAuthentication(authObj);
-//            return ResponseEntity.status(HttpStatus.OK).body(g.toJson(new MessageResponse(RequestContextHolder.currentRequestAttributes().getSessionId())));
-//        } catch (BadCredentialsException ex) {
-//            MessageResponse msg = new MessageResponse("Credenciales incorrectas");
-//            return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(msg));
-//        }
-        return null;
+        Authentication authObj;
+
+        try {
+            authObj = auth.authenticate(
+                    new UsernamePasswordAuthenticationToken(input.getUsername(), input.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authObj);
+            return ResponseEntity.status(HttpStatus.OK).body(g.toJson(new MessageResponse(RequestContextHolder.currentRequestAttributes().getSessionId())));
+        } catch (BadCredentialsException ex) {
+            MessageResponse msg = new MessageResponse("Credenciales incorrectas");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(msg));
+        }
     }
 
     @GetMapping("/userAuth")
     public ResponseEntity<?> getAuthenticated() {
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        Usuario u;
-//
-//        if (principal != "anonymousUser") {
-//            String uN = ((MyUserDetails) principal).getUser().getUsername();
-////            u = userService.findByUsername(uN).orElse(null);
-//            u = null;
-//        } else {
-//            u = null;
-//        }
-//
-//        return ResponseEntity.of(Optional.ofNullable(u));
-        return null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Usuario u;
+
+        if (principal != "anonymousUser") {
+            String uN = ((MyUserDetails) principal).getUser().getUsername();
+            u = userService.findByUsername(uN).orElse(null);
+        } else {
+            u = null;
+        }
+
+        return ResponseEntity.of(Optional.ofNullable(u));
     }
 }

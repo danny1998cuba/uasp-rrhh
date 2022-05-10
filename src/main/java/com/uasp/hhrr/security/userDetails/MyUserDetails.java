@@ -29,22 +29,20 @@ public class MyUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> auths = new ArrayList<>();
 
-//        for (Rol role : user.getRolesList()) {
-//            auths.add(new SimpleGrantedAuthority(role.getName()));
-//        }
+        for (Rol role : user.getRolList()) {
+            auths.add(new SimpleGrantedAuthority(role.getNombre()));
+        }
         return auths;
     }
 
     @Override
     public String getPassword() {
-//        return user.getPassword();
-        return "";
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-//        return user.getUsername();
-        return "";
+        return user.getUsername();
     }
 
     @Override
@@ -64,8 +62,7 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-//        return user.isEnabled();
-        return true;
+        return user.isEnabled();
     }
 
     public Usuario getUser() {

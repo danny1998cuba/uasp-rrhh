@@ -52,4 +52,8 @@ public class Cla implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "idCLA")
     private List<Trabajador> trabajadorList;
+
+    public Cla(Integer id) {
+        this.id = id;
+    }
 }

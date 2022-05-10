@@ -50,4 +50,8 @@ public class Unidad implements Serializable {
     @JsonIgnore
     private List<Departamento> departamentoList;
 
+    public Unidad(Integer id) {
+        this.id = id;
+    }
+
 }

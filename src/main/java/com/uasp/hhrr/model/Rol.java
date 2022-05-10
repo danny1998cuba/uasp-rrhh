@@ -6,18 +6,13 @@
 package com.uasp.hhrr.model;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlTransient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -50,4 +45,8 @@ public class Rol implements Serializable {
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
+
+    public Rol(Integer id) {
+        this.id = id;
+    }
 }

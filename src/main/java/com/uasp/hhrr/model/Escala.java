@@ -54,4 +54,8 @@ public class Escala implements Serializable {
     @JsonIgnore
     private List<Cargo> cargoList;
 
+    public Escala(Integer id) {
+        this.id = id;
+    }
+
 }

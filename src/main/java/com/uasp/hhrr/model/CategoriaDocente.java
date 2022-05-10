@@ -54,4 +54,8 @@ public class CategoriaDocente implements Serializable {
     @JsonIgnore
     private List<Trabajador> trabajadorList;
 
+    public CategoriaDocente(Integer id) {
+        this.id = id;
+    }
+
 }

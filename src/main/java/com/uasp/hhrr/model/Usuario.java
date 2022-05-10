@@ -78,4 +78,9 @@ public class Usuario implements Serializable {
             })
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Rol> rolList;
+
+    public Usuario(Integer id) {
+        this.id = id;
+    }
+
 }
