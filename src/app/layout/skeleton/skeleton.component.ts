@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { faUsers } from '@fortawesome/free-solid-svg-icons';
+import { ISidebarData } from 'src/app/shared/components/sidebar/sidebar.metadata';
 
 @Component({
   selector: 'app-skeleton',

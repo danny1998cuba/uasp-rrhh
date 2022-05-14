@@ -1,1 +1,67 @@
-navbar
+<header>
+  <div class="px-3 py-2 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="#" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+          <img src="assets/images/logo.png" alt="logo" height="50" class="d-inline-block align-top">
+        </a>
+
+        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+          <li>
+            <a href="#" class="nav-link text-white">
+              <fa-icon [icon]="faHome" class="fa fa-home d-block mb-1 w-100 text-center" aria-hidden="true"></fa-icon>
+              Tablero
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link text-white">
+              <fa-icon [icon]="faUsers" class="fa fa-users d-block mb-1 w-100 text-center" aria-hidden="true"></fa-icon>
+              Plantilla
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link text-white">
+              <fa-icon [icon]="faFile" class="fa fa-file d-block mb-1 w-100 text-center" aria-hidden="true"></fa-icon>
+              Modelos
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link text-white">
+              <fa-icon [icon]="faCog" class="fa fa-cog d-block mb-1 w-100 text-center" aria-hidden="true"></fa-icon>
+              Sistema
+            </a>
+          </li>
+          <li>
+            <div class="dropdown open">
+              <a href="#" class="nav-link text-white dropdown-toggle" id="triggerId" data-bs-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <fa-icon [icon]="faDash" class="fa fa-dashboard d-block mb-1 w-100 text-center" aria-hidden="true"></fa-icon>
+                Sesi&oacute;n
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-dark p-2" aria-labelledby="triggerId">
+                <li>
+                  <a class="dropdown-item d-flex gap-2 align-items-center" href="#">
+                    <fa-icon [icon]="faUser" aria-hidden="true"></fa-icon>
+                    &nbsp;
+                    Perfil
+                  </a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <a class="dropdown-item d-flex gap-2 align-items-center" href="#">
+                    <fa-icon [icon]="faSign" aria-hidden="true"></fa-icon>
+                    &nbsp;
+                    Cerrar Sesi&oacute;n
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
