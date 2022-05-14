@@ -13,13 +13,15 @@ import { SharedModule } from './shared/shared.module';
 import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { AuthComponent } from './modules/auth/auth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SkeletonComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

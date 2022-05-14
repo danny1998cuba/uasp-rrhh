@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SkeletonComponent } from './layout/skeleton/skeleton.component';
+import { AuthComponent } from './modules/auth/auth.component';
 
 const routes: Routes = [
   {
     path:'',
-    component:SkeletonComponent
+    component:AuthComponent
   }
 ];
 
