@@ -12,6 +12,7 @@ export class SidebarComponent implements OnInit {
   @Input() data : ISidebarData = {
     icon: faUser,    
     secionName:'Section name',
+    rootLink:'',
     options : [
       {
         nombre:'Default',

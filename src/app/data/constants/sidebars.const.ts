@@ -1,10 +1,11 @@
 import { faCog, faFile, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { ISidebarData } from "src/app/shared/components/sidebar/sidebar.metadata";
-import { MODELOS_ROUTES, PLANTILLA_ROUTES, SISTEMA_ROUTES } from "./routes/routes.routes";
+import { MODELOS_ROOT, MODELOS_ROUTES, PLANTILLA_ROOT, PLANTILLA_ROUTES, SISTEMA_ROOT, SISTEMA_ROUTES } from "./routes/routes.routes";
 
 export const MODELOS_SIDEBAR: ISidebarData = {
     icon: faFile,
-    secionName:'Modelos',
+    secionName: 'Modelos',
+    rootLink: '/' + MODELOS_ROOT,
     options: [
         {
             nombre: 'Modelo 1',
@@ -19,7 +20,8 @@ export const MODELOS_SIDEBAR: ISidebarData = {
 
 export const PLANTILLA_SIDEBAR: ISidebarData = {
     icon: faUsers,
-    secionName:'Plantilla',
+    secionName: 'Plantilla',
+    rootLink: '/' + PLANTILLA_ROOT,
     options: [
         {
             nombre: 'Trabajadores',
@@ -34,7 +36,8 @@ export const PLANTILLA_SIDEBAR: ISidebarData = {
 
 export const SISTEMA_SIDEBAR: ISidebarData = {
     icon: faCog,
-    secionName:'Sistema',
+    secionName: 'Sistema',
+    rootLink: '/' + SISTEMA_ROOT,
     options: [
         {
             nombre: 'Unidades',
