@@ -10,7 +10,8 @@ import { ISidebarData } from './sidebar.metadata';
 export class SidebarComponent implements OnInit {
 
   @Input() data : ISidebarData = {
-    icon: faUser,
+    icon: faUser,    
+    secionName:'Section name',
     options : [
       {
         nombre:'Default',
