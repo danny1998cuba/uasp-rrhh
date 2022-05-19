@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/core/guards';
 import { SISTEMA_CHILDREN } from 'src/app/data/constants';
 import { CargosComponent } from './cargos/cargos.component';
 import { CatDocComponent } from './cat-doc/cat-doc.component';
@@ -18,37 +19,46 @@ export const routes: Routes = [
         children: [
             {
                 path:'',
-                component:InitComponent
+                component:InitComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: SISTEMA_CHILDREN.UNIDADES,
-                component: UnidadesComponent
+                component: UnidadesComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: SISTEMA_CHILDREN.ESCALAS,
-                component: EscalasComponent
+                component: EscalasComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: SISTEMA_CHILDREN.CARGOS,
-                component: CargosComponent
+                component: CargosComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: SISTEMA_CHILDREN.CAT_OCUP,
-                component: CatOcupComponent
+                component: CatOcupComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: SISTEMA_CHILDREN.CAT_DOC,
-                component: CatDocComponent
+                component: CatDocComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: SISTEMA_CHILDREN.CLA,
-                component: ClaComponent
+                component: ClaComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: SISTEMA_CHILDREN.USUARIOS,
-                component: UsuariosComponent
+                component: UsuariosComponent,
+                canActivate: [AuthGuard]
             }
-        ]
+        ],
+        canActivate: [AuthGuard]
     }
 ]
 

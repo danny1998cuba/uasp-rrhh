@@ -27,12 +27,12 @@
                                     </h1>
 
                                     <div class="form-outline mb-4">
-                                        <input type="text" id="username" class="form-control form-control-lg" required [ngModel]="username"/>
+                                        <input type="text" id="username" class="form-control form-control-lg" required [(ngModel)]="username" [ngModelOptions]="{standalone:true}" >
                                         <label class="form-label" for="username">Nombre de usuario</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input type="password" id="password" class="form-control form-control-lg" required [ngModel]="password"/>
+                                        <input type="password" id="password" class="form-control form-control-lg" required [(ngModel)]="password" [ngModelOptions]="{standalone:true}" >
                                         <label class="form-label" for="password">Contrase&ntilde;a</label>
                                     </div>
 

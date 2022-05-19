@@ -1,17 +1,31 @@
+// Plantillas routes
 export const PLANTILLA_ROOT = 'plantilla'
-export const MODELOS_ROOT = 'modelos'
-export const SISTEMA_ROOT = 'sistema'
-export const SESION_ROOT = 'sesion'
 
 export const PLANTILLA_CHILDREN = {
     TRABAJADORES : 'trabajador',
     P2 : 'p2'
 }
 
+export const PLANTILLA_ROUTES = {
+    TRABAJADORES : `${PLANTILLA_ROOT}/${PLANTILLA_CHILDREN.TRABAJADORES}`,
+    P2 : `${PLANTILLA_ROOT}/${PLANTILLA_CHILDREN.P2}`
+}
+
+// Modelos routes
+export const MODELOS_ROOT = 'modelos'
+
 export const MODELOS_CHILDREN = {
     MODEL1 : 'model1',
     MODEL2 : 'model2'
 }
+
+export const MODELOS_ROUTES = {
+    MODEL1 : `${MODELOS_ROOT}/${MODELOS_CHILDREN.MODEL1}`,
+    MODEL2 : `${MODELOS_ROOT}/${MODELOS_CHILDREN.MODEL2}`
+}
+
+// Sistema routes
+export const SISTEMA_ROOT = 'sistema'
 
 export const SISTEMA_CHILDREN = {
     CARGOS : 'cargos',
@@ -21,16 +35,6 @@ export const SISTEMA_CHILDREN = {
     CAT_DOC : 'catdoc',
     CLA : 'cla',
     USUARIOS : 'usuarios',
-}
-
-export const PLANTILLA_ROUTES = {
-    TRABAJADORES : `${PLANTILLA_ROOT}/${PLANTILLA_CHILDREN.TRABAJADORES}`,
-    P2 : `${PLANTILLA_ROOT}/${PLANTILLA_CHILDREN.P2}`
-}
-
-export const MODELOS_ROUTES = {
-    MODEL1 : `${MODELOS_ROOT}/${MODELOS_CHILDREN.MODEL1}`,
-    MODEL2 : `${MODELOS_ROOT}/${MODELOS_CHILDREN.MODEL2}`
 }
 
 export const SISTEMA_ROUTES = {
@@ -43,3 +47,8 @@ export const SISTEMA_ROUTES = {
     USUARIOS : `${SISTEMA_ROOT}/${SISTEMA_CHILDREN.USUARIOS}`,
 }
 
+// Sesion routes
+export const SESION_ROOT = 'sesion'
+
+// Login routes
+export const LOGIN_ROUTE = 'login'

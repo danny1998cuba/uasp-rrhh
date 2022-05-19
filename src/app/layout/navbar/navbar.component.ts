@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faCog, faDashboard, faFile, faHome, faSignOut, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { MODELOS_ROOT, PLANTILLA_ROOT, SISTEMA_ROOT } from 'src/app/data/constants';
+import { AuthService } from 'src/app/data/services';
 
 @Component({
   selector: 'app-navbar',
@@ -14,9 +15,21 @@ export class NavbarComponent implements OnInit {
 
   plantilla = PLANTILLA_ROOT; modelos = MODELOS_ROOT; sistema = SISTEMA_ROOT
 
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  logout() {
+    this.authService.logout().subscribe(r => {
+      if (r.error) {
+        console.log('algo paso ' + r.msg)
+      } else {
+        console.log(r)
+      }
+    })
+
+  }
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/core/guards';
 import { InitComponent } from './init/init.component';
 import { ModeloSkeletonComponent } from './modelo-skeleton/modelo-skeleton.component';
 
@@ -10,9 +11,11 @@ export const routes: Routes = [
         children:[
             {
                 path:'',
-                component:InitComponent
+                component:InitComponent,
+                canActivate: [AuthGuard]
             },
-        ]
+        ],
+        canActivate: [AuthGuard]
     }
 ]
 

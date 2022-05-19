@@ -14,6 +14,7 @@ import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AuthComponent } from './modules/auth/auth.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AuthComponent } from './modules/auth/auth.component';
     SharedModule
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: "es-ES" }
+    { provide: LOCALE_ID, useValue: "es-ES" },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
