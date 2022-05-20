@@ -1,1 +1,7 @@
-<p>init works!</p>
+<ng-container *ngIf="!isLoading; else noData;">
+    init works!
+</ng-container>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>
