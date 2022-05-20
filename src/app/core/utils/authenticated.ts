@@ -3,7 +3,7 @@ import { User } from "src/app/data/schema"
 
 export abstract class Authenticated {
     static get getUserFromLS(): User | undefined {
-        const item = localStorage.getItem(STORAGE_KEYS.USER)
+        const item = sessionStorage.getItem(STORAGE_KEYS.USER)
         if (item)
             return JSON.parse(item)
         else

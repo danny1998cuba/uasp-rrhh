@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, map, Observable } from 'rxjs';
-import { STORAGE_KEYS } from '../../constants';
+import { LOGIN_ROUTE, SISTEMA_ROOT, STORAGE_KEYS } from '../../constants';
 import { LOGIN_ROUTES } from '../../constants/routes/api.routes';
 import { ApiClass, ResponseHandler } from '../../schema';
 
@@ -51,12 +51,12 @@ export class AuthService extends ApiClass {
       .pipe(
         map(r => {
           this.cookies.delete(STORAGE_KEYS.SESSIONID)
-          localStorage.removeItem(STORAGE_KEYS.USER)
+          sessionStorage.removeItem(STORAGE_KEYS.USER)
 
           response.msg = "Sesion cerrada con exito"
           response.status = HttpStatusCode.Ok
 
-          this.router.navigateByUrl('/login')
+          this.router.navigateByUrl('/' + LOGIN_ROUTE)
 
           return response;
         }),
@@ -79,7 +79,7 @@ export class AuthService extends ApiClass {
           this.setUserToLS(r)
 
           if (!response.error) {
-            this.router.navigateByUrl('/home')
+            this.router.navigateByUrl('/' + SISTEMA_ROOT)
           }
           return response;
         }),
@@ -88,6 +88,6 @@ export class AuthService extends ApiClass {
   }
 
   private setUserToLS(data: any) {
-    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(data))
+    sessionStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(data))
   }
 }
