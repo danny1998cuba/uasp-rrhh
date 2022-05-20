@@ -11,3 +11,4 @@ export * from './model/user'
 
 export * from './api-class'
 export * from './response-handler'
+export * from './services-consumer'
