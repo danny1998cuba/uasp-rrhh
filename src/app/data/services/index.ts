@@ -1,1 +1,12 @@
 export * from './api/auth.service'
+
+export * from './api/cargo.service'
+export * from './api/cat-doc.service'
+export * from './api/cat-ocup.service'
+export * from './api/cla.service'
+export * from './api/departamento.service'
+export * from './api/escala.service'
+export * from './api/rol.service'
+export * from './api/trabajador.service'
+export * from './api/unidad.service'
+export * from './api/user.service'

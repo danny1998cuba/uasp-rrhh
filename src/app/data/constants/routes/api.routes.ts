@@ -10,15 +10,21 @@ export const LOGIN_ROUTES = {
     ACTIVE_USER: `${BASE_ROUTE}userAuth`
 }
 
-// // Controllers Routes
-// export const GESTION_ROUTES = {
-//     PROVIDERS: `${API_ROUTE}/proveedor`,
-//     PROVIDERS_ALL: `${API_ROUTE}/proveedor/all`,
-//     CONTRATO: `${API_ROUTE}/contrato`,
-//     DICTAMEN: `${API_ROUTE}/dictamen`,
-//     USERS: `${API_ROUTE}/users`,
-//     ROLES: `${API_ROUTE}/users/roles`
-// }
+// Controllers Routes
+export const GESTION_ROUTES = {
+    CARGO: `${API_ROUTE}/cargo`,
+    CAT_DOC: `${API_ROUTE}/catDoc`,
+    CAT_OCUP: `${API_ROUTE}/catOcup`,
+    CLA: `${API_ROUTE}/cla`,
+    DEPARTAMENTO: `${API_ROUTE}/departamento`,
+    ESCALA: `${API_ROUTE}/escala`,
+    ROL: `${API_ROUTE}/rol`,
+    TRABAJADOR: `${API_ROUTE}/trabajador`,
+    UNIDAD: `${API_ROUTE}/unidad`,
+    USERS: `${API_ROUTE}/usuario`
+}
+
+export const PASS_ROUTE = `${GESTION_ROUTES.USERS}/pass`
 
 // // Connectors
 // export const CONNECTORS = {
