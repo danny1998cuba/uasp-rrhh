@@ -2,19 +2,20 @@ import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { GESTION_ROUTES } from '../../constants';
+import { IApiService } from '../../interfaces';
 import { ApiClass, Cla, ResponseHandler } from '../../schema';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClaService extends ApiClass {
+export class ClaService extends ApiClass implements IApiService<Cla, number> {
 
   constructor(private http: HttpClient) {
     super()
   }
 
   // Obtener todas las Clas
-  getCla(): Observable<ResponseHandler> {
+  getAll(): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.get<Cla[]>(GESTION_ROUTES.CLA, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -27,7 +28,7 @@ export class ClaService extends ApiClass {
   }
 
   // Obtener Cla por id
-  getClaById(id: number): Observable<ResponseHandler> {
+  getById(id: number): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.get<Cla[]>(GESTION_ROUTES.CLA + '/' + id, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -40,7 +41,7 @@ export class ClaService extends ApiClass {
   }
 
   // Crear una Cla
-  createCla(value: Cla): Observable<ResponseHandler> {
+  create(value: Cla): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.post<any>(GESTION_ROUTES.CLA, value, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -54,7 +55,7 @@ export class ClaService extends ApiClass {
   }
 
   // Actualizar entrada existente
-  updateCla(id: number, value: Cla): Observable<ResponseHandler> {
+  update(id: number, value: Cla): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.put<any>(GESTION_ROUTES.CLA + '/' + id, value, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -68,7 +69,7 @@ export class ClaService extends ApiClass {
   }
 
   // Eliminar Cla
-  deleteCla(id: number): Observable<ResponseHandler> {
+  delete(id: number): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.delete<any>(GESTION_ROUTES.CLA + '/' + id, { headers: this.headers, withCredentials: true })
       .pipe(

@@ -2,19 +2,20 @@ import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { GESTION_ROUTES } from '../../constants/routes/api.routes';
+import { IApiService } from '../../interfaces';
 import { ApiClass, ResponseHandler, Trabajador } from '../../schema';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TrabajadorService extends ApiClass {
+export class TrabajadorService extends ApiClass implements IApiService<Trabajador, number> {
 
   constructor(private http: HttpClient) {
     super()
   }
 
   // Obtener todas las Trabajador
-  getTrabajador(): Observable<ResponseHandler> {
+  getAll(): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.get<Trabajador[]>(GESTION_ROUTES.TRABAJADOR, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -27,7 +28,7 @@ export class TrabajadorService extends ApiClass {
   }
 
   // Obtener Trabajador por id
-  getTrabajadorById(id: number): Observable<ResponseHandler> {
+  getById(id: number): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.get<Trabajador[]>(GESTION_ROUTES.TRABAJADOR + '/' + id, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -40,7 +41,7 @@ export class TrabajadorService extends ApiClass {
   }
 
   // Crear una Trabajador
-  createTrabajador(value: Trabajador): Observable<ResponseHandler> {
+  create(value: Trabajador): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.post<any>(GESTION_ROUTES.TRABAJADOR, value, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -54,7 +55,7 @@ export class TrabajadorService extends ApiClass {
   }
 
   // Actualizar entrada existente
-  updateTrabajador(id: number, value: Trabajador): Observable<ResponseHandler> {
+  update(id: number, value: Trabajador): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.put<any>(GESTION_ROUTES.TRABAJADOR + '/' + id, value, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -68,7 +69,7 @@ export class TrabajadorService extends ApiClass {
   }
 
   // Eliminar Trabajador
-  deleteTrabajador(id: number): Observable<ResponseHandler> {
+  delete(id: number): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.delete<any>(GESTION_ROUTES.TRABAJADOR + '/' + id, { headers: this.headers, withCredentials: true })
       .pipe(

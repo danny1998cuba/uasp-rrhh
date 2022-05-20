@@ -2,19 +2,20 @@ import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { GESTION_ROUTES } from '../../constants';
+import { IApiService } from '../../interfaces';
 import { ApiClass, CatOcup, ResponseHandler } from '../../schema';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CatOcupService extends ApiClass {
+export class CatOcupService extends ApiClass implements IApiService<CatOcup, number> {
 
   constructor(private http: HttpClient) {
     super()
   }
 
   // Obtener todas las CatOcups
-  getCatOcup(): Observable<ResponseHandler> {
+  getAll(): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.get<CatOcup[]>(GESTION_ROUTES.CAT_OCUP, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -27,7 +28,7 @@ export class CatOcupService extends ApiClass {
   }
 
   // Obtener CatOcup por id
-  getCatOcupById(id: number): Observable<ResponseHandler> {
+  getById(id: number): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.get<CatOcup[]>(GESTION_ROUTES.CAT_OCUP + '/' + id, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -40,7 +41,7 @@ export class CatOcupService extends ApiClass {
   }
 
   // Crear una CatOcup
-  createCatOcup(value: CatOcup): Observable<ResponseHandler> {
+  create(value: CatOcup): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.post<any>(GESTION_ROUTES.CAT_OCUP, value, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -54,7 +55,7 @@ export class CatOcupService extends ApiClass {
   }
 
   // Actualizar entrada existente
-  updateCatOcup(id: number, value: CatOcup): Observable<ResponseHandler> {
+  update(id: number, value: CatOcup): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.put<any>(GESTION_ROUTES.CAT_OCUP + '/' + id, value, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -68,7 +69,7 @@ export class CatOcupService extends ApiClass {
   }
 
   // Eliminar CatOcup
-  deleteCatOcup(id: number): Observable<ResponseHandler> {
+  delete(id: number): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.delete<any>(GESTION_ROUTES.CAT_OCUP + '/' + id, { headers: this.headers, withCredentials: true })
       .pipe(

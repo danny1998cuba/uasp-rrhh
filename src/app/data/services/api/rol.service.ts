@@ -2,19 +2,20 @@ import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { GESTION_ROUTES } from '../../constants';
+import { IApiService } from '../../interfaces';
 import { ApiClass, ResponseHandler, Rol } from '../../schema';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RolService extends ApiClass {
+export class RolService extends ApiClass implements IApiService<Rol, number> {
 
   constructor(private http: HttpClient) {
     super()
   }
 
   // Obtener todas las Rol
-  getRol(): Observable<ResponseHandler> {
+  getAll(): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.get<Rol[]>(GESTION_ROUTES.ROL, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -27,7 +28,7 @@ export class RolService extends ApiClass {
   }
 
   // Obtener Rol por id
-  getRolById(id: number): Observable<ResponseHandler> {
+  getById(id: number): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.get<Rol[]>(GESTION_ROUTES.ROL + '/' + id, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -40,7 +41,7 @@ export class RolService extends ApiClass {
   }
 
   // Crear una Rol
-  createRol(value: Rol): Observable<ResponseHandler> {
+  create(value: Rol): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.post<any>(GESTION_ROUTES.ROL, value, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -54,7 +55,7 @@ export class RolService extends ApiClass {
   }
 
   // Actualizar entrada existente
-  updateRol(id: number, value: Rol): Observable<ResponseHandler> {
+  update(id: number, value: Rol): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.put<any>(GESTION_ROUTES.ROL + '/' + id, value, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -68,7 +69,7 @@ export class RolService extends ApiClass {
   }
 
   // Eliminar Rol
-  deleteRol(id: number): Observable<ResponseHandler> {
+  delete(id: number): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.delete<any>(GESTION_ROUTES.ROL + '/' + id, { headers: this.headers, withCredentials: true })
       .pipe(
