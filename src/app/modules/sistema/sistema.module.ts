@@ -10,6 +10,8 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { EscalasComponent } from './escalas/escalas.component';
 import { ClaComponent } from './cla/cla.component';
 import { InitComponent } from './init/init.component';
+import { AddModComponent } from './escalas/add-mod/add-mod.component';
+import { DelComponent } from './escalas/del/del.component';
 
 
 
@@ -23,7 +25,9 @@ import { InitComponent } from './init/init.component';
     UsuariosComponent,
     EscalasComponent,
     ClaComponent,
-    InitComponent
+    InitComponent,
+    AddModComponent,
+    DelComponent
   ],
   imports: [
     SharedModule

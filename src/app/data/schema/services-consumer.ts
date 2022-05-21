@@ -16,6 +16,7 @@ export class ServicesConsumer<T, PK> {
     }
     
     refreshData(){}
+    sendMsg(msg:string){}
 
     add(cont: T) {
         this.service.create(cont).subscribe(
@@ -24,11 +25,7 @@ export class ServicesConsumer<T, PK> {
                     this.isLoading = true;
                     this.refreshData()
                 } else {
-                    //   this.growl.data = {
-                    //     msg: r.msg,
-                    //     class: 'error',
-                    //     isHidden: false
-                    //   }
+                    this.sendMsg(r.msg)
                 }
             }
         )
@@ -41,11 +38,7 @@ export class ServicesConsumer<T, PK> {
                     this.isLoading = true;
                     this.refreshData()
                 } else {
-                    //   this.growl.data = {
-                    //     msg: r.msg,
-                    //     class: 'error',
-                    //     isHidden: false
-                    //   }
+                    this.sendMsg(r.msg)
                 }
             }
         )
@@ -58,11 +51,7 @@ export class ServicesConsumer<T, PK> {
                     this.isLoading = true;
                     this.refreshData()
                 } else {
-                    // this.growl.data = {
-                    //   msg: r.msg,
-                    //   class: 'error',
-                    //   isHidden: false
-                    // }
+                    this.sendMsg(r.msg)
                 }
             }
         )

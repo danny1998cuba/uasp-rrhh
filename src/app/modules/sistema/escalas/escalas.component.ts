@@ -1,11 +1,15 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { faEdit, faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Escala, ServicesConsumer } from 'src/app/data/schema';
 import { EscalaService } from 'src/app/data/services';
+import { AddModComponent } from './add-mod/add-mod.component';
+import { DelComponent } from './del/del.component';
 
 @Component({
   selector: 'app-escalas',
@@ -26,7 +30,12 @@ export class EscalasComponent extends ServicesConsumer<Escala, number> {
     this.dataSource.sort = sort
   }
 
-  constructor(service: EscalaService, router: Router) {
+  constructor(
+    service: EscalaService,
+    router: Router,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {
     super(service, router)
   }
 
@@ -46,6 +55,10 @@ export class EscalasComponent extends ServicesConsumer<Escala, number> {
     )
   }
 
+  override sendMsg(msg: string) {
+    this.snackBar.open(msg, '', { duration: 2000, horizontalPosition: 'end' })
+  }
+
   applyFilter(event: Event) {
     let filterValue = (event.target as HTMLInputElement).value
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -54,5 +67,31 @@ export class EscalasComponent extends ServicesConsumer<Escala, number> {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  addModDialog(isMod: boolean, object?: Escala) {
+    const myCompDialog = this.dialog.open(AddModComponent, { data: { isMod: isMod, object: object ? object : undefined } });
+    myCompDialog.afterClosed().subscribe((res) => {
+      if (res)
+        if (res.success) {
+          if (!isMod) {
+            this.add(res.object)
+            this.sendMsg('Escala agregada correctamente')
+          } else {
+            this.mod(res.object, res.object.id)
+            this.sendMsg('Escala modificada correctamente')
+          }
+        }
+    });
+  }
+
+  delDialog(object: Escala) {
+    const myCompDialog = this.dialog.open(DelComponent, { data: { class: object.clasificador } });
+    myCompDialog.afterClosed().subscribe((res) => {
+      if (res.event == 'yes-option') {
+        this.del(object.id)
+      }
+    });
+  }
+
 
 }
