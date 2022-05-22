@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/data/services';
 
 @Component({
@@ -12,15 +13,17 @@ export class AuthComponent {
   password: string = ''
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) { }
 
   submitLogin() {
     this.authService.login(this.username, this.password).subscribe(
       r => {
         if (r.error) {
-          alert('Error: ' + r.msg)
-          // this.growl.data = { msg: r.msg, class: 'error', isHidden: false }
+          this.sendMsg(r.msg)
+          this.username = ''
+          this.password = ''
         }
       }
     )
@@ -28,6 +31,10 @@ export class AuthComponent {
 
   restorrePass() {
     alert('You\'re going to restore the password')
+  }
+
+  sendMsg(msg: string) {
+    this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end', verticalPosition: 'top', })
   }
 
 }

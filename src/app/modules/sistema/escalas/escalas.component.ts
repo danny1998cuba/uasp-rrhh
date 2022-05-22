@@ -1,11 +1,12 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { faEdit, faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { CustomPaginator } from 'src/app/core/utils';
 import { Escala, ServicesConsumer } from 'src/app/data/schema';
 import { EscalaService } from 'src/app/data/services';
 import { DelDialogComponent } from 'src/app/shared/components';
@@ -18,7 +19,7 @@ import { EscalaAddModComponent } from './add-mod/add-mod.component';
 })
 export class EscalasComponent extends ServicesConsumer<Escala, number> {
 
-  displayedColumns: string[] = ['id', 'clasificador', 'salario', 'actions'];
+  displayedColumns: string[] = ['clasificador', 'salario', 'actions'];
   dataSource = new MatTableDataSource<Escala>([]);
   faAdd = faPlus; faEdit = faPencil; faDelete = faTrash
 

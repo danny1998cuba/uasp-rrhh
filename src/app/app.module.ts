@@ -14,6 +14,8 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AuthComponent } from './modules/auth/auth.component';
 import { CookieService } from 'ngx-cookie-service';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomPaginator } from './core/utils';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { CookieService } from 'ngx-cookie-service';
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "es-ES" },
+    {provide: MatPaginatorIntl, useValue: CustomPaginator()},
     CookieService
   ],
   bootstrap: [AppComponent]
