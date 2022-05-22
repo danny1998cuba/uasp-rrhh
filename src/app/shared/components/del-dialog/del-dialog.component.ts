@@ -2,14 +2,14 @@ import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-del',
-  templateUrl: './del.component.html',
-  styleUrls: ['./del.component.css']
+  selector: 'app-del-dialog',
+  templateUrl: './del-dialog.component.html',
+  styleUrls: ['./del-dialog.component.css']
 })
-export class DelComponent {
+export class DelDialogComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<DelComponent>,
+    public dialogRef: MatDialogRef<DelDialogComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public mydata: any) { }
 
   yesDialog() {
@@ -18,4 +18,5 @@ export class DelComponent {
   noDialog() {
     this.dialogRef.close({ event: 'no-option' });
   }
+
 }

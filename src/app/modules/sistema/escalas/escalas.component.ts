@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 import { faEdit, faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Escala, ServicesConsumer } from 'src/app/data/schema';
 import { EscalaService } from 'src/app/data/services';
-import { AddModComponent } from './add-mod/add-mod.component';
-import { DelComponent } from './del/del.component';
+import { DelDialogComponent } from 'src/app/shared/components';
+import { EscalaAddModComponent } from './add-mod/add-mod.component';
 
 @Component({
   selector: 'app-escalas',
@@ -69,7 +69,7 @@ export class EscalasComponent extends ServicesConsumer<Escala, number> {
   }
 
   addModDialog(isMod: boolean, object?: Escala) {
-    const myCompDialog = this.dialog.open(AddModComponent, { data: { isMod: isMod, object: object ? object : undefined } });
+    const myCompDialog = this.dialog.open(EscalaAddModComponent, { data: { isMod: isMod, object: object ? object : undefined } });
     myCompDialog.afterClosed().subscribe((res) => {
       if (res)
         if (res.success) {
@@ -85,7 +85,7 @@ export class EscalasComponent extends ServicesConsumer<Escala, number> {
   }
 
   delDialog(object: Escala) {
-    const myCompDialog = this.dialog.open(DelComponent, { data: { class: object.clasificador } });
+    const myCompDialog = this.dialog.open(DelDialogComponent, { data: { text: 'la escala salarial', class: object.clasificador } });
     myCompDialog.afterClosed().subscribe((res) => {
       if (res.event == 'yes-option') {
         this.del(object.id)

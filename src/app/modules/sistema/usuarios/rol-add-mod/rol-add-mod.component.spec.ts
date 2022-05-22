@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DelComponent } from './del.component';
+import { RolAddModComponent } from './rol-add-mod.component';
 
-describe('DelComponent', () => {
-  let component: DelComponent;
-  let fixture: ComponentFixture<DelComponent>;
+describe('RolAddModComponent', () => {
+  let component: RolAddModComponent;
+  let fixture: ComponentFixture<RolAddModComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DelComponent ]
+      declarations: [ RolAddModComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DelComponent);
+    fixture = TestBed.createComponent(RolAddModComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
