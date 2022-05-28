@@ -43,6 +43,13 @@
                     </td>
                 </ng-container>
 
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+                        <div class="text-center">
+                            No hay datos disponibles
+                        </div>
+                    </td>
+                </tr>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;">
                 </tr>

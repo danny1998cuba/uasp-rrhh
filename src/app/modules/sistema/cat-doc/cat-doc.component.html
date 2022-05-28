@@ -1,1 +1,66 @@
-<p>cat-doc works!</p>
+<h1 class="card-title">Categor&iacute;as docentes</h1>
+
+<ng-container *ngIf="!isLoading; else noData;">
+    <div class="card-body">
+        <div class="d-flex justify-content-end">
+            <button mat-button type="button" matTooltip="Nueva categor&iacute;a" aria-label="Add"
+                (click)="addModDialog(false)">
+                <fa-icon [icon]="faAdd"></fa-icon>
+            </button>
+        </div>
+
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" matTooltip="Buscar categor&iacute;as">
+        </mat-form-field>
+
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+                <!-- Clasificador Column -->
+                <ng-container matColumnDef="tipo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+                    <td mat-cell *matCellDef="let row"> {{row.tipo}} </td>
+                </ng-container>
+
+                <!-- Salario Column -->
+                <ng-container matColumnDef="salario">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Salario </th>
+                    <td mat-cell *matCellDef="let row"> {{row.salario}} </td>
+                </ng-container>
+
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-button class="" type="button" matTooltip="Modificar" aria-label="Edit"
+                            (click)="addModDialog(true, row)">
+                            <fa-icon [icon]="faEdit"></fa-icon>
+                        </button>
+
+                        <button mat-button class="" type="button" matTooltip="Eliminar" aria-label="Delete"
+                            (click)="delDialog(row)">
+                            <fa-icon [icon]="faDelete"></fa-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+                        <div class="text-center">
+                            No hay datos disponibles
+                        </div>
+                    </td>
+                </tr>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>

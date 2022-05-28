@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CatDoc } from 'src/app/data/schema';
 
@@ -26,15 +26,15 @@ export class CDocAddModComponent {
     }
 
     this.form = new FormGroup({
-      // clasificador: new FormControl({ value: this.object.clasificador, disabled: this.mydata.isMod }, Validators.required),
-      // salario: new FormControl(this.object.salario, [Validators.min(0), Validators.required])
+      tipo: new FormControl({ value: this.object.tipo, disabled: this.mydata.isMod }, Validators.required),
+      salario: new FormControl(this.object.salario, [Validators.min(0), Validators.required])
     })
   }
 
   closeDialog() {
     if (this.form.valid) {
-      // this.object.clasificador = this.form.get('clasificador')?.value
-      // this.object.salario = this.form.get('salario')?.value
+      this.object.tipo = this.form.get('tipo')?.value
+      this.object.salario = this.form.get('salario')?.value
 
       this.dialogRef.close({ success: true, object: this.object });
     }
