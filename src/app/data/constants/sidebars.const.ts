@@ -60,7 +60,7 @@ export const SISTEMA_SIDEBAR: ISidebarData = {
             link: SISTEMA_ROUTES.CAT_DOC
         },
         {
-            nombre: 'CLA',
+            nombre: 'Condiciones laborales adicionales',
             link: SISTEMA_ROUTES.CLA
         },
         {

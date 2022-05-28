@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import es from '@angular/common/locales/es';
@@ -33,7 +33,8 @@ import { CustomPaginator } from './core/utils';
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "es-ES" },
-    {provide: MatPaginatorIntl, useValue: CustomPaginator()},
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'CUP' },
+    { provide: MatPaginatorIntl, useValue: CustomPaginator() },
     CookieService
   ],
   bootstrap: [AppComponent]
