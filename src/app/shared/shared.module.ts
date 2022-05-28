@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatTooltipModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatSelectModule,
   ],
   declarations: [...fromComponents.components, ...fromPipes.pipes],
   exports: [
@@ -64,6 +66,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatTooltipModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatSelectModule,
   ]
 })
 export class SharedModule { }

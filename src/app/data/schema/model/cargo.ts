@@ -4,6 +4,6 @@ export class Cargo {
     id!: number
     nombre!: string
     nocturnidad?: number
-    numero?: string
+    plazas!: number
     idEscala!: Escala
 }

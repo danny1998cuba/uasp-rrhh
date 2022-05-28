@@ -1,30 +1,58 @@
 <h2 mat-dialog-title>{{!mydata.isMod?'Agregar':'Modificar'}} Cargo</h2>
 <mat-dialog-content class="mat-typography">
     <form [formGroup]="form" (ngSubmit)="closeDialog()">
-        <!-- <div class="row">
+        <div class="row">
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Clasificador" formControlName="clasificador">
+                    <input matInput placeholder="Nombre" formControlName="nombre">
                     <mat-hint>Sin errores</mat-hint>
-                    <mat-error *ngIf="form.controls['clasificador'].hasError('required')">
-                        El clasificador es obligatorio
+                    <mat-error *ngIf="form.controls['nombre'].hasError('required')">
+                        El nombre es obligatorio
                     </mat-error>
                 </mat-form-field>
             </div>
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Salario" type="number" formControlName="salario">
+                    <input matInput placeholder="Plazas" type="number" formControlName="plazas">
                     <mat-hint>Sin errores</mat-hint>
                     <mat-error
-                        *ngIf="!form.controls['salario'].hasError('required') && form.controls['salario'].hasError('min')">
-                        El salario debe ser positivo
+                        *ngIf="!form.controls['plazas'].hasError('required') && form.controls['plazas'].hasError('min')">
+                        Las plazas deben ser positivas
                     </mat-error>
-                    <mat-error *ngIf="form.controls['salario'].hasError('required')">
-                        El salario es obligatorio
+                    <mat-error *ngIf="form.controls['plazas'].hasError('required')">
+                        Las plazas son obligatorias
                     </mat-error>
                 </mat-form-field>
             </div>
-        </div> -->
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Nocturnidad" type="number" formControlName="nocturnidad">
+                    <mat-hint>Sin errores</mat-hint>
+                    <mat-error
+                        *ngIf="!form.controls['nocturnidad'].hasError('required') && form.controls['nocturnidad'].hasError('min')">
+                        La nocturnidad debe ser positiva
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field>
+                    <mat-select placeholder="Escala salarial" formControlName="escala" required
+                        [compareWith]="compareObjects">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let escala of escalas" [value]="escala">
+                            {{escala.clasificador}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Sin errores</mat-hint>
+                    <mat-error *ngIf="form.controls['escala'].hasError('required')">
+                        La escala es obligatoria
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
 
         <div class="d-flex justify-content-end mt-4">
             <button mat-button [mat-dialog-close]="{success:false, object:undefined}" type="button">Cancelar</button>
