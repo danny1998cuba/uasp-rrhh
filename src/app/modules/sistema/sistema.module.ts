@@ -13,6 +13,7 @@ import { CatOcupComponent } from './cat-ocup/cat-ocup.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { EscalasComponent } from './escalas/escalas.component';
 import { ClaComponent } from './cla/cla.component';
+import { DepartamentosComponent } from './unidades/departamentos/departamentos.component';
 import { InitComponent } from './init/init.component';  //Init section from module
 
 //Add-mod components
@@ -21,7 +22,6 @@ import { CargoAddModComponent } from './cargos/add-mod/add-mod.component';
 import { CDocAddModComponent } from './cat-doc/add-mod/add-mod.component';
 import { COcupAddModComponent } from './cat-ocup/add-mod/add-mod.component';
 import { ClaAddModComponent } from './cla/add-mod/add-mod.component';
-import { UnidadAddModComponent } from './unidades/add-mod/add-mod.component';
 import { UsuarioAddModComponent } from './usuarios/add-mod/add-mod.component';
 
 
@@ -38,6 +38,7 @@ import { UsuarioAddModComponent } from './usuarios/add-mod/add-mod.component';
     UsuariosComponent,
     EscalasComponent,
     ClaComponent,
+    DepartamentosComponent,
     InitComponent,
 
     //Add-mod components
@@ -46,8 +47,7 @@ import { UsuarioAddModComponent } from './usuarios/add-mod/add-mod.component';
     COcupAddModComponent,
     ClaAddModComponent,
     EscalaAddModComponent,
-    UnidadAddModComponent,
-    UsuarioAddModComponent
+    UsuarioAddModComponent,
   ],
   imports: [
     SharedModule

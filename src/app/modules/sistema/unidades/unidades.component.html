@@ -1,1 +1,49 @@
-<p>unidades works!</p>
+<h1 class="card-title">Unidades</h1>
+
+<ng-container *ngIf="!isLoading; else noData;">
+    <div class="card-body">
+        <div class="d-flex justify-content-end">
+            <div class="row">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Nombre de la unidad" [(ngModel)]="nombreUni" required>
+                    <button mat-button matSuffix type="button" matTooltip="Nueva unidad" aria-label="Add"
+                        (click)="addUni()">
+                        <fa-icon [icon]="faAdd"></fa-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <mat-tab-group>
+            <mat-tab *ngFor="let uni of unidades; let index = index" [label]="uni.nombre">
+
+                <div class="d-flex justify-content-between my-3 align-items-end">
+                    <h2>Departamentos</h2>
+
+                    <div class="d-flex justify-content-end">
+                        <div class="row">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Nombre de la unidad" [(ngModel)]="uni.nombre" required>
+                                <button mat-button matSuffix type="button" matTooltip="Cambiar nombre" aria-label="Add"
+                                    (click)="modUni(uni)">
+                                    <fa-icon [icon]="faEdit"></fa-icon>
+                                </button>
+                            </mat-form-field>
+                        </div>
+                        <button mat-button type="button" matTooltip="Eliminar esta unidad" aria-label="Add"
+                            (click)="delDialog(uni)">
+                            <fa-icon [icon]="faDelete"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <app-departamentos [unidad]="uni"></app-departamentos>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</ng-container>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>

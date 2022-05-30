@@ -1,0 +1,31 @@
+<div class="d-flex justify-content-end">
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nombre del departamento" required>
+        <button mat-button matSuffix type="button" matTooltip="Nuevo departamento" aria-label="Add">
+            <fa-icon [icon]="faAdd"></fa-icon>
+        </button>
+    </mat-form-field>
+</div>
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Departamento X
+        </mat-panel-title>
+        <mat-panel-description>
+            Abrir para editar
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="d-flex justify-content-between">
+        <mat-form-field>
+            <input matInput placeholder="Nombre">
+            <button mat-button matSuffix type="button" matTooltip="Cambiar nombre" aria-label="Add">
+                <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+        </mat-form-field>
+        <button mat-button type="button" matTooltip="Eliminar este departamento" aria-label="Add">
+            <fa-icon [icon]="faDelete"></fa-icon>
+        </button>
+    </div>
+</mat-expansion-panel>
