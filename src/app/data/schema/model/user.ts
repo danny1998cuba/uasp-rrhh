@@ -1,6 +1,6 @@
 import { Rol } from ".."
 
-export class User {
+export class Usuario {
     id!: number
     username!: string
     password!: string
@@ -9,5 +9,5 @@ export class User {
     email?: string
     telefono?: string
     enabled!: boolean
-    rolesList!: Rol[]
+    rolList!: Rol[]
 }

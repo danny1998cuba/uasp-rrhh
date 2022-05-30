@@ -1,30 +1,103 @@
 <h2 mat-dialog-title>{{!mydata.isMod?'Agregar':'Modificar'}} Usuario</h2>
 <mat-dialog-content class="mat-typography">
     <form [formGroup]="form" (ngSubmit)="closeDialog()">
-        <!-- <div class="row">
+        <h3 class="mb-1">Informaci&oacute;n Personal</h3>
+        <div class="row">
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Clasificador" formControlName="clasificador">
+                    <input matInput placeholder="Nombre" formControlName="nombre">
                     <mat-hint>Sin errores</mat-hint>
-                    <mat-error *ngIf="form.controls['clasificador'].hasError('required')">
-                        El clasificador es obligatorio
+                    <mat-error *ngIf="form.controls['nombre'].hasError('required')">
+                        El nombre es obligatorio
                     </mat-error>
                 </mat-form-field>
             </div>
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Salario" type="number" formControlName="salario">
+                    <input matInput placeholder="Apellidos" formControlName="apellidos">
                     <mat-hint>Sin errores</mat-hint>
-                    <mat-error
-                        *ngIf="!form.controls['salario'].hasError('required') && form.controls['salario'].hasError('min')">
-                        El salario debe ser positivo
-                    </mat-error>
-                    <mat-error *ngIf="form.controls['salario'].hasError('required')">
-                        El salario es obligatorio
+                    <mat-error *ngIf="form.controls['apellidos'].hasError('required')">
+                        Los apellidos es obligatorio
                     </mat-error>
                 </mat-form-field>
             </div>
-        </div> -->
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Correo electrónico" formControlName="email">
+                    <mat-hint>Sin errores</mat-hint>
+                    <mat-error *ngIf="form.controls['email'].hasError('email')">
+                        El correo electrónico tiene un formato incorrecto
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                    <span matPrefix>+53 &nbsp;</span>
+                    <input matInput placeholder="Teléfono" formControlName="telefono" type="number">
+                    <mat-hint>Sin errores</mat-hint>
+                    <mat-error *ngIf="form.controls['telefono'].hasError('pattern')">
+                        El teléfono tiene un formato incorrecto
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <ng-container *ngIf="!amI()">
+
+            <h3 class="mt-5 mb-1">Informaci&oacute;n de la Cuenta</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Nombre de usuario" formControlName="username">
+                        <mat-hint>Sin errores</mat-hint>
+                        <mat-error *ngIf="form.controls['username'].hasError('required')">
+                            El nombre de usuario es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Contraseña" formControlName="password" type="password">
+                        <mat-hint>Sin errores</mat-hint>
+                        <mat-error *ngIf="form.controls['password'].hasError('required')">
+                            La contraseña es obligatoria
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row d-flex align-items-center">
+                <div class="col-md-6">
+                    <mat-checkbox formControlName="enabled" labelPosition="before">
+                        Habilitado
+                    </mat-checkbox>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Roles</mat-label>
+                        <mat-select formControlName="rolList" multiple [compareWith]="compareObjects">
+                            <mat-select-trigger>
+                                {{form.controls['rolList'].value ? form.controls['rolList'].value[0].descripcion : ''}}
+                                <span *ngIf="form.controls['rolList'].value?.length > 1"
+                                    class="example-additional-selection">
+                                    (+{{form.controls['rolList'].value.length - 1}} m&aacute;s)
+                                </span>
+                            </mat-select-trigger>
+
+                            <mat-option *ngFor="let rol of roles" [value]="rol">{{rol.descripcion}}</mat-option>
+                        </mat-select>
+                        <mat-hint>Sin errores</mat-hint>
+                        <mat-error *ngIf="form.controls['rolList'].hasError('required')">
+                            Debe seleccionar al menos un rol
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </ng-container>
 
         <div class="d-flex justify-content-end mt-4">
             <button mat-button [mat-dialog-close]="{success:false, object:undefined}" type="button">Cancelar</button>

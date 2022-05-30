@@ -1,7 +1,7 @@
 import { HttpStatusCode } from "@angular/common/http";
-import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
-import { IApiService } from "../interfaces";
+import { IApiService } from "../../interfaces";
+
 
 export class ServicesConsumer<T, PK> {
 

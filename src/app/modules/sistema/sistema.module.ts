@@ -23,7 +23,6 @@ import { COcupAddModComponent } from './cat-ocup/add-mod/add-mod.component';
 import { ClaAddModComponent } from './cla/add-mod/add-mod.component';
 import { UnidadAddModComponent } from './unidades/add-mod/add-mod.component';
 import { UsuarioAddModComponent } from './usuarios/add-mod/add-mod.component';
-import { RolAddModComponent } from './usuarios/rol-add-mod/rol-add-mod.component';
 
 
 @NgModule({
@@ -48,8 +47,7 @@ import { RolAddModComponent } from './usuarios/rol-add-mod/rol-add-mod.component
     ClaAddModComponent,
     EscalaAddModComponent,
     UnidadAddModComponent,
-    UsuarioAddModComponent,
-    RolAddModComponent
+    UsuarioAddModComponent
   ],
   imports: [
     SharedModule

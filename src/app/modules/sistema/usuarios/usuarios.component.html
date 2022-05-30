@@ -1,1 +1,70 @@
-<p>usuarios works!</p>
+<h1 class="card-title">Usuarios</h1>
+
+<ng-container *ngIf="!isLoading; else noData;">
+    <div class="card-body">
+        <div class="d-flex justify-content-end">
+            <button mat-button type="button" matTooltip="Nuevo Usuario" aria-label="Add" (click)="addModDialog(false)">
+                <fa-icon [icon]="faAdd"></fa-icon>
+            </button>
+        </div>
+
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" matTooltip="Buscar Usuarios">
+        </mat-form-field>
+
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+                <!-- Clasificador Column -->
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                    <td mat-cell *matCellDef="let row"> {{row | fullName}} </td>
+                </ng-container>
+
+                <!-- Salario Column -->
+                <ng-container matColumnDef="username">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de usuario </th>
+                    <td mat-cell *matCellDef="let row"> {{row.username}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="roles">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Roles </th>
+                    <td mat-cell *matCellDef="let row"> {{row.rolList | roleList}} </td>
+                </ng-container>
+
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-button class="" type="button" matTooltip="Modificar" aria-label="Edit"
+                            (click)="addModDialog(true, row)">
+                            <fa-icon [icon]="faEdit"></fa-icon>
+                        </button>
+
+                        <button mat-button class="" type="button" matTooltip="Eliminar" aria-label="Delete"
+                            (click)="delDialog(row)" *ngIf="!amI(row)">
+                            <fa-icon [icon]="faDelete"></fa-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+                        <div class="text-center">
+                            No hay datos disponibles
+                        </div>
+                    </td>
+                </tr>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>

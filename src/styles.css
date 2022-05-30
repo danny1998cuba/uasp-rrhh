@@ -29,3 +29,7 @@ td,
 th {
     width: 25%;
 }
+
+form .row {
+    margin-bottom: 1rem;
+}

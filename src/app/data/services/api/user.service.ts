@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { GESTION_ROUTES, PASS_ROUTE } from '../../constants/routes/api.routes';
 import { IApiService } from '../../interfaces';
-import { ApiClass, ResponseHandler, User } from '../../schema';
+import { ApiClass, ResponseHandler, Usuario } from '../../schema';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService extends ApiClass implements IApiService<User, number> {
+export class UserService extends ApiClass implements IApiService<Usuario, number> {
 
   constructor(private http: HttpClient) {
     super()
@@ -17,7 +17,7 @@ export class UserService extends ApiClass implements IApiService<User, number> {
   // Obtener todas las User
   getAll(): Observable<ResponseHandler> {
     const response = new ResponseHandler()
-    return this.http.get<User[]>(GESTION_ROUTES.USERS, { headers: this.headers, withCredentials: true })
+    return this.http.get<Usuario[]>(GESTION_ROUTES.USERS, { headers: this.headers, withCredentials: true })
       .pipe(
         map(r => {
           response.data = r;
@@ -30,7 +30,7 @@ export class UserService extends ApiClass implements IApiService<User, number> {
   // Obtener User por id
   getById(id: number): Observable<ResponseHandler> {
     const response = new ResponseHandler()
-    return this.http.get<User[]>(GESTION_ROUTES.USERS + '/' + id, { headers: this.headers, withCredentials: true })
+    return this.http.get<Usuario[]>(GESTION_ROUTES.USERS + '/' + id, { headers: this.headers, withCredentials: true })
       .pipe(
         map(r => {
           response.data = r;
@@ -41,7 +41,7 @@ export class UserService extends ApiClass implements IApiService<User, number> {
   }
 
   // Crear una User
-  create(value: User): Observable<ResponseHandler> {
+  create(value: Usuario): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.post<any>(GESTION_ROUTES.USERS, value, { headers: this.headers, withCredentials: true })
       .pipe(
@@ -55,7 +55,7 @@ export class UserService extends ApiClass implements IApiService<User, number> {
   }
 
   // Actualizar entrada existente
-  update(id: number, value: User): Observable<ResponseHandler> {
+  update(id: number, value: Usuario): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.put<any>(GESTION_ROUTES.USERS + '/' + id, value, { headers: this.headers, withCredentials: true })
       .pipe(

@@ -1,8 +1,8 @@
 import { STORAGE_KEYS } from "src/app/data/constants"
-import { User } from "src/app/data/schema"
+import { Usuario } from "src/app/data/schema"
 
 export abstract class Authenticated {
-    static get getUserFromLS(): User | undefined {
+    static get getUserFromLS(): Usuario | undefined {
         const item = sessionStorage.getItem(STORAGE_KEYS.USER)
         if (item)
             return JSON.parse(item)
@@ -13,7 +13,7 @@ export abstract class Authenticated {
     static get isAdmin(): boolean {
         const user = this.getUserFromLS
         if (user)
-            return user.rolesList.filter(r => r.name == 'ADMIN').length != 0
+            return user.rolList.filter(r => r.name == 'ADMIN').length != 0
 
         return false
     }
@@ -21,7 +21,7 @@ export abstract class Authenticated {
     static get isCont(): boolean {
         const user = this.getUserFromLS
         if (user)
-            return user.rolesList.filter(r => r.name == 'CONT').length != 0
+            return user.rolList.filter(r => r.name == 'CONT').length != 0
 
         return false
     }
