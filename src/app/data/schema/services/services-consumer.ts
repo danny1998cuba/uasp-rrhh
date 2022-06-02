@@ -7,16 +7,16 @@ export class ServicesConsumer<T, PK> {
 
     data: T[] = []
     isLoading = true
-    
+
     constructor(
         protected service: IApiService<T, PK>,
         protected router: Router,
     ) {
         this.refreshData()
     }
-    
-    refreshData(){}
-    sendMsg(msg:string){}
+
+    refreshData() { }
+    sendMsg(msg: string) { }
 
     add(cont: T) {
         this.service.create(cont).subscribe(

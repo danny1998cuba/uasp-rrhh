@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { ServicesConsumer, Unidad } from 'src/app/data/schema';
-import { UnidadService } from 'src/app/data/services';
+import { Departamento, ServicesConsumer, Unidad } from 'src/app/data/schema';
+import { DepartamentoService, UnidadService } from 'src/app/data/services';
 import { DelDialogComponent } from 'src/app/shared/components';
 
 @Component({
@@ -15,7 +15,7 @@ import { DelDialogComponent } from 'src/app/shared/components';
 export class UnidadesComponent extends ServicesConsumer<Unidad, number> {
 
   unidades!: Unidad[]
-  faAdd = faPlus  ; faEdit = faPencil; faDelete = faTrash
+  faAdd = faPlus; faEdit = faPencil; faDelete = faTrash
 
   nombreUni: string = ''
 
@@ -62,7 +62,7 @@ export class UnidadesComponent extends ServicesConsumer<Unidad, number> {
     }
   }
 
-  modUni(obj:Unidad) {
+  modUni(obj: Unidad) {
     if (obj.nombre.trim() != '') {
       this.mod(obj, obj.id)
 
@@ -79,6 +79,11 @@ export class UnidadesComponent extends ServicesConsumer<Unidad, number> {
         this.del(object.id)
       }
     });
+  }
+
+  refresh(){
+    this.isLoading = true
+    this.refreshData()
   }
 
 }

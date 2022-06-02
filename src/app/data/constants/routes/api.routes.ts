@@ -26,8 +26,10 @@ export const GESTION_ROUTES = {
 
 export const PASS_ROUTE = `${GESTION_ROUTES.USERS}/pass`
 
-// // Connectors
-// export const CONNECTORS = {
-//     PARAMS: '?',
-//     AND: '&'
-// }
+// Connectors
+export const CONNECTORS = {
+    PARAMS: '?',
+    AND: '&'
+}
+
+export const DEP_BY_UNIDAD = `${GESTION_ROUTES.DEPARTAMENTO}${CONNECTORS.PARAMS}unidad=`
