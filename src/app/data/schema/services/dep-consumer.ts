@@ -2,7 +2,6 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { DepartamentoService, RolService } from "../../services";
 import { Departamento } from "../model/departamento";
-import { Rol } from "../model/rol";
 import { ServicesConsumer } from "./services-consumer";
 
 export class DepsConsumer extends ServicesConsumer<Departamento, number> {

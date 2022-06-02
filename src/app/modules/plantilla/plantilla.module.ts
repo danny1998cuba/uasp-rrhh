@@ -5,6 +5,7 @@ import { PlantillaSkeletonComponent } from './plantilla-skeleton/plantilla-skele
 import { TrabajadoresComponent } from './trabajadores/trabajadores.component';
 import { P2Component } from './p2/p2.component';
 import { InitComponent } from './init/init.component';
+import { TrabAddModComponent } from './trabajadores/trab-add-mod/trab-add-mod.component';
 
 
 
@@ -13,7 +14,8 @@ import { InitComponent } from './init/init.component';
     PlantillaSkeletonComponent,
     TrabajadoresComponent,
     P2Component,
-    InitComponent
+    InitComponent,
+    TrabAddModComponent
   ],
   imports: [
     SharedModule
