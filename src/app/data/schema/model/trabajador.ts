@@ -1,8 +1,8 @@
 import { Cargo } from "./cargo"
 import { CatDoc } from "./cat-doc"
-import { CatOcup } from "./cat-ocup"
 import { Cla } from "./cla"
 import { Departamento } from "./departamento"
+import { NivelEscolar } from "./nivel-escolar"
 
 export class Trabajador {
     id!: number
@@ -10,11 +10,10 @@ export class Trabajador {
     apellidos!: string
     ci!: string
     sexo!: string
-    nivelEscolar!: string
     maestria!: boolean
     doctorado!: boolean
-    idcatOcup!: CatOcup
-    idcatDoc?: CatDoc
+    idCatDoc?: CatDoc
+    idEscolar!: NivelEscolar
     idDepartamento!: Departamento
     idCLA?: Cla
     idCargo!: Cargo
