@@ -6,8 +6,8 @@ package com.uasp.hhrr.controller;
 
 import com.google.gson.Gson;
 import com.uasp.hhrr.MessageResponse;
-import com.uasp.hhrr.model.Cargo;
-import com.uasp.hhrr.service.CargoService;
+import com.uasp.hhrr.model.NivelEscolar;
+import com.uasp.hhrr.service.NivelEscolarService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +27,11 @@ import org.springframework.web.bind.annotation.PutMapping;
  */
 @CrossOrigin(origins = {"*"})
 @RestController
-@RequestMapping("/api/cargo")
-public class CargoController {
+@RequestMapping("/api/escolaridad")
+public class NivelEscolarController {
     
     @Autowired
-    CargoService service;
+    NivelEscolarService service;
     
     @Autowired
     Gson g;
@@ -47,7 +47,7 @@ public class CargoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> put(@PathVariable int id, @RequestBody Cargo input) {
+    public ResponseEntity<?> put(@PathVariable int id, @RequestBody NivelEscolar input) {
         try {
             int idRes = service.update(input, id);
 
@@ -66,7 +66,7 @@ public class CargoController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> post(@RequestBody Cargo input) {
+    public ResponseEntity<?> post(@RequestBody NivelEscolar input) {
         try {
             int idRes = service.save(input);
             MessageResponse m = new MessageResponse("Elemento creado con id " + idRes);

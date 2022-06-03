@@ -5,12 +5,18 @@
 package com.uasp.hhrr.repository;
 
 import com.uasp.hhrr.model.Departamento;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
  * @author Tapanes
  */
 public interface DepartamentoRepository extends JpaRepository<Departamento, Integer> {
+
+    @Query("Select d from Departamento d where d.idUnidad.id = :idUnidad")
+    public List<Departamento> findByIdUnidad(@Param(value = "idUnidad") int idUnidad);
     
 }

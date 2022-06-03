@@ -35,23 +35,27 @@ import lombok.Setter;
 public class CategoriaOcupacional implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-
+    
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
+    
+    @Basic(optional = false)
+    @Column(name = "abreviado")
+    private String abreviado;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcatOcup")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCatOcup")
     @JsonIgnore
-    private List<Trabajador> trabajadorList;
+    private List<Cargo> cargoList;
 
     public CategoriaOcupacional(Integer id) {
         this.id = id;
     }
-
+    
 }

@@ -33,57 +33,53 @@ import lombok.Setter;
 public class Trabajador implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-
+    
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
-
+    
     @Basic(optional = false)
     @Column(name = "apellidos")
     private String apellidos;
-
+    
     @Basic(optional = false)
     @Column(name = "ci")
     private String ci;
-
+    
     @Basic(optional = false)
     @Column(name = "sexo")
     private String sexo;
-
-    @Basic(optional = false)
-    @Column(name = "nivel_escolar")
-    private String nivelEscolar;
-
+    
     @Basic(optional = false)
     @Column(name = "maestria")
     private boolean maestria;
-
+    
     @Basic(optional = false)
     @Column(name = "doctorado")
     private boolean doctorado;
-
-    @JoinColumn(name = "id_catOcup", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private CategoriaOcupacional idcatOcup;
-
-    @JoinColumn(name = "id_catDoc", referencedColumnName = "id")
+    
+    @JoinColumn(name = "id_cat_doc", referencedColumnName = "id")
     @ManyToOne
-    private CategoriaDocente idcatDoc;
-
+    private CategoriaDocente idCatDoc;
+    
+    @JoinColumn(name = "id_escolar", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private NivelEscolar idEscolar;
+    
     @JoinColumn(name = "id_departamento", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Departamento idDepartamento;
-
+    
     @JoinColumn(name = "id_CLA", referencedColumnName = "id")
     @ManyToOne
     private Cla idCLA;
-
+    
     @JoinColumn(name = "id_cargo", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cargo idCargo;
@@ -91,4 +87,5 @@ public class Trabajador implements Serializable {
     public Trabajador(Integer id) {
         this.id = id;
     }
+   
 }

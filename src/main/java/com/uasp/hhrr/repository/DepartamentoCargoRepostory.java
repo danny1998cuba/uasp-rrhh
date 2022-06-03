@@ -4,13 +4,14 @@
  */
 package com.uasp.hhrr.repository;
 
-import com.uasp.hhrr.model.Cargo;
+import com.uasp.hhrr.model.DepartamentoCargo;
+import com.uasp.hhrr.model.DepartamentoCargoPK;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Tapanes
  */
-public interface CargoRepository extends JpaRepository<Cargo, Integer> {
+public interface DepartamentoCargoRepostory extends JpaRepository<DepartamentoCargo, DepartamentoCargoPK> {
     
 }

@@ -4,13 +4,13 @@
  */
 package com.uasp.hhrr.repository;
 
-import com.uasp.hhrr.model.Cargo;
+import com.uasp.hhrr.model.NivelEscolar;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Tapanes
  */
-public interface CargoRepository extends JpaRepository<Cargo, Integer> {
+public interface NivelEscolarRepository extends JpaRepository<NivelEscolar, Integer> {
     
 }

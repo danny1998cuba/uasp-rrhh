@@ -37,21 +37,25 @@ import lombok.Setter;
 public class Departamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-
+    
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDepartamento")
     @JsonIgnore
     private List<Trabajador> trabajadorList;
-
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento")
+    @JsonIgnore
+    private List<DepartamentoCargo> departamentoCargoList;
+    
     @JoinColumn(name = "id_unidad", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Unidad idUnidad;
@@ -59,5 +63,5 @@ public class Departamento implements Serializable {
     public Departamento(Integer id) {
         this.id = id;
     }
-
+   
 }

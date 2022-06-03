@@ -4,8 +4,9 @@
  */
 package com.uasp.hhrr.service;
 
-import com.uasp.hhrr.model.Cargo;
-import com.uasp.hhrr.repository.CargoRepository;
+import com.uasp.hhrr.model.DepartamentoCargo;
+import com.uasp.hhrr.model.DepartamentoCargoPK;
+import com.uasp.hhrr.repository.DepartamentoCargoRepostory;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,43 +17,43 @@ import org.springframework.stereotype.Service;
  * @author Tapanes
  */
 @Service
-public class CargoService implements Services<Cargo, Integer> {
+public class DepartamentoCargoService implements Services<DepartamentoCargo, DepartamentoCargoPK> {
 
     @Autowired
-    CargoRepository repository;
+    DepartamentoCargoRepostory repository;
 
     @Override
-    public Integer save(Cargo object) {
-        if(object.getId() != null) {
-            object.setId(null);
-        }
-        Cargo p = repository.save(object);
-        return p.getId();
+    public DepartamentoCargoPK save(DepartamentoCargo object) {
+//        if(object.getDepartamentoCargoPK() != null) {
+//            object.set(null);
+//        }
+        DepartamentoCargo p = repository.save(object);
+        return p.getDepartamentoCargoPK();
     }
 
     @Override
-    public Integer update(Cargo object, Integer id) {
+    public DepartamentoCargoPK update(DepartamentoCargo object, DepartamentoCargoPK id) {
         if (repository.findById(id).isPresent()) {
-            object.setId(id);
+            object.setDepartamentoCargoPK(id);
             repository.save(object);
             return id;
         } else {
-            return -1;
+            return null;
         }
     }
 
     @Override
-    public boolean deleteById(Integer id) {
+    public boolean deleteById(DepartamentoCargoPK id) {
         return true;
     }
 
     @Override
-    public List<Cargo> findAll() {
+    public List<DepartamentoCargo> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Optional<Cargo> findById(Integer id) {
+    public Optional<DepartamentoCargo> findById(DepartamentoCargoPK id) {
         return repository.findById(id);
     }
 

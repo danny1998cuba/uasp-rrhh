@@ -15,8 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -29,48 +27,43 @@ import lombok.Setter;
  * @author Tapanes
  */
 @Entity
-@Table(name = "cargo")
+@Table(name = "nivel_escolar")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Cargo implements Serializable {
+public class NivelEscolar implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    
+
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
-    
-    @Column(name = "nocturnidad")
-    private Double nocturnidad;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCargo")
+
+    @Basic(optional = false)
+    @Column(name = "relevancia")
+    private int relevancia;
+
+    @Basic(optional = false)
+    @Column(name = "abreviado")
+    private String abreviado;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEscolar")
     @JsonIgnore
     private List<Trabajador> trabajadorList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cargo")
-    @JsonIgnore
-    private List<DepartamentoCargo> departamentoCargoList;
-    
-    @JoinColumn(name = "id_cat_ocup", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private CategoriaOcupacional idCatOcup;
-    
-    @JoinColumn(name = "id_escala", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Escala idEscala;
-    
-    @JoinColumn(name = "id_escolar_min", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private NivelEscolar idEscolarMin;
 
-    public Cargo(Integer id) {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEscolarMin")
+    @JsonIgnore
+    private List<Cargo> cargoList;
+
+    public NivelEscolar(Integer id) {
         this.id = id;
     }
+
 }

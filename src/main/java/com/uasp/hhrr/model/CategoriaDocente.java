@@ -27,7 +27,6 @@ import lombok.Setter;
  */
 @Entity
 @Table(name = "categoria_docente")
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -35,27 +34,26 @@ import lombok.Setter;
 public class CategoriaDocente implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-
+    
     @Basic(optional = false)
     @Column(name = "tipo")
     private String tipo;
-
+    
     @Basic(optional = false)
     @Column(name = "salario")
     private double salario;
-
-    @OneToMany(mappedBy = "idcatDoc")
+    
+    @OneToMany(mappedBy = "idCatDoc")
     @JsonIgnore
     private List<Trabajador> trabajadorList;
 
     public CategoriaDocente(Integer id) {
         this.id = id;
     }
-
 }

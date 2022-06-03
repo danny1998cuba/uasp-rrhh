@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -29,16 +30,21 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController
 @RequestMapping("/api/departamento")
 public class DepartamentoController {
-    
+
     @Autowired
     DepartamentoService service;
-    
+
     @Autowired
     Gson g;
 
     @GetMapping("")
-    public ResponseEntity<?> list() {
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<?> list(
+            @RequestParam(name = "unidad", required = false) Integer idUnidad) {
+        if (idUnidad != null) {
+            return ResponseEntity.ok(service.findByIdUnidad(idUnidad));
+        } else {
+            return ResponseEntity.ok(service.findAll());
+        }
     }
 
     @GetMapping("/{id}")

@@ -35,21 +35,21 @@ import lombok.Setter;
 public class Escala implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-
+    
     @Basic(optional = false)
     @Column(name = "clasificador")
     private String clasificador;
-
+    
     @Basic(optional = false)
     @Column(name = "salario")
     private double salario;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEscala")
     @JsonIgnore
     private List<Cargo> cargoList;
@@ -57,5 +57,5 @@ public class Escala implements Serializable {
     public Escala(Integer id) {
         this.id = id;
     }
-
+ 
 }

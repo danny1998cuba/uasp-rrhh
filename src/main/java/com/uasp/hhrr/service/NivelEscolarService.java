@@ -4,8 +4,8 @@
  */
 package com.uasp.hhrr.service;
 
-import com.uasp.hhrr.model.Cargo;
-import com.uasp.hhrr.repository.CargoRepository;
+import com.uasp.hhrr.model.NivelEscolar;
+import com.uasp.hhrr.repository.NivelEscolarRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +16,22 @@ import org.springframework.stereotype.Service;
  * @author Tapanes
  */
 @Service
-public class CargoService implements Services<Cargo, Integer> {
+public class NivelEscolarService implements Services<NivelEscolar, Integer> {
 
     @Autowired
-    CargoRepository repository;
+    NivelEscolarRepository repository;
 
     @Override
-    public Integer save(Cargo object) {
+    public Integer save(NivelEscolar object) {
         if(object.getId() != null) {
             object.setId(null);
         }
-        Cargo p = repository.save(object);
+        NivelEscolar p = repository.save(object);
         return p.getId();
     }
 
     @Override
-    public Integer update(Cargo object, Integer id) {
+    public Integer update(NivelEscolar object, Integer id) {
         if (repository.findById(id).isPresent()) {
             object.setId(id);
             repository.save(object);
@@ -47,12 +47,12 @@ public class CargoService implements Services<Cargo, Integer> {
     }
 
     @Override
-    public List<Cargo> findAll() {
+    public List<NivelEscolar> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Optional<Cargo> findById(Integer id) {
+    public Optional<NivelEscolar> findById(Integer id) {
         return repository.findById(id);
     }
 

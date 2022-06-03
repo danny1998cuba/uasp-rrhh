@@ -56,4 +56,8 @@ public class DepartamentoService implements Services<Departamento, Integer> {
         return repository.findById(id);
     }
 
+    public List<Departamento> findByIdUnidad(int idUnidad) {
+        return repository.findByIdUnidad(idUnidad);
+    }
+
 }
