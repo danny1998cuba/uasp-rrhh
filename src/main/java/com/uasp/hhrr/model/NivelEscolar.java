@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,11 +53,11 @@ public class NivelEscolar implements Serializable {
     @Column(name = "abreviado")
     private String abreviado;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEscolar")
+    @OneToMany(mappedBy = "idEscolar")
     @JsonIgnore
     private List<Trabajador> trabajadorList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEscolarMin")
+    @OneToMany(mappedBy = "idEscolarMin")
     @JsonIgnore
     private List<Cargo> cargoList;
 

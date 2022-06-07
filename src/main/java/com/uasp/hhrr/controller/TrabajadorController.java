@@ -29,10 +29,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController
 @RequestMapping("/api/trabajador")
 public class TrabajadorController {
-    
+
     @Autowired
     TrabajadorService service;
-    
+
     @Autowired
     Gson g;
 
@@ -79,8 +79,21 @@ public class TrabajadorController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable int id) {
-        MessageResponse m = new MessageResponse("No implementado");
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(g.toJson(m));
+        try {
+            boolean deleted = service.deleteById(id);
+
+            if (deleted) {
+                MessageResponse m = new MessageResponse("Elemento con id " + id + " eliminado correctamente");
+                return ResponseEntity.ok(g.toJson(m));
+            } else {
+                MessageResponse m = new MessageResponse("No se encuentra el elemento con id " + id);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(m));
+            }
+
+        } catch (Exception e) {
+            MessageResponse m = new MessageResponse(e.getMessage());
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
+        }
     }
-    
+
 }

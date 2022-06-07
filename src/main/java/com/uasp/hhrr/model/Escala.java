@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,7 +49,7 @@ public class Escala implements Serializable {
     @Column(name = "salario")
     private double salario;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEscala")
+    @OneToMany(mappedBy = "idEscala")
     @JsonIgnore
     private List<Cargo> cargoList;
 

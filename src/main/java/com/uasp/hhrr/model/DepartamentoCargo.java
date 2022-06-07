@@ -5,6 +5,7 @@
  */
 package com.uasp.hhrr.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -33,6 +34,7 @@ public class DepartamentoCargo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
+    @JsonIgnore
     protected DepartamentoCargoPK departamentoCargoPK;
 
     @Basic(optional = false)

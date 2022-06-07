@@ -44,7 +44,12 @@ public class DepartamentoCargoService implements Services<DepartamentoCargo, Dep
 
     @Override
     public boolean deleteById(DepartamentoCargoPK id) {
-        return true;
+        if (repository.findById(id).isPresent()) {
+            repository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

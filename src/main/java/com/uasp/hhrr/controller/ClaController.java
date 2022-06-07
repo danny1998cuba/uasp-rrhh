@@ -11,6 +11,7 @@ import com.uasp.hhrr.service.ClaService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,10 +30,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController
 @RequestMapping("/api/cla")
 public class ClaController {
-    
+
     @Autowired
     ClaService service;
-    
+
     @Autowired
     Gson g;
 
@@ -79,8 +80,24 @@ public class ClaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable int id) {
-        MessageResponse m = new MessageResponse("No implementado");
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(g.toJson(m));
+        try {
+            boolean deleted = service.deleteById(id);
+
+            if (deleted) {
+                MessageResponse m = new MessageResponse("Elemento con id " + id + " eliminado correctamente");
+                return ResponseEntity.ok(g.toJson(m));
+            } else {
+                MessageResponse m = new MessageResponse("No se encuentra el elemento con id " + id);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(m));
+            }
+        } catch (DataIntegrityViolationException ex) {
+            System.out.println(ex.toString());
+            MessageResponse m = new MessageResponse("Existen entidades vinculadas a esta condición. Elimínelas o modifíquelas antes.");
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
+        } catch (Exception e) {
+            MessageResponse m = new MessageResponse(e.toString());
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
+        }
     }
-    
+
 }

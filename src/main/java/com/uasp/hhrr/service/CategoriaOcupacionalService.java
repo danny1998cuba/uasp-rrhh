@@ -43,7 +43,12 @@ public class CategoriaOcupacionalService implements Services<CategoriaOcupaciona
 
     @Override
     public boolean deleteById(Integer id) {
-        return true;
+        if (repository.findById(id).isPresent()) {
+            repository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
