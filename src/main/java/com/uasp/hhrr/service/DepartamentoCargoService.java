@@ -24,9 +24,6 @@ public class DepartamentoCargoService implements Services<DepartamentoCargo, Dep
 
     @Override
     public DepartamentoCargoPK save(DepartamentoCargo object) {
-//        if(object.getDepartamentoCargoPK() != null) {
-//            object.set(null);
-//        }
         DepartamentoCargo p = repository.save(object);
         return p.getDepartamentoCargoPK();
     }
