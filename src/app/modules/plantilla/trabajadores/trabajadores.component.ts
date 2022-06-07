@@ -110,7 +110,7 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
   }
 
   override sendMsg(msg: string) {
-    this.snackBar.open(msg, '', { duration: 2000, horizontalPosition: 'end' })
+    this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
   }
 
   applyFilter(event: Event) {
@@ -143,6 +143,7 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
     myCompDialog.afterClosed().subscribe((res) => {
       if (res.event == 'yes-option') {
         this.del(object.id)
+        this.sendMsg('Trabajador eliminado correctamente')
       }
     });
   }

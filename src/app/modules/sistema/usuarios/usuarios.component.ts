@@ -70,7 +70,7 @@ export class UsuariosComponent extends ServicesConsumer<Usuario, number> impleme
   }
 
   override sendMsg(msg: string) {
-    this.snackBar.open(msg, '', { duration: 2000, horizontalPosition: 'end' })
+    this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
   }
 
   applyFilter(event: Event) {
@@ -89,10 +89,10 @@ export class UsuariosComponent extends ServicesConsumer<Usuario, number> impleme
         if (res.success) {
           if (!isMod) {
             this.add(res.object)
-            this.sendMsg('Escala agregada correctamente')
+            this.sendMsg('Usuario agregado correctamente')
           } else {
             this.mod(res.object, res.object.id)
-            this.sendMsg('Escala modificada correctamente')
+            this.sendMsg('Usuario modificado correctamente')
           }
         }
     });

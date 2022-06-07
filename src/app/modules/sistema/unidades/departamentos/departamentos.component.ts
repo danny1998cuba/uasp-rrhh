@@ -36,7 +36,7 @@ export class DepartamentosComponent implements OnInit {
   }
 
   sendMsg(msg: string) {
-    this.snackBar.open(msg, '', { duration: 2000, horizontalPosition: 'end' })
+    this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
   }
 
   listDeps() {
@@ -86,6 +86,7 @@ export class DepartamentosComponent implements OnInit {
     myCompDialog.afterClosed().subscribe((res) => {
       if (res.event == 'yes-option') {
         this.depsConsumer.del(object.id)
+        this.sendMsg('Departamento eliminado correctamente')
       }
     });
   }

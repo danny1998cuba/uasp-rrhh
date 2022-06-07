@@ -57,7 +57,7 @@ export class CatOcupComponent extends ServicesConsumer<CatOcup, number>{
   }
 
   override sendMsg(msg: string) {
-    this.snackBar.open(msg, '', { duration: 2000, horizontalPosition: 'end' })
+    this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
   }
 
   applyFilter(event: Event) {
@@ -90,6 +90,7 @@ export class CatOcupComponent extends ServicesConsumer<CatOcup, number>{
     myCompDialog.afterClosed().subscribe((res) => {
       if (res.event == 'yes-option') {
         this.del(object.id)
+        this.sendMsg('Categoría eliminada correctamente')
       }
     });
   }

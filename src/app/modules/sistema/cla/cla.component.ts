@@ -56,7 +56,7 @@ export class ClaComponent extends ServicesConsumer<Cla, number>{
   }
 
   override sendMsg(msg: string) {
-    this.snackBar.open(msg, '', { duration: 2000, horizontalPosition: 'end' })
+    this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
   }
 
   applyFilter(event: Event) {
@@ -75,10 +75,10 @@ export class ClaComponent extends ServicesConsumer<Cla, number>{
         if (res.success) {
           if (!isMod) {
             this.add(res.object)
-            this.sendMsg('Categoría agregada correctamente')
+            this.sendMsg('Condición agregada correctamente')
           } else {
             this.mod(res.object, res.object.id)
-            this.sendMsg('Categoría modificada correctamente')
+            this.sendMsg('Condición modificada correctamente')
           }
         }
     });
@@ -89,6 +89,7 @@ export class ClaComponent extends ServicesConsumer<Cla, number>{
     myCompDialog.afterClosed().subscribe((res) => {
       if (res.event == 'yes-option') {
         this.del(object.id)
+        this.sendMsg('Condición eliminada correctamente')
       }
     });
   }

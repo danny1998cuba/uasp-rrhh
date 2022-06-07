@@ -56,7 +56,7 @@ export class NivelEscolarComponent extends ServicesConsumer<NivelEscolar, number
   }
 
   override sendMsg(msg: string) {
-    this.snackBar.open(msg, '', { duration: 2000, horizontalPosition: 'end' })
+    this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
   }
 
   applyFilter(event: Event) {
@@ -80,10 +80,10 @@ export class NivelEscolarComponent extends ServicesConsumer<NivelEscolar, number
         if (res.success) {
           if (!isMod) {
             this.add(res.object)
-            this.sendMsg('Escala agregada correctamente')
+            this.sendMsg('Nivel escolar agregado correctamente')
           } else {
             this.mod(res.object, res.object.id)
-            this.sendMsg('Escala modificada correctamente')
+            this.sendMsg('Nivel escolar modificado correctamente')
           }
         }
     });
@@ -94,6 +94,7 @@ export class NivelEscolarComponent extends ServicesConsumer<NivelEscolar, number
     myCompDialog.afterClosed().subscribe((res) => {
       if (res.event == 'yes-option') {
         this.del(object.id)
+        this.sendMsg('Nivel escolar eliminado correctamente')
       }
     });
   }

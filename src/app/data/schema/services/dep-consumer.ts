@@ -28,6 +28,6 @@ export class DepsConsumer extends ServicesConsumer<Departamento, number> {
     }
 
     override sendMsg(msg: string) {
-        this.snackBar.open(msg, '', { duration: 2000, horizontalPosition: 'end' })
+        this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
     }
 }

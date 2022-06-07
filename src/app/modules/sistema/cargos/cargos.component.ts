@@ -90,7 +90,7 @@ export class CargosComponent extends ServicesConsumer<Cargo, number> implements 
   }
 
   override sendMsg(msg: string) {
-    this.snackBar.open(msg, '', { duration: 2000, horizontalPosition: 'end' })
+    this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
   }
 
   applyFilter(event: Event) {
@@ -115,10 +115,10 @@ export class CargosComponent extends ServicesConsumer<Cargo, number> implements 
         if (res.success) {
           if (!isMod) {
             this.add(res.object)
-            this.sendMsg('Escala agregada correctamente')
+            this.sendMsg('Cargo agregado correctamente')
           } else {
             this.mod(res.object, res.object.id)
-            this.sendMsg('Escala modificada correctamente')
+            this.sendMsg('Cargo modificado correctamente')
           }
         }
     });
@@ -129,6 +129,7 @@ export class CargosComponent extends ServicesConsumer<Cargo, number> implements 
     myCompDialog.afterClosed().subscribe((res) => {
       if (res.event == 'yes-option') {
         this.del(object.id)
+        this.sendMsg('Cargo eliminado correctamente')
       }
     });
   }
