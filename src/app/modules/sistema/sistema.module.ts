@@ -14,6 +14,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { EscalasComponent } from './escalas/escalas.component';
 import { ClaComponent } from './cla/cla.component';
 import { DepartamentosComponent } from './unidades/departamentos/departamentos.component';
+import { NivelEscolarComponent } from './nivel-escolar/nivel-escolar.component';
 import { InitComponent } from './init/init.component';  //Init section from module
 
 //Add-mod components
@@ -23,6 +24,7 @@ import { CDocAddModComponent } from './cat-doc/add-mod/add-mod.component';
 import { COcupAddModComponent } from './cat-ocup/add-mod/add-mod.component';
 import { ClaAddModComponent } from './cla/add-mod/add-mod.component';
 import { UsuarioAddModComponent } from './usuarios/add-mod/add-mod.component';
+import { NivelAddModComponent } from './nivel-escolar/nivel-add-mod/nivel-add-mod.component';
 
 
 @NgModule({
@@ -39,6 +41,7 @@ import { UsuarioAddModComponent } from './usuarios/add-mod/add-mod.component';
     EscalasComponent,
     ClaComponent,
     DepartamentosComponent,
+    NivelEscolarComponent,
     InitComponent,
 
     //Add-mod components
@@ -48,6 +51,7 @@ import { UsuarioAddModComponent } from './usuarios/add-mod/add-mod.component';
     ClaAddModComponent,
     EscalaAddModComponent,
     UsuarioAddModComponent,
+    NivelAddModComponent,
   ],
   imports: [
     SharedModule

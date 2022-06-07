@@ -53,9 +53,12 @@
         <div class="row">
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Nivel escolar" formControlName="nivelEscolar">
-                        <mat-option value="MS">Medio Superior</mat-option>
-                        <mat-option value="S">Superior</mat-option>
+                    <mat-select placeholder="Nivel escolar" formControlName="nivelEscolar" required
+                        [compareWith]="compareObjects">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let nivel of niveles" [value]="nivel">
+                            {{nivel.nombre}}
+                        </mat-option>
                     </mat-select>
                     <mat-hint>Sin errores</mat-hint>
                     <mat-error *ngIf="form.controls['nivelEscolar'].hasError('required')">
@@ -66,10 +69,10 @@
 
             <div class="col-md-6">
                 <div class="d-flex flex-md-column align-md-items-center justify-content-center gap-2">
-                    <mat-checkbox formControlName="maestria" labelPosition="after">
+                    <mat-checkbox formControlName="maestria" labelPosition="after" [disabled]="!isSuperior()">
                         Maestrías
                     </mat-checkbox>
-                    <mat-checkbox formControlName="doctorado" labelPosition="after">
+                    <mat-checkbox formControlName="doctorado" labelPosition="after" [disabled]="!isSuperior()">
                         Doctorados
                     </mat-checkbox>
                 </div>
@@ -112,21 +115,6 @@
         <div class="row">
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Categoría ocupacional" formControlName="idcatOcup" required
-                        [compareWith]="compareObjects">
-                        <mat-option>--</mat-option>
-                        <mat-option *ngFor="let co of catsOcup" [value]="co">
-                            {{co.nombre}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-hint>Sin errores</mat-hint>
-                    <mat-error *ngIf="form.controls['idcatOcup'].hasError('required')">
-                        La categoría ocupacional es obligatorio
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-md-6">
-                <mat-form-field class="example-full-width">
                     <mat-select placeholder="Categoría docente" formControlName="idcatDoc"
                         [compareWith]="compareObjects">
                         <mat-option>--</mat-option>
@@ -136,10 +124,7 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <mat-form-field class="example-full-width">
                     <mat-select placeholder="Condiciones laborales adicionales" formControlName="idCLA"
                         [compareWith]="compareObjects">

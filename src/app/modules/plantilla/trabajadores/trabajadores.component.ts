@@ -6,14 +6,15 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Cargo, CatDoc, CatOcup, Cla, Departamento, DepsConsumer, ServicesConsumer, Trabajador } from 'src/app/data/schema';
-import { CargoService, CatDocService, CatOcupService, ClaService, DepartamentoService, EscalaService, TrabajadorService } from 'src/app/data/services';
+import { Cargo, CatDoc, CatOcup, Cla, Departamento, DepsConsumer, NivelEscolar, ServicesConsumer, Trabajador } from 'src/app/data/schema';
+import { CargoService, CatDocService, CatOcupService, ClaService, DepartamentoService, EscalaService, NivelEscolarService, TrabajadorService } from 'src/app/data/services';
 import { DelDialogComponent } from 'src/app/shared/components';
 import { FullNamePipe } from 'src/app/shared/pipes';
 import { CargosComponent } from '../../sistema/cargos/cargos.component';
 import { CatDocComponent } from '../../sistema/cat-doc/cat-doc.component';
 import { CatOcupComponent } from '../../sistema/cat-ocup/cat-ocup.component';
 import { ClaComponent } from '../../sistema/cla/cla.component';
+import { NivelEscolarComponent } from '../../sistema/nivel-escolar/nivel-escolar.component';
 import { TrabAddModComponent } from './trab-add-mod/trab-add-mod.component';
 
 @Component({
@@ -29,19 +30,19 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
 
   //Arrays
   catsDoc!: CatDoc[]
-  catsOcup!: CatOcup[]
   clas!: Cla[]
   deps!: Departamento[]
   cargos!: Cargo[]
+  niveles!: NivelEscolar[]
 
   listas: any
 
   //Components
   catDocComp!: CatDocComponent
-  catOcupComp!: CatOcupComponent
   claComp!: ClaComponent
   depCons!: DepsConsumer
   cargoComp!: CargosComponent
+  nivelesComp!: NivelEscolarComponent
 
   @ViewChild(MatPaginator) set matPaginator(paginator: MatPaginator) {
     this.dataSource.paginator = paginator
@@ -62,31 +63,32 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
     claServ: ClaService,
     cargoServ: CargoService,
     depServ: DepartamentoService,
-    escService: EscalaService
+    escService: EscalaService,
+    nivelService: NivelEscolarService
   ) {
     super(service, router)
 
     this.catDocComp = new CatDocComponent(catdocServ, router, dialog, snackBar)
-    this.catOcupComp = new CatOcupComponent(catocupServ, router, dialog, snackBar)
     this.claComp = new ClaComponent(claServ, router, dialog, snackBar)
     this.depCons = new DepsConsumer(depServ, router, snackBar)
-    this.cargoComp = new CargosComponent(cargoServ, router, dialog, snackBar, escService)
+    this.cargoComp = new CargosComponent(cargoServ, router, dialog, snackBar, escService, catocupServ, nivelService)
+    this.nivelesComp = new NivelEscolarComponent(nivelService, router, dialog, snackBar)
   }
 
   ngOnInit(): void {
     setTimeout(() => {
       this.catsDoc = this.catDocComp.data
-      this.catsOcup = this.catOcupComp.data
       this.clas = this.claComp.data
       this.deps = this.depCons.data
       this.cargos = this.cargoComp.data
+      this.niveles = this.nivelesComp.data
 
       this.listas = {
         catsDoc: this.catsDoc,
-        catsOcup: this.catsOcup,
         clas: this.clas,
         deps: this.deps,
         cargos: this.cargos,
+        niveles: this.niveles,
       }
     }, 1000);
   }

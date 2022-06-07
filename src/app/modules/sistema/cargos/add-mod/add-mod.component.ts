@@ -1,7 +1,7 @@
-import { Component, Inject, Input, OnInit, Optional } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Cargo, Escala } from 'src/app/data/schema';
+import { Cargo, CatOcup, Escala, NivelEscolar } from 'src/app/data/schema';
 
 @Component({
   selector: 'app-add-mod',
@@ -11,6 +11,9 @@ import { Cargo, Escala } from 'src/app/data/schema';
 export class CargoAddModComponent {
 
   escalas!: Escala[]
+  catsOcup!: CatOcup[]
+  niveles!: NivelEscolar[]
+
   object!: Cargo
   form: FormGroup
 
@@ -18,8 +21,10 @@ export class CargoAddModComponent {
     public dialogRef: MatDialogRef<CargoAddModComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public mydata: any
   ) {
-    console.log(mydata)
-    this.escalas = mydata.escalas
+    this.escalas = mydata.listas.escalas
+    this.catsOcup = mydata.listas.catsOcup
+    this.niveles = mydata.listas.niveles
+
     if (mydata.isMod) {
       this.object = mydata.object
     } else {
@@ -29,18 +34,20 @@ export class CargoAddModComponent {
 
     this.form = new FormGroup({
       nombre: new FormControl({ value: this.object.nombre, disabled: this.mydata.isMod }, Validators.required),
-      plazas: new FormControl(this.object.plazas, [Validators.min(0), Validators.required]),
       nocturnidad: new FormControl(this.object.nocturnidad, Validators.min(0)),
       escala: new FormControl(this.object.idEscala, Validators.required),
+      catOcup: new FormControl(this.object.idCatOcup, Validators.required),
+      nivelEscolar: new FormControl(this.object.idEscolarMin, Validators.required)
     })
   }
 
   closeDialog() {
     if (this.form.valid) {
       this.object.nombre = this.form.get('nombre')?.value
-      this.object.plazas = this.form.get('plazas')?.value
       this.object.nocturnidad = this.form.get('nocturnidad')?.value
       this.object.idEscala = this.form.get('escala')?.value
+      this.object.idCatOcup = this.form.get('catOcup')?.value
+      this.object.idEscolarMin = this.form.get('nivelEscolar')?.value
 
       this.dialogRef.close({ success: true, object: this.object });
     }

@@ -26,13 +26,15 @@ export class COcupAddModComponent {
     }
 
     this.form = new FormGroup({
-      nombre: new FormControl(this.object.nombre, Validators.required)
+      nombre: new FormControl(this.object.nombre, Validators.required),
+      abreviado: new FormControl(this.object.abreviado, Validators.required)
     })
   }
 
   closeDialog() {
     if (this.form.valid) {
       this.object.nombre = this.form.get('nombre')?.value
+      this.object.abreviado = this.form.get('abreviado')?.value
 
       this.dialogRef.close({ success: true, object: this.object });
     }

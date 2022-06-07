@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>{{!mydata.isMod?'Agregar':'Modificar'}} Categor&iacute;a Ocupacional</h2>
+<h2 mat-dialog-title>{{!mydata.isMod?'Agregar':'Modificar'}} Nivel escolar</h2>
 <mat-dialog-content class="mat-typography">
     <form [formGroup]="form" (ngSubmit)="closeDialog()">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <mat-form-field class="example-full-width">
                     <input matInput placeholder="Nombre" formControlName="nombre">
                     <mat-hint>Sin errores</mat-hint>
@@ -11,13 +11,29 @@
                     </mat-error>
                 </mat-form-field>
             </div>
+        </div>
 
+        <div class="row">
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
                     <input matInput placeholder="Abreviatura" formControlName="abreviado">
                     <mat-hint>Sin errores</mat-hint>
                     <mat-error *ngIf="form.controls['abreviado'].hasError('required')">
                         La abreviatura es obligatoria
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Relevancia" type="number" formControlName="relevancia">
+                    <mat-hint>Sin errores</mat-hint>
+                    <mat-error
+                        *ngIf="!form.controls['relevancia'].hasError('required') && form.controls['relevancia'].hasError('min')">
+                        La relevancia debe ser positiva
+                    </mat-error>
+                    <mat-error *ngIf="form.controls['relevancia'].hasError('required')">
+                        La relevancia es obligatoria
                     </mat-error>
                 </mat-form-field>
             </div>

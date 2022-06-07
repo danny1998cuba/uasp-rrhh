@@ -6,34 +6,21 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Cargo, CatOcup, Escala, NivelEscolar, ServicesConsumer } from 'src/app/data/schema';
-import { CargoService, CatOcupService, EscalaService, NivelEscolarService } from 'src/app/data/services';
+import { NivelEscolar, ServicesConsumer } from 'src/app/data/schema';
+import { NivelEscolarService } from 'src/app/data/services';
 import { DelDialogComponent } from 'src/app/shared/components';
-import { CatOcupComponent } from '../cat-ocup/cat-ocup.component';
-import { EscalasComponent } from '../escalas/escalas.component';
-import { NivelEscolarComponent } from '../nivel-escolar/nivel-escolar.component';
-import { CargoAddModComponent } from './add-mod/add-mod.component';
+import { NivelAddModComponent } from './nivel-add-mod/nivel-add-mod.component';
 
 @Component({
-  selector: 'app-cargos',
-  templateUrl: './cargos.component.html',
-  styleUrls: ['./cargos.component.css']
+  selector: 'app-nivel-escolar',
+  templateUrl: './nivel-escolar.component.html',
+  styleUrls: ['./nivel-escolar.component.css']
 })
-export class CargosComponent extends ServicesConsumer<Cargo, number> implements OnInit {
+export class NivelEscolarComponent extends ServicesConsumer<NivelEscolar, number> {
 
-  displayedColumns: string[] = ['nombre', 'nocturnidad', 'escala', 'actions'];
-  dataSource = new MatTableDataSource<Cargo>([]);
+  displayedColumns: string[] = ['nombre', 'abrev', 'actions'];
+  dataSource = new MatTableDataSource<NivelEscolar>([]);
   faAdd = faPlus; faEdit = faPencil; faDelete = faTrash
-
-  escalas!: Escala[]
-  catsOcup!: CatOcup[]
-  niveles!: NivelEscolar[]
-
-  listas: any
-
-  escComp!: EscalasComponent
-  catOcupComp!: CatOcupComponent
-  nivelesComp!: NivelEscolarComponent
 
   @ViewChild(MatPaginator) set matPaginator(paginator: MatPaginator) {
     this.dataSource.paginator = paginator
@@ -44,33 +31,12 @@ export class CargosComponent extends ServicesConsumer<Cargo, number> implements 
   }
 
   constructor(
-    service: CargoService,
+    service: NivelEscolarService,
     router: Router,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    escService: EscalaService,
-    catocupServ: CatOcupService,
-    nivelService: NivelEscolarService
   ) {
     super(service, router)
-
-    this.escComp = new EscalasComponent(escService, router, dialog, snackBar)
-    this.catOcupComp = new CatOcupComponent(catocupServ, router, dialog, snackBar)
-    this.nivelesComp = new NivelEscolarComponent(nivelService, router, dialog, snackBar)
-  }
-
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.escalas = this.escComp.data
-      this.catsOcup = this.catOcupComp.data
-      this.niveles = this.nivelesComp.data
-
-      this.listas = {
-        escalas: this.escalas,
-        catsOcup: this.catsOcup,
-        niveles: this.niveles
-      }
-    }, 1000);
   }
 
   override refreshData() {
@@ -102,12 +68,11 @@ export class CargosComponent extends ServicesConsumer<Cargo, number> implements 
     }
   }
 
-  addModDialog(isMod: boolean, object?: Cargo) {
-    const myCompDialog = this.dialog.open(CargoAddModComponent, {
+  addModDialog(isMod: boolean, object?: NivelEscolar) {
+    const myCompDialog = this.dialog.open(NivelAddModComponent, {
       data: {
         isMod: isMod,
-        object: object ? object : undefined,
-        listas: this.listas
+        object: object ? object : undefined
       }
     });
     myCompDialog.afterClosed().subscribe((res) => {
@@ -124,7 +89,7 @@ export class CargosComponent extends ServicesConsumer<Cargo, number> implements 
     });
   }
 
-  delDialog(object: Cargo) {
+  delDialog(object: NivelEscolar) {
     const myCompDialog = this.dialog.open(DelDialogComponent, { data: { text: 'el cargo', class: object.nombre } });
     myCompDialog.afterClosed().subscribe((res) => {
       if (res.event == 'yes-option') {

@@ -60,6 +60,10 @@ export const SISTEMA_SIDEBAR: ISidebarData = {
             link: SISTEMA_ROUTES.CAT_DOC
         },
         {
+            nombre: 'Nivel escolar',
+            link: SISTEMA_ROUTES.NIVEL
+        },
+        {
             nombre: 'Condiciones laborales adicionales',
             link: SISTEMA_ROUTES.CLA
         },

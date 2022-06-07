@@ -2,7 +2,7 @@
 <mat-dialog-content class="mat-typography">
     <form [formGroup]="form" (ngSubmit)="closeDialog()">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <mat-form-field class="example-full-width">
                     <input matInput placeholder="Nombre" formControlName="nombre">
                     <mat-hint>Sin errores</mat-hint>
@@ -11,20 +11,8 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-6">
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Plazas" type="number" formControlName="plazas">
-                    <mat-hint>Sin errores</mat-hint>
-                    <mat-error
-                        *ngIf="!form.controls['plazas'].hasError('required') && form.controls['plazas'].hasError('min')">
-                        Las plazas deben ser positivas
-                    </mat-error>
-                    <mat-error *ngIf="form.controls['plazas'].hasError('required')">
-                        Las plazas son obligatorias
-                    </mat-error>
-                </mat-form-field>
-            </div>
         </div>
+
         <div class="row">
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
@@ -49,6 +37,40 @@
                     <mat-hint>Sin errores</mat-hint>
                     <mat-error *ngIf="form.controls['escala'].hasError('required')">
                         La escala es obligatoria
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Categoría ocupacional" formControlName="catOcup" required
+                        [compareWith]="compareObjects">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let co of catsOcup" [value]="co">
+                            {{co.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Sin errores</mat-hint>
+                    <mat-error *ngIf="form.controls['catOcup'].hasError('required')">
+                        La categoría ocupacional es obligatoria
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Nivel escolar mínimo requerido" formControlName="nivelEscolar" required
+                        [compareWith]="compareObjects">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let nivel of niveles" [value]="nivel">
+                            {{nivel.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Sin errores</mat-hint>
+                    <mat-error *ngIf="form.controls['nivelEscolar'].hasError('required')">
+                        El nivel escolar mínimo es obligatorio
                     </mat-error>
                 </mat-form-field>
             </div>

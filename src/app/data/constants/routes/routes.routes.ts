@@ -33,6 +33,7 @@ export const SISTEMA_CHILDREN = {
     ESCALAS : 'escalas',
     CAT_OCUP : 'catocup',
     CAT_DOC : 'catdoc',
+    NIVEL : 'niveles',
     CLA : 'cla',
     USUARIOS : 'usuarios',
 }
@@ -43,6 +44,7 @@ export const SISTEMA_ROUTES = {
     ESCALAS : `${SISTEMA_ROOT}/${SISTEMA_CHILDREN.ESCALAS}`,
     CAT_OCUP : `${SISTEMA_ROOT}/${SISTEMA_CHILDREN.CAT_OCUP}`,
     CAT_DOC : `${SISTEMA_ROOT}/${SISTEMA_CHILDREN.CAT_DOC}`,
+    NIVEL : `${SISTEMA_ROOT}/${SISTEMA_CHILDREN.NIVEL}`,
     CLA : `${SISTEMA_ROOT}/${SISTEMA_CHILDREN.CLA}`,
     USUARIOS : `${SISTEMA_ROOT}/${SISTEMA_CHILDREN.USUARIOS}`,
 }

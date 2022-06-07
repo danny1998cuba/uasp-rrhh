@@ -8,6 +8,7 @@ import { CatOcupComponent } from './cat-ocup/cat-ocup.component';
 import { ClaComponent } from './cla/cla.component';
 import { EscalasComponent } from './escalas/escalas.component';
 import { InitComponent } from './init/init.component';
+import { NivelEscolarComponent } from './nivel-escolar/nivel-escolar.component';
 import { SistemaSkeletonComponent } from './sistema-skeleton/sistema-skeleton.component';
 import { UnidadesComponent } from './unidades/unidades.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
@@ -18,8 +19,8 @@ export const routes: Routes = [
         component: SistemaSkeletonComponent,
         children: [
             {
-                path:'',
-                component:InitComponent,
+                path: '',
+                component: InitComponent,
                 canActivate: [AuthGuard]
             },
             {
@@ -45,6 +46,11 @@ export const routes: Routes = [
             {
                 path: SISTEMA_CHILDREN.CAT_DOC,
                 component: CatDocComponent,
+                canActivate: [AuthGuard]
+            },
+            {
+                path: SISTEMA_CHILDREN.NIVEL,
+                component: NivelEscolarComponent,
                 canActivate: [AuthGuard]
             },
             {
