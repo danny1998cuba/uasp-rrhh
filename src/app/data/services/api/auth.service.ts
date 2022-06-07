@@ -50,7 +50,7 @@ export class AuthService extends ApiClass {
       { headers: this.headers, withCredentials: true })
       .pipe(
         map(r => {
-          this.cookies.delete(STORAGE_KEYS.SESSIONID)
+          this.cookies.deleteAll()
           sessionStorage.removeItem(STORAGE_KEYS.USER)
 
           response.msg = "Sesion cerrada con exito"
