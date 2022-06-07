@@ -44,12 +44,16 @@ export const SISTEMA_SIDEBAR: ISidebarData = {
             link: SISTEMA_ROUTES.UNIDADES
         },
         {
-            nombre: 'Escalas salariales',
-            link: SISTEMA_ROUTES.ESCALAS
-        },
-        {
             nombre: 'Cargos',
             link: SISTEMA_ROUTES.CARGOS
+        },
+        {
+            nombre: 'Asignación de plazas',
+            link: SISTEMA_ROUTES.PLAZAS
+        },
+        {
+            nombre: 'Escalas salariales',
+            link: SISTEMA_ROUTES.ESCALAS
         },
         {
             nombre: 'Categoría ocupacional',

@@ -94,6 +94,4 @@ export class EscalasComponent extends ServicesConsumer<Escala, number> {
       }
     });
   }
-
-
 }
