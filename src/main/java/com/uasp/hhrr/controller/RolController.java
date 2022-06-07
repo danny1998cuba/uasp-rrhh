@@ -90,7 +90,6 @@ public class RolController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(m));
             }
         } catch (DataIntegrityViolationException ex) {
-            System.out.println(ex.toString());
             MessageResponse m = new MessageResponse("Existen entidades vinculadas a este rol. Elimínelas o modifíquelas antes.");
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
         } catch (Exception e) {

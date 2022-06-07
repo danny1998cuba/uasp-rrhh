@@ -11,6 +11,7 @@ import com.uasp.hhrr.service.TrabajadorService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -59,6 +60,14 @@ public class TrabajadorController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(m));
             }
 
+        } catch (DataIntegrityViolationException ex) {
+            if (ex.getCause().getCause().getMessage().contains("Duplicate entry")) {
+                MessageResponse m = new MessageResponse("Ya existe untrabajador con este carné de identidad");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(m));
+            } else {
+                MessageResponse m = new MessageResponse(ex.getMessage());
+                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
+            }
         } catch (Exception e) {
             MessageResponse m = new MessageResponse(e.getMessage());
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
@@ -71,6 +80,14 @@ public class TrabajadorController {
             int idRes = service.save(input);
             MessageResponse m = new MessageResponse("Elemento creado con id " + idRes);
             return ResponseEntity.status(HttpStatus.CREATED).body(g.toJson(m));
+        } catch (DataIntegrityViolationException ex) {
+            if (ex.getCause().getCause().getMessage().contains("Duplicate entry")) {
+                MessageResponse m = new MessageResponse("Ya existe untrabajador con este carné de identidad");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(m));
+            } else {
+                MessageResponse m = new MessageResponse(ex.getMessage());
+                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
+            }
         } catch (Exception e) {
             MessageResponse m = new MessageResponse(e.getMessage());
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));

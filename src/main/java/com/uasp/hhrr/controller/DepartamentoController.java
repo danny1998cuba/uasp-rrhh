@@ -56,14 +56,19 @@ public class DepartamentoController {
     @PutMapping("/{id}")
     public ResponseEntity<?> put(@PathVariable int id, @RequestBody Departamento input) {
         try {
-            int idRes = service.update(input, id);
+            if (!service.findByIdUnidadAndNombre(input.getIdUnidad().getId(), input.getNombre()).isPresent()) {
+                int idRes = service.update(input, id);
 
-            if (idRes != -1) {
-                MessageResponse m = new MessageResponse("Elemento con id " + idRes + " modificado correctamente");
-                return ResponseEntity.ok(g.toJson(m));
+                if (idRes != -1) {
+                    MessageResponse m = new MessageResponse("Elemento con id " + idRes + " modificado correctamente");
+                    return ResponseEntity.ok(g.toJson(m));
+                } else {
+                    MessageResponse m = new MessageResponse("No se encuentra el elemento con id " + id);
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(m));
+                }
             } else {
-                MessageResponse m = new MessageResponse("No se encuentra el elemento con id " + id);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(m));
+                MessageResponse m = new MessageResponse("Ya existe un departamento en esta unidad con el nombre seleccionado.");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(m));
             }
 
         } catch (Exception e) {
@@ -75,9 +80,15 @@ public class DepartamentoController {
     @PostMapping("")
     public ResponseEntity<?> post(@RequestBody Departamento input) {
         try {
-            int idRes = service.save(input);
-            MessageResponse m = new MessageResponse("Elemento creado con id " + idRes);
-            return ResponseEntity.status(HttpStatus.CREATED).body(g.toJson(m));
+            if (!service.findByIdUnidadAndNombre(input.getIdUnidad().getId(), input.getNombre()).isPresent()) {
+                int idRes = service.save(input);
+                MessageResponse m = new MessageResponse("Elemento creado con id " + idRes);
+                return ResponseEntity.status(HttpStatus.CREATED).body(g.toJson(m));
+            } else {
+                MessageResponse m = new MessageResponse("Ya existe un departamento en esta unidad con el nombre seleccionado.");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(m));
+            }
+
         } catch (Exception e) {
             MessageResponse m = new MessageResponse(e.getMessage());
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
@@ -85,7 +96,8 @@ public class DepartamentoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable int id) {try {
+    public ResponseEntity<?> delete(@PathVariable int id) {
+        try {
             boolean deleted = service.deleteById(id);
 
             if (deleted) {
@@ -96,7 +108,6 @@ public class DepartamentoController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(m));
             }
         } catch (DataIntegrityViolationException ex) {
-            System.out.println(ex.toString());
             MessageResponse m = new MessageResponse("Existen entidades vinculadas a este departamento. Elimínelas o modifíquelas antes.");
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
         } catch (Exception e) {

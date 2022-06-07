@@ -19,4 +19,7 @@ public interface DepartamentoRepository extends JpaRepository<Departamento, Inte
     @Query("Select d from Departamento d where d.idUnidad.id = :idUnidad")
     public List<Departamento> findByIdUnidad(@Param(value = "idUnidad") int idUnidad);
     
+    @Query("Select d from Departamento d where d.idUnidad.id = :idUnidad and d.nombre = :nombre")
+    public Departamento findByIdUnidadAndNombre(@Param(value = "idUnidad") int idUnidad, @Param(value = "nombre") String nombre);
+    
 }

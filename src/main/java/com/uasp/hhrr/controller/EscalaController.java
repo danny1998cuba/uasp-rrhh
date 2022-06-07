@@ -60,6 +60,14 @@ public class EscalaController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(m));
             }
 
+        } catch (DataIntegrityViolationException ex) {
+            if (ex.getCause().getCause().getMessage().contains("Duplicate entry")) {
+                MessageResponse m = new MessageResponse("Ya existe una escala con este clasificador");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(m));
+            } else {
+                MessageResponse m = new MessageResponse(ex.getMessage());
+                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
+            }
         } catch (Exception e) {
             MessageResponse m = new MessageResponse(e.getMessage());
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
@@ -72,7 +80,15 @@ public class EscalaController {
             int idRes = service.save(input);
             MessageResponse m = new MessageResponse("Elemento creado con id " + idRes);
             return ResponseEntity.status(HttpStatus.CREATED).body(g.toJson(m));
-        } catch (Exception e) {
+        }catch (DataIntegrityViolationException ex) {
+            if (ex.getCause().getCause().getMessage().contains("Duplicate entry")) {
+                MessageResponse m = new MessageResponse("Ya existe una escala con este clasificador");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(m));
+            } else {
+                MessageResponse m = new MessageResponse(ex.getMessage());
+                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
+            }
+        }  catch (Exception e) {
             MessageResponse m = new MessageResponse(e.getMessage());
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
         }
@@ -90,7 +106,6 @@ public class EscalaController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(m));
             }
         } catch (DataIntegrityViolationException ex) {
-            System.out.println(ex.toString());
             MessageResponse m = new MessageResponse("Existen entidades vinculadas a esta escala. Elimínelas o modifíquelas antes.");
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
         } catch (Exception e) {

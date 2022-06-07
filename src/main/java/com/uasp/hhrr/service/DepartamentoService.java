@@ -23,7 +23,7 @@ public class DepartamentoService implements Services<Departamento, Integer> {
 
     @Override
     public Integer save(Departamento object) {
-        if(object.getId() != null) {
+        if (object.getId() != null) {
             object.setId(null);
         }
         Departamento p = repository.save(object);
@@ -63,6 +63,10 @@ public class DepartamentoService implements Services<Departamento, Integer> {
 
     public List<Departamento> findByIdUnidad(int idUnidad) {
         return repository.findByIdUnidad(idUnidad);
+    }
+
+    public Optional<Departamento> findByIdUnidadAndNombre(int idUnidad, String nombre) {
+        return Optional.ofNullable(repository.findByIdUnidadAndNombre(idUnidad, nombre));
     }
 
 }
