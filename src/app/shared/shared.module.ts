@@ -3,10 +3,11 @@ import { HttpClientModule } from '@angular/common/http'
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NgChartsModule } from 'ng2-charts';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import * as fromComponents from './components/index'
 import * as fromPipes from './pipes/index'
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 //Material
 import { MatInputModule } from '@angular/material/input';
@@ -58,6 +59,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ReactiveFormsModule,
     HttpClientModule,
     FontAwesomeModule,
+    NgChartsModule,
     ...fromComponents.components,
     ...fromPipes.pipes,
 

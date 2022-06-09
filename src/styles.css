@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-*{
+* {
     font-family: Poppins;
 }
 
@@ -32,4 +32,12 @@ th {
 
 form .row {
     margin-bottom: 1rem;
+}
+
+.chartCanvas {
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
