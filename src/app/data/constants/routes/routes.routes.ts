@@ -3,11 +3,13 @@ export const PLANTILLA_ROOT = 'plantilla'
 
 export const PLANTILLA_CHILDREN = {
     TRABAJADORES : 'trabajador',
+    FILTERS : 'trabajador/filters',
     P2 : 'p2'
 }
 
 export const PLANTILLA_ROUTES = {
     TRABAJADORES : `${PLANTILLA_ROOT}/${PLANTILLA_CHILDREN.TRABAJADORES}`,
+    FILTERS : `${PLANTILLA_ROOT}/${PLANTILLA_CHILDREN.FILTERS}`,
     P2 : `${PLANTILLA_ROOT}/${PLANTILLA_CHILDREN.P2}`
 }
 

@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatCheckboxModule,
     MatTabsModule,
     MatExpansionModule,
+    MatBottomSheetModule,
   ],
   declarations: [...fromComponents.components, ...fromPipes.pipes],
   exports: [
@@ -78,6 +80,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatCheckboxModule,
     MatTabsModule,
     MatExpansionModule,
+    MatBottomSheetModule,
   ]
 })
 export class SharedModule { }

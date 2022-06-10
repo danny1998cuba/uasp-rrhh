@@ -28,6 +28,10 @@ export const PLANTILLA_SIDEBAR: ISidebarData = {
             link: PLANTILLA_ROUTES.TRABAJADORES
         },
         {
+            nombre: 'Filtros',
+            link: PLANTILLA_ROUTES.FILTERS
+        },
+        {
             nombre: 'P2',
             link: PLANTILLA_ROUTES.P2
         }

@@ -22,6 +22,7 @@ export const GESTION_ROUTES = {
     NIVEL_ESCOLAR: `${API_ROUTE}/escolaridad`,
     ROL: `${API_ROUTE}/rol`,
     TRABAJADOR: `${API_ROUTE}/trabajador`,
+    TRABAJADOR_FILTER: `${API_ROUTE}/trabajador/filter`,
     UNIDAD: `${API_ROUTE}/unidad`,
     USERS: `${API_ROUTE}/usuario`
 }

@@ -30,6 +30,10 @@ th {
     width: 25%;
 }
 
+.clickable-row:hover {
+    background: #f5f5f5;
+}
+
 form .row {
     margin-bottom: 1rem;
 }

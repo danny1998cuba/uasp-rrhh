@@ -16,6 +16,7 @@ import { AuthComponent } from './modules/auth/auth.component';
 import { CookieService } from 'ngx-cookie-service';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomPaginator } from './core/utils';
+import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { CustomPaginator } from './core/utils';
   providers: [
     { provide: LOCALE_ID, useValue: "es-ES" },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'CUP' },
-    { provide: MatPaginatorIntl, useValue: CustomPaginator() },
+    { provide: MatBottomSheetRef, useValue: {} },
     CookieService
   ],
   bootstrap: [AppComponent]

@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Cargo, CatDoc, CatOcup, Cla, Departamento, DepsConsumer, NivelEscolar, ServicesConsumer, Trabajador } from 'src/app/data/schema';
 import { CargoService, CatDocService, CatOcupService, ClaService, DepartamentoService, EscalaService, NivelEscolarService, TrabajadorService } from 'src/app/data/services';
@@ -22,7 +22,7 @@ import { TrabAddModComponent } from './trab-add-mod/trab-add-mod.component';
   templateUrl: './trabajadores.component.html',
   styleUrls: ['./trabajadores.component.css']
 })
-export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> implements OnInit {
+export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['nombre', 'ci', 'cargo', 'actions'];
   dataSource = new MatTableDataSource<Trabajador>([]);
@@ -36,6 +36,7 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
   niveles!: NivelEscolar[]
 
   listas: any
+  ci?: string
 
   //Components
   catDocComp!: CatDocComponent
@@ -52,9 +53,12 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
     this.dataSource.sort = sort
   }
 
+  @ViewChild('filter') filter!: ElementRef;
+
   constructor(
     service: TrabajadorService,
     router: Router,
+    private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     //Extra services
@@ -75,6 +79,15 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
     this.nivelesComp = new NivelEscolarComponent(nivelService, router, dialog, snackBar)
   }
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.activatedRoute.queryParams.subscribe(params => {
+        this.ci = params['ci']
+        this.applyFilter(new Event(''), this.ci)
+      })
+    }, 1100);
+  }
+
   ngOnInit(): void {
     setTimeout(() => {
       this.catsDoc = this.catDocComp.data
@@ -90,6 +103,7 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
         cargos: this.cargos,
         niveles: this.niveles,
       }
+
     }, 1000);
   }
 
@@ -113,8 +127,15 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
     this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
   }
 
-  applyFilter(event: Event) {
-    let filterValue = (event.target as HTMLInputElement).value
+  applyFilter(event: Event, string?: string) {
+    let filterValue
+    if (!string) {
+      filterValue = (event.target as HTMLInputElement).value
+    } else {
+      filterValue = string
+      this.filter.nativeElement.value = filterValue
+    }
+
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {

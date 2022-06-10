@@ -6,6 +6,9 @@ import { TrabajadoresComponent } from './trabajadores/trabajadores.component';
 import { P2Component } from './p2/p2.component';
 import { InitComponent } from './init/init.component';
 import { TrabAddModComponent } from './trabajadores/trab-add-mod/trab-add-mod.component';
+import { TrabajadoresFiltersComponent } from './trabajadores-filters/trabajadores-filters.component';
+import { FiltersSelectorComponent } from './trabajadores-filters/filters-selector/filters-selector.component';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 
 
@@ -15,7 +18,9 @@ import { TrabAddModComponent } from './trabajadores/trab-add-mod/trab-add-mod.co
     TrabajadoresComponent,
     P2Component,
     InitComponent,
-    TrabAddModComponent
+    TrabAddModComponent,
+    TrabajadoresFiltersComponent,
+    FiltersSelectorComponent
   ],
   imports: [
     SharedModule

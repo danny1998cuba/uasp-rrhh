@@ -27,6 +27,19 @@ export class TrabajadorService extends ApiClass implements IApiService<Trabajado
       );
   }
 
+  // Obtener todas las Trabajador
+  getByFilter(object: Trabajador): Observable<ResponseHandler> {
+    const response = new ResponseHandler()
+    return this.http.post<Trabajador[]>(GESTION_ROUTES.TRABAJADOR_FILTER, object, { headers: this.headers, withCredentials: true })
+      .pipe(
+        map(r => {
+          response.data = r;
+          return response;
+        }),
+        catchError(this.error)
+      );
+  }
+
   // Obtener Trabajador por id
   getById(id: number): Observable<ResponseHandler> {
     const response = new ResponseHandler()

@@ -1,0 +1,120 @@
+<h2>Seleccionar filtros</h2>
+
+<form [formGroup]="form" (ngSubmit)="submitDialog()">
+    <h3 class="mb-1">Informaci&oacute;n Personal</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Nombre" formControlName="nombre">
+                <mat-hint>Sin errores</mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Apellidos" formControlName="apellidos">
+                <mat-hint>Sin errores</mat-hint>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Carne de identidad" formControlName="ci" type="number">
+                <mat-hint>Sin errores</mat-hint>
+                <mat-error *ngIf="form.controls['ci'].hasError('pattern')">
+                    El carne de identidad tiene un formato incorrecto
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+                <mat-select placeholder="Sexo" formControlName="sexo">
+                    <mat-option value="m">Masculino</mat-option>
+                    <mat-option value="f">Femenino</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+                <mat-select placeholder="Nivel escolar" formControlName="nivelEscolar" [compareWith]="compareObjects">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let nivel of niveles" [value]="nivel">
+                        {{nivel.nombre}}
+                    </mat-option>
+                </mat-select>
+                <mat-hint>Sin errores</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+            <div class="d-flex flex-md-column align-md-items-center justify-content-center gap-2">
+                <mat-checkbox formControlName="maestria" labelPosition="after">
+                    Maestrías
+                </mat-checkbox>
+                <mat-checkbox formControlName="doctorado" labelPosition="after">
+                    Doctorados
+                </mat-checkbox>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="mb-1">Informaci&oacute;n de contrato</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+                <mat-select placeholder="Departamento" formControlName="idDepartamento" [compareWith]="compareObjects">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let dep of deps" [value]="dep">
+                        {{dep.nombre}}/{{dep.idUnidad.nombre}}
+                    </mat-option>
+                </mat-select>
+                <mat-hint>Sin errores</mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+                <mat-select placeholder="Cargo" formControlName="idCargo" [compareWith]="compareObjects">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let cargo of cargos" [value]="cargo">
+                        {{cargo.nombre}}
+                    </mat-option>
+                </mat-select>
+                <mat-hint>Sin errores</mat-hint>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+                <mat-select placeholder="Categoría docente" formControlName="idcatDoc" [compareWith]="compareObjects">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let cd of catsDoc" [value]="cd">
+                        {{cd.tipo}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+                <mat-select placeholder="Condiciones laborales adicionales" formControlName="idCLA"
+                    [compareWith]="compareObjects">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let cla of clas" [value]="cla">
+                        Grupo {{cla.grupo}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+
+    <div class="d-flex justify-content-end mt-4">
+        <button mat-button (click)="cancel()" type="button">Cancelar</button>
+        <button mat-button cdkFocusInitial type="submit">Aceptar</button>
+    </div>
+</form>

@@ -5,6 +5,7 @@ import { PLANTILLA_CHILDREN } from 'src/app/data/constants';
 import { InitComponent } from './init/init.component';
 import { P2Component } from './p2/p2.component';
 import { PlantillaSkeletonComponent } from './plantilla-skeleton/plantilla-skeleton.component';
+import { TrabajadoresFiltersComponent } from './trabajadores-filters/trabajadores-filters.component';
 import { TrabajadoresComponent } from './trabajadores/trabajadores.component';
 
 export const routes: Routes = [
@@ -20,6 +21,11 @@ export const routes: Routes = [
             {
                 path: PLANTILLA_CHILDREN.TRABAJADORES,
                 component: TrabajadoresComponent,
+                canActivate: [AuthGuard]
+            },
+            {
+                path: PLANTILLA_CHILDREN.FILTERS,
+                component: TrabajadoresFiltersComponent,
                 canActivate: [AuthGuard]
             },
             {
