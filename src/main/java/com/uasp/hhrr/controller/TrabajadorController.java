@@ -43,7 +43,7 @@ public class TrabajadorController {
         return ResponseEntity.ok(service.findAll());
     }
     
-    @GetMapping("/filter")
+    @PostMapping("/filter")
     public ResponseEntity<?> findAllByExample(@RequestBody Trabajador example) {
         return ResponseEntity.ok(service.findAll(Example.of(example)));
     }
