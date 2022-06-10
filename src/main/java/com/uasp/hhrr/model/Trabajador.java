@@ -58,11 +58,11 @@ public class Trabajador implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "maestria")
-    private boolean maestria;
+    private Boolean maestria;
     
     @Basic(optional = false)
     @Column(name = "doctorado")
-    private boolean doctorado;
+    private Boolean doctorado;
     
     @JoinColumn(name = "id_cat_doc", referencedColumnName = "id")
     @ManyToOne

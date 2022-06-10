@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,6 +41,11 @@ public class TrabajadorController {
     @GetMapping("")
     public ResponseEntity<?> list() {
         return ResponseEntity.ok(service.findAll());
+    }
+    
+    @GetMapping("/filter")
+    public ResponseEntity<?> findAllByExample(@RequestBody Trabajador example) {
+        return ResponseEntity.ok(service.findAll(Example.of(example)));
     }
 
     @GetMapping("/{id}")

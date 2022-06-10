@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.uasp.hhrr.MessageResponse;
 import com.uasp.hhrr.model.Departamento;
 import com.uasp.hhrr.service.DepartamentoService;
+import java.util.Map;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +41,14 @@ public class DepartamentoController {
 
     @GetMapping("")
     public ResponseEntity<?> list(
-            @RequestParam(name = "unidad", required = false) Integer idUnidad) {
-        if (idUnidad != null) {
-            return ResponseEntity.ok(service.findByIdUnidad(idUnidad));
+            @RequestParam Map<String, Object> params) {
+
+        if (params.get("unidad") != null) {
+            try {
+                return ResponseEntity.ok(service.findByIdUnidad(Integer.parseInt(params.get("unidad").toString())));
+            } catch (NumberFormatException e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
         } else {
             return ResponseEntity.ok(service.findAll());
         }

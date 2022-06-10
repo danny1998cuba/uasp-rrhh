@@ -9,6 +9,9 @@ import com.uasp.hhrr.repository.TrabajadorRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,7 +26,7 @@ public class TrabajadorService implements Services<Trabajador, Integer> {
 
     @Override
     public Integer save(Trabajador object) {
-        if(object.getId() != null) {
+        if (object.getId() != null) {
             object.setId(null);
         }
         Trabajador p = repository.save(object);
@@ -59,6 +62,14 @@ public class TrabajadorService implements Services<Trabajador, Integer> {
     @Override
     public Optional<Trabajador> findById(Integer id) {
         return repository.findById(id);
+    }
+
+    public List<Trabajador> findAll(Specification<Trabajador> spec) {
+        return repository.findAll(spec);
+    }
+
+    public List<Trabajador> findAll(Example<Trabajador> example) {
+        return repository.findAll(example);
     }
 
 }

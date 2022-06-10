@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.uasp</groupId>
     <artifactId>hhrr</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <name>Sistema de gestion de Recursos Humanos</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -69,6 +69,13 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+        
+        <!--Reportes-->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.10.0</version>
         </dependency>
     </dependencies>
 
