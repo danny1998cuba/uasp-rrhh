@@ -27,6 +27,8 @@ export const GESTION_ROUTES = {
     USERS: `${API_ROUTE}/usuario`
 }
 
+export const COUNT = '/count'
+
 export const PASS_ROUTE = `${GESTION_ROUTES.USERS}/pass`
 
 // Connectors

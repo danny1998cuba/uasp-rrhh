@@ -1,7 +1,7 @@
 import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
-import { GESTION_ROUTES } from '../../constants/routes/api.routes';
+import { COUNT, GESTION_ROUTES } from '../../constants/routes/api.routes';
 import { IApiService } from '../../interfaces';
 import { ApiClass, ResponseHandler, Trabajador } from '../../schema';
 
@@ -31,6 +31,18 @@ export class TrabajadorService extends ApiClass implements IApiService<Trabajado
   getByFilter(object: Trabajador): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.post<Trabajador[]>(GESTION_ROUTES.TRABAJADOR_FILTER, object, { headers: this.headers, withCredentials: true })
+      .pipe(
+        map(r => {
+          response.data = r;
+          return response;
+        }),
+        catchError(this.error)
+      );
+  }
+
+  countByFilter(object: Trabajador): Observable<ResponseHandler> {
+    const response = new ResponseHandler()
+    return this.http.post<Trabajador[]>(GESTION_ROUTES.TRABAJADOR + COUNT, object, { headers: this.headers, withCredentials: true })
       .pipe(
         map(r => {
           response.data = r;
