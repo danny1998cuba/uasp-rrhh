@@ -6,10 +6,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { PLANTILLA_ROUTES } from 'src/app/data/constants';
 import { Cargo, CatDoc, Cla, Departamento, DepsConsumer, NivelEscolar, Trabajador } from 'src/app/data/schema';
-import { CargoService, CatDocService, CatOcupService, ClaService, DepartamentoService, EscalaService, NivelEscolarService, TrabajadorService } from 'src/app/data/services';
+import { CargoService, CatDocService, CatOcupService, ClaService, DepartamentoService, EscalaService, NivelEscolarService, ReportsService, TrabajadorService } from 'src/app/data/services';
 import { CargosComponent } from '../../sistema/cargos/cargos.component';
 import { CatDocComponent } from '../../sistema/cat-doc/cat-doc.component';
 import { ClaComponent } from '../../sistema/cla/cla.component';
@@ -27,7 +27,7 @@ export class TrabajadoresFiltersComponent implements OnInit {
 
   displayedColumns: string[] = ['nombre', 'ci', 'sexo', 'cargo'];
   dataSource = new MatTableDataSource<Trabajador>([]);
-  faFilter = faFilter
+  faFilter = faFilter; faDown = faDownload
 
   catsDoc!: CatDoc[]
   clas!: Cla[]
@@ -36,6 +36,7 @@ export class TrabajadoresFiltersComponent implements OnInit {
   niveles!: NivelEscolar[]
 
   listas: any
+  lastFilter!: Trabajador
 
   //Components
   catDocComp!: CatDocComponent
@@ -58,6 +59,7 @@ export class TrabajadoresFiltersComponent implements OnInit {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private bottomSheet: MatBottomSheet,
+    private reportService: ReportsService,
     //Extra services
     catdocServ: CatDocService,
     catocupServ: CatOcupService,
@@ -109,6 +111,7 @@ export class TrabajadoresFiltersComponent implements OnInit {
   }
 
   loadFilter(object: Trabajador) {
+    this.lastFilter = object
     this.service.getByFilter(object).subscribe(
       r => {
         if (!r.error) {
@@ -125,6 +128,24 @@ export class TrabajadoresFiltersComponent implements OnInit {
     this.router.navigate(['/' + PLANTILLA_ROUTES.TRABAJADORES], {
       queryParams: { ci: object.ci }
     })
+  }
+
+  download() {
+    this.reportService.filtered(this.lastFilter).subscribe(
+      (data: Blob) => {
+        var file = new Blob([data], { type: 'application/pdf' })
+        var fileUrl = URL.createObjectURL(file)
+
+        var a = document.createElement('a')
+        a.href = fileUrl
+        a.target = '_blank'
+        a.download = 'lsl.pdf'
+        document.body.appendChild(a)
+        a.click()
+      }, (error) => {
+        console.log(`error ${error}`)
+      }
+    )
   }
 
 }

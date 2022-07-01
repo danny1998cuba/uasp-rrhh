@@ -3,11 +3,12 @@
 <div class="card-body">
     <div class="d-flex justify-content-between">
 
-        <div class="bg-dark text-light d-flex justify-content-center p-3 align-items-center">
-            TODO: Applied filters label
+        <div>
+            <p>Detalles de los filtros aplicados:</p>
+            <p class="filter-detail">{{lastFilter | trabajadorFilter}}</p>
         </div>
 
-        <button mat-button type="button" matTooltip="Nuevo Trabajador" aria-label="Add" class="mb-3"
+        <button mat-button type="button" matTooltip="Seleccionar filtros" aria-label="Select" class="mb-3"
             (click)="openBottomSheet()">
             <fa-icon [icon]="faFilter"></fa-icon>
         </button>
@@ -56,7 +57,18 @@
 
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
         </div>
+
+        <div class="d-flex justify-content-end mt-4">
+            <!-- <div class="btn btn-primary" [class.disabled]="dataSource.data.length == 0" (click)="">Descargar
+                listado</div> -->
+            <button mat-button type="button" aria-label="Down" (click)="download()"
+                [disabled]="dataSource.data.length == 0">
+                <fa-icon [icon]="faDown"></fa-icon>
+                <span class="px-3">Decargar listado</span>
+            </button>
+        </div>
     </ng-container>
+
 </div>
 
 <div class="modal fade right" id="modalPoll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

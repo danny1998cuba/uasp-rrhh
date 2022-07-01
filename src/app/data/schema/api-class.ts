@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { of } from "rxjs";
 import { environment } from "src/environments/environment";
 import { ResponseHandler } from ".";
@@ -10,7 +10,7 @@ export class ApiClass {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
-        'Access-Control-Allow-Headers': 'Origin,Content-Type,append,delete,entries,foreach,get,has,keys,set,values,Authorization'
+        'Access-Control-Allow-Headers': 'Origin,Content-Type,append,delete,entries,foreach,get,has,keys,set,values,Authorization,accept'
     })
 
     error(error: HttpErrorResponse) {

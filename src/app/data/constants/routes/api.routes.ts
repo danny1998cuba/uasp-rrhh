@@ -27,6 +27,14 @@ export const GESTION_ROUTES = {
     USERS: `${API_ROUTE}/usuario`
 }
 
+// Reports Routes
+export const REPORTS_BASE = `${API_ROUTE}/reports`
+
+export const REPORTS = {
+    FILTERED: `${REPORTS_BASE}/filtered`
+}
+
+
 export const COUNT = '/count'
 
 export const PASS_ROUTE = `${GESTION_ROUTES.USERS}/pass`
