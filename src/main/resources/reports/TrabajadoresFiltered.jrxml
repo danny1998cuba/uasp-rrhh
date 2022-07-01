@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TrabajadoresFiltered" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="657b825a-3b2c-40d6-95ab-b53e9c5c7fde">
+    <property name="ireport.zoom" value="3.13842837672101"/>
+    <property name="ireport.x" value="938"/>
+    <property name="ireport.y" value="13"/>
+    <parameter name="logo" class="java.lang.String"/>
+    <parameter name="filtrostxt" class="java.lang.String"/>
+    <queryString>
+		<![CDATA[]]>
+    </queryString>
+    <field name="nombre" class="java.lang.String"/>
+    <field name="apellidos" class="java.lang.String"/>
+    <field name="ci" class="java.lang.String"/>
+    <field name="sexo" class="java.lang.String"/>
+    <field name="maestria" class="java.lang.Boolean"/>
+    <field name="doctorado" class="java.lang.Boolean"/>
+    <field name="idCatDoc" class="com.uasp.hhrr.model.CategoriaDocente">
+        <fieldDescription><![CDATA[idCatDoc]]></fieldDescription>
+    </field>
+    <field name="idEscolar" class="com.uasp.hhrr.model.NivelEscolar">
+        <fieldDescription><![CDATA[idEscolar]]></fieldDescription>
+    </field>
+    <field name="idDepartamento" class="com.uasp.hhrr.model.Departamento">
+        <fieldDescription><![CDATA[idDepartamento]]></fieldDescription>
+    </field>
+    <field name="idCLA" class="com.uasp.hhrr.model.Cla">
+        <fieldDescription><![CDATA[idCLA]]></fieldDescription>
+    </field>
+    <field name="idCargo" class="com.uasp.hhrr.model.Cargo">
+        <fieldDescription><![CDATA[idCargo]]></fieldDescription>
+    </field>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="49" splitType="Stretch">
+            <image>
+                <reportElement x="18" y="0" width="195" height="49" uuid="72c61b79-36f1-4f98-a276-efe6913d4b8c"/>
+                <imageExpression><![CDATA[$P{logo}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="330" y="0" width="405" height="49" uuid="709572f0-87bc-4156-8fad-b0763ce4e9a1"/>
+                <textElement textAlignment="Right" verticalAlignment="Bottom">
+                    <font fontName="Cambria" size="22" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Listado de trabajadores filtrado]]></text>
+            </staticText>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="43" splitType="Stretch">
+            <staticText>
+                <reportElement x="18" y="10" width="119" height="16" uuid="6e57e624-8dbf-417e-9035-f975c4d366a9"/>
+                <textElement>
+                    <font fontName="Cambria" size="13" isBold="true" isUnderline="true"/>
+                </textElement>
+                <text><![CDATA[Filtros aplicados:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+                <reportElement x="38" y="26" width="697" height="17" uuid="ce68e895-9bc2-4ef6-bec7-1037e72dc3d0"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Cambria" size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{filtrostxt}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="47" splitType="Stretch">
+            <staticText>
+                <reportElement x="18" y="11" width="118" height="32" uuid="441d69fb-b76f-4a3d-bc17-aee6b7d17a3d"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="SansSerif" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Nombre completo]]></text>
+            </staticText>
+            <staticText>
+                <reportElement stretchType="RelativeToTallestObject" x="144" y="11" width="80" height="32" uuid="9de71037-2ccf-442c-9408-8a50063f79fe"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="SansSerif" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Carné de identidad]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="231" y="11" width="55" height="32" uuid="2a468e65-edc8-4869-9c4f-dd53d0383910"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="SansSerif" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Sexo]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="635" y="11" width="100" height="32" uuid="b8506f4b-8e37-4e58-bdc8-fc4e08235c94"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="SansSerif" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Cargo]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="510" y="11" width="116" height="32" uuid="e0d8b5a6-017e-47f4-b748-673d622b360d"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="SansSerif" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Departamento]]></text>
+            </staticText>
+            <line>
+                <reportElement x="19" y="44" width="716" height="1" uuid="ab7c6e6c-db39-45c7-90df-475dfc2d3111"/>
+            </line>
+            <staticText>
+                <reportElement stretchType="RelativeToTallestObject" x="294" y="11" width="55" height="32" uuid="cc61bf54-7980-4d09-b6b8-0d19386b7f96"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="SansSerif" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Nivel escolar]]></text>
+            </staticText>
+            <staticText>
+                <reportElement stretchType="RelativeToTallestObject" x="356" y="11" width="33" height="32" uuid="9d51a54d-ae1f-42dd-b08f-f2b64763d6d6"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="SansSerif" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Master]]></text>
+            </staticText>
+            <staticText>
+                <reportElement stretchType="RelativeToTallestObject" x="391" y="11" width="36" height="32" uuid="8c2665f9-12b5-4877-a84d-893d304c6935"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="SansSerif" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Doctor]]></text>
+            </staticText>
+            <staticText>
+                <reportElement stretchType="RelativeToTallestObject" x="436" y="11" width="66" height="32" uuid="072e2967-ac3e-4408-a3c9-79291bdbde5a"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="SansSerif" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Categoría docente]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="26" splitType="Stretch">
+            <textField isStretchWithOverflow="true">
+                <reportElement x="18" y="3" width="118" height="20" uuid="f759fefd-d1ac-488d-b9ce-72e4c086b49b"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{nombre} + " " + $F{apellidos}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="144" y="3" width="80" height="20" uuid="8a8ff372-20bb-4c32-9f72-f6a0cbf441f3"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{ci}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="231" y="3" width="55" height="20" uuid="a3803178-a4ba-46a8-8742-5e8e5fbf965b"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{sexo}.equalsIgnoreCase("m")?"Masculino":"Femenino"]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="510" y="3" width="116" height="20" uuid="34d61efc-b154-4b14-87c4-d9cc9b175604"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{idDepartamento}.getIdUnidad().getNombre() + " - " + $F{idDepartamento}.getNombre()]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="635" y="3" width="100" height="20" uuid="78100c9c-4a6f-4b61-9137-a54b889b485f"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{idCargo}.getNombre()]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="294" y="3" width="55" height="20" uuid="de40cebe-54a4-417d-ad53-1829e4a986a7"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{idEscolar}.getAbreviado()]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="356" y="3" width="33" height="20" uuid="710ad0b8-595c-4d0a-99f2-3bb2469a374f"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{maestria} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="391" y="3" width="36" height="20" uuid="9e1d5488-0216-4450-8a20-072e0c40ecdb"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{doctorado} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="436" y="3" width="66" height="20" uuid="b9d761bc-1774-4fbf-b265-f1e858663cdb"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{idCatDoc} == null ? "No tiene" : $F{idCatDoc}.getTipo()]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <pageFooter>
+        <band height="37" splitType="Stretch">
+            <image hAlign="Center" vAlign="Middle">
+                <reportElement x="330" y="7" width="96" height="24" uuid="1abd9a28-9e7a-4be6-a16d-8563bd1bb3b7"/>
+                <imageExpression><![CDATA[$P{logo}]]></imageExpression>
+            </image>
+            <textField>
+                <reportElement x="626" y="8" width="80" height="23" uuid="dba63f72-e7de-47fa-bc2c-992a44eaed3f"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement x="706" y="8" width="40" height="23" uuid="63105075-7bb5-4949-9d08-a91aa78a7be1"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+</jasperReport>

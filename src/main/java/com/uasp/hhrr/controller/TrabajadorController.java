@@ -42,10 +42,15 @@ public class TrabajadorController {
     public ResponseEntity<?> list() {
         return ResponseEntity.ok(service.findAll());
     }
-    
+
     @PostMapping("/filter")
     public ResponseEntity<?> findAllByExample(@RequestBody Trabajador example) {
         return ResponseEntity.ok(service.findAll(Example.of(example)));
+    }
+
+    @PostMapping("/count")
+    public ResponseEntity<?> countByExample(@RequestBody Trabajador example) {
+        return ResponseEntity.ok(service.countByExample(Example.of(example)));
     }
 
     @GetMapping("/{id}")

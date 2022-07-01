@@ -86,6 +86,6 @@ public class Trabajador implements Serializable {
 
     public Trabajador(Integer id) {
         this.id = id;
-    }
-   
+    }   
+    
 }
