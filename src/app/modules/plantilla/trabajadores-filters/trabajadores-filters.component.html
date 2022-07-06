@@ -1,4 +1,4 @@
-<h1 class="card-title">Filtros</h1>
+<h1 class="card-title">Búsqueda avanzada</h1>
 
 <div class="card-body">
     <div class="d-flex justify-content-between">
@@ -67,8 +67,19 @@
                 <span class="px-3">Decargar listado</span>
             </button>
         </div>
-    </ng-container>
 
+        <ng-container *ngIf="dataSource.data.length != 0">
+            <div class="row">
+                <div class="col-lg-3 col-md-2"></div>
+                <div class="col-lg-6 col-md-8">
+                    <app-card title="Cantidad y porcentaje de mujeres">
+                        <app-percent-women [trabajadores]="dataSource.data"></app-percent-women>
+                    </app-card>
+                </div>
+                <div class="col-lg-3 col-md-2"></div>
+            </div>
+        </ng-container>
+    </ng-container>
 </div>
 
 <div class="modal fade right" id="modalPoll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

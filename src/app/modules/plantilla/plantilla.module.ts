@@ -9,6 +9,8 @@ import { TrabAddModComponent } from './trabajadores/trab-add-mod/trab-add-mod.co
 import { TrabajadoresFiltersComponent } from './trabajadores-filters/trabajadores-filters.component';
 import { FiltersSelectorComponent } from './trabajadores-filters/filters-selector/filters-selector.component';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { AprobCubiertaComponent } from './aprob-cubierta/aprob-cubierta.component';
+import { TrabajadoresUnidadComponent } from './trabajadores-unidad/trabajadores-unidad.component';
 
 
 
@@ -20,7 +22,9 @@ import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
     InitComponent,
     TrabAddModComponent,
     TrabajadoresFiltersComponent,
-    FiltersSelectorComponent
+    FiltersSelectorComponent,
+    AprobCubiertaComponent,
+    TrabajadoresUnidadComponent
   ],
   imports: [
     SharedModule

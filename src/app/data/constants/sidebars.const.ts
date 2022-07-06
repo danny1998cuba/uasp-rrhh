@@ -24,15 +24,23 @@ export const PLANTILLA_SIDEBAR: ISidebarData = {
     rootLink: '/' + PLANTILLA_ROOT,
     options: [
         {
-            nombre: 'Trabajadores',
+            nombre: 'Gestión de trabajadores',
             link: PLANTILLA_ROUTES.TRABAJADORES
         },
         {
-            nombre: 'Filtros',
+            nombre:'Plantilla aprobada y cubierta',
+            link: PLANTILLA_ROUTES.APROB
+        },
+        {
+            nombre:'Trabajadores por unidad',
+            link: PLANTILLA_ROUTES.UNIDAD
+        },
+        {
+            nombre: 'Búsqueda avanzada',
             link: PLANTILLA_ROUTES.FILTERS
         },
         {
-            nombre: 'P2',
+            nombre: 'Plantilla de cargo y registro de trabajadores',
             link: PLANTILLA_ROUTES.P2
         }
     ]
