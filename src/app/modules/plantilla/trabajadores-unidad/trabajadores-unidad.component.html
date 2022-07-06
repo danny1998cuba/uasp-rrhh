@@ -1,1 +1,46 @@
 <h1 class="card-title">Relación de trabajadores por unidad</h1>
+
+<div class="card-body">
+    <div class="d-flex justify-content-between">
+        <mat-form-field>
+            <mat-label>Seleccione una unidad</mat-label>
+            <mat-select [(value)]="unidad" [compareWith]="compareObjects" (valueChange)="changedUni()">
+                <mat-option [value]="null">--</mat-option>
+                <mat-option [value]="allUnids">Todas las unidades</mat-option>
+                <mat-option *ngFor="let uni of unidades" [value]="uni">
+                    {{uni.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <ng-container *ngIf="!isLoading; else noData;">
+        <div *ngIf="!allUnidsB">
+            <app-clickable-trabajador-table [dataSource]="dataSource"></app-clickable-trabajador-table>
+        </div>
+
+
+        <div *ngIf="allUnidsB">
+            <mat-tab-group (selectedIndexChange)="changeTab($event)">
+                <mat-tab *ngFor="let uni of unidades; let index = index" [label]="uni.nombre">
+                    <app-clickable-trabajador-table [dataSource]="dataSources[index]"></app-clickable-trabajador-table>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+
+
+        <div class="d-flex justify-content-end mt-4">
+            <!-- <div class="btn btn-primary" [class.disabled]="dataSource.data.length == 0" (click)="">Descargar
+                listado</div> -->
+            <button mat-button type="button" aria-label="Down" (click)="download()"
+                [disabled]="dataSource.data.length == 0">
+                <fa-icon [icon]="faDown"></fa-icon>
+                <span class="px-3">Decargar listado</span>
+            </button>
+        </div>
+    </ng-container>
+</div>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>

@@ -15,47 +15,8 @@
     </div>
 
     <ng-container *ngIf="!isLoading; else noData;">
-        <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource" matSort>
-
-                <!-- Clasificador Column -->
-                <ng-container matColumnDef="nombre">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre completo </th>
-                    <td mat-cell *matCellDef="let row"> {{row | fullName}} </td>
-                </ng-container>
-
-                <!-- Salario Column -->
-                <ng-container matColumnDef="cargo">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Cargo </th>
-                    <td mat-cell *matCellDef="let row"> {{row.idCargo.nombre}} </td>
-                </ng-container>
-
-                <!-- Salario Column -->
-                <ng-container matColumnDef="ci">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Carne de identidad </th>
-                    <td mat-cell *matCellDef="let row"> {{row.ci}} </td>
-                </ng-container>
-
-                <!-- Salario Column -->
-                <ng-container matColumnDef="sexo">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Sexo </th>
-                    <td mat-cell *matCellDef="let row"> {{row.sexo == 'm' ? 'Masculino': 'Femenino'}} </td>
-                </ng-container>
-
-                <tr class="mat-row" *matNoDataRow>
-                    <td class="mat-cell" [attr.colspan]="displayedColumns.length">
-                        <div class="text-center">
-                            No hay datos disponibles o no ha aplicado ning&uacute;n filtro a&uacute;n
-                        </div>
-                    </td>
-                </tr>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="editTrabajador(row)"
-                    matTooltip="Doble click para editar" class="clickable-row">
-                </tr>
-            </table>
-
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+        <div>
+            <app-clickable-trabajador-table [dataSource]="dataSource"></app-clickable-trabajador-table>
         </div>
 
         <div class="d-flex justify-content-end mt-4">
@@ -67,18 +28,6 @@
                 <span class="px-3">Decargar listado</span>
             </button>
         </div>
-
-        <ng-container *ngIf="dataSource.data.length != 0">
-            <div class="row">
-                <div class="col-lg-3 col-md-2"></div>
-                <div class="col-lg-6 col-md-8">
-                    <app-card title="Cantidad y porcentaje de mujeres">
-                        <app-percent-women [trabajadores]="dataSource.data"></app-percent-women>
-                    </app-card>
-                </div>
-                <div class="col-lg-3 col-md-2"></div>
-            </div>
-        </ng-container>
     </ng-container>
 </div>
 

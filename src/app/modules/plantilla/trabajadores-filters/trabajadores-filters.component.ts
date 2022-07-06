@@ -45,14 +45,6 @@ export class TrabajadoresFiltersComponent implements OnInit {
   cargoComp!: CargosComponent
   nivelesComp!: NivelEscolarComponent
 
-  @ViewChild(MatPaginator) set matPaginator(paginator: MatPaginator) {
-    this.dataSource.paginator = paginator
-  }
-
-  @ViewChild(MatSort) set matSort(sort: MatSort) {
-    this.dataSource.sort = sort
-  }
-
   constructor(
     private service: TrabajadorService,
     private router: Router,

@@ -1,4 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { BaseChartDirective, NgChartsConfiguration } from 'ng2-charts';
+import { Trabajador, Unidad } from 'src/app/data/schema';
+import { CargoService, CatDocService, CatOcupService, ClaService, DepartamentoService, EscalaService, NivelEscolarService, ReportsService, TrabajadorService, UnidadService } from 'src/app/data/services';
+import { PercentWomenComponent } from 'src/app/shared/charts';
+import { UnidadesComponent } from '../../sistema/unidades/unidades.component';
+import { TrabajadoresComponent } from '../trabajadores/trabajadores.component';
 
 @Component({
   selector: 'app-trabajadores-unidad',
@@ -7,9 +20,111 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrabajadoresUnidadComponent implements OnInit {
 
-  constructor() { }
+  isLoading = false
+  allUnidsB = false
+
+  dataSource = new MatTableDataSource<Trabajador>([]);
+  dataSources: MatTableDataSource<Trabajador>[] = [];
+
+  @ViewChild(PercentWomenComponent) chart: PercentWomenComponent | undefined;
+
+  faDown = faDownload
+
+  trabajadores!: Trabajador[]
+
+  unidades!: Unidad[]
+  unidad!: Unidad | null
+  allUnids: Unidad = {
+    id: 0,
+    nombre: 'Todas las unidades'
+  }
+
+  //Components
+  unidadComp!: UnidadesComponent
+  trabComp!: TrabajadoresComponent
+
+  constructor(
+    private service: TrabajadorService,
+    private router: Router,
+    dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private reportService: ReportsService,
+    //Extra services
+    unidadService: UnidadService,
+    catdocServ: CatDocService,
+    catocupServ: CatOcupService,
+    claServ: ClaService,
+    cargoServ: CargoService,
+    depServ: DepartamentoService,
+    escService: EscalaService,
+    nivelService: NivelEscolarService
+  ) {
+    this.unidadComp = new UnidadesComponent(unidadService, router, dialog, snackBar)
+    this.trabComp = new TrabajadoresComponent(
+      service, router, new ActivatedRoute(), dialog, snackBar, catdocServ,
+      catocupServ, claServ, cargoServ, depServ, escService, nivelService)
+  }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.unidades = this.unidadComp.data
+      this.trabajadores = this.trabComp.data
+    }, 1000);
+  }
+
+  sendMsg(msg: string) {
+    this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
+  }
+
+  compareObjects(ob1: any, ob2: any) { return (ob1 && ob2) ? ob1.id === ob2.id : false }
+
+  changedUni() {
+    this.isLoading = true
+    if (this.unidad == null) {
+      this.dataSource = new MatTableDataSource()
+      this.isLoading = false
+      this.allUnidsB = false
+    } else if (this.unidad == this.allUnids) {
+      this.allUnidsB = true
+      
+      this.unidades.forEach((uni, index) => {
+        this.dataSources[index] = new MatTableDataSource(this.trabajadoresUnidad(uni))
+      })
+      this.changeTab(0)
+      setTimeout(() => { this.isLoading = false }, 1000);
+    } else {
+      this.allUnidsB = false
+      this.dataSource = new MatTableDataSource(this.trabajadoresUnidad(this.unidad))
+      console.log(this.dataSource.data)
+      setTimeout(() => { this.isLoading = false }, 1000);
+    }
+  }
+  
+  changeTab(index: number){
+    this.dataSource = this.dataSources[index]
+  }
+
+  trabajadoresUnidad(unidad: Unidad): Trabajador[] {
+    console.log(this.trabajadores)
+    return this.trabajadores.filter(trab => trab.idDepartamento.idUnidad.id == unidad.id)
+  }
+
+  download() {
+    // this.reportService.filtered(this.lastFilter).subscribe(
+    //   (data: Blob) => {
+    //     var file = new Blob([data], { type: 'application/pdf' })
+    //     var fileUrl = URL.createObjectURL(file)
+
+    //     var a = document.createElement('a')
+    //     a.href = fileUrl
+    //     a.target = '_blank'
+    //     a.download = 'lsl.pdf'
+    //     document.body.appendChild(a)
+    //     a.click()
+    //   }, (error) => {
+    //     console.log(`error ${error}`)
+    //   }
+    // )
   }
 
 }
