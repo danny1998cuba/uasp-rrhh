@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TrabajadoresFiltered" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="657b825a-3b2c-40d6-95ab-b53e9c5c7fde">
-    <property name="ireport.zoom" value="3.13842837672101"/>
-    <property name="ireport.x" value="938"/>
-    <property name="ireport.y" value="13"/>
+    <property name="ireport.zoom" value="1.3310000000000062"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
     <parameter name="logo" class="java.lang.String"/>
     <parameter name="filtrostxt" class="java.lang.String"/>
     <queryString>
@@ -29,6 +29,12 @@
     <field name="idCargo" class="com.uasp.hhrr.model.Cargo">
         <fieldDescription><![CDATA[idCargo]]></fieldDescription>
     </field>
+    <variable name="total" class="java.lang.Integer" calculation="Count">
+        <variableExpression><![CDATA[$F{ci}]]></variableExpression>
+    </variable>
+    <group name="BySexo">
+        <groupExpression><![CDATA[$F{sexo}]]></groupExpression>
+    </group>
     <background>
         <band splitType="Stretch"/>
     </background>
@@ -202,4 +208,34 @@
             </textField>
         </band>
     </pageFooter>
+    <summary>
+        <band height="203">
+            <pieChart>
+                <chart>
+                    <reportElement x="18" y="39" width="389" height="154" uuid="0772853e-249f-47c2-a264-b823b1c08846"/>
+                    <chartTitle/>
+                    <chartSubtitle/>
+                    <chartLegend textColor="#666666" position="Right"/>
+                </chart>
+                <pieDataset>
+                    <keyExpression><![CDATA[$F{sexo} == null ? "N/A" : $F{sexo}.equalsIgnoreCase("m")?"Masculino":"Femenino"]]></keyExpression>
+                    <valueExpression><![CDATA[$V{BySexo_COUNT}]]></valueExpression>
+                </pieDataset>
+                <piePlot isShowLabels="true" labelFormat="{1} ({2})">
+                    <plot/>
+                    <itemLabel/>
+                </piePlot>
+            </pieChart>
+            <staticText>
+                <reportElement x="19" y="20" width="227" height="16" uuid="3671e1bb-cc37-45ea-a73d-0ea7d7ebbfac"/>
+                <textElement>
+                    <font fontName="Cambria" size="13" isBold="true" isUnderline="true"/>
+                </textElement>
+                <text><![CDATA[Cantidad y porcentaje de mujeres: ]]></text>
+            </staticText>
+            <line>
+                <reportElement x="19" y="4" width="716" height="1" uuid="85acf67f-5ed2-4baf-a033-bd1bd192ba80"/>
+            </line>
+        </band>
+    </summary>
 </jasperReport>
