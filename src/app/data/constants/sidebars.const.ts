@@ -6,14 +6,45 @@ export const MODELOS_SIDEBAR: ISidebarData = {
     icon: faFile,
     secionName: 'Modelos',
     rootLink: '/' + MODELOS_ROOT,
-    options: [
+    groups: [
         {
-            nombre: 'Modelo 1',
-            link: MODELOS_ROUTES.MODEL1
+            title: 'Plantilla',
+            options: [
+                {
+                    nombre: 'Modelo Grupo - Escala',
+                    link: MODELOS_ROUTES.GRUPO_ESCALA
+                }
+            ]
         },
         {
-            nombre: 'Modelo 2',
-            link: MODELOS_ROUTES.MODEL2
+            title: 'Mensuales',
+            options: [
+                {
+                    nombre: 'Resumen de trabajadores y salario',
+                    link: MODELOS_ROUTES.DATABASE
+                },
+                {
+                    nombre: 'Ausentismo',
+                    link: MODELOS_ROUTES.AUSENTISMO
+                },
+                {
+                    nombre: 'Situación laboral de los RRHH',
+                    link: MODELOS_ROUTES.SITUACION
+                }
+            ]
+        },
+        {
+            title: 'Estadísticas',
+            options: [
+                {
+                    nombre: 'OMEI 1',
+                    link: MODELOS_ROUTES.OMEI1
+                },
+                {
+                    nombre: 'OMEI 2',
+                    link: MODELOS_ROUTES.OMEI2
+                }
+            ]
         }
     ]
 }
@@ -22,26 +53,30 @@ export const PLANTILLA_SIDEBAR: ISidebarData = {
     icon: faUsers,
     secionName: 'Plantilla',
     rootLink: '/' + PLANTILLA_ROOT,
-    options: [
+    groups: [
         {
-            nombre: 'Gestión de trabajadores',
-            link: PLANTILLA_ROUTES.TRABAJADORES
-        },
-        {
-            nombre:'Plantilla aprobada y cubierta',
-            link: PLANTILLA_ROUTES.APROB
-        },
-        {
-            nombre:'Trabajadores por unidad',
-            link: PLANTILLA_ROUTES.UNIDAD
-        },
-        {
-            nombre: 'Búsqueda avanzada',
-            link: PLANTILLA_ROUTES.FILTERS
-        },
-        {
-            nombre: 'Plantilla de cargo y registro de trabajadores',
-            link: PLANTILLA_ROUTES.P2
+            options: [
+                {
+                    nombre: 'Gestión de trabajadores',
+                    link: PLANTILLA_ROUTES.TRABAJADORES
+                },
+                {
+                    nombre: 'Plantilla aprobada y cubierta',
+                    link: PLANTILLA_ROUTES.APROB
+                },
+                {
+                    nombre: 'Trabajadores por unidad',
+                    link: PLANTILLA_ROUTES.UNIDAD
+                },
+                {
+                    nombre: 'Búsqueda avanzada',
+                    link: PLANTILLA_ROUTES.FILTERS
+                },
+                {
+                    nombre: 'Plantilla de cargo y registro de trabajadores',
+                    link: PLANTILLA_ROUTES.P2
+                }
+            ]
         }
     ]
 }
@@ -50,42 +85,46 @@ export const SISTEMA_SIDEBAR: ISidebarData = {
     icon: faCog,
     secionName: 'Sistema',
     rootLink: '/' + SISTEMA_ROOT,
-    options: [
+    groups: [
         {
-            nombre: 'Unidades',
-            link: SISTEMA_ROUTES.UNIDADES
-        },
-        {
-            nombre: 'Cargos',
-            link: SISTEMA_ROUTES.CARGOS
-        },
-        {
-            nombre: 'Asignación de plazas',
-            link: SISTEMA_ROUTES.PLAZAS
-        },
-        {
-            nombre: 'Escalas salariales',
-            link: SISTEMA_ROUTES.ESCALAS
-        },
-        {
-            nombre: 'Categoría ocupacional',
-            link: SISTEMA_ROUTES.CAT_OCUP
-        },
-        {
-            nombre: 'Categoría docente',
-            link: SISTEMA_ROUTES.CAT_DOC
-        },
-        {
-            nombre: 'Nivel escolar',
-            link: SISTEMA_ROUTES.NIVEL
-        },
-        {
-            nombre: 'Condiciones laborales adicionales',
-            link: SISTEMA_ROUTES.CLA
-        },
-        {
-            nombre: 'Usuarios',
-            link: SISTEMA_ROUTES.USUARIOS
+            options: [
+                {
+                    nombre: 'Unidades',
+                    link: SISTEMA_ROUTES.UNIDADES
+                },
+                {
+                    nombre: 'Cargos',
+                    link: SISTEMA_ROUTES.CARGOS
+                },
+                {
+                    nombre: 'Asignación de plazas',
+                    link: SISTEMA_ROUTES.PLAZAS
+                },
+                {
+                    nombre: 'Escalas salariales',
+                    link: SISTEMA_ROUTES.ESCALAS
+                },
+                {
+                    nombre: 'Categoría ocupacional',
+                    link: SISTEMA_ROUTES.CAT_OCUP
+                },
+                {
+                    nombre: 'Categoría docente',
+                    link: SISTEMA_ROUTES.CAT_DOC
+                },
+                {
+                    nombre: 'Nivel escolar',
+                    link: SISTEMA_ROUTES.NIVEL
+                },
+                {
+                    nombre: 'Condiciones laborales adicionales',
+                    link: SISTEMA_ROUTES.CLA
+                },
+                {
+                    nombre: 'Usuarios',
+                    link: SISTEMA_ROUTES.USUARIOS
+                }
+            ]
         }
     ]
 }

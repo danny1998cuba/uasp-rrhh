@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, map, Observable } from 'rxjs';
-import { LOGIN_ROUTE, PLANTILLA_ROOT, SISTEMA_ROOT, STORAGE_KEYS } from '../../constants';
+import { LOGIN_ROUTE, PLANTILLA_ROOT, STORAGE_KEYS } from '../../constants';
 import { LOGIN_ROUTES } from '../../constants/routes/api.routes';
 import { ApiClass, ResponseHandler } from '../../schema';
 

@@ -9,14 +9,18 @@ import { ISidebarData } from './sidebar.metadata';
 })
 export class SidebarComponent implements OnInit {
 
-  @Input() data : ISidebarData = {
-    icon: faUser,    
-    secionName:'Section name',
-    rootLink:'',
-    options : [
+  @Input() data: ISidebarData = {
+    icon: faUser,
+    secionName: 'Section name',
+    rootLink: '',
+    groups: [
       {
-        nombre:'Default',
-        link:''
+        options: [
+          {
+            nombre: 'Default',
+            link: ''
+          }
+        ]
       }
     ]
   }
