@@ -19,4 +19,10 @@ export class ReportsService extends ApiClass {
     return this.http.post<Blob>(REPORTS.FILTERED + '?tipo=pdf',
       { filtros: new TrabajadorFilterPipe().transform(object), example: object }, { headers: this.headers, withCredentials: true, responseType: 'blob' as 'json' });
   }
+
+  unidades(): Observable<Blob> {
+    this.headers.append('response-type', 'blob')
+    return this.http.post<Blob>(REPORTS.UNIDAD + '?tipo=pdf',
+      { }, { headers: this.headers, withCredentials: true, responseType: 'blob' as 'json' });
+  }
 }

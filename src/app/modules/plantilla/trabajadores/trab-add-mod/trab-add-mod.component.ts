@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { nivelEscolarValidator } from 'src/app/core/validators';
 import { Cargo, CatDoc, CatOcup, Cla, Departamento, NivelEscolar, Trabajador } from 'src/app/data/schema';
 
 @Component({
@@ -52,7 +53,10 @@ export class TrabAddModComponent {
       idDepartamento: new FormControl(this.object.idDepartamento, Validators.required),
       idCLA: new FormControl(this.object.idCLA),
       idCargo: new FormControl(this.object.idCargo, Validators.required)
-    })
+    },
+    {validators :[
+      nivelEscolarValidator()
+    ]})
   }
 
   closeDialog() {

@@ -64,6 +64,9 @@
                     <mat-error *ngIf="form.controls['nivelEscolar'].hasError('required')">
                         El nivel escolar es obligatorio
                     </mat-error>
+                    <mat-error *ngIf="form.controls['nivelEscolar'].hasError('nivEscMinReq')">
+                        El trabajador no posee el nivel escolar mínimo requerido para el cargo
+                    </mat-error>
                 </mat-form-field>
             </div>
 

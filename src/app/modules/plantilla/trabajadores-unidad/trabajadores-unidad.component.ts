@@ -110,21 +110,21 @@ export class TrabajadoresUnidadComponent implements OnInit {
   }
 
   download() {
-    // this.reportService.filtered(this.lastFilter).subscribe(
-    //   (data: Blob) => {
-    //     var file = new Blob([data], { type: 'application/pdf' })
-    //     var fileUrl = URL.createObjectURL(file)
+    this.reportService.unidades().subscribe(
+      (data: Blob) => {
+        var file = new Blob([data], { type: 'application/pdf' })
+        var fileUrl = URL.createObjectURL(file)
 
-    //     var a = document.createElement('a')
-    //     a.href = fileUrl
-    //     a.target = '_blank'
-    //     a.download = 'lsl.pdf'
-    //     document.body.appendChild(a)
-    //     a.click()
-    //   }, (error) => {
-    //     console.log(`error ${error}`)
-    //   }
-    // )
+        var a = document.createElement('a')
+        a.href = fileUrl
+        a.target = '_blank'
+        a.download = 'lsl.pdf'
+        document.body.appendChild(a)
+        a.click()
+      }, (error) => {
+        console.log(`error ${error}`)
+      }
+    )
   }
 
 }
