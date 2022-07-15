@@ -4,11 +4,15 @@
  */
 package com.uasp.hhrr.service;
 
+import com.itextpdf.text.RomanList;
 import com.uasp.hhrr.model.Escala;
 import com.uasp.hhrr.repository.EscalaRepository;
+import com.uasp.hhrr.utils.RomansUtils;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,7 +27,7 @@ public class EscalaService implements Services<Escala, Integer> {
 
     @Override
     public Integer save(Escala object) {
-        if(object.getId() != null) {
+        if (object.getId() != null) {
             object.setId(null);
         }
         Escala p = repository.save(object);
@@ -53,7 +57,9 @@ public class EscalaService implements Services<Escala, Integer> {
 
     @Override
     public List<Escala> findAll() {
-        return repository.findAll();
+        List<Escala> all = repository.findAll();
+        all.sort(Comparator.comparing((e) -> RomansUtils.romanToInt(e.getClasificador())));
+        return all;
     }
 
     @Override

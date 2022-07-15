@@ -9,6 +9,7 @@ import com.uasp.hhrr.repository.NivelEscolarRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
@@ -53,7 +54,7 @@ public class NivelEscolarService implements Services<NivelEscolar, Integer> {
 
     @Override
     public List<NivelEscolar> findAll() {
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Order.desc("relevancia")));
     }
 
     @Override

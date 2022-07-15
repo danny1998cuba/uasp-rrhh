@@ -6,6 +6,7 @@ package com.uasp.hhrr.controller;
 
 import com.google.gson.Gson;
 import com.uasp.hhrr.MessageResponse;
+import com.uasp.hhrr.exceptions.NivelEscolarMinReqExcception;
 import com.uasp.hhrr.model.Trabajador;
 import com.uasp.hhrr.service.TrabajadorService;
 import org.springframework.web.bind.annotation.RestController;
@@ -79,6 +80,9 @@ public class TrabajadorController {
                 MessageResponse m = new MessageResponse(ex.getMessage());
                 return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
             }
+        } catch (NivelEscolarMinReqExcception ex) {
+            MessageResponse m = new MessageResponse(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
         } catch (Exception e) {
             MessageResponse m = new MessageResponse(e.getMessage());
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
@@ -99,6 +103,9 @@ public class TrabajadorController {
                 MessageResponse m = new MessageResponse(ex.getMessage());
                 return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
             }
+        } catch (NivelEscolarMinReqExcception ex) {
+            MessageResponse m = new MessageResponse(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
         } catch (Exception e) {
             MessageResponse m = new MessageResponse(e.getMessage());
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));

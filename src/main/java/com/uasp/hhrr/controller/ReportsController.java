@@ -59,6 +59,12 @@ public class ReportsController {
         return generateReport("TrabajadoresFiltered", params, new JRBeanCollectionDataSource(tService.findAll(Example.of(body.getExample()))));
     }
 
+    @PostMapping("/unidad")
+    public ResponseEntity<?> trabajadorUnidad(
+            @RequestParam Map<String, Object> params) {
+        return generateReport("TrabajadoresUnidad", params, new JRBeanCollectionDataSource(tService.findAll()));
+    }
+
     private ResponseEntity<?> generateReport(String fileName, Map<String, Object> params) {
         try {
             Report report = service.obtenerReporte(fileName, params);

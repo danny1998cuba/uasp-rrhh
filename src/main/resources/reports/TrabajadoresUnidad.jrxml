@@ -32,8 +32,25 @@
     <variable name="total" class="java.lang.Integer" calculation="Count">
         <variableExpression><![CDATA[$F{ci}]]></variableExpression>
     </variable>
+    <variable name="unidad" class="java.lang.String" resetType="Group" resetGroup="Unidad">
+        <variableExpression><![CDATA[$F{idDepartamento}.getIdUnidad().getNombre()]]></variableExpression>
+    </variable>
     <group name="BySexo">
         <groupExpression><![CDATA[$F{sexo}]]></groupExpression>
+    </group>
+    <group name="Unidad">
+        <groupExpression><![CDATA[$F{idDepartamento}.getIdUnidad()]]></groupExpression>
+        <groupHeader>
+            <band height="50">
+                <textField>
+                    <reportElement x="19" y="15" width="100" height="20" uuid="51a25f02-24b0-4bc7-b078-0cab56d44b11"/>
+                    <textFieldExpression><![CDATA[$V{unidad}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band height="50"/>
+        </groupFooter>
     </group>
     <background>
         <band splitType="Stretch"/>
@@ -49,27 +66,12 @@
                 <textElement textAlignment="Right" verticalAlignment="Bottom">
                     <font fontName="Cambria" size="22" isBold="true"/>
                 </textElement>
-                <text><![CDATA[Listado de trabajadores filtrado]]></text>
+                <text><![CDATA[Listado de trabajadores]]></text>
             </staticText>
         </band>
     </title>
     <pageHeader>
-        <band height="43" splitType="Stretch">
-            <staticText>
-                <reportElement x="18" y="10" width="119" height="16" uuid="6e57e624-8dbf-417e-9035-f975c4d366a9"/>
-                <textElement>
-                    <font fontName="Cambria" size="13" isBold="true" isUnderline="true"/>
-                </textElement>
-                <text><![CDATA[Filtros aplicados:]]></text>
-            </staticText>
-            <textField isStretchWithOverflow="true" isBlankWhenNull="true">
-                <reportElement x="38" y="26" width="697" height="17" uuid="ce68e895-9bc2-4ef6-bec7-1037e72dc3d0"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Cambria" size="11"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{filtrostxt}]]></textFieldExpression>
-            </textField>
-        </band>
+        <band height="43" splitType="Stretch"/>
     </pageHeader>
     <columnHeader>
         <band height="47" splitType="Stretch">

@@ -4,6 +4,7 @@
  */
 package com.uasp.hhrr.service;
 
+import com.uasp.hhrr.exceptions.NivelEscolarMinReqExcception;
 import com.uasp.hhrr.model.Trabajador;
 import com.uasp.hhrr.repository.TrabajadorRepository;
 import java.util.List;
@@ -18,24 +19,32 @@ import org.springframework.stereotype.Service;
  * @author Tapanes
  */
 @Service
-public class TrabajadorService implements Services<Trabajador, Integer> {
+public class TrabajadorService {
 
     @Autowired
     TrabajadorRepository repository;
 
-    @Override
-    public Integer save(Trabajador object) {
+    public Integer save(Trabajador object) throws NivelEscolarMinReqExcception {
         if (object.getId() != null) {
             object.setId(null);
         }
+
+        if (object.getIdCargo().getIdEscolarMin().getRelevancia() > object.getIdEscolar().getRelevancia()) {
+            throw new NivelEscolarMinReqExcception();
+        }
+
         Trabajador p = repository.save(object);
         return p.getId();
     }
 
-    @Override
-    public Integer update(Trabajador object, Integer id) {
+    public Integer update(Trabajador object, Integer id) throws NivelEscolarMinReqExcception {
         if (repository.findById(id).isPresent()) {
             object.setId(id);
+
+            if (object.getIdCargo().getIdEscolarMin().getRelevancia() > object.getIdEscolar().getRelevancia()) {
+                throw new NivelEscolarMinReqExcception();
+            }
+
             repository.save(object);
             return id;
         } else {
@@ -43,7 +52,6 @@ public class TrabajadorService implements Services<Trabajador, Integer> {
         }
     }
 
-    @Override
     public boolean deleteById(Integer id) {
         if (repository.findById(id).isPresent()) {
             repository.deleteById(id);
@@ -53,12 +61,10 @@ public class TrabajadorService implements Services<Trabajador, Integer> {
         }
     }
 
-    @Override
     public List<Trabajador> findAll() {
         return repository.findAll();
     }
 
-    @Override
     public Optional<Trabajador> findById(Integer id) {
         return repository.findById(id);
     }
@@ -70,7 +76,7 @@ public class TrabajadorService implements Services<Trabajador, Integer> {
     public List<Trabajador> findAll(Example<Trabajador> example) {
         return repository.findAll(example);
     }
-    
+
     public long countByExample(Example<Trabajador> example) {
         return repository.count(example);
     }
