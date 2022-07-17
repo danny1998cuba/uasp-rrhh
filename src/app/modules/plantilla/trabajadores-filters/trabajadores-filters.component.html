@@ -20,12 +20,10 @@
         </div>
 
         <div class="d-flex justify-content-end mt-4">
-            <!-- <div class="btn btn-primary" [class.disabled]="dataSource.data.length == 0" (click)="">Descargar
-                listado</div> -->
             <button mat-button type="button" aria-label="Down" (click)="download()"
                 [disabled]="dataSource.data.length == 0">
                 <fa-icon [icon]="faDown"></fa-icon>
-                <span class="px-3">Decargar listado</span>
+                <span class="px-3">Descargar listado</span>
             </button>
         </div>
     </ng-container>

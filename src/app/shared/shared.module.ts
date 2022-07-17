@@ -27,6 +27,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatCardModule } from '@angular/material/card';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { MatCardModule } from '@angular/material/card';
     HttpClientModule,
     FontAwesomeModule,
     NgChartsModule,
+    PdfViewerModule,
 
     //Material...
     MatTableModule,
@@ -65,6 +67,7 @@ import { MatCardModule } from '@angular/material/card';
     HttpClientModule,
     FontAwesomeModule,
     NgChartsModule,
+    PdfViewerModule,
     ...fromComponents.components,
     ...fromPipes.pipes,
     ...fromCharts.charts,

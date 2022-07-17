@@ -124,14 +124,13 @@ export class TrabajadoresFiltersComponent implements OnInit {
 
   download() {
     this.reportService.filtered(this.lastFilter).subscribe(
-      (data: Blob) => {
-        var file = new Blob([data], { type: 'application/pdf' })
-        var fileUrl = URL.createObjectURL(file)
+      data => {
+        var fileUrl = URL.createObjectURL(data.data)
 
         var a = document.createElement('a')
         a.href = fileUrl
         a.target = '_blank'
-        a.download = 'lsl.pdf'
+        a.download = 'Trabajadores filtrados.pdf'
         document.body.appendChild(a)
         a.click()
       }, (error) => {

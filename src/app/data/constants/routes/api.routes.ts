@@ -32,6 +32,7 @@ export const REPORTS_BASE = `${API_ROUTE}/reports`
 
 export const REPORTS = {
     FILTERED: `${REPORTS_BASE}/filtered`,
+    P2: `${REPORTS_BASE}/p2`,
     UNIDAD: `${REPORTS_BASE}/unidad`
 }
 

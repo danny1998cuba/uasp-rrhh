@@ -86,7 +86,7 @@ export class TrabajadoresUnidadComponent implements OnInit {
       this.allUnidsB = false
     } else if (this.unidad == this.allUnids) {
       this.allUnidsB = true
-      
+
       this.unidades.forEach((uni, index) => {
         this.dataSources[index] = new MatTableDataSource(this.trabajadoresUnidad(uni))
       })
@@ -99,8 +99,8 @@ export class TrabajadoresUnidadComponent implements OnInit {
       setTimeout(() => { this.isLoading = false }, 1000);
     }
   }
-  
-  changeTab(index: number){
+
+  changeTab(index: number) {
     this.dataSource = this.dataSources[index]
   }
 
@@ -111,14 +111,13 @@ export class TrabajadoresUnidadComponent implements OnInit {
 
   download() {
     this.reportService.unidades().subscribe(
-      (data: Blob) => {
-        var file = new Blob([data], { type: 'application/pdf' })
-        var fileUrl = URL.createObjectURL(file)
+      data => {
+        var fileUrl = URL.createObjectURL(data.data)
 
         var a = document.createElement('a')
         a.href = fileUrl
         a.target = '_blank'
-        a.download = 'lsl.pdf'
+        a.download = 'Trabajadores por unidad.pdf'
         document.body.appendChild(a)
         a.click()
       }, (error) => {
