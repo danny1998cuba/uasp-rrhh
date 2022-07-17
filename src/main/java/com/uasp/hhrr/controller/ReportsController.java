@@ -7,26 +7,22 @@ package com.uasp.hhrr.controller;
 
 import com.google.gson.Gson;
 import com.uasp.hhrr.MessageResponse;
-import com.uasp.hhrr.model.Trabajador;
 import com.uasp.hhrr.reports.Report;
-import com.uasp.hhrr.reports.TipoReporte;
 import com.uasp.hhrr.reports.submodel.FilteredType;
 import com.uasp.hhrr.service.ReportsService;
 import com.uasp.hhrr.service.TrabajadorService;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.Map;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Example;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,27 +61,30 @@ public class ReportsController {
         return generateReport("TrabajadoresUnidad", params, new JRBeanCollectionDataSource(tService.findAll()));
     }
 
+    @GetMapping("/p2")
+    public ResponseEntity<?> P2(
+            @RequestParam Map<String, Object> params) {
+        if (params.get("unidadId") != null) {
+            int unidadId = Integer.parseInt(params.get("unidadId").toString());
+            params.replace("unidadId", unidadId);
+            return generateReport("P2", params);
+        } else {
+            MessageResponse m = new MessageResponse("Falta el id de la unidad");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(g.toJson(m));
+        }
+    }
+
     private ResponseEntity<?> generateReport(String fileName, Map<String, Object> params) {
         try {
             Report report = service.obtenerReporte(fileName, params);
 
-            InputStreamResource streamResource = new InputStreamResource(report.getStream());
-            MediaType mediaType;
+            byte[] array = new byte[report.getStream().available()];
+            report.getStream().read(array);
 
-            if (params.get("tipo").toString().equalsIgnoreCase(TipoReporte.XLS.name())) {
-                mediaType = MediaType.APPLICATION_OCTET_STREAM;
-            } else {
-                mediaType = MediaType.APPLICATION_PDF;
-            }
+            String encoded = Base64.getEncoder().encodeToString(array);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Content-Disposition", "attachment; filename\"" + report.getFileName() + "\"");
-            headers.add("Access-Control-Allow-Headers", "accept, content-type");
-            headers.add("Access-Control-Allow-Methods", "POST");
-            headers.add("Access-Control-Allow-Origin", "*");
-
-            return ResponseEntity.ok().headers(headers)
-                    .contentLength(report.getLength()).contentType(mediaType).body(streamResource);
+            MessageResponse m = new MessageResponse(encoded);
+            return ResponseEntity.ok().body(m);
 
         } catch (IOException | JRException | SQLException ex) {
             MessageResponse m = new MessageResponse("Error al crear el reporte: " + ex.getMessage());
@@ -98,25 +97,13 @@ public class ReportsController {
 
             Report report = service.obtenerReporte(fileName, params, source);
 
-            InputStreamResource streamResource = new InputStreamResource(report.getStream());
-            MediaType mediaType;
+            byte[] array = new byte[report.getStream().available()];
+            report.getStream().read(array);
 
-            if (params.get("tipo").toString().equalsIgnoreCase(TipoReporte.XLS.name())) {
-                mediaType = MediaType.APPLICATION_OCTET_STREAM;
-            } else {
-                mediaType = MediaType.APPLICATION_PDF;
-            }
+            String encoded = Base64.getEncoder().encodeToString(array);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Content-Disposition", "inline; filename\"" + report.getFileName() + "\"");
-            headers.add("Access-Control-Allow-Headers", "accept, content-type");
-            headers.add("Access-Control-Allow-Methods", "POST");
-            headers.add("Access-Control-Allow-Origin", "*");
-
-            return ResponseEntity.ok().headers(headers)
-                    .contentLength(report.getLength()).contentType(mediaType)
-                    .allow(HttpMethod.OPTIONS).body(streamResource);
-
+            MessageResponse m = new MessageResponse(encoded);
+            return ResponseEntity.ok().body(m);
         } catch (IOException | JRException | SQLException ex) {
             MessageResponse m = new MessageResponse("Error al crear el reporte: " + ex.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(m));

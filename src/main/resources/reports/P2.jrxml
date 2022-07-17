@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="P2" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ec702c06-9c8f-4d6c-b97c-a10cb0f59ae0">
+	<property name="ireport.zoom" value="1.7715610000000053"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="38"/>
+	<parameter name="unidadId" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[3]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["D:\\Daniel\\Escuela\\5to\\De tesis\\Program\\Frontend\\Design\\assets\\images\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     cargo.`nombre` AS cargo_nombre,
+     unidad.`nombre` AS unidad_nombre,
+     departamento.`nombre` AS departamento_nombre,
+     departamento_cargo.`plazas` AS departamento_cargo_plazas,
+     escala.`clasificador` AS escala_clasificador,
+     categoria_ocupacional.`abreviado` AS categoria_ocupacional_abreviado,
+     nivel_escolar.`abreviado` AS nivel_escolar_abreviado,
+     unidad.`id` AS unidad_id,
+     departamento.`id` AS departamento_id
+FROM
+     `unidad` unidad INNER JOIN `departamento` departamento ON unidad.`id` = departamento.`id_unidad`
+     INNER JOIN `departamento_cargo` departamento_cargo ON departamento.`id` = departamento_cargo.`Departamentoid`
+     INNER JOIN `cargo` cargo ON departamento_cargo.`Cargoid` = cargo.`id`
+     INNER JOIN `escala` escala ON cargo.`id_escala` = escala.`id`
+     INNER JOIN `categoria_ocupacional` categoria_ocupacional ON cargo.`id_cat_ocup` = categoria_ocupacional.`id`
+     INNER JOIN `nivel_escolar` nivel_escolar ON cargo.`id_escolar_min` = nivel_escolar.`id`
+WHERE
+     unidad.`id` = $P{unidadId}
+ORDER BY
+     departamento.`id` ASC]]>
+	</queryString>
+	<field name="cargo_nombre" class="java.lang.String"/>
+	<field name="unidad_nombre" class="java.lang.String"/>
+	<field name="departamento_nombre" class="java.lang.String"/>
+	<field name="departamento_cargo_plazas" class="java.lang.Integer"/>
+	<field name="escala_clasificador" class="java.lang.String"/>
+	<field name="categoria_ocupacional_abreviado" class="java.lang.String"/>
+	<field name="nivel_escolar_abreviado" class="java.lang.String"/>
+	<field name="unidad_id" class="java.lang.Integer"/>
+	<field name="departamento_id" class="java.lang.Integer"/>
+	<variable name="departamento_cargo_plazas_1" class="java.lang.Integer" resetType="Group" resetGroup="departamento_id" calculation="Sum">
+		<variableExpression><![CDATA[$F{departamento_cargo_plazas}]]></variableExpression>
+	</variable>
+	<group name="departamento_id" keepTogether="true">
+		<groupExpression><![CDATA[$F{departamento_id}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<textField isStretchWithOverflow="true">
+					<reportElement x="26" y="2" width="403" height="20" uuid="66ebabcf-fb0d-4bec-9b83-10f9d16a487a"/>
+					<textElement>
+						<font fontName="Cambria" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Departamento: " + $F{departamento_nombre}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="27" y="22" width="521" height="1" uuid="b9e46669-4b74-4a4c-ac5c-45465dbb9400"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="47">
+				<staticText>
+					<reportElement x="26" y="2" width="100" height="20" uuid="779ea35e-6809-4b60-ba92-5c2449b682fa"/>
+					<textElement>
+						<font fontName="Cambria" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sub - Total]]></text>
+				</staticText>
+				<line>
+					<reportElement x="27" y="23" width="521" height="1" uuid="ee54a174-9d4a-444d-85b3-5c399b3bf42b"/>
+				</line>
+				<line>
+					<reportElement x="27" y="0" width="522" height="1" uuid="e1918716-aa91-43cc-b4e5-a1fdde1c6458"/>
+				</line>
+				<textField>
+					<reportElement x="321" y="2" width="71" height="20" uuid="a277e7ef-7250-4c40-8a8e-499122242f77"/>
+					<textElement textAlignment="Center">
+						<font fontName="Cambria" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{departamento_cargo_plazas_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="264" splitType="Stretch">
+			<staticText>
+				<reportElement x="46" y="99" width="73" height="20" uuid="5eea8026-d360-46b9-b691-1ac36ca19ddc"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="79" width="73" height="20" uuid="8d8276dd-0434-4634-be38-d24e5039676f"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="27" y="64" width="262" height="150" uuid="06e5b0bf-d8c6-413c-a972-3aed9792e7ea"/>
+				<staticText>
+					<reportElement x="0" y="0" width="261" height="20" uuid="b228bbf6-b6c7-4674-b855-d71b8f62a27c"/>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Propuesto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="20" width="56" height="20" uuid="b9ee4e33-1d52-4b5d-96ea-118d405ecd4e"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Cargo:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="42" width="56" height="20" uuid="53ffbf04-5905-41b3-9f8e-3122c7c23df2"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Nombre:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="64" width="56" height="20" uuid="1e54f543-5143-478e-8c40-b32a8b3ef740"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Firma:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="86" width="56" height="20" uuid="cff814e1-a783-4b29-b8f1-ddba441f1025"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Fecha:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="108" width="138" height="20" uuid="6944fa32-02ba-47ab-b899-b92aafd127d8"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Plantilla No. REEUP:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="130" width="78" height="20" uuid="cd08265b-5142-47f4-b8df-7805ccca4242"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Organismo:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="78" y="130" width="78" height="20" uuid="f10a4bda-61ef-4d02-b85f-d053c5b483da"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[MINSAP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="138" y="108" width="106" height="20" uuid="4251cdd8-92fa-4961-bd33-0940b8fe39f0"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[327-2-8427]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="56" y="64" width="188" height="20" uuid="9e78a532-7c64-420c-8ecb-e5a7be44bd1b"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[____________________________________]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="56" y="20" width="205" height="20" uuid="fb3bafa9-5435-40b9-9371-6d518945f6c3"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[Jefe UASP Policlínico. Jaruco]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="56" y="42" width="205" height="20" uuid="a681bfb3-cb13-40d5-9273-ebc56fc6f879"/>
+					<textElement>
+						<font size="14" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Tania I. Padrón Rodríguez]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="56" y="86" width="188" height="20" uuid="1b2ea9d2-4d4c-4bd8-8b74-398b438ae76d"/>
+					<textElement>
+						<font fontName="Cambria" size="14" isUnderline="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="289" y="64" width="260" height="186" uuid="b4c6c6d0-9e78-421c-8d52-fe7ac6d13422"/>
+				<staticText>
+					<reportElement x="0" y="0" width="260" height="20" uuid="76214e4a-a156-46d0-9df3-6a433128ca2b"/>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Aprobado]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="20" width="58" height="20" uuid="dc078a44-383a-44de-8e30-6e8fd096af3f"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Cargo:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="64" width="58" height="20" uuid="96b48987-0057-44bf-8619-85a10b71cf07"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Firma:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="128" width="58" height="20" uuid="0fbdf0db-b8e1-4de2-9300-cef96d2f655a"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Unidad:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="42" width="58" height="20" uuid="db5e9b86-b63c-4b01-98af-263044e084c5"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Nombre:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="86" width="58" height="20" uuid="6e079781-7236-434c-8565-8c9892ac48a3"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Fecha:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="58" y="64" width="188" height="20" uuid="4a34c598-11ba-488a-9cda-8959c89ab49d"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[____________________________________]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="58" y="128" width="188" height="20" uuid="f15b50c0-5870-407e-8642-4737a06ab56a"/>
+					<textElement textAlignment="Left" markup="none">
+						<font size="14" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{unidad_nombre}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="58" y="20" width="202" height="20" uuid="ea9457c1-5112-4759-bf60-26342ae5f029"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[Director Estatal de Salud]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="58" y="42" width="202" height="20" uuid="c54fc39a-25dd-4be0-bbfd-a37a1baf7af1"/>
+					<textElement>
+						<font size="14" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Antonio F. Herrera González]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="58" y="86" width="188" height="20" uuid="b6552461-d72d-4791-94fe-e211260c478e"/>
+					<textElement>
+						<font fontName="Cambria" size="14" isUnderline="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="141" y="158" width="105" height="20" uuid="9d789915-8fb2-4905-af23-762bbb0c3e91"/>
+					<textElement textAlignment="Right">
+						<font fontName="Cambria" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Hoja: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="27" y="5" width="522" height="49" isPrintInFirstWholeBand="true" uuid="5487e2f9-b545-4e37-aa15-fcb84280c1b8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria" size="22" isBold="true"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[Plantilla de cargo y registro de trabajadores]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="26" y="0" width="210" height="29" uuid="f749115a-30db-4e8a-ade4-a1c3148f6142"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Cambria" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="27" y="29" width="521" height="1" uuid="f80fc32c-49fd-445e-9dba-9f37f1f82e83"/>
+			</line>
+			<staticText>
+				<reportElement x="478" y="0" width="70" height="29" uuid="eb2b256f-2aad-4cbe-9906-fe3586f6415e"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Cambria" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grupo Escala]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="0" width="84" height="29" uuid="211b98b0-7dd4-490e-a9fd-35066e577fc7"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Cambria" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nivel de preparación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="248" y="0" width="73" height="29" uuid="7a61553a-cd4d-4824-9326-868345add786"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Cambria" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoría ocup.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="321" y="0" width="73" height="29" uuid="7408b354-70ae-412f-8919-4fa5e089c9cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Cambria" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad de cargos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="26" y="0" width="210" height="20" uuid="6def4460-4490-4068-9b3d-2b138f031854"/>
+				<textElement>
+					<font fontName="Cambria" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cargo_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="248" y="0" width="73" height="20" uuid="3f3b6a04-c283-4356-8088-8280bb0f7931"/>
+				<textElement textAlignment="Center">
+					<font fontName="Cambria" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{categoria_ocupacional_abreviado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="321" y="0" width="71" height="20" uuid="e3b8c4c6-717e-4e2a-9df0-6a734e2c9672"/>
+				<textElement textAlignment="Center">
+					<font fontName="Cambria" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{departamento_cargo_plazas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="394" y="0" width="84" height="20" uuid="180b0696-d6ed-4e2d-9fdb-f3d13ad83fd1"/>
+				<textElement textAlignment="Center">
+					<font fontName="Cambria" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nivel_escolar_abreviado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="478" y="0" width="71" height="20" uuid="aa65b5bb-6254-459b-9aba-6ca2d2a3db14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Cambria" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{escala_clasificador}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="37" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="241" y="8" width="96" height="24" uuid="058b792f-f314-4c17-88ec-66d579b422e3"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="429" y="9" width="80" height="23" uuid="eb2f0282-a9c3-4c54-9f9a-68e604164171"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Cambria"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="509" y="9" width="40" height="23" uuid="f5dba4bc-264e-4556-bfed-5f7ab5c7b4e7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
