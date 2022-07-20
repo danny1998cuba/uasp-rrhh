@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="d-flex justify-content-between align-items-center w-100">
+        <div class="">{{title}}</div>
+        <div class="page-selector" [class.disabled]="!isLoaded">
+            <div (click)="increasePage(false)" [class.pe-none]="page == 1" class="btn-page"
+                matTooltip="Página anterior">
+                <fa-icon [icon]="faPrevious"></fa-icon>
+            </div>
+            <span>P&aacute;gina {{page}} de {{totalPages}}</span>
+            <div (click)="increasePage(true)" [class.pe-none]="page == totalPages" class="btn-page"
+                matTooltip="Página siguiente">
+                <fa-icon [icon]="faNext"></fa-icon>
+            </div>
+        </div>
+        <div class="">
+            <div class="btn-page" (click)="download()">
+                <fa-icon [icon]="faDown" matTooltip="Descargar documento"></fa-icon>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <pdf-viewer [src]="src" [render-text]="true" [original-size]="false" class="pdf" [show-borders]="true"
+        [autoresize]="true" [show-all]="true" (after-load-complete)="afterLoadComplete($event)" [(page)]="page">
+    </pdf-viewer>
+</div>

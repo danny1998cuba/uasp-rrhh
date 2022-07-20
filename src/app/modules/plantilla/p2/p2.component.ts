@@ -66,13 +66,4 @@ export class P2Component implements OnInit {
     }
   }
 
-  download() {
-    var a = document.createElement('a')
-    a.href = this.file
-    a.target = '_blank'
-    a.download = 'P2 - ' + this.unidad?.nombre + '.pdf'
-    document.body.appendChild(a)
-    a.click()
-  }
-
 }

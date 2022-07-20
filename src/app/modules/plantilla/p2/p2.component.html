@@ -15,18 +15,7 @@
 
     <ng-container *ngIf="!isLoading; else noData;">
         <ng-container *ngIf="file != ''; else noFile">
-            <pdf-viewer [src]="file" [render-text]="true" [original-size]="false" class="pdf" [show-borders]="true"
-                [autoresize]="true" [fit-to-page]="true" [show-all]="true">
-            </pdf-viewer>
-
-            <div class="d-flex justify-content-end mt-4">
-                <!-- <div class="btn btn-primary" [class.disabled]="dataSource.data.length == 0" (click)="">Descargar
-                    listado</div> -->
-                <button mat-button type="button" aria-label="Down" (click)="download()">
-                    <fa-icon [icon]="faDown"></fa-icon>
-                    <span class="px-3">Descargar documento</span>
-                </button>
-            </div>
+            <app-pdf-viewer [src]="file" [downloadFileName]="'P2 - ' + unidad?.nombre + '.pdf'"></app-pdf-viewer>
         </ng-container>
     </ng-container>
 </div>

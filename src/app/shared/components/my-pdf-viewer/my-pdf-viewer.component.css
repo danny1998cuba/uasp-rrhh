@@ -1,0 +1,38 @@
+.pdf {
+    width: 100% !important;
+    height: 70vh !important;
+}
+
+:host ::ng-deep .pdfViewer .page {
+    width: 100% !important;
+    height: 100% !important;
+    /* margin: 0 !important */
+}
+
+.page-selector {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-page {
+    min-width: 1rem;
+    min-height: 1rem;
+    border-radius: 5px;
+    padding: .7rem;
+}
+
+.btn-page:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.btn-page.pe-none {
+    color: #999;
+    cursor: none;
+}
+
+.btn-page:not(.pe-none) {
+    cursor: pointer !important;
+}
