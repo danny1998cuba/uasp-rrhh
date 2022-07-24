@@ -1,12 +1,22 @@
-<h2 mat-dialog-title>{{!mydata.isMod?'Agregar':'Modificar'}} Plazas</h2>
+<h2 mat-dialog-title>Asignar Plazas</h2>
 <mat-dialog-content class="mat-typography">
     <form [formGroup]="form" (ngSubmit)="closeDialog()">
 
         <div class="row">
             <div class="col-md-5">
                 <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Nombre" formControlName="cargo">
+                    <mat-hint>Sin errores</mat-hint>
+                    <mat-error *ngIf="form.controls['cargo'].hasError('required')">
+                        El cargo es obligatorio
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-5">
+                <mat-form-field class="example-full-width">
                     <mat-select placeholder="Departamento" formControlName="departamento" required
-                        [compareWith]="compareObjects">
+                        [compareWith]="compareObjects" (valueChange)="onChange($event)">
                         <mat-option>--</mat-option>
                         <mat-option *ngFor="let dep of deps" [value]="dep">
                             {{dep.idUnidad.nombre}}/{{dep.nombre}}
@@ -19,28 +29,13 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-5">
-                <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Cargo" formControlName="cargo" required [compareWith]="compareObjects">
-                        <mat-option>--</mat-option>
-                        <mat-option *ngFor="let cargo of cargos" [value]="cargo">
-                            {{cargo.nombre}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-hint>Sin errores</mat-hint>
-                    <mat-error *ngIf="form.controls['cargo'].hasError('required')">
-                        El cargo es obligatorio
-                    </mat-error>
-                </mat-form-field>
-            </div>
-
             <div class="col-md-2">
                 <mat-form-field class="example-full-width">
                     <input matInput placeholder="Plazas" type="number" formControlName="plazas">
                     <mat-hint>Sin errores</mat-hint>
                     <mat-error
                         *ngIf="!form.controls['plazas'].hasError('required') && form.controls['plazas'].hasError('min')">
-                        El número de plazas debe ser positivo
+                        El número de plazas debe ser 1 o más
                     </mat-error>
                     <mat-error *ngIf="form.controls['plazas'].hasError('required')">
                         El número de plazas es obligatorio
@@ -52,7 +47,7 @@
 
         <div class="d-flex justify-content-end mt-4">
             <button mat-button [mat-dialog-close]="{success:false, object:undefined}" type="button">Cancelar</button>
-            <button mat-button cdkFocusInitial type="submit">{{!mydata.isMod?'Agregar':'Modificar'}}</button>
+            <button mat-button cdkFocusInitial type="submit">Asignar</button>
         </div>
     </form>
 </mat-dialog-content>

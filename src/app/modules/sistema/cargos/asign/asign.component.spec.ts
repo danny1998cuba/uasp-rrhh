@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DcAddModComponent } from './dc-add-mod.component';
+import { AsignComponent } from './asign.component';
 
-describe('DcAddModComponent', () => {
-  let component: DcAddModComponent;
-  let fixture: ComponentFixture<DcAddModComponent>;
+describe('AsignComponent', () => {
+  let component: AsignComponent;
+  let fixture: ComponentFixture<AsignComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DcAddModComponent ]
+      declarations: [ AsignComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DcAddModComponent);
+    fixture = TestBed.createComponent(AsignComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

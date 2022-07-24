@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Cargo, CatDoc, CatOcup, Cla, Departamento, DepsConsumer, NivelEscolar, ServicesConsumer, Trabajador } from 'src/app/data/schema';
 import { CargoService, CatDocService, CatOcupService, ClaService, DepartamentoService, EscalaService, NivelEscolarService, TrabajadorService } from 'src/app/data/services';
+import { DepCargoService } from 'src/app/data/services/api/dep-cargo.service';
 import { DelDialogComponent } from 'src/app/shared/components';
 import { FullNamePipe } from 'src/app/shared/pipes';
 import { CargosComponent } from '../../sistema/cargos/cargos.component';
@@ -67,6 +68,7 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
     claServ: ClaService,
     cargoServ: CargoService,
     depServ: DepartamentoService,
+    depCServ: DepCargoService,
     escService: EscalaService,
     nivelService: NivelEscolarService
   ) {
@@ -75,7 +77,7 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
     this.catDocComp = new CatDocComponent(catdocServ, router, dialog, snackBar)
     this.claComp = new ClaComponent(claServ, router, dialog, snackBar)
     this.depCons = new DepsConsumer(depServ, router, snackBar)
-    this.cargoComp = new CargosComponent(cargoServ, router, dialog, snackBar, escService, catocupServ, nivelService)
+    this.cargoComp = new CargosComponent(cargoServ, router, dialog, snackBar, escService, catocupServ, nivelService, depCServ, depServ)
     this.nivelesComp = new NivelEscolarComponent(nivelService, router, dialog, snackBar)
   }
 

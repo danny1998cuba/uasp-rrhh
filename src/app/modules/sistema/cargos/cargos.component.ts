@@ -5,14 +5,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Cargo, CatOcup, Escala, NivelEscolar, ServicesConsumer } from 'src/app/data/schema';
-import { CargoService, CatOcupService, EscalaService, NivelEscolarService } from 'src/app/data/services';
+import { faLink, faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Cargo, CatOcup, Departamento, DepartamentoCargoPK, DepCargoConsumer, DepsConsumer, Escala, NivelEscolar, ServicesConsumer } from 'src/app/data/schema';
+import { CargoService, CatOcupService, DepartamentoService, EscalaService, NivelEscolarService } from 'src/app/data/services';
+import { DepCargoService } from 'src/app/data/services/api/dep-cargo.service';
 import { DelDialogComponent } from 'src/app/shared/components';
 import { CatOcupComponent } from '../cat-ocup/cat-ocup.component';
 import { EscalasComponent } from '../escalas/escalas.component';
 import { NivelEscolarComponent } from '../nivel-escolar/nivel-escolar.component';
 import { CargoAddModComponent } from './add-mod/add-mod.component';
+import { AsignComponent } from './asign/asign.component';
 
 @Component({
   selector: 'app-cargos',
@@ -23,17 +25,20 @@ export class CargosComponent extends ServicesConsumer<Cargo, number> implements 
 
   displayedColumns: string[] = ['nombre', 'nocturnidad', 'escala', 'actions'];
   dataSource = new MatTableDataSource<Cargo>([]);
-  faAdd = faPlus; faEdit = faPencil; faDelete = faTrash
+  faAdd = faPlus; faEdit = faPencil; faDelete = faTrash; faLink = faLink
 
   escalas!: Escala[]
   catsOcup!: CatOcup[]
   niveles!: NivelEscolar[]
+  deps!: Departamento[]
 
   listas: any
 
   escComp!: EscalasComponent
   catOcupComp!: CatOcupComponent
   nivelesComp!: NivelEscolarComponent
+  depCons!: DepsConsumer;
+  depCCons!: DepCargoConsumer;
 
   @ViewChild(MatPaginator) set matPaginator(paginator: MatPaginator) {
     this.dataSource.paginator = paginator
@@ -50,13 +55,17 @@ export class CargosComponent extends ServicesConsumer<Cargo, number> implements 
     private snackBar: MatSnackBar,
     escService: EscalaService,
     catocupServ: CatOcupService,
-    nivelService: NivelEscolarService
+    nivelService: NivelEscolarService,
+    private depCargoService: DepCargoService,
+    depServ: DepartamentoService
   ) {
     super(service, router)
 
     this.escComp = new EscalasComponent(escService, router, dialog, snackBar)
     this.catOcupComp = new CatOcupComponent(catocupServ, router, dialog, snackBar)
     this.nivelesComp = new NivelEscolarComponent(nivelService, router, dialog, snackBar)
+    this.depCons = new DepsConsumer(depServ, router, snackBar)
+    this.depCCons = new DepCargoConsumer(depCargoService, router, snackBar)
   }
 
   ngOnInit(): void {
@@ -64,11 +73,13 @@ export class CargosComponent extends ServicesConsumer<Cargo, number> implements 
       this.escalas = this.escComp.data
       this.catsOcup = this.catOcupComp.data
       this.niveles = this.nivelesComp.data
+      this.deps = this.depCons.data
 
       this.listas = {
         escalas: this.escalas,
         catsOcup: this.catsOcup,
-        niveles: this.niveles
+        niveles: this.niveles,
+        deps: this.deps
       }
     }, 1000);
   }
@@ -131,6 +142,34 @@ export class CargosComponent extends ServicesConsumer<Cargo, number> implements 
         this.del(object.id)
         this.sendMsg('Cargo eliminado correctamente')
       }
+    });
+  }
+
+  asignPlazas(object: Cargo) {
+    const myCompDialog = this.dialog.open(AsignComponent, {
+      data: {
+        cargo: object,
+        listas: this.listas
+      }
+    });
+    myCompDialog.afterClosed().subscribe((res) => {
+      if (res)
+        if (res.success) {
+          if (!res.exists) {
+            if (res.object.plazas != 0) {
+              this.depCCons.add(res.object)
+              this.sendMsg('Asignación agregada correctamente')
+            }
+          } else {
+            if (res.object.plazas != 0) {
+              this.depCCons.mod(res.object, { idDep: res.object.departamento.id, idCargo: res.object.cargo.id })
+              this.sendMsg('Asignación modificada correctamente')
+            } else {
+              this.depCCons.del({ idDep: res.object.departamento.id, idCargo: res.object.cargo.id })
+              this.sendMsg('Asignación eliminada correctamente')
+            }
+          }
+        }
     });
   }
 }

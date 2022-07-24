@@ -15,7 +15,6 @@ import { EscalasComponent } from './escalas/escalas.component';
 import { ClaComponent } from './cla/cla.component';
 import { DepartamentosComponent } from './unidades/departamentos/departamentos.component';
 import { NivelEscolarComponent } from './nivel-escolar/nivel-escolar.component';
-import { DepCargoComponent } from './dep-cargo/dep-cargo.component';
 import { InitComponent } from './init/init.component';  //Init section from module
 
 //Add-mod components
@@ -26,7 +25,7 @@ import { COcupAddModComponent } from './cat-ocup/add-mod/add-mod.component';
 import { ClaAddModComponent } from './cla/add-mod/add-mod.component';
 import { UsuarioAddModComponent } from './usuarios/add-mod/add-mod.component';
 import { NivelAddModComponent } from './nivel-escolar/nivel-add-mod/nivel-add-mod.component';
-import { DcAddModComponent } from './dep-cargo/dc-add-mod/dc-add-mod.component';
+import { AsignComponent } from './cargos/asign/asign.component';
 
 
 @NgModule({
@@ -44,7 +43,6 @@ import { DcAddModComponent } from './dep-cargo/dc-add-mod/dc-add-mod.component';
     ClaComponent,
     DepartamentosComponent,
     NivelEscolarComponent,
-    DepCargoComponent,
     InitComponent,
 
     //Add-mod components
@@ -55,7 +53,7 @@ import { DcAddModComponent } from './dep-cargo/dc-add-mod/dc-add-mod.component';
     EscalaAddModComponent,
     UsuarioAddModComponent,
     NivelAddModComponent,
-    DcAddModComponent,
+    AsignComponent,
   ],
   imports: [
     SharedModule

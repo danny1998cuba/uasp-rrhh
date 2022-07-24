@@ -1,6 +1,6 @@
 import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, firstValueFrom, lastValueFrom, map, Observable } from 'rxjs';
 import { GESTION_ROUTES } from '../../constants';
 import { IApiService } from '../../interfaces';
 import { ApiClass, DepartamentoCargo, DepartamentoCargoPK, ResponseHandler } from '../../schema';
@@ -30,7 +30,7 @@ export class DepCargoService extends ApiClass implements IApiService<Departament
   // Obtener Departamento por id
   getById(id: DepartamentoCargoPK): Observable<ResponseHandler> {
     const response = new ResponseHandler()
-    return this.http.get<DepartamentoCargo[]>(GESTION_ROUTES.DEPARTAMENTO_CARGO + '/' + id.idDep + '/' + id.idCargo, { headers: this.headers, withCredentials: true })
+    return this.http.get<DepartamentoCargo>(GESTION_ROUTES.DEPARTAMENTO_CARGO + '/' + id.idDep + '/' + id.idCargo, { headers: this.headers, withCredentials: true })
       .pipe(
         map(r => {
           response.data = r;
@@ -38,6 +38,27 @@ export class DepCargoService extends ApiClass implements IApiService<Departament
         }),
         catchError(this.error)
       );
+  }
+
+  async getByIdAsync(id: DepartamentoCargoPK) {
+    let response = new ResponseHandler()
+
+    let value = await lastValueFrom(
+      this.http.get<DepartamentoCargo>(
+        GESTION_ROUTES.DEPARTAMENTO_CARGO + '/' + id.idDep + '/' + id.idCargo,
+        { headers: this.headers, withCredentials: true }
+      ).pipe(
+        map(r => {
+          response.data = r;
+          return response
+        }),
+        catchError(this.error)
+      )
+    ).then(v => {
+      response = v
+    })
+
+    return response
   }
 
   // Crear una Departamento

@@ -21,7 +21,10 @@ export class ApiClass {
             response.msg = error.error.message
         } else {
             response.status = error.status
-            response.msg = error.error.msg
+            if(error.status == 404)
+                response.msg = "No encontrado"
+            else 
+                response.msg = error.error.msg
         }
 
         return of(response)

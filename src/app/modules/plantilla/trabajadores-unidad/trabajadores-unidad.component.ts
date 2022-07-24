@@ -9,6 +9,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { BaseChartDirective, NgChartsConfiguration } from 'ng2-charts';
 import { Trabajador, Unidad } from 'src/app/data/schema';
 import { CargoService, CatDocService, CatOcupService, ClaService, DepartamentoService, EscalaService, NivelEscolarService, ReportsService, TrabajadorService, UnidadService } from 'src/app/data/services';
+import { DepCargoService } from 'src/app/data/services/api/dep-cargo.service';
 import { PercentWomenComponent } from 'src/app/shared/charts';
 import { UnidadesComponent } from '../../sistema/unidades/unidades.component';
 import { TrabajadoresComponent } from '../trabajadores/trabajadores.component';
@@ -56,13 +57,14 @@ export class TrabajadoresUnidadComponent implements OnInit {
     claServ: ClaService,
     cargoServ: CargoService,
     depServ: DepartamentoService,
+    depCServ: DepCargoService,
     escService: EscalaService,
     nivelService: NivelEscolarService
   ) {
     this.unidadComp = new UnidadesComponent(unidadService, router, dialog, snackBar)
     this.trabComp = new TrabajadoresComponent(
       service, router, new ActivatedRoute(), dialog, snackBar, catdocServ,
-      catocupServ, claServ, cargoServ, depServ, escService, nivelService)
+      catocupServ, claServ, cargoServ, depServ, depCServ, escService, nivelService)
   }
 
   ngOnInit(): void {

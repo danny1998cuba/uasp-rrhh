@@ -6,7 +6,6 @@ import { CargosComponent } from './cargos/cargos.component';
 import { CatDocComponent } from './cat-doc/cat-doc.component';
 import { CatOcupComponent } from './cat-ocup/cat-ocup.component';
 import { ClaComponent } from './cla/cla.component';
-import { DepCargoComponent } from './dep-cargo/dep-cargo.component';
 import { EscalasComponent } from './escalas/escalas.component';
 import { InitComponent } from './init/init.component';
 import { NivelEscolarComponent } from './nivel-escolar/nivel-escolar.component';
@@ -52,11 +51,6 @@ export const routes: Routes = [
             {
                 path: SISTEMA_CHILDREN.NIVEL,
                 component: NivelEscolarComponent,
-                canActivate: [AuthGuard]
-            },
-            {
-                path: SISTEMA_CHILDREN.PLAZAS,
-                component: DepCargoComponent,
                 canActivate: [AuthGuard]
             },
             {
