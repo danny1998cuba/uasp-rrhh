@@ -68,7 +68,7 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
     claServ: ClaService,
     cargoServ: CargoService,
     depServ: DepartamentoService,
-    depCServ: DepCargoService,
+    private depCServ: DepCargoService,
     escService: EscalaService,
     nivelService: NivelEscolarService
   ) {
@@ -146,7 +146,7 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
   }
 
   addModDialog(isMod: boolean, object?: Trabajador) {
-    const myCompDialog = this.dialog.open(TrabAddModComponent, { data: { isMod: isMod, object: object ? object : undefined, listas: this.listas } });
+    const myCompDialog = this.dialog.open(TrabAddModComponent, { data: { isMod: isMod, object: object ? object : undefined, listas: this.listas, valid: this.depCServ } });
     myCompDialog.afterClosed().subscribe((res) => {
       if (res)
         if (res.success) {

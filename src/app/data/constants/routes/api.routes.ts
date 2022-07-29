@@ -18,6 +18,7 @@ export const GESTION_ROUTES = {
     CLA: `${API_ROUTE}/cla`,
     DEPARTAMENTO: `${API_ROUTE}/departamento`,
     DEPARTAMENTO_CARGO: `${API_ROUTE}/departamento_cargo`,
+    DEPARTAMENTO_CARGO_DISP: `${API_ROUTE}/departamento_cargo/disponibilidad`,
     ESCALA: `${API_ROUTE}/escala`,
     NIVEL_ESCOLAR: `${API_ROUTE}/escolaridad`,
     ROL: `${API_ROUTE}/rol`,

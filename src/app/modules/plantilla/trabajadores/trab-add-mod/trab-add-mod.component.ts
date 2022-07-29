@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { nivelEscolarValidator } from 'src/app/core/validators';
-import { Cargo, CatDoc, CatOcup, Cla, Departamento, NivelEscolar, Trabajador } from 'src/app/data/schema';
+import { disponibilidadPlazasValidator, nivelEscolarValidator } from 'src/app/core/validators';
+import { Cargo, CatDoc, Cla, Departamento, NivelEscolar, Trabajador } from 'src/app/data/schema';
+import { DepCargoService } from 'src/app/data/services/api/dep-cargo.service';
 
 @Component({
   selector: 'app-trab-add-mod',
@@ -20,6 +21,8 @@ export class TrabAddModComponent {
   cargos!: Cargo[]
   niveles!: NivelEscolar[]
 
+  valid!: DepCargoService
+
   constructor(
     public dialogRef: MatDialogRef<TrabAddModComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public mydata: any
@@ -31,6 +34,8 @@ export class TrabAddModComponent {
     this.deps = mydata.listas.deps
     this.cargos = mydata.listas.cargos
     this.niveles = mydata.listas.niveles
+
+    this.valid = mydata.valid
 
     if (mydata.isMod) {
       this.object = mydata.object
@@ -54,9 +59,12 @@ export class TrabAddModComponent {
       idCLA: new FormControl(this.object.idCLA),
       idCargo: new FormControl(this.object.idCargo, Validators.required)
     },
-    {validators :[
-      nivelEscolarValidator()
-    ]})
+      {
+        validators: [
+          nivelEscolarValidator(),
+          disponibilidadPlazasValidator(this.valid, this.object.id)
+        ]
+      })
   }
 
   closeDialog() {

@@ -1,5 +1,5 @@
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { Cargo, NivelEscolar } from "src/app/data/schema";
+import { Cargo } from "src/app/data/schema";
 
 export function nivelEscolarValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -10,9 +10,6 @@ export function nivelEscolarValidator(): ValidatorFn {
 
         const nivelEscolar = nivelEscolarControl?.value;
         const cargo: Cargo = form.get("idCargo")?.value;
-        
-        console.log(nivelEscolar)
-        console.log(cargo)
 
         if (nivelEscolar && cargo) {
             if (nivelEscolar.relevancia < cargo.idEscolarMin.relevancia) {

@@ -111,6 +111,9 @@
                     <mat-error *ngIf="form.controls['idCargo'].hasError('required')">
                         El cargo es obligatorio
                     </mat-error>
+                    <mat-error *ngIf="form.controls['idCargo'].hasError('plazas')">
+                        Todas las plazas asignadas est&aacute;n cubiertas
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>

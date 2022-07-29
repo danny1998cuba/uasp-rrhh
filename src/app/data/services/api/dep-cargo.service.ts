@@ -40,10 +40,10 @@ export class DepCargoService extends ApiClass implements IApiService<Departament
       );
   }
 
-  async getByIdAsync(id: DepartamentoCargoPK) {
+  async getByIdAsync(id: DepartamentoCargoPK): Promise<ResponseHandler> {
     let response = new ResponseHandler()
 
-    let value = await lastValueFrom(
+    await lastValueFrom(
       this.http.get<DepartamentoCargo>(
         GESTION_ROUTES.DEPARTAMENTO_CARGO + '/' + id.idDep + '/' + id.idCargo,
         { headers: this.headers, withCredentials: true }
@@ -101,6 +101,22 @@ export class DepCargoService extends ApiClass implements IApiService<Departament
         }),
         catchError(this.error)
       );
+  }
+
+  disponibilidad(idDep: number, idCargo: number, idTrabajador: number): Observable<ResponseHandler> {
+    let response = new ResponseHandler()
+
+    return this.http.get<DepartamentoCargo>(
+      GESTION_ROUTES.DEPARTAMENTO_CARGO_DISP + '/' + idDep + '/' + idCargo +
+      (idTrabajador != 0 ? '?trabajador=' + idTrabajador : ''),
+      { headers: this.headers, withCredentials: true }
+    ).pipe(
+      map(r => {
+        response.data = r;
+        return response
+      }),
+      catchError(this.error)
+    );
   }
 
 }
