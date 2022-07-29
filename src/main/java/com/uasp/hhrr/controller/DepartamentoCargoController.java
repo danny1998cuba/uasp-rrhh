@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -100,6 +101,16 @@ public class DepartamentoCargoController {
         } catch (Exception e) {
             MessageResponse m = new MessageResponse(e.toString());
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
+        }
+    }
+
+    @GetMapping("/disponibilidad/{idDep}/{idCargo}")
+    public ResponseEntity<?> disponibilidad(@PathVariable int idDep, @PathVariable int idCargo,
+            @RequestParam(required = false, name = "trabajador") Integer idTrab) {
+        if (idTrab != null) {
+            return ResponseEntity.ok(service.disponibilidad(idDep, idCargo, idTrab));
+        } else {
+            return ResponseEntity.ok(service.disponibilidad(idDep, idCargo));
         }
     }
 }

@@ -13,5 +13,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @author Tapanes
  */
 public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer>, JpaSpecificationExecutor<Trabajador> {
-    
+
+    long countByIdDepartamentoIdAndIdCargoId(int idDepartamento, int idCargo);
 }

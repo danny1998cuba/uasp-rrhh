@@ -4,7 +4,9 @@
  */
 package com.uasp.hhrr.service;
 
+import com.google.gson.Gson;
 import com.uasp.hhrr.exceptions.NivelEscolarMinReqExcception;
+import com.uasp.hhrr.exceptions.PlazasDisponiblesException;
 import com.uasp.hhrr.model.Trabajador;
 import com.uasp.hhrr.repository.TrabajadorRepository;
 import java.util.List;
@@ -24,9 +26,16 @@ public class TrabajadorService {
     @Autowired
     TrabajadorRepository repository;
 
-    public Integer save(Trabajador object) throws NivelEscolarMinReqExcception {
+    @Autowired
+    DepartamentoCargoService dcService;
+
+    public Integer save(Trabajador object) throws NivelEscolarMinReqExcception, PlazasDisponiblesException {
         if (object.getId() != null) {
             object.setId(null);
+        }
+
+        if (!dcService.disponibilidad(object.getIdDepartamento(), object.getIdCargo())) {
+            throw new PlazasDisponiblesException();
         }
 
         if (object.getIdCargo().getIdEscolarMin().getRelevancia() > object.getIdEscolar().getRelevancia()) {
@@ -37,9 +46,17 @@ public class TrabajadorService {
         return p.getId();
     }
 
-    public Integer update(Trabajador object, Integer id) throws NivelEscolarMinReqExcception {
+    public Integer update(Trabajador object, Integer id) throws NivelEscolarMinReqExcception, PlazasDisponiblesException {
         if (repository.findById(id).isPresent()) {
+            Trabajador oldData = repository.findById(id).get();
             object.setId(id);
+
+            if ((oldData.getIdCargo().getId() != object.getIdCargo().getId()
+                    || oldData.getIdDepartamento().getId() != object.getIdDepartamento().getId())
+                    && !dcService.disponibilidad(object.getIdDepartamento(), object.getIdCargo())) {
+
+                throw new PlazasDisponiblesException();
+            }
 
             if (object.getIdCargo().getIdEscolarMin().getRelevancia() > object.getIdEscolar().getRelevancia()) {
                 throw new NivelEscolarMinReqExcception();
