@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.uasp.hhrr.MessageResponse;
 import com.uasp.hhrr.model.CategoriaOcupacional;
 import com.uasp.hhrr.service.CategoriaOcupacionalService;
+import java.util.Map;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -30,16 +32,26 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController
 @RequestMapping("/api/catOcup")
 public class CategoriaOcupacionalController {
-    
+
     @Autowired
     CategoriaOcupacionalService service;
-    
+
     @Autowired
     Gson g;
 
     @GetMapping("")
-    public ResponseEntity<?> list() {
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<?> list(
+            @RequestParam Map<String, Object> params) {
+
+        if (params.get("parent") != null) {
+            if (Boolean.parseBoolean(params.get("parent").toString())) {
+                return ResponseEntity.ok(service.findChildCats());
+            } else {
+                return ResponseEntity.ok(service.findRootCats());
+            }
+        } else {
+            return ResponseEntity.ok(service.findAll());
+        }
     }
 
     @GetMapping("/{id}")
@@ -50,6 +62,12 @@ public class CategoriaOcupacionalController {
     @PutMapping("/{id}")
     public ResponseEntity<?> put(@PathVariable int id, @RequestBody CategoriaOcupacional input) {
         try {
+
+            if (input.getParent() != null && !service.findById(input.getParent().getId()).get().getAbreviado().equals(input.getAbreviado())) {
+                MessageResponse m = new MessageResponse("La abreviatura de una categoría hija debe coincidir con la de su padre");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(m));
+            }
+
             int idRes = service.update(input, id);
 
             if (idRes != -1) {
@@ -77,6 +95,11 @@ public class CategoriaOcupacionalController {
     @PostMapping("")
     public ResponseEntity<?> post(@RequestBody CategoriaOcupacional input) {
         try {
+            if (input.getParent() != null && !service.findById(input.getParent().getId()).get().getAbreviado().equals(input.getAbreviado())) {
+                MessageResponse m = new MessageResponse("La abreviatura de una categoría hija debe coincidir con la de su padre");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(m));
+            }
+
             int idRes = service.save(input);
             MessageResponse m = new MessageResponse("Elemento creado con id " + idRes);
             return ResponseEntity.status(HttpStatus.CREATED).body(g.toJson(m));
@@ -95,7 +118,8 @@ public class CategoriaOcupacionalController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable int id) {try {
+    public ResponseEntity<?> delete(@PathVariable int id) {
+        try {
             boolean deleted = service.deleteById(id);
 
             if (deleted) {
@@ -113,5 +137,5 @@ public class CategoriaOcupacionalController {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
         }
     }
-    
+
 }

@@ -5,6 +5,7 @@
 package com.uasp.hhrr.repository;
 
 import com.uasp.hhrr.model.CategoriaOcupacional;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -12,5 +13,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Tapanes
  */
 public interface CategoriaOcupacionalRepository extends JpaRepository<CategoriaOcupacional, Integer> {
+
+    public List<CategoriaOcupacional> findByParentIsNull();
     
+    public List<CategoriaOcupacional> findByParentIsNotNull();
 }

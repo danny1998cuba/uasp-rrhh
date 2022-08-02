@@ -64,6 +64,10 @@ public class Trabajador implements Serializable {
     @Column(name = "doctorado")
     private Boolean doctorado;
     
+    @Basic(optional = false)
+    @Column(name = "mision")
+    private boolean mision;
+    
     @JoinColumn(name = "id_cat_doc", referencedColumnName = "id")
     @ManyToOne
     private CategoriaDocente idCatDoc;

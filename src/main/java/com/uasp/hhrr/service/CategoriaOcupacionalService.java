@@ -60,5 +60,13 @@ public class CategoriaOcupacionalService implements Services<CategoriaOcupaciona
     public Optional<CategoriaOcupacional> findById(Integer id) {
         return repository.findById(id);
     }
+    
+    public List<CategoriaOcupacional> findRootCats() {
+        return repository.findByParentIsNull();
+    }
+    
+    public List<CategoriaOcupacional> findChildCats() {
+        return repository.findByParentIsNotNull();
+    }
 
 }

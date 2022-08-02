@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2022 a las 04:53:42
+-- Tiempo de generación: 02-08-2022 a las 06:25:08
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -57,7 +57,8 @@ CREATE TABLE `categoria_docente` (
 CREATE TABLE `categoria_ocupacional` (
   `id` int(10) NOT NULL,
   `nombre` varchar(255) NOT NULL,
-  `abreviado` varchar(10) NOT NULL
+  `abreviado` varchar(10) NOT NULL,
+  `parent` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -156,6 +157,7 @@ CREATE TABLE `trabajador` (
   `sexo` varchar(1) NOT NULL,
   `maestria` tinyint(1) NOT NULL,
   `doctorado` tinyint(1) NOT NULL,
+  `mision` tinyint(1) NOT NULL,
   `id_departamento` int(10) NOT NULL,
   `id_cargo` int(10) NOT NULL,
   `id_cat_doc` int(10) DEFAULT NULL,
@@ -242,7 +244,8 @@ ALTER TABLE `categoria_docente`
 --
 ALTER TABLE `categoria_ocupacional`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nombre` (`nombre`);
+  ADD UNIQUE KEY `nombre` (`nombre`),
+  ADD KEY `FKCategoria_605219` (`parent`);
 
 --
 -- Indices de la tabla `cla`
@@ -401,6 +404,12 @@ ALTER TABLE `cargo`
   ADD CONSTRAINT `FKCargo195211` FOREIGN KEY (`id_cat_ocup`) REFERENCES `categoria_ocupacional` (`id`),
   ADD CONSTRAINT `FKCargo60784` FOREIGN KEY (`id_escala`) REFERENCES `escala` (`id`),
   ADD CONSTRAINT `FKCargo753442` FOREIGN KEY (`id_escolar_min`) REFERENCES `nivel_escolar` (`id`);
+
+--
+-- Filtros para la tabla `categoria_ocupacional`
+--
+ALTER TABLE `categoria_ocupacional`
+  ADD CONSTRAINT `FKCategoria_605219` FOREIGN KEY (`parent`) REFERENCES `categoria_ocupacional` (`id`);
 
 --
 -- Filtros para la tabla `departamento`
