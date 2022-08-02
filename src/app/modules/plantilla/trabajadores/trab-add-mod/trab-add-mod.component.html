@@ -84,7 +84,7 @@
 
         <h3 class="mb-1">Informaci&oacute;n de contrato</h3>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <mat-form-field class="example-full-width">
                     <mat-select placeholder="Departamento" formControlName="idDepartamento" required
                         [compareWith]="compareObjects">
@@ -99,6 +99,9 @@
                     </mat-error>
                 </mat-form-field>
             </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
                     <mat-select placeholder="Cargo" formControlName="idCargo" required [compareWith]="compareObjects">
@@ -116,9 +119,6 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-        </div>
-
-        <div class="row">
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
                     <mat-select placeholder="Categoría docente" formControlName="idcatDoc"
@@ -130,6 +130,9 @@
                     </mat-select>
                 </mat-form-field>
             </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
                     <mat-select placeholder="Condiciones laborales adicionales" formControlName="idCLA"
@@ -141,12 +144,19 @@
                     </mat-select>
                 </mat-form-field>
             </div>
+            <div class="col-md-6">
+                <div class="d-flex flex-md-column align-md-items-center justify-content-center gap-2 h-100">
+                    <mat-checkbox formControlName="mision" labelPosition="after">
+                        Cumpliendo misi&oacute;n
+                    </mat-checkbox>
+                </div>
+            </div>
         </div>
 
 
         <div class="d-flex justify-content-end mt-4">
             <button mat-button [mat-dialog-close]="{success:false, object:undefined}" type="button">Cancelar</button>
-            <button mat-button cdkFocusInitial type="submit">{{!mydata.isMod?'Agregar':'Modificar'}}</button>
+            <button mat-button type="submit">{{!mydata.isMod?'Agregar':'Modificar'}}</button>
         </div>
     </form>
 </mat-dialog-content>

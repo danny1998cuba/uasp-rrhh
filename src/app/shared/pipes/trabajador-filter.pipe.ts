@@ -59,6 +59,14 @@ export class TrabajadorFilterPipe implements PipeTransform {
         }
         filters += 'Doctorado: ' + (lastFilter.doctorado ? "Sí" : "No")
       }
+      if (lastFilter.mision != undefined) {
+        if (addedSome) {
+          filters += ' | '
+        } else {
+          addedSome = true
+        }
+        filters += 'Misión: ' + (lastFilter.mision ? "Sí" : "No")
+      }
       if (lastFilter.idCatDoc != undefined) {
         if (addedSome) {
           filters += ' | '

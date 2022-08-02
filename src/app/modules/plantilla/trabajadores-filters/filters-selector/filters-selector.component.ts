@@ -1,6 +1,7 @@
-import { Component, Inject, OnInit, Optional } from '@angular/core';
+import { Component, Inject, OnInit, Optional, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { Cargo, CatDoc, Cla, Departamento, NivelEscolar, Trabajador } from 'src/app/data/schema';
 
 @Component({
@@ -18,6 +19,10 @@ export class FiltersSelectorComponent {
   deps!: Departamento[]
   cargos!: Cargo[]
   niveles!: NivelEscolar[]
+
+  @ViewChild("maestria") maestria!: MatCheckbox
+  @ViewChild("doctorado") doctorado!: MatCheckbox
+  @ViewChild("mision") mision!: MatCheckbox
 
   constructor(
     public selRef: MatBottomSheetRef<FiltersSelectorComponent>,
@@ -40,6 +45,7 @@ export class FiltersSelectorComponent {
       sexo: new FormControl(this.object.sexo),
       maestria: new FormControl(this.object.maestria),
       doctorado: new FormControl(this.object.doctorado),
+      mision: new FormControl(this.object.mision),
       idcatDoc: new FormControl(this.object.idCatDoc),
       nivelEscolar: new FormControl(this.object.idEscolar),
       idDepartamento: new FormControl(this.object.idDepartamento),
@@ -55,8 +61,9 @@ export class FiltersSelectorComponent {
       this.object.apellidos = this.form.get('apellidos')?.value
       this.object.ci = this.form.get('ci')?.value
       this.object.sexo = this.form.get('sexo')?.value
-      this.object.maestria = this.form.get('maestria')?.value
-      this.object.doctorado = this.form.get('doctorado')?.value
+      this.object.maestria = this.maestria.indeterminate ? undefined : this.form.get('maestria')?.value
+      this.object.doctorado = this.doctorado.indeterminate ? undefined : this.form.get('doctorado')?.value
+      this.object.mision = this.mision.indeterminate ? undefined : this.form.get('mision')?.value
       this.object.idCatDoc = this.form.get('idcatDoc')?.value
       this.object.idEscolar = this.form.get('nivelEscolar')?.value
       this.object.idDepartamento = this.form.get('idDepartamento')?.value
@@ -73,4 +80,12 @@ export class FiltersSelectorComponent {
 
   compareObjects(ob1: any, ob2: any) { return (ob1 && ob2) ? ob1.id === ob2.id : false }
 
+  onChange(ob: MatCheckboxChange) {
+    if (ob.source.indeterminate) {
+      ob.source.indeterminate = false
+      ob.source.checked = true
+    } else if (!ob.source.indeterminate && ob.checked) {
+      ob.source.indeterminate = true
+    }
+  }
 }

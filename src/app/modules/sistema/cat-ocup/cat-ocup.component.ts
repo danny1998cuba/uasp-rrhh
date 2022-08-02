@@ -23,6 +23,8 @@ export class CatOcupComponent extends ServicesConsumer<CatOcup, number>{
   dataSource = new MatTableDataSource<CatOcup>([]);
   faAdd = faPlus; faEdit = faPencil; faDelete = faTrash
 
+  catsOcup!: CatOcup[]
+
   @ViewChild(MatPaginator) set matPaginator(paginator: MatPaginator) {
     this.dataSource.paginator = paginator
   }
@@ -38,6 +40,15 @@ export class CatOcupComponent extends ServicesConsumer<CatOcup, number>{
     private snackBar: MatSnackBar
   ) {
     super(service, router)
+    service.getRoots_Children(false).subscribe(
+      r => {
+        if (!r.error) {
+          this.catsOcup = r.data;
+        } else {
+          this.router.navigateByUrl('/home');
+        }
+      }
+    )
   }
 
   override refreshData() {
@@ -70,7 +81,7 @@ export class CatOcupComponent extends ServicesConsumer<CatOcup, number>{
   }
 
   addModDialog(isMod: boolean, object?: CatOcup) {
-    const myCompDialog = this.dialog.open(COcupAddModComponent, { data: { isMod: isMod, object: object ? object : undefined } });
+    const myCompDialog = this.dialog.open(COcupAddModComponent, { data: { isMod: isMod, object: object ? object : undefined, catsOcup: this.catsOcup } });
     myCompDialog.afterClosed().subscribe((res) => {
       if (res)
         if (res.success) {

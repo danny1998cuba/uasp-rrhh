@@ -44,6 +44,7 @@ export class TrabAddModComponent {
       this.object.id = 0
       this.object.maestria = false
       this.object.doctorado = false
+      this.object.mision = false
     }
 
     this.form = new FormGroup({
@@ -53,6 +54,7 @@ export class TrabAddModComponent {
       sexo: new FormControl(this.object.sexo, Validators.required),
       maestria: new FormControl(this.object.maestria, Validators.required),
       doctorado: new FormControl(this.object.doctorado, Validators.required),
+      mision: new FormControl(this.object.mision, Validators.required),
       idcatDoc: new FormControl(this.object.idCatDoc),
       nivelEscolar: new FormControl(this.object.idEscolar, Validators.required),
       idDepartamento: new FormControl(this.object.idDepartamento, Validators.required),
@@ -75,6 +77,7 @@ export class TrabAddModComponent {
       this.object.sexo = this.form.get('sexo')?.value
       this.object.maestria = this.isSuperior() ? this.form.get('maestria')?.value : false
       this.object.doctorado = this.isSuperior() ? this.form.get('doctorado')?.value : false
+      this.object.mision = this.form.get('mision')?.value
       this.object.idCatDoc = this.form.get('idcatDoc')?.value
       this.object.idEscolar = this.form.get('nivelEscolar')?.value
       this.object.idDepartamento = this.form.get('idDepartamento')?.value

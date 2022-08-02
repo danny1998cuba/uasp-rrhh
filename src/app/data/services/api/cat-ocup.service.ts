@@ -27,6 +27,20 @@ export class CatOcupService extends ApiClass implements IApiService<CatOcup, num
       );
   }
 
+  // Obtener todas las CatOcups
+  getRoots_Children(isChild: boolean): Observable<ResponseHandler> {
+    const response = new ResponseHandler()
+    return this.http.get<CatOcup[]>(GESTION_ROUTES.CAT_OCUP + "?parent=" + isChild,
+      { headers: this.headers, withCredentials: true })
+      .pipe(
+        map(r => {
+          response.data = r;
+          return response;
+        }),
+        catchError(this.error)
+      );
+  }
+
   // Obtener CatOcup por id
   getById(id: number): Observable<ResponseHandler> {
     const response = new ResponseHandler()

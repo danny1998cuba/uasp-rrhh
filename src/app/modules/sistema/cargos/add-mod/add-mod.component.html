@@ -49,7 +49,7 @@
                         [compareWith]="compareObjects">
                         <mat-option>--</mat-option>
                         <mat-option *ngFor="let co of catsOcup" [value]="co">
-                            {{co.nombre}}
+                            {{co.parent?co.parent.nombre + ' ('+co.nombre+')': co.nombre}}
                         </mat-option>
                     </mat-select>
                     <mat-hint>Sin errores</mat-hint>
@@ -78,7 +78,7 @@
 
         <div class="d-flex justify-content-end mt-4">
             <button mat-button [mat-dialog-close]="{success:false, object:undefined}" type="button">Cancelar</button>
-            <button mat-button cdkFocusInitial type="submit">{{!mydata.isMod?'Agregar':'Modificar'}}</button>
+            <button mat-button type="submit">{{!mydata.isMod?'Agregar':'Modificar'}}</button>
         </div>
     </form>
 </mat-dialog-content>

@@ -12,6 +12,7 @@ export class Trabajador {
     sexo!: string
     maestria!: boolean
     doctorado!: boolean
+    mision!: boolean
     idCatDoc?: CatDoc
     idEscolar!: NivelEscolar
     idDepartamento!: Departamento
