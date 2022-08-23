@@ -10,7 +10,7 @@ import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
-import com.uasp.hhrr.sigelite.model.EstadosModelo;
+import com.uasp.hhrr.sigelite.struct.EstadosModelo;
 
 /**
  *

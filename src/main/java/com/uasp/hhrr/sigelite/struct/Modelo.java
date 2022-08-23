@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.uasp.hhrr.sigelite.model;
+package com.uasp.hhrr.sigelite.struct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Modelo {
 
     public Modelo(EncabezadoModelo encabezado) {
         this.encabezado = encabezado;
-        this.paginas = new ArrayList<Pagina>();
+        this.paginas = new ArrayList<>();
     }
 
     public EncabezadoModelo getEncabezado() {

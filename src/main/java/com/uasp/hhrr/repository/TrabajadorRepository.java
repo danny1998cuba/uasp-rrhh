@@ -15,4 +15,16 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer>, JpaSpecificationExecutor<Trabajador> {
 
     long countByIdDepartamentoIdAndIdCargoId(int idDepartamento, int idCargo);
+
+    long countBySexo(String sexo);
+
+    long countByIdCargoIdCatOcupAbreviado(String abreviado);
+
+    long countByIdCargoIdCatOcupAbreviadoAndSexo(String abreviado, String sexo);
+
+    long countBySexoAndIdEscolarId(String sexo, int idEscolar);
+
+    long countByIdCargoIdCatOcupAbreviadoAndIdEscolarId(String abreviado, int idEscolar);
+
+    long countByIdCargoIdCatOcupAbreviadoAndSexoAndIdEscolarId(String abreviado, String sexo, int idEscolar);
 }

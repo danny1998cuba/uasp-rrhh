@@ -7,12 +7,7 @@ package com.uasp.hhrr.sigelite.xml;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import com.uasp.hhrr.sigelite.model.Aspecto;
-import com.uasp.hhrr.sigelite.model.EncabezadoModelo;
-import com.uasp.hhrr.sigelite.model.Indicador;
-
-import com.uasp.hhrr.sigelite.model.Modelo;
-import com.uasp.hhrr.sigelite.model.Pagina;
+import com.uasp.hhrr.sigelite.struct.Modelo;
 
 /**
  *
@@ -41,6 +36,6 @@ public class XMLGenerator {
 
     public String toXml(Modelo model) {
         XStream x = configuration(model);
-        return "<?xml version=\"1.0\"?>\n" + x.toXML(model);
+        return "<?xml version=\"1.0\"?>\n" + x.toXML(model).replace("__", "_");
     }
 }

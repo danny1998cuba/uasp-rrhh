@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.uasp.hhrr.sigelite.model;
+package com.uasp.hhrr.sigelite.struct;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
@@ -21,7 +21,7 @@ public class EncabezadoModelo {
     private int idnummodelo;
     private String idsubnummodelo;
     private int idcodvariante;
-    private int codcentroinformante;
+    private String codcentroinformante;
 
     @XStreamConverter(SingleValueDateConverter.class)
     private Date idfechadelinformeacumulado;
@@ -37,7 +37,7 @@ public class EncabezadoModelo {
     public EncabezadoModelo() {
     }
 
-    public EncabezadoModelo(int idnummodelo, String idsubnummodelo, int idcodvariante, int codcentroinformante, Date idfechadelinformeacumulado, Date idfechadeconfeccion, EstadosModelo estado, String observaciones, int idtipodemodelo) {
+    public EncabezadoModelo(int idnummodelo, String idsubnummodelo, int idcodvariante, String codcentroinformante, Date idfechadelinformeacumulado, Date idfechadeconfeccion, EstadosModelo estado, String observaciones, int idtipodemodelo) {
         this.idnummodelo = idnummodelo;
         this.idsubnummodelo = idsubnummodelo;
         this.idcodvariante = idcodvariante;
@@ -73,11 +73,11 @@ public class EncabezadoModelo {
         this.idcodvariante = idcodvariante;
     }
 
-    public int getCodcentroinformante() {
+    public String getCodcentroinformante() {
         return codcentroinformante;
     }
 
-    public void setCodcentroinformante(int codcentroinformante) {
+    public void setCodcentroinformante(String codcentroinformante) {
         this.codcentroinformante = codcentroinformante;
     }
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.uasp.hhrr.sigelite.model;
+package com.uasp.hhrr.sigelite.struct;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
@@ -27,7 +27,7 @@ public class Indicador {
 
     public Indicador(int codigofila) {
         this.codigofila = codigofila;
-        this.aspectos = new ArrayList<Aspecto>();
+        this.aspectos = new ArrayList<>();
     }
 
     public Indicador(int codigofila, List<Aspecto> aspectos) {
