@@ -7,6 +7,8 @@ package com.uasp.hhrr.repository;
 import com.uasp.hhrr.model.Trabajador;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -18,6 +20,8 @@ public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer>
 
     long countBySexo(String sexo);
 
+    long countByIdEscolarId(int idEscolar);
+
     long countByIdCargoIdCatOcupAbreviado(String abreviado);
 
     long countByIdCargoIdCatOcupAbreviadoAndSexo(String abreviado, String sexo);
@@ -27,4 +31,36 @@ public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer>
     long countByIdCargoIdCatOcupAbreviadoAndIdEscolarId(String abreviado, int idEscolar);
 
     long countByIdCargoIdCatOcupAbreviadoAndSexoAndIdEscolarId(String abreviado, String sexo, int idEscolar);
+
+    @Query(value = "SELECT COUNT(t.id) FROM trabajador AS t WHERE calcularEdad(t.ci) > 65",
+            nativeQuery = true)
+    Long countByMayorEdadLaboral();
+
+    @Query(value = "SELECT COUNT(t.id) FROM trabajador AS t WHERE calcularEdad(t.ci) < 17",
+            nativeQuery = true)
+    Long countByMenorEdadLaboral();
+
+    @Query(value = "SELECT COUNT(t.id) FROM trabajador AS t WHERE calcularEdad(t.ci) > 65 and t.id_escolar = :idEscolar",
+            nativeQuery = true)
+    Long countByMayorEdadLaboralAndIdEscolar(@Param(value = "idEscolar") int idEscolar);
+
+    @Query(value = "SELECT COUNT(t.id) FROM trabajador AS t WHERE calcularEdad(t.ci) < 17 and t.id_escolar = :idEscolar",
+            nativeQuery = true)
+    Long countByMenorEdadLaboralAndIdEscolar(@Param(value = "idEscolar") int idEscolar);
+
+    @Query(value = "SELECT COUNT(t.id) FROM trabajador AS t WHERE calcularEdad(t.ci) > 65 and t.sexo = :sexo",
+            nativeQuery = true)
+    Long countByMayorEdadLaboralAndSexo(@Param(value = "sexo") String sexo);
+
+    @Query(value = "SELECT COUNT(t.id) FROM trabajador AS t WHERE calcularEdad(t.ci) < 17 and t.sexo = :sexo",
+            nativeQuery = true)
+    Long countByMenorEdadLaboralAndSexo(@Param(value = "sexo") String sexo);
+
+    @Query(value = "SELECT COUNT(t.id) FROM trabajador AS t WHERE calcularEdad(t.ci) > 65 and t.sexo = :sexo and t.id_escolar = :idEscolar",
+            nativeQuery = true)
+    Long countByMayorEdadLaboralAndSexoAndIdEscolar(@Param(value = "sexo") String sexo, @Param(value = "idEscolar") int idEscolar);
+
+    @Query(value = "SELECT COUNT(t.id) FROM trabajador AS t WHERE calcularEdad(t.ci) < 17 and t.sexo = :sexo and t.id_escolar = :idEscolar",
+            nativeQuery = true)
+    Long countByMenorEdadLaboralAndSexoAndIdEscolar(@Param(value = "sexo") String sexo, @Param(value = "idEscolar") int idEscolar);
 }

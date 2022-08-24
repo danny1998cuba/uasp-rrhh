@@ -12,13 +12,15 @@ import com.uasp.hhrr.sigelite.struct.EstadosModelo;
 import com.uasp.hhrr.sigelite.struct.Indicador;
 import com.uasp.hhrr.sigelite.struct.Modelo;
 import com.uasp.hhrr.sigelite.struct.Pagina;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  *
  * @author Tapanes
  */
-public class F5205_03 {
+public class F5205_02 {
 
     //Columns
     public static enum COLUMNS {
@@ -53,7 +55,7 @@ public class F5205_03 {
 
     //Rows    
     public static enum FILAS {
-        TOTAL_VACANTES(9), TOTAL_OCUPADOS(1), NO_PRIMARIA(2), PRIMARIA(3), SECUNDARIA(4), PRE(5), OBRERO(6), TECNICO_MEDIO(7), UNIVERSITARIO(8), JARUCO(2403);
+        TOTAL_VACANTES(9), TOTAL_OCUPADOS(1), NO_PRIMARIA(2), PRIMARIA(3), SECUNDARIA(4), PRE(5), OBRERO(6), TECNICO_MEDIO(7), UNIVERSITARIO(8), JARUCO(2403), SUMA_CONTROL(99999999);
 
         private final int value;
 
@@ -68,7 +70,7 @@ public class F5205_03 {
 
     private final Modelo modelo;
 
-    protected F5205_03(F5205_03Builder builder) {
+    protected F5205_02(F5205_02Builder builder) {
         modelo = builder.model;
     }
 
@@ -104,6 +106,9 @@ public class F5205_03 {
         if (ind == null) {
             ind = new Indicador(fila.value);
             p.getIndicadores().add(ind);
+
+            List<Aspecto> aspcs = ind.getAspectos();
+            Arrays.stream(COLUMNS.values()).forEach(c -> aspcs.add(new Aspecto(c.getValue(), "0")));
         }
 
         Aspecto asp = ind.getAspectos().stream().filter(a -> a.getAlias().equals(columna.value)).findFirst().orElse(null);
@@ -115,11 +120,27 @@ public class F5205_03 {
         }
     }
 
-    public static class F5205_03Builder {
+    public String getValue(FILAS fila, COLUMNS columna) {
+        Pagina p = modelo.getPaginas().get(0);
+
+        Indicador ind = p.getIndicadores().stream().filter(i -> i.getCodigofila() == fila.value).findFirst().orElse(null);
+
+        if (ind != null) {
+            Aspecto asp = ind.getAspectos().stream().filter(a -> a.getAlias().equals(columna.value)).findFirst().orElse(null);
+            if (asp != null) {
+                return asp.getValor();
+            }
+        }
+
+        return "";
+
+    }
+
+    public static class F5205_02Builder {
 
         private final Modelo model;
 
-        public F5205_03Builder(int month, String day) {
+        public F5205_02Builder(int month, String day) {
             model = new Modelo(new EncabezadoModelo());
 
             model.getEncabezado().setIdnummodelo(SigeliteConstants.F5205_COD_MODELO);
@@ -134,11 +155,11 @@ public class F5205_03 {
             model.getPaginas().add(new Pagina(1));
         }
 
-        public F5205_03 build() {
-            return new F5205_03(this);
+        public F5205_02 build() {
+            return new F5205_02(this);
         }
 
-        public F5205_03Builder setObservaciones(String observaciones) {
+        public F5205_02Builder setObservaciones(String observaciones) {
             model.getEncabezado().setObservaciones(observaciones);
             return this;
         }
