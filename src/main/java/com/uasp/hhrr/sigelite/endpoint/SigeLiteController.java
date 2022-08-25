@@ -6,7 +6,6 @@
 package com.uasp.hhrr.sigelite.endpoint;
 
 import com.google.gson.Gson;
-import com.uasp.hhrr.MessageResponse;
 import com.uasp.hhrr.sigelite.xml.XMLGenerator;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;

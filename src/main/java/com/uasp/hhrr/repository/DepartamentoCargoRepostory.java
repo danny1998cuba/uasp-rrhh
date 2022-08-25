@@ -28,5 +28,13 @@ public interface DepartamentoCargoRepostory
             + "JOIN departamento_cargo AS dc ON c.id = dc.Cargoid "
             + "WHERE o.abreviado = :co",
             nativeQuery = true)
-    Long plazasByCatOcup(@Param(value = "co") String abreviado);
+    Long plazasByCatOcupAbrev(@Param(value = "co") String abreviado);
+    
+    @Query(value = "SELECT COALESCE(SUM(dc.plazas), 0) "
+            + "FROM categoria_ocupacional AS o "
+            + "JOIN cargo AS c ON o.id = c.id_cat_ocup "
+            + "JOIN departamento_cargo AS dc ON c.id = dc.Cargoid "
+            + "WHERE o.id = :co",
+            nativeQuery = true)
+    Long plazasByCatOcupId(@Param(value = "co") int id);
 }

@@ -8,6 +8,7 @@ package com.uasp.hhrr.controller;
 import com.google.gson.Gson;
 import com.uasp.hhrr.MessageResponse;
 import com.uasp.hhrr.reports.Report;
+import com.uasp.hhrr.reports.datasets.PlantillaAprobadaCubiertaDataset;
 import com.uasp.hhrr.reports.submodel.FilteredType;
 import com.uasp.hhrr.service.ReportsService;
 import com.uasp.hhrr.service.TrabajadorService;
@@ -47,6 +48,9 @@ public class ReportsController {
     @Autowired
     Gson g;
 
+    @Autowired
+    PlantillaAprobadaCubiertaDataset pac;
+
     @PostMapping("/filtered")
     public ResponseEntity<?> trabajadorFiltered(
             @RequestBody FilteredType body,
@@ -59,6 +63,12 @@ public class ReportsController {
     public ResponseEntity<?> trabajadorUnidad(
             @RequestParam Map<String, Object> params) {
         return generateReport("TrabajadoresUnidad", params, new JRBeanCollectionDataSource(tService.findAll()));
+    }
+
+    @GetMapping("/plantillaAC")
+    public ResponseEntity<?> plantillaAprobCub(
+            @RequestParam Map<String, Object> params) {
+        return generateReport("plantillaAC", params, new JRBeanCollectionDataSource(pac.getDataset()));
     }
 
     @GetMapping("/p2")

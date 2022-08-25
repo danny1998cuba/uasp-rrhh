@@ -24,6 +24,12 @@ public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer>
 
     long countByIdCargoIdCatOcupAbreviado(String abreviado);
 
+    long countByIdCargoIdCatOcupId(int id);
+
+    long countByIdCargoIdCatOcupIdAndMision(int id, boolean mision);
+
+    long countByIdCargoIdCatOcupAbreviadoAndMision(String abreviado, boolean mision);
+
     long countByIdCargoIdCatOcupAbreviadoAndSexo(String abreviado, String sexo);
 
     long countBySexoAndIdEscolarId(String sexo, int idEscolar);

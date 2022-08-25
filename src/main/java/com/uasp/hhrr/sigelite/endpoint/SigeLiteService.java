@@ -37,6 +37,8 @@ public class SigeLiteService {
 
         if (params.containsKey("observ")) {
             builder.setObservaciones(params.get("observ").toString());
+        } else {
+            builder.setObservaciones("VmFsaWRhIGNvbiBhbGVydGFzIGRlYmlkbyBhbCA1MjAy");   //Mensaje encriptado obtenido directamente del SigeLite
         }
 
         F5205_02 model = builder.build();

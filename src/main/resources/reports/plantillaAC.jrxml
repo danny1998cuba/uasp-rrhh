@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantillaAC" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="53230ecc-2ba9-4ff8-8cad-e206ded0efa9">
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["D:\\Daniel\\Escuela\\5to\\De tesis\\Program\\Frontend\\Design\\assets\\images\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="totalPlazas" class="java.lang.Long"/>
+	<field name="totalCubiertas" class="java.lang.Long"/>
+	<field name="totalMision" class="java.lang.Long"/>
+	<field name="parent" class="java.lang.Boolean"/>
+	<variable name="totalCubiertas1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{parent} ? $F{totalCubiertas} : 0]]></variableExpression>
+	</variable>
+	<variable name="totalPlazas1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{parent} ? $F{totalPlazas} : 0]]></variableExpression>
+	</variable>
+	<variable name="totalMision1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{parent} ? $F{totalMision} : 0]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="25" y="10" width="523" height="49" isPrintInFirstWholeBand="true" uuid="7529b049-8e8e-4f24-b828-5f6fe7d65144"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cambria" size="22" isBold="true"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[Plantilla aprobada y cubierta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="59" width="150" height="20" uuid="9abbec7a-e6dd-4a83-8bf8-b811ca5ef10a"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre de la entidad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="59" width="79" height="20" uuid="0189fe3f-a946-43da-b2ba-35258d64414e"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Provincia:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="25" y="22" width="100" height="18" uuid="889c9724-0f81-4cc5-8be7-0be306f5913a"/>
+				<text><![CDATA[CATEGORÍA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="22" width="100" height="18" uuid="1e007490-eb12-42b8-9aac-ead3c76378c2"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[APROBADA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="22" width="100" height="18" uuid="3dd104f1-3eaf-4f21-9e20-52c2141608e7"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[CUBIERTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="22" width="100" height="18" uuid="cdabbc48-ce07-499c-ae88-5476ae49f642"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[MISIÓN]]></text>
+			</staticText>
+			<line>
+				<reportElement x="24" y="40" width="521" height="1" uuid="4054eda0-9a02-4c16-b77b-3eca4bb3065b"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="25" y="4" width="150" height="16" uuid="d737984d-0bc1-4ad8-8a9d-3bc3e297baf5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="783c5fdc-5229-4d96-ba59-61f4c6144527"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[($F{parent} ? "" : "\t") + $F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="4" width="100" height="16" uuid="c02c1fee-ec85-46bc-a26e-316cf9bcd36a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7f1b2e6f-4c01-4a46-ba3f-c199d7c6634f"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{totalPlazas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="4" width="100" height="16" uuid="4e179e33-259f-41f3-8c3a-a6dc99bd7934">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="29e2a99d-081a-448c-a8b4-4d99df83cd4b"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{totalCubiertas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="4" width="100" height="16" uuid="d1e7322a-52f4-42eb-a833-a005c670b3f8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c8e3f01d-e8d3-489a-918a-6fad65b08cae"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{totalMision}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="80">
+			<staticText>
+				<reportElement x="25" y="15" width="100" height="20" uuid="5a6efabe-6523-4af1-b880-e8c8b773d830"/>
+				<text><![CDATA[Confeccionada por:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="35" width="100" height="20" uuid="b9df71e0-3070-4082-95a2-20c23f37fc59"/>
+				<text><![CDATA[Aprobada por:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="55" width="40" height="20" uuid="7a3b0ef4-e58b-41c3-8359-e33bf8e09496"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="65" y="55" width="100" height="20" uuid="a77ffb3e-6b5e-4931-9886-35a8217b3ef8"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="49" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="238" y="8" width="96" height="24" uuid="51195324-93f5-4693-9cd0-754b70c5e777"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="429" y="9" width="80" height="23" uuid="fdb996bc-459a-4063-a7d1-355d2877f63a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Cambria"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="509" y="9" width="40" height="23" uuid="4b4767ae-940f-48cd-89b3-685a8e46c652"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="25" y="3" width="100" height="20" uuid="289fc830-7f4c-45bf-8ec8-f8a48d459749"/>
+				<text><![CDATA[Totales:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="3" width="100" height="20" uuid="c001e1bf-fb12-492c-b9a3-e442020870af"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{totalCubiertas1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="3" width="100" height="20" uuid="14f53846-8c8e-46be-9776-79cc70d5dfd7"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{totalPlazas1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="3" width="100" height="20" uuid="5b3c2218-ec1a-4c03-acfa-7ca893ec843e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{totalMision1}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="24" y="0" width="521" height="1" uuid="8140caad-3dbd-4b3b-b49f-fa114b770e63"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
