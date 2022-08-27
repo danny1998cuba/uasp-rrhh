@@ -8,7 +8,6 @@ package com.uasp.hhrr.controller;
 import com.google.gson.Gson;
 import com.uasp.hhrr.MessageResponse;
 import com.uasp.hhrr.reports.Report;
-import com.uasp.hhrr.reports.datasets.PlantillaAprobadaCubiertaDataset;
 import com.uasp.hhrr.reports.submodel.FilteredType;
 import com.uasp.hhrr.service.ReportsService;
 import com.uasp.hhrr.service.TrabajadorService;
@@ -16,6 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Base64;
 import java.util.Map;
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +48,6 @@ public class ReportsController {
     @Autowired
     Gson g;
 
-    @Autowired
-    PlantillaAprobadaCubiertaDataset pac;
-
     @PostMapping("/filtered")
     public ResponseEntity<?> trabajadorFiltered(
             @RequestBody FilteredType body,
@@ -59,7 +56,7 @@ public class ReportsController {
         return generateReport("TrabajadoresFiltered", params, new JRBeanCollectionDataSource(tService.findAll(Example.of(body.getExample()))));
     }
 
-    @PostMapping("/unidad")
+    @GetMapping("/unidad")
     public ResponseEntity<?> trabajadorUnidad(
             @RequestParam Map<String, Object> params) {
         return generateReport("TrabajadoresUnidad", params, new JRBeanCollectionDataSource(tService.findAll()));
@@ -68,7 +65,7 @@ public class ReportsController {
     @GetMapping("/plantillaAC")
     public ResponseEntity<?> plantillaAprobCub(
             @RequestParam Map<String, Object> params) {
-        return generateReport("plantillaAC", params, new JRBeanCollectionDataSource(pac.getDataset()));
+        return generateReport("plantillaAC", params, service.generatePlantillaACDataSource());
     }
 
     @GetMapping("/p2")
@@ -102,7 +99,7 @@ public class ReportsController {
         }
     }
 
-    private ResponseEntity<?> generateReport(String fileName, Map<String, Object> params, JRBeanCollectionDataSource source) {
+    private ResponseEntity<?> generateReport(String fileName, Map<String, Object> params, JRDataSource source) {
         try {
 
             Report report = service.obtenerReporte(fileName, params, source);

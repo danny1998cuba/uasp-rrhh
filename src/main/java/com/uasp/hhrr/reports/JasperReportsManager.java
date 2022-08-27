@@ -11,13 +11,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.Map;
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
@@ -61,7 +61,7 @@ public class JasperReportsManager {
     }
 
     public ByteArrayOutputStream export(String fileName, String tipoReport, Map<String, Object> params,
-            JRBeanCollectionDataSource source) throws JRException, IOException {
+            JRDataSource source) throws JRException, IOException {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
         ClassPathResource resource = new ClassPathResource("images" + File.separator + "logo.png");

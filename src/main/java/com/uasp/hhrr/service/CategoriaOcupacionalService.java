@@ -9,6 +9,7 @@ import com.uasp.hhrr.repository.CategoriaOcupacionalRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,19 +18,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CategoriaOcupacionalService implements Services<CategoriaOcupacional, Integer> {
-
+    
     @Autowired
     CategoriaOcupacionalRepository repository;
-
+    
     @Override
     public Integer save(CategoriaOcupacional object) {
-        if(object.getId() != null) {
+        if (object.getId() != null) {
             object.setId(null);
         }
         CategoriaOcupacional p = repository.save(object);
         return p.getId();
     }
-
+    
     @Override
     public Integer update(CategoriaOcupacional object, Integer id) {
         if (repository.findById(id).isPresent()) {
@@ -40,7 +41,7 @@ public class CategoriaOcupacionalService implements Services<CategoriaOcupaciona
             return -1;
         }
     }
-
+    
     @Override
     public boolean deleteById(Integer id) {
         if (repository.findById(id).isPresent()) {
@@ -50,12 +51,12 @@ public class CategoriaOcupacionalService implements Services<CategoriaOcupaciona
             return false;
         }
     }
-
+    
     @Override
     public List<CategoriaOcupacional> findAll() {
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Order.asc("abreviado")));
     }
-
+    
     @Override
     public Optional<CategoriaOcupacional> findById(Integer id) {
         return repository.findById(id);
@@ -68,5 +69,5 @@ public class CategoriaOcupacionalService implements Services<CategoriaOcupaciona
     public List<CategoriaOcupacional> findChildCats() {
         return repository.findByParentIsNotNull();
     }
-
+    
 }
