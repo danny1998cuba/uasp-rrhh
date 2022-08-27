@@ -38,6 +38,12 @@ export const REPORTS = {
     UNIDAD: `${REPORTS_BASE}/unidad`
 }
 
+// Sigelite Routes
+export const SIGELITE_BASE = `${API_ROUTE}/sigelite`
+
+export const SIGELITE = {
+    F5205: `${SIGELITE_BASE}/5205`,
+}
 
 export const COUNT = '/count'
 

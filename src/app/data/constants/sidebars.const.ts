@@ -34,15 +34,11 @@ export const MODELOS_SIDEBAR: ISidebarData = {
             ]
         },
         {
-            title: 'Estadísticas',
+            title: 'OMEI',
             options: [
                 {
-                    nombre: 'OMEI 1',
+                    nombre: 'Formularios Sigelite',
                     link: MODELOS_ROUTES.OMEI1
-                },
-                {
-                    nombre: 'OMEI 2',
-                    link: MODELOS_ROUTES.OMEI2
                 }
             ]
         }

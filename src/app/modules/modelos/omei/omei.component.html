@@ -1,0 +1,52 @@
+<h1 class="card-title">Formularios Oficina Municipal de Estad&iacute;stica e Informaci&oacute;n (Sigelite)</h1>
+
+<div class="card-body">
+    <div class="d-flex flex-column gap-5">
+        <mat-card>
+            <mat-card-title>F-5202</mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+
+            <mat-card-content>
+                <!-- <div class="row px-5 mt-3">
+            <mat-form-field>
+                <textarea matInput placeholder="Observaciones" matTooltip="Agregar Observaciones"
+                    matTooltipPosition="right" rows="5" [(ngModel)]="observ"></textarea>
+            </mat-form-field>
+        </div> -->
+
+                <div class="d-flex justify-content-end">
+                    <button mat-button type="button" aria-label="Add">
+                        <fa-icon [icon]="faDown"></fa-icon> &nbsp;&nbsp; Procesar y descargar
+                    </button>
+
+                    <img src="assets/images/loader.gif" class="loader" alt="Loader" *ngIf="isLoading">
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card>
+            <mat-card-title>F-5205</mat-card-title>
+            <mat-card-subtitle>NÚMERO DE TRABAJADORES POR CATEGORÍA OCUPACIONAL, SEXO Y NIVEL DE ESCOLARIDAD
+            </mat-card-subtitle>
+
+            <mat-card-content>
+                Fecha de informe acumulado: {{fechaProces | date:"dd/MM/yyyy"}}
+
+                <div class="row px-5 mt-3">
+                    <mat-form-field>
+                        <textarea matInput placeholder="Observaciones" matTooltip="Agregar Observaciones"
+                            matTooltipPosition="right" rows="5" [(ngModel)]="observ"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button mat-button type="button" aria-label="Add" (click)="load_F5205()">
+                        <fa-icon [icon]="faDown"></fa-icon> &nbsp;&nbsp; Procesar y descargar
+                    </button>
+
+                    <img src="assets/images/loader.gif" class="loader" alt="Loader" *ngIf="isLoading">
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

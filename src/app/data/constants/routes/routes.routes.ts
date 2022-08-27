@@ -25,8 +25,7 @@ export const MODELOS_CHILDREN = {
     DATABASE: 'database',
     AUSENTISMO: 'ausentismo',
     SITUACION: 'situacion_laboral',
-    OMEI1: 'omei1',
-    OMEI2: 'omei2'
+    OMEI1: 'modelos_omei'
 }
 
 export const MODELOS_ROUTES = {
@@ -34,8 +33,7 @@ export const MODELOS_ROUTES = {
     DATABASE: `${MODELOS_ROOT}/${MODELOS_CHILDREN.DATABASE}`,
     AUSENTISMO: `${MODELOS_ROOT}/${MODELOS_CHILDREN.AUSENTISMO}`,
     SITUACION: `${MODELOS_ROOT}/${MODELOS_CHILDREN.SITUACION}`,
-    OMEI1: `${MODELOS_ROOT}/${MODELOS_CHILDREN.OMEI1}`,
-    OMEI2: `${MODELOS_ROOT}/${MODELOS_CHILDREN.OMEI2}`
+    OMEI1: `${MODELOS_ROOT}/${MODELOS_CHILDREN.OMEI1}`
 }
 
 // Sistema routes
