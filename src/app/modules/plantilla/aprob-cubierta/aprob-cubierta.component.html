@@ -1,1 +1,20 @@
 <h1 class="card-title">Plantilla aprobada y cubierta</h1>
+
+<div class="card-body">
+    <ng-container *ngIf="!isLoading; else noData;">
+        <ng-container *ngIf="file != ''; else noFile">
+            <app-pdf-viewer [src]="file" [downloadFileName]="'Plantilla Aprobada y cubierta - ' + fecha + '.pdf'">
+            </app-pdf-viewer>
+        </ng-container>
+    </ng-container>
+</div>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>
+
+<ng-template #noFile>
+    <small class="text-danger">
+        No se carg&oacute; el archivo
+    </small>
+</ng-template>

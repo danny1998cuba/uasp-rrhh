@@ -3,8 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import { base64toPdf } from 'src/app/core/utils';
-import { REPORTS } from 'src/app/data/constants';
 import { Unidad } from 'src/app/data/schema';
 import { ReportsService, UnidadService } from 'src/app/data/services';
 import { UnidadesComponent } from '../../sistema/unidades/unidades.component';
