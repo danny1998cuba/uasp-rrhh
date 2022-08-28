@@ -11,6 +11,14 @@ export const MODELOS_SIDEBAR: ISidebarData = {
             title: 'Plantilla',
             options: [
                 {
+                    nombre: 'Plantilla aprobada y cubierta',
+                    link: MODELOS_ROUTES.APROB
+                },
+                {
+                    nombre: 'Plantilla de cargo y registro de trabajadores (P2)',
+                    link: MODELOS_ROUTES.P2
+                },
+                {
                     nombre: 'Modelo Grupo - Escala',
                     link: MODELOS_ROUTES.GRUPO_ESCALA
                 }
@@ -57,20 +65,12 @@ export const PLANTILLA_SIDEBAR: ISidebarData = {
                     link: PLANTILLA_ROUTES.TRABAJADORES
                 },
                 {
-                    nombre: 'Plantilla aprobada y cubierta',
-                    link: PLANTILLA_ROUTES.APROB
-                },
-                {
                     nombre: 'Trabajadores por unidad',
                     link: PLANTILLA_ROUTES.UNIDAD
                 },
                 {
                     nombre: 'Búsqueda avanzada',
                     link: PLANTILLA_ROUTES.FILTERS
-                },
-                {
-                    nombre: 'Plantilla de cargo y registro de trabajadores',
-                    link: PLANTILLA_ROUTES.P2
                 }
             ]
         }

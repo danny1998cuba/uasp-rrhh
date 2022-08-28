@@ -1,0 +1,20 @@
+<h1 class="card-title">Informe sobre Trabajadores por Categoría Ocupacional y Grupo de la Escala</h1>
+
+<div class="card-body">
+    <ng-container *ngIf="!isLoading; else noData;">
+        <ng-container *ngIf="file != ''; else noFile">
+            <app-pdf-viewer [src]="file" [downloadFileName]="'Modelo Grupo Escala - ' + fecha + '.pdf'">
+            </app-pdf-viewer>
+        </ng-container>
+    </ng-container>
+</div>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>
+
+<ng-template #noFile>
+    <small class="text-danger">
+        No se carg&oacute; el archivo
+    </small>
+</ng-template>

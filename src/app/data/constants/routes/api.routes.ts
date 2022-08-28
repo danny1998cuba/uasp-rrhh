@@ -35,6 +35,7 @@ export const REPORTS = {
     FILTERED: `${REPORTS_BASE}/filtered`,
     P2: `${REPORTS_BASE}/p2`,
     PLANTILLA_AC: `${REPORTS_BASE}/plantillaAC`,
+    GRUPO_ESCALA: `${REPORTS_BASE}/grupo_escala`,
     UNIDAD: `${REPORTS_BASE}/unidad`
 }
 

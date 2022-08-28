@@ -71,4 +71,18 @@ export class ReportsService extends ApiClass {
         catchError(this.error)
       );
   }
+
+  grupoEscala(): Observable<ResponseHandler> {
+    const response = new ResponseHandler()
+
+    return this.http.get<any>(REPORTS.GRUPO_ESCALA + '?tipo=pdf',
+      { headers: this.headers, withCredentials: true })
+      .pipe(
+        map(r => {
+          response.data = base64toPdf(r.msg);
+          return response;
+        }),
+        catchError(this.error)
+      );
+  }
 }

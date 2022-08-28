@@ -3,18 +3,14 @@ export const PLANTILLA_ROOT = 'plantilla'
 
 export const PLANTILLA_CHILDREN = {
     TRABAJADORES: 'trabajador',
-    APROB: 'aprob_cub',
     UNIDAD: 'trabajador/unidad',
-    FILTERS: 'trabajador/filters',
-    P2: 'p2'
+    FILTERS: 'trabajador/filters'
 }
 
 export const PLANTILLA_ROUTES = {
     TRABAJADORES: `${PLANTILLA_ROOT}/${PLANTILLA_CHILDREN.TRABAJADORES}`,
-    APROB: `${PLANTILLA_ROOT}/${PLANTILLA_CHILDREN.APROB}`,
     UNIDAD: `${PLANTILLA_ROOT}/${PLANTILLA_CHILDREN.UNIDAD}`,
-    FILTERS: `${PLANTILLA_ROOT}/${PLANTILLA_CHILDREN.FILTERS}`,
-    P2: `${PLANTILLA_ROOT}/${PLANTILLA_CHILDREN.P2}`
+    FILTERS: `${PLANTILLA_ROOT}/${PLANTILLA_CHILDREN.FILTERS}`
 }
 
 // Modelos routes
@@ -22,6 +18,8 @@ export const MODELOS_ROOT = 'modelos'
 
 export const MODELOS_CHILDREN = {
     GRUPO_ESCALA: 'grupo_escala',
+    APROB: 'aprob_cub',
+    P2: 'p2',
     DATABASE: 'database',
     AUSENTISMO: 'ausentismo',
     SITUACION: 'situacion_laboral',
@@ -30,6 +28,8 @@ export const MODELOS_CHILDREN = {
 
 export const MODELOS_ROUTES = {
     GRUPO_ESCALA: `${MODELOS_ROOT}/${MODELOS_CHILDREN.GRUPO_ESCALA}`,
+    APROB: `${MODELOS_ROOT}/${MODELOS_CHILDREN.APROB}`,
+    P2: `${MODELOS_ROOT}/${MODELOS_CHILDREN.P2}`,
     DATABASE: `${MODELOS_ROOT}/${MODELOS_CHILDREN.DATABASE}`,
     AUSENTISMO: `${MODELOS_ROOT}/${MODELOS_CHILDREN.AUSENTISMO}`,
     SITUACION: `${MODELOS_ROOT}/${MODELOS_CHILDREN.SITUACION}`,

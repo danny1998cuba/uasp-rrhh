@@ -4,6 +4,9 @@ import { ModelosRoutingModule } from './modelos-routing.module';
 import { ModeloSkeletonComponent } from './modelo-skeleton/modelo-skeleton.component';
 import { InitComponent } from './init/init.component';
 import { OmeiComponent } from './omei/omei.component';
+import { GrupoEscalaComponent } from './grupo-escala/grupo-escala.component';
+import { P2Component } from './p2/p2.component';
+import { AprobCubiertaComponent } from './aprob-cubierta/aprob-cubierta.component';
 
 
 
@@ -11,7 +14,10 @@ import { OmeiComponent } from './omei/omei.component';
   declarations: [
     ModeloSkeletonComponent,
     InitComponent,
-    OmeiComponent
+    OmeiComponent,
+    GrupoEscalaComponent,
+    P2Component,
+    AprobCubiertaComponent
   ],
   imports: [
     SharedModule
