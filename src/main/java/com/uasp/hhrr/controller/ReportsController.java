@@ -68,6 +68,12 @@ public class ReportsController {
         return generateReport("plantillaAC", params, service.generatePlantillaACDataSource());
     }
 
+    @GetMapping("/grupo_escala")
+    public ResponseEntity<?> grupoEscala(
+            @RequestParam Map<String, Object> params) {
+        return generateReport("GrupoEscala", params, service.generateGEDataSource());
+    }
+
     @GetMapping("/p2")
     public ResponseEntity<?> P2(
             @RequestParam Map<String, Object> params) {

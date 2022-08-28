@@ -38,6 +38,10 @@ public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer>
 
     long countByIdCargoIdCatOcupAbreviadoAndSexoAndIdEscolarId(String abreviado, String sexo, int idEscolar);
 
+    long countByIdCargoIdEscalaIdAndIdCargoIdCatOcupAbreviado(int idEscala, String abreviado);
+
+    long countByIdCargoIdEscalaIdAndSexoAndIdCargoIdCatOcupAbreviado(int idEscala, String sexo, String abreviado);
+
     @Query(value = "SELECT COUNT(t.id) FROM trabajador AS t WHERE calcularEdad(t.ci) > 65",
             nativeQuery = true)
     Long countByMayorEdadLaboral();
@@ -69,4 +73,5 @@ public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer>
     @Query(value = "SELECT COUNT(t.id) FROM trabajador AS t WHERE calcularEdad(t.ci) < 17 and t.sexo = :sexo and t.id_escolar = :idEscolar",
             nativeQuery = true)
     Long countByMenorEdadLaboralAndSexoAndIdEscolar(@Param(value = "sexo") String sexo, @Param(value = "idEscolar") int idEscolar);
+
 }

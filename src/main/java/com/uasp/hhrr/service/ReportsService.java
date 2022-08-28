@@ -8,11 +8,15 @@ package com.uasp.hhrr.service;
 import com.uasp.hhrr.reports.JasperReportsManager;
 import com.uasp.hhrr.reports.Report;
 import com.uasp.hhrr.reports.TipoReporte;
+import com.uasp.hhrr.reports.datasources.GrupoEscalaDataSource;
 import com.uasp.hhrr.reports.datasources.PlantillaACDataSource;
+import com.uasp.hhrr.reports.submodel.GrupoEscala;
 import com.uasp.hhrr.reports.submodel.PlantillaAprobadaCubierta;
 import com.uasp.hhrr.repository.CategoriaOcupacionalRepository;
 import com.uasp.hhrr.repository.DepartamentoCargoRepostory;
+import com.uasp.hhrr.repository.EscalaRepository;
 import com.uasp.hhrr.repository.TrabajadorRepository;
+import com.uasp.hhrr.utils.RomansUtils;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -45,6 +49,9 @@ public class ReportsService {
 
     @Autowired
     CategoriaOcupacionalRepository coRepository;
+
+    @Autowired
+    EscalaRepository eRepository;
 
     @Autowired
     TrabajadorRepository tRepository;
@@ -100,6 +107,33 @@ public class ReportsService {
         );
 
         list.sort(Comparator.comparing(PlantillaAprobadaCubierta::getAbreviado));
+        ds.addAll(list);
+
+        return ds;
+    }
+
+    public GrupoEscalaDataSource generateGEDataSource() {
+        GrupoEscalaDataSource ds = new GrupoEscalaDataSource();
+        List<GrupoEscala> list = new ArrayList<>();
+
+        eRepository.findAll().forEach(
+                e -> {
+                    list.add(new GrupoEscala(
+                            e.getClasificador(),
+                            tRepository.countByIdCargoIdEscalaIdAndIdCargoIdCatOcupAbreviado(e.getId(), "O"),
+                            tRepository.countByIdCargoIdEscalaIdAndSexoAndIdCargoIdCatOcupAbreviado(e.getId(), "f", "O"),
+                            tRepository.countByIdCargoIdEscalaIdAndIdCargoIdCatOcupAbreviado(e.getId(), "S"),
+                            tRepository.countByIdCargoIdEscalaIdAndSexoAndIdCargoIdCatOcupAbreviado(e.getId(), "f", "S"),
+                            tRepository.countByIdCargoIdEscalaIdAndIdCargoIdCatOcupAbreviado(e.getId(), "A"),
+                            tRepository.countByIdCargoIdEscalaIdAndSexoAndIdCargoIdCatOcupAbreviado(e.getId(), "f", "A"),
+                            tRepository.countByIdCargoIdEscalaIdAndIdCargoIdCatOcupAbreviado(e.getId(), "T"),
+                            tRepository.countByIdCargoIdEscalaIdAndSexoAndIdCargoIdCatOcupAbreviado(e.getId(), "f", "T"),
+                            tRepository.countByIdCargoIdEscalaIdAndIdCargoIdCatOcupAbreviado(e.getId(), "C"),
+                            tRepository.countByIdCargoIdEscalaIdAndSexoAndIdCargoIdCatOcupAbreviado(e.getId(), "f", "C")));
+                }
+        );
+
+        list.sort(Comparator.comparing((e) -> RomansUtils.romanToInt(e.getGrupo())));
         ds.addAll(list);
 
         return ds;
