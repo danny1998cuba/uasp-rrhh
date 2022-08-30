@@ -40,6 +40,8 @@ export class TrabajadoresUnidadComponent implements OnInit {
     nombre: 'Todas las unidades'
   }
 
+  downName = 'document.pdf'
+
   //Components
   unidadComp!: UnidadesComponent
   trabComp!: TrabajadoresComponent
@@ -93,11 +95,17 @@ export class TrabajadoresUnidadComponent implements OnInit {
         this.dataSources[index] = new MatTableDataSource(this.trabajadoresUnidad(uni))
       })
       this.changeTab(0)
+
+      this.downName = 'Trabajadores - Todas las unidades.pdf'
+
       setTimeout(() => { this.isLoading = false }, 1000);
     } else {
       this.allUnidsB = false
       this.dataSource = new MatTableDataSource(this.trabajadoresUnidad(this.unidad))
       console.log(this.dataSource.data)
+
+      this.downName = 'Trabajadores - ' + this.unidad.nombre + '.pdf' 
+
       setTimeout(() => { this.isLoading = false }, 1000);
     }
   }
@@ -112,20 +120,23 @@ export class TrabajadoresUnidadComponent implements OnInit {
   }
 
   download() {
-    this.reportService.unidades().subscribe(
-      data => {
-        var fileUrl = URL.createObjectURL(data.data)
+    if (this.unidad) {
+      this.reportService.unidades(this.unidad.id).subscribe(
+        data => {
+          var fileUrl = URL.createObjectURL(data.data)
 
-        var a = document.createElement('a')
-        a.href = fileUrl
-        a.target = '_blank'
-        a.download = 'Trabajadores por unidad.pdf'
-        document.body.appendChild(a)
-        a.click()
-      }, (error) => {
-        console.log(`error ${error}`)
-      }
-    )
+          var a = document.createElement('a')
+          a.href = fileUrl
+          a.target = '_blank'
+
+          a.download = this.downName
+          document.body.appendChild(a)
+          a.click()
+        }, (error) => {
+          console.log(`error ${error}`)
+        }
+      )
+    }
   }
 
 }

@@ -30,10 +30,10 @@ export class ReportsService extends ApiClass {
       );
   }
 
-  unidades(): Observable<ResponseHandler> {
+  unidades(idUnidad: number): Observable<ResponseHandler> {
     const response = new ResponseHandler()
 
-    return this.http.get<any>(REPORTS.UNIDAD + '?tipo=pdf',
+    return this.http.get<any>(REPORTS.UNIDAD + '?unidadId=' + idUnidad + '&tipo=pdf',
       { headers: this.headers, withCredentials: true })
       .pipe(
         map(r => {
