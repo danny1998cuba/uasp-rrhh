@@ -4,7 +4,6 @@
  */
 package com.uasp.hhrr.service;
 
-import com.google.gson.Gson;
 import com.uasp.hhrr.exceptions.NivelEscolarMinReqExcception;
 import com.uasp.hhrr.exceptions.PlazasDisponiblesException;
 import com.uasp.hhrr.model.Trabajador;

@@ -59,7 +59,19 @@ public class ReportsController {
     @GetMapping("/unidad")
     public ResponseEntity<?> trabajadorUnidad(
             @RequestParam Map<String, Object> params) {
-        return generateReport("TrabajadoresUnidad", params, new JRBeanCollectionDataSource(tService.findAll()));
+        if (params.get("unidadId") != null) {
+            int unidadId = Integer.parseInt(params.get("unidadId").toString());
+            params.replace("unidadId", unidadId);
+            
+            if (unidadId == 0) {
+                return generateReport("TrabAllUnidades", params);
+            } else {
+                return generateReport("TrabUnidad", params);
+            }
+        } else {
+            MessageResponse m = new MessageResponse("Falta el id de la unidad");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(g.toJson(m));
+        }
     }
 
     @GetMapping("/plantillaAC")

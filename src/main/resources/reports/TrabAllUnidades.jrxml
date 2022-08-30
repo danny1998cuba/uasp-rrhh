@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TrabUnidad" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bb2e25a9-5a11-4009-b9c0-f9b539875db1">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RRHH"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="net.sf.jasperreports.chart.pie.ignore.duplicated.key" value="true"/>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["D:\\Daniel\\Escuela\\5to\\De tesis\\Program\\Frontend\\Design\\assets\\images\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT rrhh.trabajador.nombre AS nombre,
+	rrhh.trabajador.apellidos AS apellidos,
+	rrhh.trabajador.ci AS ci,
+	rrhh.trabajador.sexo AS sexo,
+	rrhh.trabajador.maestria AS master,
+	rrhh.trabajador.doctorado AS doctor,
+	rrhh.cargo.nombre AS cargo,
+	rrhh.categoria_docente.tipo AS catDoc,
+	rrhh.departamento.nombre AS depart,
+	rrhh.unidad.nombre AS unidad,
+	rrhh.nivel_escolar.abreviado AS escolar,
+	rrhh.unidad.id AS idUnidad
+FROM rrhh.trabajador
+	LEFT JOIN rrhh.cargo ON 
+	 rrhh.trabajador.id_cargo = rrhh.cargo.id 
+	LEFT JOIN rrhh.categoria_docente ON 
+	 rrhh.trabajador.id_cat_doc = rrhh.categoria_docente.id 
+	LEFT JOIN rrhh.departamento ON 
+	 rrhh.trabajador.id_departamento = rrhh.departamento.id 
+	LEFT JOIN rrhh.unidad ON 
+	 rrhh.departamento.id_unidad = rrhh.unidad.id 
+	LEFT JOIN rrhh.nivel_escolar ON 
+	 rrhh.trabajador.id_escolar = rrhh.nivel_escolar.id]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="trabajador"/>
+	</field>
+	<field name="apellidos" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellidos"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellidos"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="trabajador"/>
+	</field>
+	<field name="ci" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ci"/>
+		<property name="com.jaspersoft.studio.field.label" value="ci"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="trabajador"/>
+	</field>
+	<field name="sexo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sexo"/>
+		<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="trabajador"/>
+	</field>
+	<field name="master" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="maestria"/>
+		<property name="com.jaspersoft.studio.field.label" value="master"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="trabajador"/>
+	</field>
+	<field name="doctor" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="doctorado"/>
+		<property name="com.jaspersoft.studio.field.label" value="doctor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="trabajador"/>
+	</field>
+	<field name="cargo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="cargo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cargo"/>
+	</field>
+	<field name="catDoc" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tipo"/>
+		<property name="com.jaspersoft.studio.field.label" value="catDoc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="categoria_docente"/>
+	</field>
+	<field name="depart" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="depart"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="departamento"/>
+	</field>
+	<field name="unidad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="unidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="unidad"/>
+	</field>
+	<field name="escolar" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="abreviado"/>
+		<property name="com.jaspersoft.studio.field.label" value="escolar"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nivel_escolar"/>
+	</field>
+	<field name="idUnidad" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="idUnidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="unidad"/>
+	</field>
+	<sortField name="unidad"/>
+	<sortField name="sexo"/>
+	<group name="Unidad">
+		<groupExpression><![CDATA[$F{unidad}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<textField>
+					<reportElement x="18" y="6" width="212" height="19" uuid="4a94f4d0-4ca4-47ef-a45a-92038bf7fddf"/>
+					<textFieldExpression><![CDATA["Unidad: " + $F{unidad}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="19" y="20" width="716" height="1" uuid="253e4e9c-5826-46c7-b7ac-8af55cbc8105"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="193">
+				<pieChart>
+					<chart>
+						<reportElement x="184" y="30" width="389" height="154" uuid="2ea4ba8c-f34a-458c-80c6-290ce5fddd07"/>
+						<chartTitle/>
+						<chartSubtitle/>
+						<chartLegend textColor="#666666" position="Right"/>
+					</chart>
+					<pieDataset>
+						<dataset resetType="Report"/>
+						<keyExpression><![CDATA[$F{sexo} == null ? "N/A" : $F{sexo}.equalsIgnoreCase("m")?"Masculino":"Femenino"]]></keyExpression>
+						<valueExpression><![CDATA[$V{Sexo_COUNT}]]></valueExpression>
+					</pieDataset>
+					<piePlot isShowLabels="true" labelFormat="{1} ({2})">
+						<plot/>
+						<itemLabel/>
+					</piePlot>
+				</pieChart>
+				<staticText>
+					<reportElement x="19" y="14" width="227" height="16" uuid="129dec92-8a56-4d88-86f3-261ca4c535aa"/>
+					<textElement>
+						<font fontName="Cambria" size="13" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Cantidad y porcentaje de mujeres: ]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Sexo">
+		<groupExpression><![CDATA[$F{sexo}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="49" splitType="Stretch">
+			<image>
+				<reportElement x="18" y="0" width="195" height="49" uuid="30efcf04-4270-48d5-be1b-916d91a06552"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="330" y="0" width="405" height="49" uuid="c80b14d5-40d6-4e41-940e-0cde886f4635"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Cambria" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de trabajadores]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="11" width="118" height="32" uuid="910ca828-1295-4609-a812-c7336fc5c5f3"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre completo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="144" y="11" width="80" height="32" uuid="52110aee-62ef-4da1-93bb-d99ff9d2e7a4"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Carné de identidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="11" width="55" height="32" uuid="0ee4fc36-c24c-4ead-a2b3-6e5cfbd6eb35"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="294" y="11" width="55" height="32" uuid="a50dff86-8e43-426a-8d0a-6644d63f787b"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nivel escolar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="356" y="11" width="33" height="32" uuid="82d8e36b-defa-4de2-aee5-4c136919b91f"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Master]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="391" y="11" width="36" height="32" uuid="141b8f83-c497-402d-8ac1-c91b336c200a"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doctor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="436" y="11" width="66" height="32" uuid="70834998-ef33-4db6-ab33-f1347caefb90"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoría docente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="510" y="11" width="116" height="32" uuid="c428379a-df70-4a0d-89a9-106f670f1239"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Departamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="635" y="11" width="100" height="32" uuid="0ba232b8-1838-4047-b1d3-e1deaf659011"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="19" y="44" width="716" height="1" uuid="3795ccb8-1c74-49ff-a161-c9257f9b2b50"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="18" y="3" width="118" height="20" uuid="26d618f4-c5b5-4722-9481-c41bfbc63569"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombre} + " " + $F{apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="144" y="3" width="80" height="20" uuid="47dfef42-7b3a-4dca-80e8-292f329722c7"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ci}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="231" y="3" width="55" height="20" uuid="aa6ca2af-0209-4fc5-ab6a-2a712347c27e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{sexo}.equalsIgnoreCase("m")?"Masculino":"Femenino"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="294" y="3" width="55" height="20" uuid="33bb3977-a2da-4586-bdf9-716fd17ac1db"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{escolar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="356" y="3" width="33" height="20" uuid="9c489ce5-0dd4-4df9-b891-8f7081ccd01f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{master} ? "Sí" : "No"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="391" y="3" width="36" height="20" uuid="cf09085c-9408-4334-ae09-ad9138eb4c1d"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{doctor} ? "Sí" : "No"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="436" y="3" width="66" height="20" uuid="9dd02dd0-5ce2-4974-8687-c9cf0ba43f6c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{catDoc} == null ? "No tiene" : $F{catDoc}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="510" y="3" width="116" height="20" uuid="7726ff35-7e6d-47b8-bbe4-bd14bd5fb52c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{unidad} + " - " + $F{depart}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="635" y="3" width="100" height="20" uuid="4b5b0dbc-4d16-4660-bb81-4475a58a2214"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cargo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="626" y="8" width="80" height="23" uuid="f2803e2e-2983-44e4-97e6-e2fb44537aac"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Cambria"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="330" y="7" width="96" height="24" uuid="9362becc-6753-4bae-8706-6bb39f1d5209"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField evaluationTime="Report">
+				<reportElement x="706" y="8" width="40" height="23" uuid="7ea9635c-1b3b-4df9-a215-8d64fe595af5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
