@@ -59,6 +59,7 @@ public class Usuario implements Serializable {
     @Column(name = "apellidos")
     private String apellidos;
 
+    @Basic(optional = false)
     @Column(name = "email")
     private String email;
 

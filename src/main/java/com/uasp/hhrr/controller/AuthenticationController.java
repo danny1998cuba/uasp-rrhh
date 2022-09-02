@@ -21,6 +21,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -73,5 +74,16 @@ public class AuthenticationController {
         }
 
         return ResponseEntity.of(Optional.ofNullable(u));
+    }
+
+    @GetMapping("/restorePass/{ident}")
+    public ResponseEntity<?> restorePass(@PathVariable String ident) {
+        if (userService.restorePassword(ident)) {
+            MessageResponse msg = new MessageResponse("Se ha enviado su nueva contraseña a su correo electrónico");
+            return ResponseEntity.ok(g.toJson(msg));
+        } else {
+            MessageResponse msg = new MessageResponse("Correo electrónico o nombre de usuario incorrecto");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(msg));
+        }
     }
 }

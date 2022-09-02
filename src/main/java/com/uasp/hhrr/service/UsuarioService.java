@@ -6,9 +6,13 @@ package com.uasp.hhrr.service;
 
 import com.uasp.hhrr.model.Usuario;
 import com.uasp.hhrr.repository.UsuarioRepository;
+import com.uasp.hhrr.utils.PasswordGenerator;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,7 +22,8 @@ import org.springframework.stereotype.Service;
  * @author Tapanes
  */
 @Service
-public class UsuarioService implements Services<Usuario, Integer>{
+public class UsuarioService implements Services<Usuario, Integer> {
+
     @Autowired
     UsuarioRepository repository;
 
@@ -104,4 +109,13 @@ public class UsuarioService implements Services<Usuario, Integer>{
             return ChangeState.USER_NOT_FOUND;
         }
     }
+
+    public boolean restorePassword(String identificativo) {
+
+        String newPass = new PasswordGenerator().generateRandomPassword();
+        
+
+        return true;
+    }
+
 }
