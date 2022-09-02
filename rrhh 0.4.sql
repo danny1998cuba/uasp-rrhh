@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-08-2022 a las 06:25:08
+-- Tiempo de generación: 02-09-2022 a las 17:48:57
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -20,6 +20,39 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `rrhh`
 --
+CREATE DATABASE IF NOT EXISTS `rrhh` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `rrhh`;
+
+DELIMITER $$
+--
+-- Funciones
+--
+CREATE DEFINER=`` FUNCTION `calcularEdad` (`ci` VARCHAR(11)) RETURNS INT(11) BEGIN
+    DECLARE yearCI INT ; DECLARE month INT; DECLARE day INT;
+    DECLARE yearNac INT;    
+    DECLARE edad INT;
+    
+    SET yearCI = CAST(SUBSTRING(ci, 1, 2) AS INT) ;
+    
+    IF CAST(SUBSTRING(ci, 7, 1) AS INTEGER) < 6 
+    THEN SET yearNac = yearCI + 1900;
+    ELSE SET yearNac = yearCI  + 2000;
+    END IF;
+    
+    SET month = CAST(SUBSTRING(ci, 3, 2) AS INT) ;
+    SET day = CAST(SUBSTRING(ci, 5, 2) AS INT) ;
+
+    SET edad = YEAR(NOW()) - yearNac;
+    
+    IF month > MONTH(NOW())
+    THEN SET edad = edad - 1;
+        ELSEIF MONTH = MONTH(NOW()) AND DAY > DAY(NOW())
+        THEN SET edad = edad - 1;
+    END IF;
+    RETURN edad ; 
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -60,6 +93,22 @@ CREATE TABLE `categoria_ocupacional` (
   `abreviado` varchar(10) NOT NULL,
   `parent` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `categoria_ocupacional`
+--
+
+INSERT INTO `categoria_ocupacional` (`id`, `nombre`, `abreviado`, `parent`) VALUES
+(1, 'Cuadro', 'C', NULL),
+(2, 'Técnico', 'T', NULL),
+(3, 'Servicios', 'S', NULL),
+(5, 'Operario', 'O', NULL),
+(7, 'Administrativo', 'A', NULL),
+(8, 'Médico', 'T', 2),
+(9, 'Enfermero', 'T', 2),
+(10, 'Estomatólogo', 'T', 2),
+(11, 'Auxiliar de limpieza', 'S', 3),
+(12, 'Atención a pacientes', 'S', 3);
 
 -- --------------------------------------------------------
 
@@ -109,6 +158,36 @@ CREATE TABLE `escala` (
   `salario` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `escala`
+--
+
+INSERT INTO `escala` (`id`, `clasificador`, `salario`) VALUES
+(1, 'XXIV', 6310),
+(3, 'XVI', 4410),
+(4, 'I', 2150),
+(5, 'II', 2200),
+(6, 'III', 2310),
+(7, 'VI', 2710),
+(8, 'V', 2540),
+(10, 'IV', 2420),
+(11, 'VII', 2810),
+(12, 'VIII', 2960),
+(13, 'IX', 3110),
+(14, 'X', 3260),
+(15, 'XI', 3410),
+(16, 'XII', 3610),
+(17, 'XIII', 3810),
+(18, 'XIV', 4010),
+(19, 'XV', 4210),
+(21, 'XVII', 4610),
+(23, 'XVIII', 4810),
+(24, 'XIX', 5060),
+(25, 'XX', 5410),
+(26, 'XXI', 5560),
+(27, 'XXII', 5810),
+(28, 'XXIII', 6060);
+
 -- --------------------------------------------------------
 
 --
@@ -121,6 +200,20 @@ CREATE TABLE `nivel_escolar` (
   `relevancia` int(10) NOT NULL,
   `abreviado` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `nivel_escolar`
+--
+
+INSERT INTO `nivel_escolar` (`id`, `nombre`, `relevancia`, `abreviado`) VALUES
+(1, 'Superior', 1000, 'SUP'),
+(2, 'Medio Superior', 800, 'M/SUP'),
+(3, 'Tecnico Medio', 500, 'T/M'),
+(5, 'Habilitado (Primaria no terminada)', 99, 'HAB'),
+(6, 'Medio', 200, 'MED'),
+(7, 'Tecnico Medio Superior', 900, 'T/M/SUP'),
+(9, 'Habilitado (Primaria terminada)', 100, 'HAB'),
+(10, 'Habilitado (Obrero)', 105, 'HAB');
 
 -- --------------------------------------------------------
 
@@ -188,7 +281,7 @@ CREATE TABLE `usuario` (
   `PASSWORD` varchar(255) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `apellidos` varchar(255) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
   `telefono` varchar(255) DEFAULT NULL,
   `enabled` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -343,7 +436,7 @@ ALTER TABLE `categoria_docente`
 -- AUTO_INCREMENT de la tabla `categoria_ocupacional`
 --
 ALTER TABLE `categoria_ocupacional`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `cla`
@@ -361,13 +454,13 @@ ALTER TABLE `departamento`
 -- AUTO_INCREMENT de la tabla `escala`
 --
 ALTER TABLE `escala`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `nivel_escolar`
 --
 ALTER TABLE `nivel_escolar`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
