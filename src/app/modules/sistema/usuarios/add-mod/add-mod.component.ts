@@ -33,7 +33,7 @@ export class UsuarioAddModComponent {
       password: new FormControl(this.object.password, Validators.required),
       nombre: new FormControl(this.object.nombre, Validators.required),
       apellidos: new FormControl(this.object.apellidos, Validators.required),
-      email: new FormControl(this.object.email, Validators.email),
+      email: new FormControl(this.object.email, [Validators.email, Validators.required]),
       telefono: new FormControl(this.object.telefono, Validators.pattern('[0-9]{8}')),
       enabled: new FormControl(this.object.enabled, Validators.required),
       rolList: new FormControl(this.object.rolList, Validators.required),

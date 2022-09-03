@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, map, Observable } from 'rxjs';
 import { LOGIN_ROUTE, PLANTILLA_ROOT, STORAGE_KEYS } from '../../constants';
-import { LOGIN_ROUTES } from '../../constants/routes/api.routes';
+import { LOGIN_ROUTES, PASS_RESTORE } from '../../constants/routes/api.routes';
 import { ApiClass, ResponseHandler } from '../../schema';
 
 @Injectable({
@@ -65,13 +65,11 @@ export class AuthService extends ApiClass {
   }
 
   getUser(): Observable<ResponseHandler> {
-    console.log('en user')
     const response = new ResponseHandler()
     return this.http.get<any>(LOGIN_ROUTES.ACTIVE_USER,
       { headers: this.headers, withCredentials: true })
       .pipe(
         map(r => {
-          console.log('hice request')
           response.msg = "Usuario"
           response.data = r;
           response.status = HttpStatusCode.Ok
@@ -81,6 +79,21 @@ export class AuthService extends ApiClass {
           if (!response.error) {
             this.router.navigateByUrl('/' + PLANTILLA_ROOT)
           }
+          return response;
+        }),
+        catchError(this.error)
+      );
+  }
+
+  restorePass(identificador: String): Observable<ResponseHandler> {
+    const response = new ResponseHandler()
+    return this.http.post<any>(PASS_RESTORE, identificador,
+      { headers: this.headers })
+      .pipe(
+        map(r => {
+          response.data = r;
+          response.status = HttpStatusCode.Ok
+
           return response;
         }),
         catchError(this.error)

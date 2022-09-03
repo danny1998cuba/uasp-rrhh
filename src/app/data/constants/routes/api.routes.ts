@@ -49,6 +49,7 @@ export const SIGELITE = {
 export const COUNT = '/count'
 
 export const PASS_ROUTE = `${GESTION_ROUTES.USERS}/pass`
+export const PASS_RESTORE = `${BASE_ROUTE}restorePass`
 
 // Connectors
 export const CONNECTORS = {
