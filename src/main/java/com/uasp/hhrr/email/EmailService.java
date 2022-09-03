@@ -65,8 +65,6 @@ public class EmailService {
             helper.setSubject(details.getSubject());
             String html = templateEngine.process("pass-restore.html", context);
             
-            System.out.println(html);
-
             helper.setText(html, true);
 
             javaMailSender.send(message);

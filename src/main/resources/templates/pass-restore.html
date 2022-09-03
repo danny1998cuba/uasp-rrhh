@@ -1,37 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title th:remove="all">Template for HTML email</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 
-        <style>
-            body {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            .pass {
-                box-sizing: border-box;
-                margin: 10px auto;
-                width: min-content;
-                padding: 20px 40px;
-                border: solid 1px #ddd;
-                border-radius: 10px;
-                background-color: #fae98d99;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>
-            Unidad de Aseguramiento a la Salud Públicsa, Jaruco
-        </h1>
+    <title th:remove="all">Template for HTML email</title>
 
-        <p>
-            Ha solicitado un cambio de contraseña a nuestro sistema. Su nueva contraseña es:
-        </p>
-        <h4 class="pass" th:text="${pass}">password</h4>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-        <p>Recomendamos que la modifique en su página personal una vez iniciada sesión.</p>
+        .pass {
+            box-sizing: border-box;
+            margin: 10px auto;
+            width: min-content;
+            padding: 20px 40px;
+            border: solid 1px #ddd;
+            border-radius: 10px;
+            background-color: #fae98d99;
+        }
+    </style>
+</head>
 
-        <h3>Muchas gracias.</h3>
-    </body>
+<body>
+    <h1>
+        Unidad de Aseguramiento a la Salud Públicsa, Jaruco
+    </h1>
+
+    <p>
+        Ha solicitado un cambio de contraseña a nuestro sistema. Su nueva contraseña es:
+    </p>
+    <h4 class="pass" th:text="${pass}">password</h4>
+
+    <p>Recomendamos que la modifique en su página personal una vez iniciada sesión.</p>
+
+    <h3>Muchas gracias.</h3>
+</body>
+
 </html>
