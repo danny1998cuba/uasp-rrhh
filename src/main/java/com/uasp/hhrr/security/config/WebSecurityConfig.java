@@ -80,6 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login").anonymous()
                 .antMatchers("/userAuth").permitAll()
+                .antMatchers("/restorePass").anonymous()
                 .antMatchers("/logout").authenticated()
                 .anyRequest().authenticated();
 

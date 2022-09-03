@@ -4,16 +4,20 @@
  */
 package com.uasp.hhrr.service;
 
+import com.uasp.hhrr.email.EmailDetails;
+import com.uasp.hhrr.email.EmailService;
 import com.uasp.hhrr.model.Usuario;
 import com.uasp.hhrr.repository.UsuarioRepository;
 import com.uasp.hhrr.utils.PasswordGenerator;
-import java.util.Collections;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import org.apache.commons.lang3.RandomStringUtils;
+import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +30,9 @@ public class UsuarioService implements Services<Usuario, Integer> {
 
     @Autowired
     UsuarioRepository repository;
+
+    @Autowired
+    EmailService emailService;
 
     @Override
     public Integer save(Usuario object) {
@@ -110,12 +117,40 @@ public class UsuarioService implements Services<Usuario, Integer> {
         }
     }
 
-    public boolean restorePassword(String identificativo) {
-
-        String newPass = new PasswordGenerator().generateRandomPassword();
-        
-
-        return true;
+    public enum RestoreStatus {
+        RESTORED, NOT_FOUND, EMAIL_ERROR
     }
 
+    public RestoreStatus restorePassword(String identificativo) {
+
+        String newPass = new PasswordGenerator().generateRandomPassword();
+
+        try {
+            EmailDetails details = new EmailDetails();
+
+            String recipient;
+
+            Usuario user = repository.findByUsername(identificativo);
+            if (user != null) {
+                recipient = user.getEmail();
+            } else {
+                return RestoreStatus.NOT_FOUND;
+            }
+
+            details.setRecipient(recipient);
+            details.setSubject("Restaurar contraseña - UASP RRHH");
+            details.setMsgBody(newPass);
+
+            emailService.sendHtmlMail(details);
+
+            user.setPassword(new BCryptPasswordEncoder().encode(newPass));
+            repository.save(user);
+
+            return RestoreStatus.RESTORED;
+
+        } catch (MailException | MessagingException | IOException ex) {
+            return RestoreStatus.EMAIL_ERROR;
+
+        }
+    }
 }

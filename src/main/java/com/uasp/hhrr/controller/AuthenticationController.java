@@ -76,14 +76,22 @@ public class AuthenticationController {
         return ResponseEntity.of(Optional.ofNullable(u));
     }
 
-    @GetMapping("/restorePass/{ident}")
-    public ResponseEntity<?> restorePass(@PathVariable String ident) {
-        if (userService.restorePassword(ident)) {
-            MessageResponse msg = new MessageResponse("Se ha enviado su nueva contraseña a su correo electrónico");
-            return ResponseEntity.ok(g.toJson(msg));
-        } else {
-            MessageResponse msg = new MessageResponse("Correo electrónico o nombre de usuario incorrecto");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(msg));
+    @PostMapping("/restorePass")
+    public ResponseEntity<?> restorePass(@RequestBody String ident) {
+        MessageResponse msg;
+        switch (userService.restorePassword(ident)) {
+            case RESTORED:
+                msg = new MessageResponse("Se ha enviado su nueva contraseña a su correo electrónico");
+                return ResponseEntity.ok(g.toJson(msg));
+            case NOT_FOUND:
+                msg = new MessageResponse("Nombre de usuario incorrecto");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(msg));
+            case EMAIL_ERROR:
+                msg = new MessageResponse("Correo electrónico no enviado");
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(g.toJson(msg));
+            default:
+                msg = new MessageResponse("Otra cosa");
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(g.toJson(msg));
         }
     }
 }
