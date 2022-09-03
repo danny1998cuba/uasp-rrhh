@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NoAuthGuard } from './core/guards';
+import { AuthGuard, NoAuthGuard } from './core/guards';
 import { MODELOS_ROOT, PLANTILLA_ROOT, SESION_ROOT, SISTEMA_ROOT } from './data/constants';
 import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { AuthComponent } from './modules/auth/auth.component';
+import { SesionComponent } from './modules/sesion/sesion.component';
 
 const routes: Routes = [
   {
@@ -37,8 +38,8 @@ const routes: Routes = [
       },
       {
         path: SESION_ROOT,
-        loadChildren: () =>
-          import('./modules/sesion/sesion.module').then((m) => m.SesionModule)
+        component: SesionComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: '**',

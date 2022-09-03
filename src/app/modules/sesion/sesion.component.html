@@ -1,0 +1,117 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card bg-light h-100" id="main-content">
+            <div class="card-body">
+                <div class="container h-100">
+                    <div class="row">
+                        <h1 class="card-title">Informaci&oacute;n de Perfil</h1>
+                        <div class="col-md-6">
+                            <div class="card text-start h-100">
+                                <ng-container *ngIf="!isLoading; else noData;">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-row gap-4 align-items-center">
+                                            <img class="card-img" src="assets/images/favicon.png" alt="Title">
+                                            <div>
+                                                <h2 class="card-title"> {{usuario | fullName}} </h2>
+                                                <p class="card-subtitle">{{usuario.username}}</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+
+                                        <div class="w-100 d-flex flex-row justify-content-between align-items-center">
+                                            <ul class="list-unstyled">
+                                                <li>Correo electr&oacute;nico: {{usuario.email}}</li>
+                                                <li>Tel&eacute;fono: {{usuario.telefono ? ('+53 ' + usuario.telefono) :
+                                                    'No tiene'}}
+                                                </li>
+                                            </ul>
+
+                                            <div class="d-flex justify-content-end px-3">
+                                                <button mat-button type="button" matTooltip="Nuevo Trabajador"
+                                                    aria-label="Add" (click)="edit()">
+                                                    <fa-icon [icon]="faEdit"></fa-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+                                        <p class="card-text">Permisos ({{usuario.rolList | roleList}}):</p>
+                                    </div>
+
+                                    <ul class="list-group list-group-flush" *ngFor="let perm of rolesPermis">
+                                        <li class="list-group-item px-5">{{perm}}</li>
+                                    </ul>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <h2 class="card-title">Modificar contrase&ntilde;a</h2>
+
+                                    <ng-container *ngIf="!isLoadingPass; else noData;">
+                                        <form [formGroup]="form" (ngSubmit)="changePass()"
+                                            class="h-100 d-flex flex-column justify-content-center">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput placeholder="Contraseña anterior"
+                                                            formControlName="oldPass" type="password">
+                                                        <mat-hint>Sin errores</mat-hint>
+                                                        <mat-error
+                                                            *ngIf="form.controls['oldPass'].hasError('required')">
+                                                            La contraseña anterior es obligatoria
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput placeholder="Contraseña nueva"
+                                                            formControlName="newPass" type="password">
+                                                        <mat-hint>Sin errores</mat-hint>
+                                                        <mat-error
+                                                            *ngIf="form.controls['newPass'].hasError('required')">
+                                                            La contraseña nueva es obligatoria
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput placeholder="Repita la contraseña nueva"
+                                                            formControlName="newPass2" type="password">
+                                                        <mat-hint>Sin errores</mat-hint>
+                                                        <mat-error
+                                                            *ngIf="form.controls['newPass2'].hasError('required')">
+                                                            Debe repetir la contraseña nueva
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="form.controls['newPass2'].hasError('passMatch')">
+                                                            La contraseña nueva no coincide
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-end mt-4">
+                                                <button mat-button type="reset">Limpiar campos</button>
+                                                <button mat-button type="submit">Modificar</button>
+                                            </div>
+                                        </form>
+
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>

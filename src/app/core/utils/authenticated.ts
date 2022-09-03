@@ -13,7 +13,7 @@ export abstract class Authenticated {
     static get isAdmin(): boolean {
         const user = this.getUserFromLS
         if (user)
-            return user.rolList.filter(r => r.name == 'ADMIN').length != 0
+            return user.rolList.filter(r => r.nombre == 'ADMIN').length != 0
 
         return false
     }
@@ -21,7 +21,7 @@ export abstract class Authenticated {
     static get isCont(): boolean {
         const user = this.getUserFromLS
         if (user)
-            return user.rolList.filter(r => r.name == 'CONT').length != 0
+            return user.rolList.filter(r => r.nombre == 'CONT').length != 0
 
         return false
     }

@@ -59,7 +59,8 @@ import { AsignComponent } from './cargos/asign/asign.component';
     SharedModule
   ],
   exports: [
-    SistemaRoutingModule
+    SistemaRoutingModule,
+    UsuarioAddModComponent
   ]
 })
 export class SistemaModule { }

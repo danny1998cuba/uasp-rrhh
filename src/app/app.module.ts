@@ -17,6 +17,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomPaginator } from './core/utils';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { RestoreFormComponent } from './modules/auth/restore-form/restore-form.component';
+import { SesionComponent } from './modules/sesion/sesion.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bott
     SkeletonComponent,
     NavbarComponent,
     FooterComponent,
-    AuthComponent
+    AuthComponent,
+    RestoreFormComponent,
+    SesionComponent
   ],
   imports: [
     BrowserModule,

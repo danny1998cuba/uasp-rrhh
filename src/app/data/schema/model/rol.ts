@@ -1,5 +1,5 @@
 export class Rol {
     id!:number
-    name!:string
+    nombre!:string
     descripcion!:string
 }
