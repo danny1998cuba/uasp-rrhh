@@ -7,6 +7,9 @@ import { OmeiComponent } from './omei/omei.component';
 import { GrupoEscalaComponent } from './grupo-escala/grupo-escala.component';
 import { P2Component } from './p2/p2.component';
 import { AprobCubiertaComponent } from './aprob-cubierta/aprob-cubierta.component';
+import { AusentismoComponent } from './ausentismo/ausentismo.component';
+import { DatabaseComponent } from './database/database.component';
+import { LevantamientoComponent } from './levantamiento/levantamiento.component';
 
 
 
@@ -17,7 +20,10 @@ import { AprobCubiertaComponent } from './aprob-cubierta/aprob-cubierta.componen
     OmeiComponent,
     GrupoEscalaComponent,
     P2Component,
-    AprobCubiertaComponent
+    AprobCubiertaComponent,
+    AusentismoComponent,
+    DatabaseComponent,
+    LevantamientoComponent
   ],
   imports: [
     SharedModule

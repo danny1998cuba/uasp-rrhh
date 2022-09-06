@@ -43,7 +43,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: `/${PLANTILLA_ROOT}`,
+        redirectTo: `/${MODELOS_ROOT}`,
         pathMatch: 'full'
       }
     ]

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, map, Observable } from 'rxjs';
-import { LOGIN_ROUTE, PLANTILLA_ROOT, STORAGE_KEYS } from '../../constants';
+import { LOGIN_ROUTE, MODELOS_ROOT, STORAGE_KEYS } from '../../constants';
 import { LOGIN_ROUTES, PASS_RESTORE } from '../../constants/routes/api.routes';
 import { ApiClass, ResponseHandler } from '../../schema';
 
@@ -77,7 +77,7 @@ export class AuthService extends ApiClass {
           this.setUserToLS(r)
 
           if (!response.error) {
-            this.router.navigateByUrl('/' + PLANTILLA_ROOT)
+            this.router.navigateByUrl('/' + MODELOS_ROOT)
           }
           return response;
         }),
