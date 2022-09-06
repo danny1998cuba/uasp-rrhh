@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgChartsModule } from 'ng2-charts';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import * as fromComponents from './components/index'
@@ -27,7 +28,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatCardModule } from '@angular/material/card';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
   imports: [
@@ -57,6 +60,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     MatExpansionModule,
     MatBottomSheetModule,
     MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
   ],
   declarations: [...fromComponents.components, ...fromPipes.pipes, ...fromCharts.charts],
   exports: [
@@ -68,10 +74,11 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     FontAwesomeModule,
     NgChartsModule,
     PdfViewerModule,
+    
     ...fromComponents.components,
     ...fromPipes.pipes,
     ...fromCharts.charts,
-
+    
     //Material...
     MatTableModule,
     MatPaginatorModule,
@@ -89,6 +96,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     MatExpansionModule,
     MatBottomSheetModule,
     MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
   ]
 })
 export class SharedModule { }
