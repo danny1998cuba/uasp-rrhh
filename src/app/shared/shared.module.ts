@@ -31,6 +31,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   imports: [
@@ -63,6 +64,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatDatepickerModule,
     MatNativeDateModule,
     MatMomentDateModule,
+    MatStepperModule,
   ],
   declarations: [...fromComponents.components, ...fromPipes.pipes, ...fromCharts.charts],
   exports: [
@@ -99,6 +101,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatDatepickerModule,
     MatNativeDateModule,
     MatMomentDateModule,
+    MatStepperModule,
   ]
 })
 export class SharedModule { }

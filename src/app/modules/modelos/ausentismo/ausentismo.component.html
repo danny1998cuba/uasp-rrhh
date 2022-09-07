@@ -1,3 +1,33 @@
-<p>ausentismo works!</p>
+<h1 class="card-title">Informe de Ausentismo</h1>
 
-<app-month-picker (submitEvent)="obtainMonth($event)"></app-month-picker>
+<div class="card-body">
+
+    <mat-horizontal-stepper linear="true" #stepper>
+        <ng-template matStepperIcon="done">
+            <fa-icon [icon]="faDone"></fa-icon>
+        </ng-template>
+
+        <mat-step [stepControl]="monthControl" [editable]="false" #monthStep>
+            <ng-template matStepLabel>{{mes}}</ng-template>
+            <app-month-picker (submitEvent)="obtainMonth($event)" #month></app-month-picker>
+        </mat-step>
+
+        <mat-step [editable]="false" #formStep>
+            <ng-template matStepLabel>Entrada de datos</ng-template>
+            <app-ausentismo-form (submitEvent)="loadinfo()" *ngIf="monthStep.completed" #form></app-ausentismo-form>
+            <div class="flex-right">
+                <button mat-button (click)="reset()">Volver al inicio</button>
+            </div>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>Documento</ng-template>
+            You are done
+            <br />
+
+            <div class="flex-right">
+                <button mat-button (click)="reset()">Volver al inicio</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>

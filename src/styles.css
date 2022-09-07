@@ -48,8 +48,20 @@ form .row {
 
 .example-month-picker .mat-calendar-period-button {
     pointer-events: none;
-  }
-  
-  .example-month-picker .mat-calendar-arrow {
+}
+
+.example-month-picker .mat-calendar-arrow {
     display: none;
-  }
+}
+
+.flex-right {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+}
+
+.mat-horizontal-stepper-header {
+    pointer-events: none !important;
+}

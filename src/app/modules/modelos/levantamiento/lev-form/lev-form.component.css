@@ -1,0 +1,21 @@
+.form-row {
+    background: #cccccc;
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+.row .col:has(.mat-form-field)  {
+    display: flex;
+    align-items: center;
+}
+
+.sub-col {
+    border-radius: 10px;
+    border: 1px solid #333;
+    padding: .7rem 1.5rem;
+}
+
+.sub-col .col-title {
+    margin-bottom: 1.5rem;
+    text-decoration: underline;
+}

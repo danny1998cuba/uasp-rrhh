@@ -10,6 +10,8 @@ import { AprobCubiertaComponent } from './aprob-cubierta/aprob-cubierta.componen
 import { AusentismoComponent } from './ausentismo/ausentismo.component';
 import { DatabaseComponent } from './database/database.component';
 import { LevantamientoComponent } from './levantamiento/levantamiento.component';
+import { AusentismoFormComponent } from './ausentismo/form/form.component';
+import { LevFormComponent } from './levantamiento/lev-form/lev-form.component';
 
 
 
@@ -23,7 +25,9 @@ import { LevantamientoComponent } from './levantamiento/levantamiento.component'
     AprobCubiertaComponent,
     AusentismoComponent,
     DatabaseComponent,
-    LevantamientoComponent
+    LevantamientoComponent,
+    AusentismoFormComponent,
+    LevFormComponent
   ],
   imports: [
     SharedModule

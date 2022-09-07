@@ -1,0 +1,86 @@
+<ng-container *ngIf="!isLoading; else noData;">
+    <p>Ingrese los datos de las ausencias por cada categor&iacute;a ocupacional. Esta informaci&oacute;n se maneja en <b>H/d</b></p>
+    <ng-container *ngFor="let item of forms; let index = index">
+        <div class="row my-4 mx-2 form-row mat-elevation-z8">
+            <h2>{{cats[index].nombre}}</h2>
+            <h4>Fondo de tiempo laborable: ???</h4>
+
+            <form [formGroup]="item">
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Autorizadas" formControlName="autorizada" type="number">
+                            <mat-hint>Sin errores</mat-hint>
+                            <mat-error *ngIf="item.controls['autorizada'].hasError('min')">
+                                Solo valores positivos
+                            </mat-error>
+                            <mat-error *ngIf="item.controls['autorizada'].hasError('required')">
+                                Debe ingresar un valor
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Enfermedad" formControlName="enfermedad" type="number">
+                            <mat-hint>Sin errores</mat-hint>
+                            <mat-error *ngIf="item.controls['enfermedad'].hasError('min')">
+                                Solo valores positivos
+                            </mat-error>
+                            <mat-error *ngIf="item.controls['enfermedad'].hasError('required')">
+                                Debe ingresar un valor
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="ISS" formControlName="iss" type="number">
+                            <mat-hint>Sin errores</mat-hint>
+                            <mat-error *ngIf="item.controls['iss'].hasError('min')">
+                                Solo valores positivos
+                            </mat-error>
+                            <mat-error *ngIf="item.controls['iss'].hasError('required')">
+                                Debe ingresar un valor
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Accidentes de trabajo" formControlName="accidente"
+                                type="number">
+                            <mat-hint>Sin errores</mat-hint>
+                            <mat-error *ngIf="item.controls['accidente'].hasError('min')">
+                                Solo valores positivos
+                            </mat-error>
+                            <mat-error *ngIf="item.controls['accidente'].hasError('required')">
+                                Debe ingresar un valor
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Injustificadas" formControlName="injust" type="number">
+                            <mat-hint>Sin errores</mat-hint>
+                            <mat-error *ngIf="item.controls['injust'].hasError('min')">
+                                Solo valores positivos
+                            </mat-error>
+                            <mat-error *ngIf="item.controls['injust'].hasError('required')">
+                                Debe ingresar un valor
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </form>
+        </div>
+    </ng-container>
+
+    <div class="flex-right">
+        <button type="button" mat-button (click)="submitAll()">Siguiente</button>
+    </div>
+</ng-container>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>

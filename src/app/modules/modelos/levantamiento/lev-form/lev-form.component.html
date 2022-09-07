@@ -1,0 +1,219 @@
+<ng-container *ngIf="!isLoading; else noData;">
+    <p>Ingrese los datos de las ausencias por cada categor&iacute;a ocupacional. Esta informaci&oacute;n se maneja en
+        <b>H/d</b>
+    </p>
+    <ng-container *ngFor="let item of forms; let index = index">
+        <div class="row my-4 mx-2 form-row mat-elevation-z8">
+            <h2>{{cats[index].nombre}}</h2>
+            <h4>Total de trabajadores disponibles: ???</h4>
+
+            <form [formGroup]="item">
+
+                <div class="row sub-col">
+                    <div class="col-title">Causas de los trabajadores no f&iacute;sicos</div>
+                    <div class="row">
+                        <div class="col col-md-2">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Madres" formControlName="madres" type="number">
+                                <mat-hint>Sin errores</mat-hint>
+                                <mat-error *ngIf="item.controls['madres'].hasError('min')">
+                                    Solo valores positivos
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['madres'].hasError('required')">
+                                    Debe ingresar un valor
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col col-md-2">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Aislamiento" formControlName="aislamiento" type="number">
+                                <mat-hint>Sin errores</mat-hint>
+                                <mat-error *ngIf="item.controls['aislamiento'].hasError('min')">
+                                    Solo valores positivos
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['aislamiento'].hasError('required')">
+                                    Debe ingresar un valor
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6 sub-col">
+                            <div class="text-center w-100 col-title">Enfermos</div>
+                            <div class="row">
+                                <div class="col col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="COVID" formControlName="covid" type="number">
+                                        <mat-hint>Sin errores</mat-hint>
+                                        <mat-error *ngIf="item.controls['covid'].hasError('min')">
+                                            Solo valores positivos
+                                        </mat-error>
+                                        <mat-error *ngIf="item.controls['covid'].hasError('required')">
+                                            Debe ingresar un valor
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="No COVID" formControlName="no_covid" type="number">
+                                        <mat-hint>Sin errores</mat-hint>
+                                        <mat-error *ngIf="item.controls['no_covid'].hasError('min')">
+                                            Solo valores positivos
+                                        </mat-error>
+                                        <mat-error *ngIf="item.controls['no_covid'].hasError('required')">
+                                            Debe ingresar un valor
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Peritados" formControlName="peritados"
+                                            type="number">
+                                        <mat-hint>Sin errores</mat-hint>
+                                        <mat-error *ngIf="item.controls['peritados'].hasError('min')">
+                                            Solo valores positivos
+                                        </mat-error>
+                                        <mat-error *ngIf="item.controls['peritados'].hasError('required')">
+                                            Debe ingresar un valor
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-md-2">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Trast. embarazo" formControlName="embarazo" type="number">
+                                <mat-hint>Sin errores</mat-hint>
+                                <mat-error *ngIf="item.controls['embarazo'].hasError('min')">
+                                    Solo valores positivos
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['embarazo'].hasError('required')">
+                                    Debe ingresar un valor
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-3">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Licencia de maternidad" formControlName="maternidad"
+                                    type="number">
+                                <mat-hint>Sin errores</mat-hint>
+                                <mat-error *ngIf="item.controls['maternidad'].hasError('min')">
+                                    Solo valores positivos
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['maternidad'].hasError('required')">
+                                    Debe ingresar un valor
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col col-md-3">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Otras licencias" formControlName="licencia" type="number">
+                                <mat-hint>Sin errores</mat-hint>
+                                <mat-error *ngIf="item.controls['licencia'].hasError('min')">
+                                    Solo valores positivos
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['licencia'].hasError('required')">
+                                    Debe ingresar un valor
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col col-md-3">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Vacaciones" formControlName="vacaciones" type="number">
+                                <mat-hint>Sin errores</mat-hint>
+                                <mat-error *ngIf="item.controls['vacaciones'].hasError('min')">
+                                    Solo valores positivos
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['vacaciones'].hasError('required')">
+                                    Debe ingresar un valor
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col col-md-3">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Interruptos" formControlName="interrupto" type="number">
+                                <mat-hint>Sin errores</mat-hint>
+                                <mat-error *ngIf="item.controls['interrupto'].hasError('min')">
+                                    Solo valores positivos
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['interrupto'].hasError('required')">
+                                    Debe ingresar un valor
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row sub-col">
+                    <div class="col-title">Otras situaciones</div>
+                    <div class="row">
+                        <div class="col col-md-3">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Teletrabajp" formControlName="teletrab" type="number">
+                                <mat-hint>Sin errores</mat-hint>
+                                <mat-error *ngIf="item.controls['teletrab'].hasError('min')">
+                                    Solo valores positivos
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['teletrab'].hasError('required')">
+                                    Debe ingresar un valor
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="sub-col col-md-9">
+                            <div class="text-center w-100 col-title">Movilizados</div>
+                            <div class="row">
+                                <div class="col col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="En pesquisa" formControlName="pesquisa"
+                                            type="number">
+                                        <mat-hint>Sin errores</mat-hint>
+                                        <mat-error *ngIf="item.controls['pesquisa'].hasError('min')">
+                                            Solo valores positivos
+                                        </mat-error>
+                                        <mat-error *ngIf="item.controls['pesquisa'].hasError('required')">
+                                            Debe ingresar un valor
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="En vacunación" formControlName="vacunacion"
+                                            type="number">
+                                        <mat-hint>Sin errores</mat-hint>
+                                        <mat-error *ngIf="item.controls['vacunacion'].hasError('min')">
+                                            Solo valores positivos
+                                        </mat-error>
+                                        <mat-error *ngIf="item.controls['vacunacion'].hasError('required')">
+                                            Debe ingresar un valor
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="En otros puestos" formControlName="otro_puesto"
+                                            type="number">
+                                        <mat-hint>Sin errores</mat-hint>
+                                        <mat-error *ngIf="item.controls['otro_puesto'].hasError('min')">
+                                            Solo valores positivos
+                                        </mat-error>
+                                        <mat-error *ngIf="item.controls['otro_puesto'].hasError('required')">
+                                            Debe ingresar un valor
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </ng-container>
+
+    <div class="flex-right">
+        <button type="button" mat-button (click)="submitAll()">Siguiente</button>
+    </div>
+</ng-container>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>
