@@ -25,7 +25,10 @@ export const GESTION_ROUTES = {
     TRABAJADOR: `${API_ROUTE}/trabajador`,
     TRABAJADOR_FILTER: `${API_ROUTE}/trabajador/filter`,
     UNIDAD: `${API_ROUTE}/unidad`,
-    USERS: `${API_ROUTE}/usuario`
+    USERS: `${API_ROUTE}/usuario`,
+    AUSENCIAS: `${API_ROUTE}/ausencias`,
+    LEVANTAMIENTO: `${API_ROUTE}/levantamiento`,
+    NOCT: `${API_ROUTE}/noct`
 }
 
 // Reports Routes
