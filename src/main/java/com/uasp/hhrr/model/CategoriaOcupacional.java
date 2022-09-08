@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -62,6 +63,14 @@ public class CategoriaOcupacional implements Serializable {
     @OneToMany(mappedBy = "idCatOcup")
     @JsonIgnore
     private List<Cargo> cargoList;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcatOcup")
+    @JsonIgnore
+    private List<Levantamiento> levantamientoList;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcatOcup")
+    @JsonIgnore
+    private List<Ausencias> ausenciasList;
 
     public CategoriaOcupacional(Integer id) {
         this.id = id;

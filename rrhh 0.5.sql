@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-09-2022 a las 17:48:57
+-- Tiempo de generación: 08-09-2022 a las 20:37:42
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -57,6 +57,23 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `ausencias`
+--
+
+CREATE TABLE `ausencias` (
+  `id` int(11) NOT NULL,
+  `id_cat_ocup` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `autorizado` int(11) NOT NULL DEFAULT 0,
+  `enfermedad` int(11) NOT NULL DEFAULT 0,
+  `iss` int(11) NOT NULL DEFAULT 0,
+  `accidentes` int(11) NOT NULL DEFAULT 0,
+  `injustificado` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `cargo`
 --
 
@@ -80,6 +97,15 @@ CREATE TABLE `categoria_docente` (
   `tipo` varchar(255) NOT NULL,
   `salario` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `categoria_docente`
+--
+
+INSERT INTO `categoria_docente` (`id`, `tipo`, `salario`) VALUES
+(1, 'Instructor', 220),
+(2, 'Asistente', 330),
+(3, 'Auxiliar', 440);
 
 -- --------------------------------------------------------
 
@@ -121,6 +147,15 @@ CREATE TABLE `cla` (
   `grupo` varchar(255) NOT NULL,
   `salario` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `cla`
+--
+
+INSERT INTO `cla` (`id`, `grupo`, `salario`) VALUES
+(1, '1', 1),
+(3, '3', 3),
+(4, '2', 2);
 
 -- --------------------------------------------------------
 
@@ -191,6 +226,32 @@ INSERT INTO `escala` (`id`, `clasificador`, `salario`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `levantamiento`
+--
+
+CREATE TABLE `levantamiento` (
+  `id` int(11) NOT NULL,
+  `id_cat_ocup` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `madres` int(11) NOT NULL DEFAULT 0,
+  `aislamiento` int(11) NOT NULL DEFAULT 0,
+  `covid` int(11) NOT NULL DEFAULT 0,
+  `no_covid` int(11) NOT NULL DEFAULT 0,
+  `peritados` int(11) NOT NULL DEFAULT 0,
+  `embarazo` int(11) NOT NULL DEFAULT 0,
+  `lic_mat` int(11) NOT NULL DEFAULT 0,
+  `otra_lic` int(11) NOT NULL DEFAULT 0,
+  `vacaciones` int(11) NOT NULL DEFAULT 0,
+  `interruptos` int(11) NOT NULL DEFAULT 0,
+  `teletrabajo` int(11) NOT NULL DEFAULT 0,
+  `pesquisa` int(11) NOT NULL DEFAULT 0,
+  `vacunacion` int(11) NOT NULL DEFAULT 0,
+  `otro_puesto` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `nivel_escolar`
 --
 
@@ -214,6 +275,19 @@ INSERT INTO `nivel_escolar` (`id`, `nombre`, `relevancia`, `abreviado`) VALUES
 (7, 'Tecnico Medio Superior', 900, 'T/M/SUP'),
 (9, 'Habilitado (Primaria terminada)', 100, 'HAB'),
 (10, 'Habilitado (Obrero)', 105, 'HAB');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `nocturnidades`
+--
+
+CREATE TABLE `nocturnidades` (
+  `id` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `id_trabajador` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -291,7 +365,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `username`, `PASSWORD`, `nombre`, `apellidos`, `email`, `telefono`, `enabled`) VALUES
-(1, 'danny98cuba', '$2a$10$7XK94bZWkQsECj8B/Kf./.IscfpxVli.dh0kaKGd0Tw7qOBfWsif6', 'Daniel', 'Gonzalez Cuetara', 'danny.glezcuet98@gmail.com', NULL, 1);
+(1, 'danny98cuba', '$2a$10$za1ANVpW/ul6HIg3WD6XEeJr7Ad6Ka8R7bqUzOrXvOZ5Feedih3fy', 'Daniel', 'González Cuétara', 'danny.glezcuet98@gmail.com', '53741292', 1),
+(2, 'user', '$2a$10$EEFiTj1iiiISSbS8FHPB/eYsGcuiszSMBtN4X6BlA0Q5BkDn6VB1K', 'Usuario', 'Autorizado', 'd4nny.m3nd3z@gmail.com', NULL, 1),
+(3, 'jdep', '$2a$10$oybDsJ.4chEaX6cFlweJMeeE1eBOOqipXPVAxZa2ug9zj32hU/MGi', 'Jefe', 'Departamento', 'danny97cuba@gmail.com', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -309,11 +385,20 @@ CREATE TABLE `usuario_roles` (
 --
 
 INSERT INTO `usuario_roles` (`id_usuario`, `id_rol`) VALUES
-(1, 1);
+(1, 1),
+(2, 3),
+(3, 2);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `ausencias`
+--
+ALTER TABLE `ausencias`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `CatOcup_Ausencia` (`id_cat_ocup`) USING BTREE;
 
 --
 -- Indices de la tabla `cargo`
@@ -370,11 +455,25 @@ ALTER TABLE `escala`
   ADD UNIQUE KEY `clasificador` (`clasificador`);
 
 --
+-- Indices de la tabla `levantamiento`
+--
+ALTER TABLE `levantamiento`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `CatOcup_Levant` (`id_cat_ocup`) USING BTREE;
+
+--
 -- Indices de la tabla `nivel_escolar`
 --
 ALTER TABLE `nivel_escolar`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nombre` (`nombre`);
+
+--
+-- Indices de la tabla `nocturnidades`
+--
+ALTER TABLE `nocturnidades`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `Trabajador_Nocturnidad` (`id_trabajador`);
 
 --
 -- Indices de la tabla `rol`
@@ -421,6 +520,12 @@ ALTER TABLE `usuario_roles`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `ausencias`
+--
+ALTER TABLE `ausencias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
@@ -430,7 +535,7 @@ ALTER TABLE `cargo`
 -- AUTO_INCREMENT de la tabla `categoria_docente`
 --
 ALTER TABLE `categoria_docente`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria_ocupacional`
@@ -442,7 +547,7 @@ ALTER TABLE `categoria_ocupacional`
 -- AUTO_INCREMENT de la tabla `cla`
 --
 ALTER TABLE `cla`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `departamento`
@@ -457,10 +562,22 @@ ALTER TABLE `escala`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
+-- AUTO_INCREMENT de la tabla `levantamiento`
+--
+ALTER TABLE `levantamiento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `nivel_escolar`
 --
 ALTER TABLE `nivel_escolar`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `nocturnidades`
+--
+ALTER TABLE `nocturnidades`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -484,11 +601,17 @@ ALTER TABLE `unidad`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `ausencias`
+--
+ALTER TABLE `ausencias`
+  ADD CONSTRAINT `CatOcup_Ausencia` FOREIGN KEY (`id_cat_ocup`) REFERENCES `categoria_ocupacional` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `cargo`
@@ -516,6 +639,18 @@ ALTER TABLE `departamento`
 ALTER TABLE `departamento_cargo`
   ADD CONSTRAINT `FKDepartamen712274` FOREIGN KEY (`Departamentoid`) REFERENCES `departamento` (`id`),
   ADD CONSTRAINT `FKDepartamen995951` FOREIGN KEY (`Cargoid`) REFERENCES `cargo` (`id`);
+
+--
+-- Filtros para la tabla `levantamiento`
+--
+ALTER TABLE `levantamiento`
+  ADD CONSTRAINT `CatOcup_Levant` FOREIGN KEY (`id_cat_ocup`) REFERENCES `categoria_ocupacional` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `nocturnidades`
+--
+ALTER TABLE `nocturnidades`
+  ADD CONSTRAINT `Trabajador_Nocturnidad` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajador` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `trabajador`

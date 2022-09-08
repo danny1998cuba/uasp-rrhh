@@ -28,9 +28,35 @@ public class DepartamentoCargoPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "Departamentoid")
     private int departamentoid;
-    
+
     @Basic(optional = false)
     @Column(name = "Cargoid")
     private int cargoid;
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 19 * hash + this.departamentoid;
+        hash = 19 * hash + this.cargoid;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DepartamentoCargoPK other = (DepartamentoCargoPK) obj;
+        if (this.departamentoid != other.departamentoid) {
+            return false;
+        }
+        return this.cargoid == other.cargoid;
+    }
 
 }
