@@ -30,7 +30,8 @@
 
         <mat-step [editable]="false" #formStep>
             <ng-template matStepLabel>Entrada de datos</ng-template>
-            <app-noct-tables (submitEvent)="loadinfo($event)" *ngIf="monthStep.completed" [unidad]="unidad" #form>
+            <app-noct-tables (submitEvent)="loadinfo($event)" *ngIf="monthStep.completed" [unidad]="unidad"
+                [mes]="selectedMonth" #form>
             </app-noct-tables>
             <div class="flex-right">
                 <button mat-button (click)="reset()">Volver al inicio</button>

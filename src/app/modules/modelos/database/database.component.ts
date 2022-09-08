@@ -21,6 +21,8 @@ export class DatabaseComponent implements OnInit {
   faDone = faCheck
 
   mes: string | null = 'Selección del mes'
+  selectedMonth!: Date
+
   unidades!: Unidad[]
   unidad!: Unidad
   unidadComp!: UnidadesComponent
@@ -62,10 +64,10 @@ export class DatabaseComponent implements OnInit {
   compareObjects(ob1: any, ob2: any) { return (ob1 && ob2) ? ob1.id === ob2.id : false }
 
   obtainMonth(date: Date) {
-    console.log(this.unidad?.nombre + '  ' + (new DatePipe('es-ES').transform(date, "MMMM YYYY")))
-    this.stepper.next()
+    this.selectedMonth = date
     this.monthStep.completed = true
     this.mes = new DatePipe('es-ES').transform(date, "MMMM YYYY")
+    this.stepper.next()
   }
 
   loadinfo(list: Trabajador[]) {

@@ -5,8 +5,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { faMoon, faPencil } from '@fortawesome/free-solid-svg-icons';
-import { Trabajador, Unidad } from 'src/app/data/schema';
-import { TrabajadorService } from 'src/app/data/services';
+import { firstValueFrom } from 'rxjs';
+import { Nocturnidades, Trabajador, Unidad } from 'src/app/data/schema';
+import { NocturnidadesService, TrabajadorService } from 'src/app/data/services';
 import { NoctFormComponent } from '../noct-form/noct-form.component';
 
 @Component({
@@ -18,6 +19,7 @@ export class NoctTablesComponent implements OnInit {
 
   @Output() submitEvent = new EventEmitter()
   @Input() unidad !: Unidad
+  @Input() mes!: Date
 
   isLoading = true
   faMoon = faMoon; faEdit = faPencil
@@ -43,22 +45,53 @@ export class NoctTablesComponent implements OnInit {
     this.dataSource.sort = sort
   }
 
-  @ViewChild('filter') filter!: ElementRef;
+  @ViewChild('filter1') filter1!: ElementRef;
+  @ViewChild('filter2') filter2!: ElementRef;
 
   constructor(
     private service: TrabajadorService,
+    private noctService: NocturnidadesService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.service.getAll().subscribe(
+    this.loadData()
+  }
+
+  async loadData() {
+
+    let nocts: Nocturnidades[] = []
+
+    await firstValueFrom(this.noctService.getByMonth(this.mes)).then(
+      r => {
+        if (!r.error) {
+          nocts = r.data
+        } else {
+          this.sendMsg('Error')
+        }
+      }
+    )
+
+    await firstValueFrom(this.service.getAll()).then(
       r => {
         if (!r.error) {
           let aux: Trabajador[] = r.data
-          this.trabs = aux.filter(t => t.idDepartamento.idUnidad.id == this.unidad.id)
 
-          // TODO Cargar nocturnidades almacenadas para el mes... Si existen...
+          nocts.forEach(
+            noc => {
+              let trab = aux.find(t => t.id == noc.idTrabajador.id)
+              if (trab)
+                trab.nocturnidades = noc.cantidad
+            }
+          )
+
+          this.trabs = aux.filter(t =>
+            t.idDepartamento.idUnidad.id == this.unidad.id
+            && !t.nocturnidades)
+
+          this.noct = aux.filter(t => t.idDepartamento.idUnidad.id == this.unidad.id
+            && t.nocturnidades)
 
           this.updateDataSources()
         } else {
@@ -78,7 +111,7 @@ export class NoctTablesComponent implements OnInit {
       filterValue = (event.target as HTMLInputElement).value
     } else {
       filterValue = string
-      this.filter.nativeElement.value = filterValue
+      this.filter1.nativeElement.value = filterValue
     }
 
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -88,8 +121,20 @@ export class NoctTablesComponent implements OnInit {
     }
   }
 
-  submit() {
-    this.submitEvent.emit(this.noct)
+  applyFilterNocts(event: Event, string?: string) {
+    let filterValue
+    if (!string) {
+      filterValue = (event.target as HTMLInputElement).value
+    } else {
+      filterValue = string
+      this.filter2.nativeElement.value = filterValue
+    }
+
+    this.dataSourceNoct.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSourceNoct.paginator) {
+      this.dataSourceNoct.paginator.firstPage();
+    }
   }
 
   addNoct(isMod: boolean, object: Trabajador) {
@@ -104,10 +149,6 @@ export class NoctTablesComponent implements OnInit {
               this.noct = this.noct.filter(t => t.id != retObj.id)
               this.trabs.push(retObj)
               retObj.nocturnidades = undefined
-
-              //delete relacion
-            } else {
-              //update relacion
             }
           } else {
             if (retObj.nocturnidades != 0) {
@@ -125,6 +166,6 @@ export class NoctTablesComponent implements OnInit {
     this.isLoading = true
     this.dataSource = new MatTableDataSource(this.trabs);
     this.dataSourceNoct = new MatTableDataSource(this.noct);
-    setTimeout(() => { this.isLoading = false }, 300);
+    setTimeout(() => { this.isLoading = false }, 500);
   }
 }

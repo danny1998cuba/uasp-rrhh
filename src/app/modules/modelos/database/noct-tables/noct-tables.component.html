@@ -1,9 +1,9 @@
 <ng-container *ngIf="!isLoading; else noData;">
+    <h2>Trabajadores de {{unidad.nombre}}</h2>
     <mat-form-field>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" matTooltip="Buscar Trabajadores" #filter>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" matTooltip="Buscar Trabajadores" #filter1>
     </mat-form-field>
 
-    <h2>Trabajadores de {{unidad.nombre}}</h2>
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort>
 
@@ -55,6 +55,10 @@
     <hr>
 
     <h2>Trabajadores con nocturnidades</h2>
+    <mat-form-field>
+        <input matInput (keyup)="applyFilterNocts($event)" placeholder="Buscar" matTooltip="Buscar Trabajadores"
+            #filter2>
+    </mat-form-field>
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSourceNoct" matSort>
 
@@ -109,7 +113,7 @@
     </div>
 
     <div class="flex-right mt-3">
-        <button type="button" mat-button (click)="submit()">Siguiente</button>
+        <button type="button" mat-button (click)="submitEvent.emit(noct)">Siguiente</button>
     </div>
 </ng-container>
 
