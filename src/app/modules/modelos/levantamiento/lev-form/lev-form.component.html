@@ -5,9 +5,12 @@
     <ng-container *ngFor="let item of forms; let index = index">
         <div class="row my-4 mx-2 form-row mat-elevation-z8">
             <h2>{{cats[index].nombre}}</h2>
-            <h4>Total de trabajadores disponibles: ???</h4>
 
             <form [formGroup]="item">
+                <div class="d-flex flex-row align-items-center w-100 gap-3 mb-4">
+                    <h4 class="my-1"> Total de trabajadores disponibles en el pa&iacute;s: </h4>
+                    <input matInput title="ttd" formControlName="total_trabs" type="number" class="w-25 my-1">
+                </div>
 
                 <div class="row sub-col">
                     <div class="col-title">Causas de los trabajadores no f&iacute;sicos</div>

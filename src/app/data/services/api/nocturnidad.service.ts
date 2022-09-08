@@ -44,7 +44,7 @@ export class NocturnidadesService extends ApiClass {
   getByMonth(fecha: Date): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.get<Nocturnidades[]>(
-      GESTION_ROUTES.NOCT + '?fecha=' + new DatePipe('es-ES').transform(fecha, "yyyy-MM-dd"),
+      GESTION_ROUTES.NOCT + '/mes?fecha=' + new DatePipe('es-ES').transform(fecha, "yyyy-MM-dd"),
       { headers: this.headers, withCredentials: true })
       .pipe(
         map(r => {

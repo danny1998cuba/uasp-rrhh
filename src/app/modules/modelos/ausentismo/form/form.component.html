@@ -1,11 +1,15 @@
 <ng-container *ngIf="!isLoading; else noData;">
-    <p>Ingrese los datos de las ausencias por cada categor&iacute;a ocupacional. Esta informaci&oacute;n se maneja en <b>H/d</b></p>
+    <p>Ingrese los datos de las ausencias por cada categor&iacute;a ocupacional. Esta informaci&oacute;n se maneja en
+        <b>H/d</b></p>
     <ng-container *ngFor="let item of forms; let index = index">
         <div class="row my-4 mx-2 form-row mat-elevation-z8">
             <h2>{{cats[index].nombre}}</h2>
-            <h4>Fondo de tiempo laborable: ???</h4>
 
             <form [formGroup]="item">
+                <div class="d-flex flex-row align-items-center w-100 gap-3 mb-4">
+                    <h4 class="my-1" title="FTL = Plantilla cubierta * 24"> Fondo de tiempo laborable: </h4>
+                    <input matInput title="ttd" formControlName="ftl" type="number" class="w-25 my-1">
+                </div>
                 <div class="row">
                     <div class="col-md-4">
                         <mat-form-field class="example-full-width">

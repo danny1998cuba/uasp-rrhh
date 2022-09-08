@@ -43,7 +43,7 @@ export class LevantamientoService extends ApiClass {
   getByMonth(fecha: Date): Observable<ResponseHandler> {
     const response = new ResponseHandler()
     return this.http.get<Levantamiento[]>(
-      GESTION_ROUTES.LEVANTAMIENTO + '?fecha=' + new DatePipe('es-ES').transform(fecha, "yyyy-MM-dd"),
+      GESTION_ROUTES.LEVANTAMIENTO + '/mes?fecha=' + new DatePipe('es-ES').transform(fecha, "yyyy-MM-dd"),
       { headers: this.headers, withCredentials: true })
       .pipe(
         map(r => {

@@ -7,13 +7,16 @@
         </ng-template>
 
         <mat-step [stepControl]="monthControl" [editable]="false" #monthStep>
-            <ng-template matStepLabel>{{mes}}</ng-template>
-            <app-month-picker (submitEvent)="obtainMonth($event)" #month></app-month-picker>
+            <ng-container *ngIf="!isLoading; else noData;">
+                <ng-template matStepLabel>{{mes}}</ng-template>
+                <app-month-picker (submitEvent)="obtainMonth($event)" #month></app-month-picker>
+            </ng-container>
         </mat-step>
 
         <mat-step [editable]="false" #formStep>
             <ng-template matStepLabel>Entrada de datos</ng-template>
-            <app-lev-form (submitEvent)="loadinfo()" *ngIf="monthStep.completed" #form></app-lev-form>
+            <app-lev-form (submitEvent)="loadinfo($event)" *ngIf="monthStep.completed" #form [mes]="selectedMonth">
+            </app-lev-form>
             <div class="flex-right">
                 <button mat-button (click)="reset()">Volver al inicio</button>
             </div>
@@ -30,3 +33,7 @@
         </mat-step>
     </mat-horizontal-stepper>
 </div>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>
