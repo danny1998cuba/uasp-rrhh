@@ -1,3 +1,54 @@
-<h1 class="card-title">Resumern de trabajadores y salarios</h1>
+<h1 class="card-title">Resumen de trabajadores y salarios</h1>
 
-<div class="card-body"></div>
+<div class="card-body">
+
+    <mat-horizontal-stepper linear="true" #stepper>
+        <ng-template matStepperIcon="done">
+            <fa-icon [icon]="faDone"></fa-icon>
+        </ng-template>
+
+        <mat-step [stepControl]="monthControl" [editable]="false" #monthStep>
+
+            <ng-container *ngIf="!isLoading; else noData;">
+                <ng-template matStepLabel>{{mes}}</ng-template>
+
+                <div class="d-flex justify-content-between">
+                    <mat-form-field>
+                        <mat-label>Seleccione una unidad</mat-label>
+                        <mat-select [(value)]="unidad" [compareWith]="compareObjects">
+                            <mat-option *ngFor="let uni of unidades" [value]="uni">
+                                {{uni.nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <app-month-picker (submitEvent)="obtainMonth($event)" #month></app-month-picker>
+            </ng-container>
+
+        </mat-step>
+
+        <mat-step [editable]="false" #formStep>
+            <ng-template matStepLabel>Entrada de datos</ng-template>
+            <app-noct-tables (submitEvent)="loadinfo($event)" *ngIf="monthStep.completed" [unidad]="unidad" #form>
+            </app-noct-tables>
+            <div class="flex-right">
+                <button mat-button (click)="reset()">Volver al inicio</button>
+            </div>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>Documento</ng-template>
+            You are done
+            <br />
+
+            <div class="flex-right">
+                <button mat-button (click)="reset()">Volver al inicio</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>

@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Adicionar nocturnidades</h2>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="form" (ngSubmit)="closeDialog()">
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Nombre" formControlName="nombre">
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Nocturnidades" formControlName="nocturnidad" type="number">
+                    <mat-hint>Sin errores</mat-hint>
+                    <mat-error *ngIf="form.controls['nocturnidad'].hasError('required')">
+                        Los apellidos es obligatorio
+                    </mat-error>
+                    <mat-error *ngIf="form.controls['nocturnidad'].hasError('min')">
+                        Debe ser un n&uacute;mero positivo
+                    </mat-error>
+                    <mat-error *ngIf="form.controls['nocturnidad'].hasError('max')">
+                        Pueden asignarse hasta 24 nocturnidades al mes
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-4">
+            <button mat-button [mat-dialog-close]="{success:false, object:undefined}" type="button">Cancelar</button>
+            <button mat-button type="submit">{{!mydata.isMod?'Agregar':'Modificar'}}</button>
+        </div>
+    </form>
+</mat-dialog-content>

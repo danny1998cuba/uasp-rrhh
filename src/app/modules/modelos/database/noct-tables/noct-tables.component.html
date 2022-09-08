@@ -1,0 +1,118 @@
+<ng-container *ngIf="!isLoading; else noData;">
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" matTooltip="Buscar Trabajadores" #filter>
+    </mat-form-field>
+
+    <h2>Trabajadores de {{unidad.nombre}}</h2>
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Clasificador Column -->
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre completo </th>
+                <td mat-cell *matCellDef="let row"> {{row | fullName}} </td>
+            </ng-container>
+
+            <!-- Salario Column -->
+            <ng-container matColumnDef="cargo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cargo </th>
+                <td mat-cell *matCellDef="let row"> {{row.idCargo.nombre}} </td>
+            </ng-container>
+
+            <!-- Salario Column -->
+            <ng-container matColumnDef="ci">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Carne de identidad </th>
+                <td mat-cell *matCellDef="let row"> {{row.ci}} </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-button class="" type="button" matTooltip="Asignar nocturnidad" aria-label="Edit"
+                        (click)="addNoct(false, row)">
+                        <fa-icon [icon]="faMoon"></fa-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+                    <div class="text-center">
+                        No hay datos disponibles
+                    </div>
+                </td>
+            </tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons #pag1></mat-paginator>
+    </div>
+
+    <br>
+    <hr>
+
+    <h2>Trabajadores con nocturnidades</h2>
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSourceNoct" matSort>
+
+            <!-- Clasificador Column -->
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre completo </th>
+                <td mat-cell *matCellDef="let row"> {{row | fullName}} </td>
+            </ng-container>
+
+            <!-- Salario Column -->
+            <ng-container matColumnDef="cargo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cargo </th>
+                <td mat-cell *matCellDef="let row"> {{row.idCargo.nombre}} </td>
+            </ng-container>
+
+            <!-- Salario Column -->
+            <ng-container matColumnDef="ci">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Carne de identidad </th>
+                <td mat-cell *matCellDef="let row"> {{row.ci}} </td>
+            </ng-container>
+
+            <!-- Salario Column -->
+            <ng-container matColumnDef="noct">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nocturnidades del mes </th>
+                <td mat-cell *matCellDef="let row"> {{row.nocturnidades}} </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-button class="" type="button" matTooltip="Modificar nocturnidad" aria-label="Edit"
+                        (click)="addNoct(true, row)">
+                        <fa-icon [icon]="faEdit"></fa-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" [attr.colspan]="displayedColumns2.length">
+                    <div class="text-center">
+                        No hay datos disponibles
+                    </div>
+                </td>
+            </tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns2;">
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons #pag2></mat-paginator>
+    </div>
+
+    <div class="flex-right mt-3">
+        <button type="button" mat-button (click)="submit()">Siguiente</button>
+    </div>
+</ng-container>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>

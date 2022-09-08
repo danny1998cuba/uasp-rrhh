@@ -12,6 +12,8 @@ import { DatabaseComponent } from './database/database.component';
 import { LevantamientoComponent } from './levantamiento/levantamiento.component';
 import { AusentismoFormComponent } from './ausentismo/form/form.component';
 import { LevFormComponent } from './levantamiento/lev-form/lev-form.component';
+import { NoctFormComponent } from './database/noct-form/noct-form.component';
+import { NoctTablesComponent } from './database/noct-tables/noct-tables.component';
 
 
 
@@ -27,7 +29,9 @@ import { LevFormComponent } from './levantamiento/lev-form/lev-form.component';
     DatabaseComponent,
     LevantamientoComponent,
     AusentismoFormComponent,
-    LevFormComponent
+    LevFormComponent,
+    NoctFormComponent,
+    NoctTablesComponent
   ],
   imports: [
     SharedModule

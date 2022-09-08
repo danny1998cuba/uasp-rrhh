@@ -18,4 +18,6 @@ export class Trabajador {
     idDepartamento!: Departamento
     idCLA?: Cla
     idCargo!: Cargo
+
+    nocturnidades?: number
 }
