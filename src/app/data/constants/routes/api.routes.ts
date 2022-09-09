@@ -39,7 +39,10 @@ export const REPORTS = {
     P2: `${REPORTS_BASE}/p2`,
     PLANTILLA_AC: `${REPORTS_BASE}/plantillaAC`,
     GRUPO_ESCALA: `${REPORTS_BASE}/grupo_escala`,
-    UNIDAD: `${REPORTS_BASE}/unidad`
+    UNIDAD: `${REPORTS_BASE}/unidad`,
+    AUSENTISMO: `${REPORTS_BASE}/ausentismo`,
+    DATABASE: `${REPORTS_BASE}/database`,
+    LEVANTAMIENTO: `${REPORTS_BASE}/levantamiento`
 }
 
 // Sigelite Routes
@@ -53,11 +56,3 @@ export const COUNT = '/count'
 
 export const PASS_ROUTE = `${GESTION_ROUTES.USERS}/pass`
 export const PASS_RESTORE = `${BASE_ROUTE}restorePass`
-
-// Connectors
-export const CONNECTORS = {
-    PARAMS: '?',
-    AND: '&'
-}
-
-export const DEP_BY_UNIDAD = `${GESTION_ROUTES.DEPARTAMENTO}${CONNECTORS.PARAMS}unidad=`

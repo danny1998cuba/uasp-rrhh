@@ -1,7 +1,7 @@
 import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
-import { DEP_BY_UNIDAD, GESTION_ROUTES } from '../../constants';
+import { GESTION_ROUTES } from '../../constants';
 import { IApiService } from '../../interfaces';
 import { ApiClass, Departamento, ResponseHandler } from '../../schema';
 
@@ -43,7 +43,7 @@ export class DepartamentoService extends ApiClass implements IApiService<Departa
   // Obtener Departamento por id
   getByUnidad(idUnidad: number): Observable<ResponseHandler> {
     const response = new ResponseHandler()
-    return this.http.get<Departamento[]>(DEP_BY_UNIDAD + idUnidad, { headers: this.headers, withCredentials: true })
+    return this.http.get<Departamento[]>(GESTION_ROUTES.DEPARTAMENTO + '?unidad=' + idUnidad, { headers: this.headers, withCredentials: true })
       .pipe(
         map(r => {
           response.data = r;

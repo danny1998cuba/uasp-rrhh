@@ -1,5 +1,6 @@
 <ng-container *ngIf="!isLoading; else noData;">
-    <p>Ingrese los datos de las ausencias por cada categor&iacute;a ocupacional. Esta informaci&oacute;n se maneja en
+    <p>
+        Ingrese los datos de las ausencias por cada categor&iacute;a ocupacional. Esta informaci&oacute;n se maneja en
         <b>H/d</b>
     </p>
     <ng-container *ngFor="let item of forms; let index = index">
@@ -9,7 +10,13 @@
             <form [formGroup]="item">
                 <div class="d-flex flex-row align-items-center w-100 gap-3 mb-4">
                     <h4 class="my-1"> Total de trabajadores disponibles en el pa&iacute;s: </h4>
-                    <input matInput title="ttd" formControlName="total_trabs" type="number" class="w-25 my-1">
+
+                    <mat-form-field class="example-full-width w-25 my-1">
+                        <input matInput title="ttd" formControlName="referencia" type="number">
+                    </mat-form-field>
+                    <p *ngIf="item.controls['referencia'].hasError('mayorRef')" class="text-danger small">
+                        La suma de los valores internos excede al total de trabajadores
+                    </p>
                 </div>
 
                 <div class="row sub-col">
@@ -25,6 +32,9 @@
                                 <mat-error *ngIf="item.controls['madres'].hasError('required')">
                                     Debe ingresar un valor
                                 </mat-error>
+                                <mat-error *ngIf="item.controls['madres'].hasError('mayorRef')">
+                                    No debe exceder el valor del total de trabajadores
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div class="col col-md-2">
@@ -36,6 +46,9 @@
                                 </mat-error>
                                 <mat-error *ngIf="item.controls['aislamiento'].hasError('required')">
                                     Debe ingresar un valor
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['aislamiento'].hasError('mayorRef')">
+                                    No debe exceder el valor del total de trabajadores
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -52,6 +65,9 @@
                                         <mat-error *ngIf="item.controls['covid'].hasError('required')">
                                             Debe ingresar un valor
                                         </mat-error>
+                                        <mat-error *ngIf="item.controls['covid'].hasError('mayorRef')">
+                                            No debe exceder el valor del total de trabajadores
+                                        </mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col col-md-4">
@@ -63,6 +79,9 @@
                                         </mat-error>
                                         <mat-error *ngIf="item.controls['no_covid'].hasError('required')">
                                             Debe ingresar un valor
+                                        </mat-error>
+                                        <mat-error *ngIf="item.controls['no_covid'].hasError('mayorRef')">
+                                            No debe exceder el valor del total de trabajadores
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
@@ -77,6 +96,9 @@
                                         <mat-error *ngIf="item.controls['peritados'].hasError('required')">
                                             Debe ingresar un valor
                                         </mat-error>
+                                        <mat-error *ngIf="item.controls['peritados'].hasError('mayorRef')">
+                                            No debe exceder el valor del total de trabajadores
+                                        </mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -90,6 +112,9 @@
                                 </mat-error>
                                 <mat-error *ngIf="item.controls['embarazo'].hasError('required')">
                                     Debe ingresar un valor
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['embarazo'].hasError('mayorRef')">
+                                    No debe exceder el valor del total de trabajadores
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -106,6 +131,9 @@
                                 <mat-error *ngIf="item.controls['maternidad'].hasError('required')">
                                     Debe ingresar un valor
                                 </mat-error>
+                                <mat-error *ngIf="item.controls['maternidad'].hasError('mayorRef')">
+                                    No debe exceder el valor del total de trabajadores
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div class="col col-md-3">
@@ -117,6 +145,9 @@
                                 </mat-error>
                                 <mat-error *ngIf="item.controls['licencia'].hasError('required')">
                                     Debe ingresar un valor
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['licencia'].hasError('mayorRef')">
+                                    No debe exceder el valor del total de trabajadores
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -130,6 +161,9 @@
                                 <mat-error *ngIf="item.controls['vacaciones'].hasError('required')">
                                     Debe ingresar un valor
                                 </mat-error>
+                                <mat-error *ngIf="item.controls['vacaciones'].hasError('mayorRef')">
+                                    No debe exceder el valor del total de trabajadores
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div class="col col-md-3">
@@ -141,6 +175,9 @@
                                 </mat-error>
                                 <mat-error *ngIf="item.controls['interrupto'].hasError('required')">
                                     Debe ingresar un valor
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['interrupto'].hasError('mayorRef')">
+                                    No debe exceder el valor del total de trabajadores
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -159,6 +196,9 @@
                                 <mat-error *ngIf="item.controls['teletrab'].hasError('required')">
                                     Debe ingresar un valor
                                 </mat-error>
+                                <mat-error *ngIf="item.controls['teletrab'].hasError('mayorRef')">
+                                    No debe exceder el valor del total de trabajadores
+                                </mat-error>
                             </mat-form-field>
                         </div>
 
@@ -176,6 +216,9 @@
                                         <mat-error *ngIf="item.controls['pesquisa'].hasError('required')">
                                             Debe ingresar un valor
                                         </mat-error>
+                                        <mat-error *ngIf="item.controls['pesquisa'].hasError('mayorRef')">
+                                            No debe exceder el valor del total de trabajadores
+                                        </mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col col-md-4">
@@ -189,6 +232,9 @@
                                         <mat-error *ngIf="item.controls['vacunacion'].hasError('required')">
                                             Debe ingresar un valor
                                         </mat-error>
+                                        <mat-error *ngIf="item.controls['vacunacion'].hasError('mayorRef')">
+                                            No debe exceder el valor del total de trabajadores
+                                        </mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col col-md-4">
@@ -201,6 +247,9 @@
                                         </mat-error>
                                         <mat-error *ngIf="item.controls['otro_puesto'].hasError('required')">
                                             Debe ingresar un valor
+                                        </mat-error>
+                                        <mat-error *ngIf="item.controls['otro_puesto'].hasError('mayorRef')">
+                                            No debe exceder el valor del total de trabajadores
                                         </mat-error>
                                     </mat-form-field>
                                 </div>

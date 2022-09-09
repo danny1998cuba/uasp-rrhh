@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { firstValueFrom } from 'rxjs';
+import { menorReferencia, menorReferenciaEach } from 'src/app/core/validators';
 import { Cargo, CatOcup, Levantamiento, Trabajador } from 'src/app/data/schema';
 import { CatOcupService, LevantamientoService, TrabajadorService } from 'src/app/data/services';
 
@@ -80,50 +81,54 @@ export class LevFormComponent implements OnInit {
 
       this.forms.push(new FormGroup({
         categoria: new FormControl({ value: cat, disabled: true }),
-        total_trabs: new FormControl({ value: realDisponible, disabled: true }),
+        referencia: new FormControl({ value: realDisponible, disabled: true }),
         madres: new FormControl(
           lev_cat ? lev_cat.madres : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
         aislamiento: new FormControl(
           lev_cat ? lev_cat.aislamiento : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
         covid: new FormControl(
           lev_cat ? lev_cat.covid : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
         no_covid: new FormControl(
           lev_cat ? lev_cat.noCovid : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
         peritados: new FormControl(
           lev_cat ? lev_cat.peritados : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
         embarazo: new FormControl(
           lev_cat ? lev_cat.embarazo : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
         maternidad: new FormControl(
           lev_cat ? lev_cat.licMat : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
         licencia: new FormControl(
           lev_cat ? lev_cat.otraLic : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
         vacaciones: new FormControl(
           lev_cat ? lev_cat.vacaciones : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
         interrupto: new FormControl(
           lev_cat ? lev_cat.interruptos : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
         teletrab: new FormControl(
           lev_cat ? lev_cat.teletrabajo : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
         pesquisa: new FormControl(
           lev_cat ? lev_cat.pesquisa : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
         vacunacion: new FormControl(
           lev_cat ? lev_cat.vacunacion : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
         otro_puesto: new FormControl(
           lev_cat ? lev_cat.otroPuesto : 0,
-          [Validators.min(0), Validators.required]),
-      }))
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
+      },
+        {
+          validators: [menorReferencia()]
+        }
+      ))
     }
 
     setTimeout(() => { this.isLoading = false }, 1000);
@@ -135,6 +140,7 @@ export class LevFormComponent implements OnInit {
 
   submitAll() {
     let no_valid = this.forms.filter(f => !f.valid)
+
     if (no_valid.length == 0) {
       const levant: Levantamiento[] = []
 

@@ -24,7 +24,9 @@
 
         <mat-step>
             <ng-template matStepLabel>Documento</ng-template>
-            You are done
+            <ng-container *ngIf="!isLoading; else noData;">
+                <pre>{{file|json}}</pre>
+            </ng-container>
             <br />
 
             <div class="flex-right">

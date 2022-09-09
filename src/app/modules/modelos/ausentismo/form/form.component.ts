@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { menorReferencia, menorReferenciaEach } from 'src/app/core/validators';
 import { Ausencias, Cargo, CatOcup, Trabajador } from 'src/app/data/schema';
 import { AusenciaService, CatOcupService, TrabajadorService } from 'src/app/data/services';
 
@@ -79,23 +80,27 @@ export class AusentismoFormComponent implements OnInit {
 
       this.forms.push(new FormGroup({
         categoria: new FormControl({ value: cat, disabled: true }),
-        ftl: new FormControl({ value: (plantillaCub * 24), disabled: true }),
+        referencia: new FormControl({ value: (plantillaCub * 24), disabled: true }),
         autorizada: new FormControl(
           au_cat ? au_cat.autorizado : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(plantillaCub * 24)]),
         enfermedad: new FormControl(
           au_cat ? au_cat.enfermedad : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(plantillaCub * 24)]),
         iss: new FormControl(
           au_cat ? au_cat.iss : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(plantillaCub * 24)]),
         accidente: new FormControl(
           au_cat ? au_cat.accidentes : 0,
-          [Validators.min(0), Validators.required]),
+          [Validators.min(0), Validators.required, menorReferenciaEach(plantillaCub * 24)]),
         injust: new FormControl(
           au_cat ? au_cat.injustificado : 0,
-          [Validators.min(0), Validators.required])
-      }))
+          [Validators.min(0), Validators.required, menorReferenciaEach(plantillaCub * 24)])
+      },
+        {
+          validators: [menorReferencia()]
+        }
+      ))
     }
 
     setTimeout(() => { this.isLoading = false }, 1000);
