@@ -7,14 +7,25 @@ package com.uasp.hhrr.controller;
 
 import com.google.gson.Gson;
 import com.uasp.hhrr.MessageResponse;
+import com.uasp.hhrr.exceptions.InvalidControlSumException;
+import com.uasp.hhrr.model.Ausencias;
+import com.uasp.hhrr.model.Levantamiento;
 import com.uasp.hhrr.reports.Report;
+import com.uasp.hhrr.reports.datasources.AusentismoDataSource;
+import com.uasp.hhrr.reports.datasources.LevantamientoDataSource;
 import com.uasp.hhrr.reports.submodel.FilteredType;
 import com.uasp.hhrr.service.ReportsService;
 import com.uasp.hhrr.service.TrabajadorService;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -62,7 +73,7 @@ public class ReportsController {
         if (params.get("unidadId") != null) {
             int unidadId = Integer.parseInt(params.get("unidadId").toString());
             params.replace("unidadId", unidadId);
-            
+
             if (unidadId == 0) {
                 return generateReport("TrabAllUnidades", params);
             } else {
@@ -84,6 +95,56 @@ public class ReportsController {
     public ResponseEntity<?> grupoEscala(
             @RequestParam Map<String, Object> params) {
         return generateReport("GrupoEscala", params, service.generateGEDataSource());
+    }
+
+    @PostMapping("/ausentismo")
+    public ResponseEntity<?> ausentismo(
+            @RequestParam Map<String, Object> params,
+            @RequestBody List<Ausencias> data) {
+        if (params.get("mes") != null) {
+            try {
+                Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(params.get("mes").toString());
+                params.replace("mes", fecha);
+
+//                return generateReport("ausentismo", params, service.ausentismo(fecha, data));
+                AusentismoDataSource ds = service.ausentismo(fecha, data);
+                return ResponseEntity.ok(ds.getList());
+            } catch (ParseException ex) {
+                MessageResponse m = new MessageResponse("El formato de la fecha ingresada no es correcto");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(g.toJson(m));
+            } catch (InvalidControlSumException ex) {
+                MessageResponse m = new MessageResponse(ex.getMessage());
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(m));
+            }
+        } else {
+            MessageResponse m = new MessageResponse("Falta la fecha");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(g.toJson(m));
+        }
+    }
+
+    @PostMapping("/levantamiento")
+    public ResponseEntity<?> levantamiento(
+            @RequestParam Map<String, Object> params,
+            @RequestBody List<Levantamiento> data) {
+        if (params.get("mes") != null) {
+            try {
+                Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(params.get("mes").toString());
+                params.replace("mes", fecha);
+
+//                return generateReport("ausentismo", params, service.ausentismo(fecha, data));
+                LevantamientoDataSource ds = service.levantamiento(fecha, data);
+                return ResponseEntity.ok(ds.getList());
+            } catch (ParseException ex) {
+                MessageResponse m = new MessageResponse("El formato de la fecha ingresada no es correcto");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(g.toJson(m));
+            } catch (InvalidControlSumException ex) {
+                MessageResponse m = new MessageResponse(ex.getMessage());
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(m));
+            }
+        } else {
+            MessageResponse m = new MessageResponse("Falta la fecha");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(g.toJson(m));
+        }
     }
 
     @GetMapping("/p2")

@@ -4,6 +4,7 @@
  */
 package com.uasp.hhrr.service;
 
+import com.uasp.hhrr.model.Ausencias;
 import com.uasp.hhrr.model.Levantamiento;
 import com.uasp.hhrr.repository.LevantamientoRepository;
 import java.util.Calendar;
@@ -25,7 +26,7 @@ public class LevantamientoService implements Services<Levantamiento, Integer> {
 
     @Override
     public Integer save(Levantamiento object) {
-        if(object.getId() != null) {
+        if (object.getId() != null) {
             object.setId(null);
         }
         Levantamiento p = repository.save(object);
@@ -62,11 +63,29 @@ public class LevantamientoService implements Services<Levantamiento, Integer> {
     public Optional<Levantamiento> findById(Integer id) {
         return repository.findById(id);
     }
-    
+
     public List<Levantamiento> getByMonth(Date fecha) {
         Calendar c = Calendar.getInstance();
         c.setTime(fecha);
         return repository.findByMes(c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1);
+    }
+
+    public void actualizarDb(Date fecha, List<Levantamiento> data) {
+        List<Levantamiento> enDb = getByMonth(fecha);
+
+        enDb.forEach(lev -> {
+            if (!data.contains(lev)) {
+                deleteById(lev.getId());
+            }
+        });
+
+        data.forEach(lev -> {
+            if (enDb.contains(lev)) {
+                update(lev, enDb.get(enDb.indexOf(lev)).getId());
+            } else {
+                save(lev);
+            }
+        });
     }
 
 }

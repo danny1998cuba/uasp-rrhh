@@ -69,4 +69,22 @@ public class AusenciasService implements Services<Ausencias, Integer> {
         return repository.findByMes(c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1);
     }
 
+    public void actualizarDb(Date fecha, List<Ausencias> data) {
+        List<Ausencias> enDb = getByMonth(fecha);
+        
+        enDb.forEach(aus -> {
+            if (!data.contains(aus)) {
+                deleteById(aus.getId());
+            }
+        });
+
+        data.forEach(aus -> {
+            if (enDb.contains(aus)) {
+                update(aus, enDb.get(enDb.indexOf(aus)).getId());
+            } else {
+                save(aus);
+            }
+        });
+    }
+
 }

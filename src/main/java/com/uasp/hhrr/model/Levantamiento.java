@@ -6,7 +6,9 @@
 package com.uasp.hhrr.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -108,6 +110,56 @@ public class Levantamiento implements Serializable {
 
     public Levantamiento(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Levantamiento) {
+            Levantamiento o = (Levantamiento) obj;
+
+            Calendar c1 = Calendar.getInstance();
+            Calendar c2 = Calendar.getInstance();
+
+            c1.setTime(this.getFecha());
+            c2.setTime(o.getFecha());
+
+            return c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)
+                    && c1.get(Calendar.MONTH) == c2.get(Calendar.MONTH)
+                    && Objects.equals(this.getIdcatOcup().getId(), o.getIdcatOcup().getId());
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.fecha);
+        hash = 41 * hash + Objects.hashCode(this.idcatOcup);
+        return hash;
+    }
+
+    public boolean isValid(long referencia) {
+
+        return (madres <= referencia
+                && aislamiento <= referencia
+                && covid <= referencia
+                && noCovid <= referencia
+                && peritados <= referencia
+                && embarazo <= referencia
+                && licMat <= referencia
+                && otraLic <= referencia
+                && vacaciones <= referencia
+                && interruptos <= referencia
+                && teletrabajo <= referencia
+                && pesquisa <= referencia
+                && vacunacion <= referencia
+                && otroPuesto <= referencia)
+                && (madres + aislamiento + covid + noCovid + peritados
+                + embarazo + licMat + otraLic + vacaciones + interruptos
+                + teletrabajo + pesquisa + vacunacion + otroPuesto
+                <= referencia);
+
     }
 
 }

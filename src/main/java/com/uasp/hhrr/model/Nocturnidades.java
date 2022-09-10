@@ -6,7 +6,9 @@
 package com.uasp.hhrr.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -56,6 +58,33 @@ public class Nocturnidades implements Serializable {
 
     public Nocturnidades(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Nocturnidades) {
+            Nocturnidades o = (Nocturnidades) obj;
+
+            Calendar c1 = Calendar.getInstance();
+            Calendar c2 = Calendar.getInstance();
+
+            c1.setTime(this.getFecha());
+            c2.setTime(o.getFecha());
+
+            return c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)
+                    && c1.get(Calendar.MONTH) == c2.get(Calendar.MONTH)
+                    && Objects.equals(this.getIdTrabajador().getId(), o.getIdTrabajador().getId());
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.fecha);
+        hash = 41 * hash + Objects.hashCode(this.idTrabajador);
+        return hash;
     }
 
 }
