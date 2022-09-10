@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="levantamiento" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d303b50f-4445-4c2d-83dd-456539f6c636">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<import value="com.uasp.hhrr.model.*"/>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["D:\\Daniel\\Escuela\\5to\\De tesis\\Program\\Frontend\\Design\\assets\\images\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mes" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="categoria" class="java.lang.String"/>
+	<field name="trabajadores" class="java.lang.Long"/>
+	<field name="mision" class="java.lang.Long"/>
+	<field name="lev" class="com.uasp.hhrr.model.Levantamiento"/>
+	<variable name="rdp" class="java.lang.Long" resetType="None">
+		<variableExpression><![CDATA[$F{trabajadores} -  $F{mision}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="fisicos" class="java.lang.Long" resetType="None">
+		<variableExpression><![CDATA[$V{rdp} - ($F{lev}!=null?$F{lev}.getNoFisicos():0)]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalTrab" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{trabajadores}]]></variableExpression>
+	</variable>
+	<variable name="totalFisicos" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$V{rdp} - ($F{lev}!=null?$F{lev}.getNoFisicos():0)]]></variableExpression>
+	</variable>
+	<variable name="totalmadres" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev} != null ? $F{lev}.getMadres() : 0]]></variableExpression>
+	</variable>
+	<variable name="totalAislamiento" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev} != null ? $F{lev}.getAislamiento() : 0]]></variableExpression>
+	</variable>
+	<variable name="totalCovid" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev} != null ? $F{lev}.getCovid() : 0]]></variableExpression>
+	</variable>
+	<variable name="totalNoCovid" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev} != null ? $F{lev}.getNoCovid() : 0]]></variableExpression>
+	</variable>
+	<variable name="totalPeritados" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev} != null ? $F{lev}.getPeritados() : 0]]></variableExpression>
+	</variable>
+	<variable name="totalEmbarazo" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev} != null ? $F{lev}.getEmbarazo() : 0]]></variableExpression>
+	</variable>
+	<variable name="totalMater" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev} != null ? $F{lev}.getLicMat() : 0]]></variableExpression>
+	</variable>
+	<variable name="totalLices" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev} != null ? $F{lev}.getOtraLic() : 0]]></variableExpression>
+	</variable>
+	<variable name="totalVacac" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev} != null ? $F{lev}.getVacaciones() : 0]]></variableExpression>
+	</variable>
+	<variable name="totalInterr" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev} != null ? $F{lev}.getInterruptos() : 0]]></variableExpression>
+	</variable>
+	<variable name="totalTelet" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev} != null ?$F{lev}.getTeletrabajo() : 0]]></variableExpression>
+	</variable>
+	<variable name="totalPesquisa" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev} != null ?$F{lev}.getPesquisa() : 0]]></variableExpression>
+	</variable>
+	<variable name="totalVacun" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev} != null ? $F{lev}.getVacunacion() : 0]]></variableExpression>
+	</variable>
+	<variable name="totalOtro" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev} != null ? $F{lev}.getOtroPuesto(): 0]]></variableExpression>
+	</variable>
+	<variable name="totalMision" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{mision}]]></variableExpression>
+	</variable>
+	<variable name="totalRDP" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$V{rdp}]]></variableExpression>
+	</variable>
+	<variable name="totalNoFis" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{lev}!= null?$F{lev}.getNoFisicos():0]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement x="183" y="8" width="390" height="30" uuid="15af90a3-7b1f-47f9-acab-9f3629c38059"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Situación laboral de los Recursos Humanos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="39" width="110" height="13" uuid="84d291b1-7969-4f41-aa26-2b4f0e06fce8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Provincia o entidad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="38" width="46" height="14" uuid="5d67f899-5da2-464e-b3d3-c2ab53b5381f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="MMMM yyyy">
+				<reportElement x="426" y="38" width="147" height="14" uuid="94c45763-0e79-457b-9cec-ca89f15701df"/>
+				<textElement textAlignment="Left" rotation="None">
+					<font isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="124" splitType="Stretch">
+			<staticText>
+				<reportElement x="692" y="47" width="32" height="77" uuid="e027df49-e044-462d-ad90-6eff05d8e82a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Movilizados en otros puestos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="660" y="47" width="32" height="77" uuid="55a053e2-5b56-443e-a8d9-5c524518ef5e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Movilizados en vacunación ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="628" y="47" width="32" height="77" uuid="cd3b51a0-678a-4caf-be9e-b98709567be4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Movilizados en pesquisa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="596" y="30" width="32" height="94" uuid="053f4efa-118b-4fdc-9869-2332b3e6a442">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teletrabajo o trabajo a distancia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="564" y="30" width="32" height="94" uuid="6a468c7f-1afd-4649-adb7-d50e155424ad">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Interruptos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="30" width="32" height="94" uuid="d5c161f8-6134-4c62-aad0-687f424ea18d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Otras licencias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="404" y="47" width="32" height="77" uuid="08f0d2a1-e20e-4773-9c99-35855d2ddf03">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Peritados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="30" width="32" height="94" uuid="cf2de6a9-0934-41c9-b946-afc9b9575e57">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CM por trastornos del embarazo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="532" y="30" width="32" height="94" uuid="8b53ddef-a2ce-4739-8691-b31f6dccfa8a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vacaciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="468" y="30" width="32" height="94" uuid="b9aea9bd-12bd-4638-820c-983a8ca9965f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Licencias de maternidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="47" width="32" height="77" uuid="3b268675-79f1-4046-8e54-044b882f70a8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Enfermos COVID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="11" width="32" height="113" uuid="c56db3d5-c63d-4a0a-8e9e-6bfb8eec0684">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No físicos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="30" width="32" height="94" uuid="f77c42f4-571e-4e82-8a54-3a963971b0fb">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Madres con garantía salarial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="47" width="32" height="77" uuid="41d46157-bfaa-40d4-b09a-c902df46a510">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Enfermos No COVID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="30" width="32" height="94" uuid="4aa5f126-cf25-4820-8924-5c313c936a33">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aislamiento preventivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="11" width="32" height="113" uuid="b3953825-c7e4-4a1d-838c-abd2d0438ab2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Real disponibles en el país ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="11" width="95" height="113" uuid="2ab1e74c-182f-42e2-a0fc-98b220ebff37"/>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conceptos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="115" y="11" width="32" height="113" uuid="7c176b9b-f912-4a61-8382-85141894ebab">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número de trabajadores]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="11" width="32" height="113" uuid="eab4e54c-9eb2-4fab-a19c-c5868b70fd9b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Físicos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="11" width="33" height="113" uuid="716dc569-698a-4a52-b712-263fb5d42935">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En misión internacionalista]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="11" width="320" height="19" uuid="a91ec674-f3a2-4aba-8e87-fda6d8f7503f"/>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Causas de los no fisicos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="30" width="96" height="17" uuid="f5dc59ff-f60f-4a0d-9ddc-6b40666c9a09"/>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Enfermos ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="596" y="11" width="128" height="19" uuid="0b45799f-46ef-4794-a886-bc0568d80a3d"/>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Movilizados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="628" y="30" width="96" height="17" uuid="79eedb25-6ef6-4c25-8b38-dd02df6defe1"/>
+				<box padding="2">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Movilizados]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="0" width="95" height="20" uuid="e2118b8a-68e4-4ddd-a3f1-dbca6eb66265"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="0" width="32" height="20" uuid="c0817424-50d8-496b-9fb4-fa37bf1d1034"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{trabajadores}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="0" width="33" height="20" uuid="dbf91d58-40eb-4be6-a075-8e4320342999"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mision}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="32" height="20" uuid="df5c1fcc-d66f-418d-beed-0a765979845e"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{rdp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="212" y="0" width="32" height="20" uuid="063a6a37-dfee-41e9-b62c-bd0ddb942f4d"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{fisicos}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Auto">
+				<reportElement x="244" y="0" width="32" height="20" uuid="45487dfe-e455-4c6a-aecb-135669d56f34"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev}!= null?$F{lev}.getNoFisicos():0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="372" y="0" width="32" height="20" uuid="7e6593ce-9dc3-41fe-803f-929b7b4d0922"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev} != null ? $F{lev}.getNoCovid() : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="404" y="0" width="32" height="20" uuid="ca3c0daa-4cbd-4bf6-ac0a-ec7eb3c79668"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev} != null ? $F{lev}.getPeritados() : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="0" width="32" height="20" uuid="dd7a8dd3-d8cc-4fbc-b6b8-e152a6ca196f"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev} != null ? $F{lev}.getCovid() : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="0" width="32" height="20" uuid="99867580-323f-488a-975a-382d6dfb7ca8"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev} != null ? $F{lev}.getMadres() : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="308" y="0" width="32" height="20" uuid="658ebe70-86a3-4f6c-b742-9cec44928e32"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev} != null ? $F{lev}.getAislamiento() : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="0" width="32" height="20" uuid="3e4201f3-3b54-482a-b882-12855f3fd8c3"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev} != null ? $F{lev}.getOtraLic() : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="436" y="0" width="32" height="20" uuid="ee92f790-c72e-4ea5-b197-45aaf7dc7015"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev} != null ? $F{lev}.getEmbarazo() : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="468" y="0" width="32" height="20" uuid="01a17a4f-6ded-49c6-ae84-dddea7e18719"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev} != null ?$F{lev}.getLicMat() : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="564" y="0" width="32" height="20" uuid="f11cceea-451b-4899-97ae-5b14d9ebb7d7"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev}!= null ? $F{lev}.getInterruptos() : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="532" y="0" width="32" height="20" uuid="b867792d-6f43-41d5-bb97-877e71c5201b"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev} != null ? $F{lev}.getVacaciones() : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="660" y="0" width="32" height="20" uuid="6d256da7-106d-442d-bec9-23c4278ef478"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev} != null ? $F{lev}.getVacunacion() : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="692" y="0" width="32" height="20" uuid="8b57f83b-6d58-479b-9c9d-f641b38b43bb"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev} != null ? $F{lev}.getOtroPuesto() : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="628" y="0" width="32" height="20" uuid="948599e2-3938-4e67-a0d4-bee5325f688d"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev} != null ? $F{lev}.getPesquisa() : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="596" y="0" width="32" height="20" uuid="ff87b5c2-5f4a-4567-b674-a08bf996b520"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lev} != null ? $F{lev}.getTeletrabajo() : 0]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="46" splitType="Stretch">
+			<textField>
+				<reportElement x="626" y="18" width="80" height="23" uuid="ccf14c6e-479e-4873-ae12-0123f558909a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Cambria"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="706" y="18" width="40" height="23" uuid="c669392f-cc30-4190-b68d-30ca3fb8272b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Cambria"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="330" y="17" width="96" height="24" uuid="94ca590c-da8b-436d-871b-55e03ddf0a2b"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="0" width="95" height="20" uuid="b83bee3c-71bb-4b86-a2e0-8b8a4f3549df"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totales]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="212" y="0" width="32" height="20" uuid="46156cb3-7117-4476-95e6-fc3422a8ee72"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalFisicos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="0" width="32" height="20" uuid="28eee682-5f62-436a-852e-784458a62562"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalTrab}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="0" width="33" height="20" uuid="9fd7803c-17d3-4257-beb3-52c11e8fe3f7"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalMision}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="32" height="20" uuid="dc2787b6-d5d7-494f-871f-c41a75ed2f9f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalRDP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="0" width="32" height="20" uuid="27c091ec-2f5a-4f4d-85ed-787c3477cfa4"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalmadres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="244" y="0" width="32" height="20" uuid="5315af26-ad55-4189-a330-76af27951464"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalNoFis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="660" y="0" width="32" height="20" uuid="c79f6cfc-bcbe-4e49-8f9d-7eac1976283e"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalVacun}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="692" y="0" width="32" height="20" uuid="63757ff6-a3d4-4939-b415-d44b0a584cd8"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalOtro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="596" y="0" width="32" height="20" uuid="e428a737-73c7-45ca-82db-77892addd947"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalTelet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="628" y="0" width="32" height="20" uuid="b1f0ecc2-f66f-4f70-b3a9-d85730d1cbc1"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalPesquisa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="532" y="0" width="32" height="20" uuid="a9a6414f-8fbe-491a-9d92-d7623e12e462"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalVacac}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="564" y="0" width="32" height="20" uuid="45f5fe7a-37d7-4d3e-a716-0ce5f1bb3e20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalInterr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="372" y="0" width="32" height="20" uuid="821fa808-2128-4afd-9b71-7c63fae5c235"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalNoCovid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="0" width="32" height="20" uuid="307fdd3c-4c3c-437c-b1ff-7a90b94b30ca"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalCovid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="404" y="0" width="32" height="20" uuid="17aa0a06-2d81-4f35-a7bb-70338066e7ac"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalPeritados}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="308" y="0" width="32" height="20" uuid="8463972c-9590-4fdd-a427-8a20747e40a9"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalAislamiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="0" width="32" height="20" uuid="8c6ca96f-0641-46f9-916a-e6bdc2f25e6e"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalLices}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="468" y="0" width="32" height="20" uuid="6310a655-5775-4f65-9b95-581940d20724"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalMater}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="436" y="0" width="32" height="20" uuid="48ae5be6-57cf-4818-a63d-8ab9b3fb04d4"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalEmbarazo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="20" y="0" width="704" height="1" uuid="98cb188e-9435-4aa7-9dc9-17d3b28495de"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

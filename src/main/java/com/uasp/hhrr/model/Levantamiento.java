@@ -162,4 +162,9 @@ public class Levantamiento implements Serializable {
 
     }
 
+    public int getNoFisicos() {
+        return madres + aislamiento + covid + noCovid + peritados + embarazo
+                + licMat + otraLic + vacaciones + interruptos;
+    }
+
 }
