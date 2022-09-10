@@ -106,9 +106,7 @@ public class ReportsController {
                 Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(params.get("mes").toString());
                 params.replace("mes", fecha);
 
-//                return generateReport("ausentismo", params, service.ausentismo(fecha, data));
-                AusentismoDataSource ds = service.ausentismo(fecha, data);
-                return ResponseEntity.ok(ds.getList());
+                return generateReport("ausentismo", params, service.ausentismo(fecha, data));
             } catch (ParseException ex) {
                 MessageResponse m = new MessageResponse("El formato de la fecha ingresada no es correcto");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(g.toJson(m));

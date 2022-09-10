@@ -781,7 +781,7 @@
 			<textField>
 				<reportElement x="626" y="22" width="80" height="23" uuid="d8067aeb-9ec2-412c-8abe-27b7d4eab67f"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="706" y="22" width="40" height="23" uuid="786102fc-bb65-4cf9-9ba5-deb44ae117cc"/>
