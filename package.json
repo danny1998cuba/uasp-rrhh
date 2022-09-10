@@ -1,6 +1,6 @@
 {
   "name": "uasp-rrhh",
-  "version": "0.7.5",
+  "version": "0.7.8",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --c=development -o",
