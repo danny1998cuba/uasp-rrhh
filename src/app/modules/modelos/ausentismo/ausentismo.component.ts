@@ -54,7 +54,7 @@ export class AusentismoComponent implements OnInit {
     await firstValueFrom(this.service.ausentismo(this.selectedMonth, ausencias)).then(
       r => {
         if (!r.error) {
-          this.file = r.data
+          this.file = URL.createObjectURL(r.data)
         } else {
           this.sendMsg('error')
         }

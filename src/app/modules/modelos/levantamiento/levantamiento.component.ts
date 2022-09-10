@@ -54,7 +54,7 @@ export class LevantamientoComponent implements OnInit {
     await firstValueFrom(this.service.levantamiento(this.selectedMonth, levantamientos)).then(
       r => {
         if (!r.error) {
-          this.file = r.data
+          this.file = URL.createObjectURL(r.data)
         } else {
           this.sendMsg('error')
         }

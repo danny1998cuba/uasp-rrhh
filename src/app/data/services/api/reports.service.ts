@@ -96,8 +96,7 @@ export class ReportsService extends ApiClass {
       { headers: this.headers, withCredentials: true })
       .pipe(
         map(r => {
-          // response.data = base64toPdf(r.msg);
-          response.data = r
+          response.data = base64toPdf(r.msg);
           return response;
         }),
         catchError(this.error)
@@ -113,8 +112,7 @@ export class ReportsService extends ApiClass {
       { headers: this.headers, withCredentials: true })
       .pipe(
         map(r => {
-          // response.data = base64toPdf(r.msg);
-          response.data = r
+          response.data = base64toPdf(r.msg);
           return response;
         }),
         catchError(this.error)

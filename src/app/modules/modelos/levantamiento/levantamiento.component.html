@@ -25,7 +25,10 @@
         <mat-step>
             <ng-template matStepLabel>Documento</ng-template>
             <ng-container *ngIf="!isLoading; else noData;">
-                <pre>{{file|json}}</pre>
+                <ng-container *ngIf="file != ''; else noFile">
+                    <app-pdf-viewer [src]="file" [downloadFileName]="'Levantamiento - ' + mes + '.pdf'">
+                    </app-pdf-viewer>
+                </ng-container>
             </ng-container>
             <br />
 
@@ -38,4 +41,10 @@
 
 <ng-template #noData>
     <app-loader></app-loader>
+</ng-template>
+
+<ng-template #noFile>
+    <small class="text-danger">
+        No se carg&oacute; el archivo
+    </small>
 </ng-template>
