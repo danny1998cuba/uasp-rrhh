@@ -20,4 +20,5 @@ export class Levantamiento {
     pesquisa: number = 0
     vacunacion: number = 0
     otroPuesto: number = 0
+    totalMujeresNoFisico: number = 0
 }

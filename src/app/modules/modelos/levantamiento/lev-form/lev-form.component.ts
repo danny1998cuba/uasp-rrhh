@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { firstValueFrom } from 'rxjs';
-import { menorReferencia, menorReferenciaEach } from 'src/app/core/validators';
+import { cantidadMujeres, menorReferencia, menorReferenciaEach, mujeresNF } from 'src/app/core/validators';
 import { Cargo, CatOcup, Levantamiento, Trabajador } from 'src/app/data/schema';
 import { CatOcupService, LevantamientoService, TrabajadorService } from 'src/app/data/services';
 
@@ -124,9 +124,13 @@ export class LevFormComponent implements OnInit {
         otro_puesto: new FormControl(
           lev_cat ? lev_cat.otroPuesto : 0,
           [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible)]),
+        mujeresNF: new FormControl(
+          lev_cat ? lev_cat.totalMujeresNoFisico : 0,
+          [Validators.min(0), Validators.required, menorReferenciaEach(realDisponible),
+          cantidadMujeres(this.trabService, cat.abreviado)]),
       },
         {
-          validators: [menorReferencia()]
+          validators: [menorReferencia(), mujeresNF()]
         }
       ))
     }
@@ -165,7 +169,7 @@ export class LevFormComponent implements OnInit {
           lev.pesquisa = form.controls['pesquisa'].value
           lev.vacunacion = form.controls['vacunacion'].value
           lev.otroPuesto = form.controls['otro_puesto'].value
-
+          lev.totalMujeresNoFisico = form.controls['mujeresNF'].value
 
           levant.push(lev)
         }

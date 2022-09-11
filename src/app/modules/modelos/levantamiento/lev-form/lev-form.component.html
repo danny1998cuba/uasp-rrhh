@@ -182,6 +182,31 @@
                             </mat-form-field>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col col-md-12">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>De ellos mujeres: </mat-label>
+                                <input matInput placeholder="Mujeres" formControlName="mujeresNF" type="number">
+                                <mat-hint>Sin errores</mat-hint>
+                                <mat-error *ngIf="item.controls['mujeresNF'].hasError('min')">
+                                    Solo valores positivos
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['mujeresNF'].hasError('required')">
+                                    Debe ingresar un valor
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['mujeresNF'].hasError('mayorRef')">
+                                    No debe exceder el valor del total de trabajadores
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['mujeresNF'].hasError('mayorNoFisico')">
+                                    El n&uacute;mero de mujeres no debe ser mayor al de trabajadores no f&iacute;sicos
+                                </mat-error>
+                                <mat-error *ngIf="item.controls['mujeresNF'].hasError('mayorTotalMujeres')">
+                                    El n&uacute;mero de mujeres no debe ser mayor al de mujeres de esta categor&iacute;a
+                                    ocupacional
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
                 </div>
                 <div class="row sub-col">
                     <div class="col-title">Otras situaciones</div>

@@ -11,7 +11,7 @@ export function menorReferencia(): ValidatorFn {
         if (referencia) {
             let suma = 0
             Object.keys(form.controls).forEach(key => {
-                if (key != 'referencia' && key != 'categoria') {
+                if (key != 'referencia' && key != 'categoria' && key != 'mujeresNF') {
                     suma += form.controls[key].value
                 }
             })
