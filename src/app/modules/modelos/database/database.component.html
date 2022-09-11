@@ -40,7 +40,14 @@
 
         <mat-step>
             <ng-template matStepLabel>Documento</ng-template>
-            You are done
+
+            <ng-container *ngIf="!isLoading; else noData;">
+                <ng-container *ngIf="file != ''; else noFile">
+                    <app-pdf-viewer [src]="file" [downloadFileName]="'Base de datos - ' + mes + '.pdf'">
+                    </app-pdf-viewer>
+                </ng-container>
+            </ng-container>
+
             <br />
 
             <div class="flex-right">
@@ -52,4 +59,10 @@
 
 <ng-template #noData>
     <app-loader></app-loader>
+</ng-template>
+
+<ng-template #noFile>
+    <small class="text-danger">
+        No se carg&oacute; el archivo
+    </small>
 </ng-template>

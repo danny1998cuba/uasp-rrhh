@@ -6,8 +6,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStep, MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { Trabajador, Unidad } from 'src/app/data/schema';
-import { UnidadService } from 'src/app/data/services';
+import { firstValueFrom } from 'rxjs';
+import { Nocturnidades, Trabajador, Unidad } from 'src/app/data/schema';
+import { ReportsService, UnidadService } from 'src/app/data/services';
 import { MonthPickerComponent } from 'src/app/shared/components';
 import { UnidadesComponent } from '../../sistema/unidades/unidades.component';
 
@@ -23,6 +24,8 @@ export class DatabaseComponent implements OnInit {
   mes: string | null = 'Selección del mes'
   selectedMonth!: Date
 
+  file: string = ''
+
   unidades!: Unidad[]
   unidad!: Unidad
   unidadComp!: UnidadesComponent
@@ -32,8 +35,9 @@ export class DatabaseComponent implements OnInit {
   @ViewChild('monthStep') monthStep !: MatStep
 
   constructor(
+    private service: ReportsService,
     unidadService: UnidadService,
-    private router: Router,
+    router: Router,
     dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {
@@ -70,15 +74,28 @@ export class DatabaseComponent implements OnInit {
     this.stepper.next()
   }
 
-  loadinfo(list: Trabajador[]) {
-    let listado = list.map(t => {
-      return {
-        idTrab: t.id,
-        noct: t.nocturnidades
-      }
-    })
-    console.log(listado)
+  async loadinfo(list: Trabajador[]) {
+    this.isLoading = true
     this.stepper.next()
+    let listado: Nocturnidades[] = list.map(t => {
+      const n = new Nocturnidades
+      n.idTrabajador = t
+      n.fecha = this.selectedMonth
+      n.cantidad = t.nocturnidades ? t.nocturnidades : 0
+      return n
+    })
+
+    await firstValueFrom(this.service.database(this.selectedMonth, listado)).then(
+      r => {
+        if (!r.error) {
+          this.file = URL.createObjectURL(r.data)
+        } else {
+          this.sendMsg('error')
+        }
+      }
+    )
+
+    this.isLoading = false
   }
 
   reset() {
