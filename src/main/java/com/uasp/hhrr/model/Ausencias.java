@@ -110,7 +110,11 @@ public class Ausencias implements Serializable {
                 && iss <= referencia
                 && accidentes <= referencia
                 && injustificado <= referencia)
-                && (autorizado + enfermedad + iss + accidentes + injustificado <= referencia);
+                && (getTotal() <= referencia);
 
+    }
+
+    public int getTotal() {
+        return autorizado + enfermedad + iss + accidentes + injustificado;
     }
 }

@@ -604,7 +604,7 @@
 			</textField>
 		</band>
 	</pageFooter>
-	<lastPageFooter>
+<!--	<lastPageFooter>
 		<band height="168">
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="330" y="130" width="96" height="24" uuid="fe95dacc-2cb6-4e3c-a331-c39ecc875ae6"/>
@@ -1193,7 +1193,7 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 		</band>
-	</lastPageFooter>
+	</lastPageFooter>-->
 	<summary>
 		<band height="26" splitType="Stretch">
 			<textField pattern="#,##0.000%">

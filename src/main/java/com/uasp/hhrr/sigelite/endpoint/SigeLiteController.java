@@ -39,8 +39,14 @@ public class SigeLiteController {
     @Autowired
     Gson g;
 
+    @GetMapping("/5202")
+    public ResponseEntity<?> F5202(
+            @RequestParam Map<String, Object> params) {
+        return ResponseEntity.ok(XMLGenerator.getInstance().toXml(service.generate_5202(params).getModelo()));
+    }
+
     @GetMapping("/5205")
-    public ResponseEntity<?> trabajadorUnidad(
+    public ResponseEntity<?> F5205(
             @RequestParam Map<String, Object> params) {
         return generateEncryptedFile(XMLGenerator.getInstance().toXml(service.generate_5205(params).getModelo()));
     }

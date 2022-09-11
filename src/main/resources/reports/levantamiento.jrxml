@@ -384,7 +384,7 @@
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Movilizados]]></text>
+				<text><![CDATA[Otras situaciones]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="628" y="30" width="96" height="17" uuid="79eedb25-6ef6-4c25-8b38-dd02df6defe1"/>

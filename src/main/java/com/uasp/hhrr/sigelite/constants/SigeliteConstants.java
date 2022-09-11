@@ -23,6 +23,10 @@ public abstract class SigeliteConstants {
     /* 5205  NÚMERO DE TRABAJADORES POR CATEGORÍA OCUPACIONAL, SEXO Y NIVEL DE ESCOLARIDAD */
     public static final int F5205_COD_MODELO = 5205;
     public static final String F5205_SUBNUMERO_MODELO = "02";
+    
+    /* 5202  INDICADORES SELECCIONADOS DEL EMPLEO Y LA REMUNERACIÓN */
+    public static final int F5202_COD_MODELO = 5202;
+    public static final String F5202_SUBNUMERO_MODELO = "07";
 
     public static HashMap<String, Date> fechasCierreMes(int month) {
         HashMap<String, Date> map = new HashMap<>();
