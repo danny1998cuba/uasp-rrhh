@@ -14,6 +14,20 @@ export class SigeliteService extends ApiClass {
     super()
   }
 
+  F5202(observ: string | undefined): Observable<ResponseHandler> {
+    const response = new ResponseHandler()
+
+    return this.http.get<any>(SIGELITE.F5202 + (observ ? ('?observ=' + observ) : ''),
+      { headers: this.headers, withCredentials: true })
+      .pipe(
+        map(r => {
+          response.data = base64toXML(r.msg);
+          return response;
+        }),
+        catchError(this.error)
+      );
+  }
+
   F5205(observ: string | undefined): Observable<ResponseHandler> {
     const response = new ResponseHandler()
 

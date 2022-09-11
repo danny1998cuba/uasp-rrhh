@@ -49,6 +49,7 @@ export const REPORTS = {
 export const SIGELITE_BASE = `${API_ROUTE}/sigelite`
 
 export const SIGELITE = {
+    F5202: `${SIGELITE_BASE}/5202`,
     F5205: `${SIGELITE_BASE}/5205`,
 }
 

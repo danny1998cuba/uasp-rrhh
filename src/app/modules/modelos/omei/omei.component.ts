@@ -10,13 +10,15 @@ import { SigeliteService } from 'src/app/data/services';
   styleUrls: ['./omei.component.css']
 })
 export class OmeiComponent {
-  isLoading = false
+  isLoading5202 = false
+  isLoading5205 = false
 
   file: string = ''
   downloadName: string = ''
   faDown = faDownload
 
-  observ: string = ''
+  observ5202: string = ''
+  observ5205: string = ''
   fechaProces: Date;
 
   constructor(
@@ -32,9 +34,31 @@ export class OmeiComponent {
     this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
   }
 
+  load_F5202() {
+    this.isLoading5202 = true
+    this.service.F5202(this.observ5202 == '' ? undefined : this.observ5202).subscribe(
+      r => {
+        if (!r.error) {
+          this.file = URL.createObjectURL(r.data)
+
+          this.downloadName = "F520207_2_"
+            + new DatePipe('es-ES').transform(this.fechaProces, "yyyy-MM-dd")
+            + '_08427.xml'
+
+          this.download()
+          this.observ5202 = ''
+          setTimeout(() => { this.isLoading5202 = false }, 1000);
+        } else {
+          this.sendMsg("Error")
+          setTimeout(() => { this.isLoading5202 = false }, 1000);
+        }
+      }
+    )
+  }
+
   load_F5205() {
-    this.isLoading = true
-    this.service.F5205(this.observ == '' ? undefined : this.observ).subscribe(
+    this.isLoading5205 = true
+    this.service.F5205(this.observ5205 == '' ? undefined : this.observ5205).subscribe(
       r => {
         if (!r.error) {
           this.file = URL.createObjectURL(r.data)
@@ -44,11 +68,11 @@ export class OmeiComponent {
             + '_08427.xml'
 
           this.download()
-          this.observ = ''
-          setTimeout(() => { this.isLoading = false }, 1000);
+          this.observ5205 = ''
+          setTimeout(() => { this.isLoading5205 = false }, 1000);
         } else {
           this.sendMsg("Error")
-          setTimeout(() => { this.isLoading = false }, 1000);
+          setTimeout(() => { this.isLoading5205 = false }, 1000);
         }
       }
     )

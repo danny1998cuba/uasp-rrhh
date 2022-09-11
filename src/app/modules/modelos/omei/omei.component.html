@@ -4,22 +4,28 @@
     <div class="d-flex flex-column gap-5">
         <mat-card>
             <mat-card-title>F-5202</mat-card-title>
-            <mat-card-subtitle></mat-card-subtitle>
+            <mat-card-subtitle>
+                INDICADORES SELECCIONADOS DEL EMPLEO Y LA REMUNERACIÓN
+                <br>
+                <small><b>Secci&oacute;n de empleo</b></small>
+            </mat-card-subtitle>
 
             <mat-card-content>
-                <!-- <div class="row px-5 mt-3">
-            <mat-form-field>
-                <textarea matInput placeholder="Observaciones" matTooltip="Agregar Observaciones"
-                    matTooltipPosition="right" rows="5" [(ngModel)]="observ"></textarea>
-            </mat-form-field>
-        </div> -->
+                Fecha de informe acumulado: {{fechaProces | date:"dd/MM/yyyy"}}
+
+                <div class="row px-5 mt-3">
+                    <mat-form-field>
+                        <textarea matInput placeholder="Observaciones" matTooltip="Agregar Observaciones"
+                            matTooltipPosition="right" rows="5" [(ngModel)]="observ5202"></textarea>
+                    </mat-form-field>
+                </div>
 
                 <div class="d-flex justify-content-end">
-                    <button mat-button type="button" aria-label="Add">
+                    <button mat-button type="button" aria-label="Add" (click)="load_F5202()">
                         <fa-icon [icon]="faDown"></fa-icon> &nbsp;&nbsp; Procesar y descargar
                     </button>
 
-                    <img src="assets/images/loader.gif" class="loader" alt="Loader" *ngIf="isLoading">
+                    <img src="assets/images/loader.gif" class="loader" alt="Loader" *ngIf="isLoading5202">
                 </div>
             </mat-card-content>
         </mat-card>
@@ -35,7 +41,7 @@
                 <div class="row px-5 mt-3">
                     <mat-form-field>
                         <textarea matInput placeholder="Observaciones" matTooltip="Agregar Observaciones"
-                            matTooltipPosition="right" rows="5" [(ngModel)]="observ"></textarea>
+                            matTooltipPosition="right" rows="5" [(ngModel)]="observ5205"></textarea>
                     </mat-form-field>
                 </div>
 
@@ -44,7 +50,7 @@
                         <fa-icon [icon]="faDown"></fa-icon> &nbsp;&nbsp; Procesar y descargar
                     </button>
 
-                    <img src="assets/images/loader.gif" class="loader" alt="Loader" *ngIf="isLoading">
+                    <img src="assets/images/loader.gif" class="loader" alt="Loader" *ngIf="isLoading5205">
                 </div>
             </mat-card-content>
         </mat-card>

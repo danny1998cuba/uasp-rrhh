@@ -93,6 +93,10 @@ export class NoctTablesComponent implements OnInit {
           this.noct = aux.filter(t => t.idDepartamento.idUnidad.id == this.unidad.id
             && t.nocturnidades)
 
+          if (this.noct.length != 0) {
+            this.sendMsg('Ya existían datos del mes seleccionado')
+          }
+
           this.updateDataSources()
         } else {
           this.sendMsg('Error')

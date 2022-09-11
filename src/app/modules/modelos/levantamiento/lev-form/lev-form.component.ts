@@ -56,12 +56,12 @@ export class LevFormComponent implements OnInit {
       }
     )
 
+    if (levs.length != 0) {
+      this.sendMsg('Ya existían datos del mes seleccionado')
+    }
+
     for (const cat of this.cats) {
       const lev_cat = levs.find(a => a.idcatOcup.id == cat.id)
-
-      if (lev_cat) {
-        this.sendMsg('Ya existían datos del mes seleccionado')
-      }
 
       let realDisponible = 0
       let example = new Trabajador()
