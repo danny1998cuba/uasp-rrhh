@@ -84,7 +84,7 @@ public class F5202_07FillHelper {
         for (int i = Calendar.getInstance().get(Calendar.MONTH) + 1; i >= 1; i--) {
             int totalNoFis = 0;
             for (Levantamiento lev : levantamientoRepository.findByMes(Calendar.getInstance().get(Calendar.YEAR), i)) {
-                totalNoFis += isMujer ? lev.getNoFisicos() : lev.getNoFisicos();     //isMujer == true ? then lev.getMujeres() : lev.getNoFisicos()
+                totalNoFis += isMujer ? lev.getTotalMujeresNoFisico() : lev.getNoFisicos();
             }
             double realMes = realDisponble - totalNoFis;
 

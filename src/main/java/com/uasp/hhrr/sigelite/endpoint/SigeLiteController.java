@@ -42,7 +42,7 @@ public class SigeLiteController {
     @GetMapping("/5202")
     public ResponseEntity<?> F5202(
             @RequestParam Map<String, Object> params) {
-        return ResponseEntity.ok(XMLGenerator.getInstance().toXml(service.generate_5202(params).getModelo()));
+        return generateEncryptedFile(XMLGenerator.getInstance().toXml(service.generate_5202(params).getModelo()));
     }
 
     @GetMapping("/5205")

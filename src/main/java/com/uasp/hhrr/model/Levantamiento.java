@@ -104,6 +104,10 @@ public class Levantamiento implements Serializable {
     @Column(name = "otro_puesto")
     private int otroPuesto;
 
+    @Basic(optional = false)
+    @Column(name = "total_mujeres_no_fisico")
+    private int totalMujeresNoFisico;
+
     @JoinColumn(name = "id_cat_ocup", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private CategoriaOcupacional idcatOcup;
@@ -155,10 +159,8 @@ public class Levantamiento implements Serializable {
                 && pesquisa <= referencia
                 && vacunacion <= referencia
                 && otroPuesto <= referencia)
-                && (madres + aislamiento + covid + noCovid + peritados
-                + embarazo + licMat + otraLic + vacaciones + interruptos
-                + teletrabajo + pesquisa + vacunacion + otroPuesto
-                <= referencia);
+                && (getNoFisicos() + teletrabajo + pesquisa + vacunacion + otroPuesto) <= referencia
+                && getNoFisicos() >= totalMujeresNoFisico;
 
     }
 

@@ -246,7 +246,8 @@ CREATE TABLE `levantamiento` (
   `teletrabajo` int(11) NOT NULL DEFAULT 0,
   `pesquisa` int(11) NOT NULL DEFAULT 0,
   `vacunacion` int(11) NOT NULL DEFAULT 0,
-  `otro_puesto` int(11) NOT NULL DEFAULT 0
+  `otro_puesto` int(11) NOT NULL DEFAULT 0,
+  `total_mujeres_no_fisico` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
