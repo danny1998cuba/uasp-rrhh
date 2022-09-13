@@ -258,7 +258,7 @@ public class ReportsService {
             }
         }
 
-        nocturnidadService.actualizarDb(fecha, data);
+        nocturnidadService.actualizarDb(fecha, data, u);
 
         TrabajadorSalarioDataSource ds = new TrabajadorSalarioDataSource();
         List<TrabajadorSalario> list = new ArrayList<>();

@@ -6,6 +6,7 @@ package com.uasp.hhrr.service;
 
 import com.uasp.hhrr.model.Ausencias;
 import com.uasp.hhrr.model.Nocturnidades;
+import com.uasp.hhrr.model.Unidad;
 import com.uasp.hhrr.repository.NocturnidadRepository;
 import java.util.Calendar;
 import java.util.Date;
@@ -70,8 +71,14 @@ public class NocturnidadService implements Services<Nocturnidades, Integer> {
         return repository.findByMes(c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1);
     }
 
-    public void actualizarDb(Date fecha, List<Nocturnidades> data) {
-        List<Nocturnidades> enDb = getByMonth(fecha);
+    public List<Nocturnidades> getByMonthAndUnidad(Date fecha, int u) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(fecha);
+        return repository.findByMesAndUnidad(c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, u);
+    }
+
+    public void actualizarDb(Date fecha, List<Nocturnidades> data, Unidad u) {
+        List<Nocturnidades> enDb = getByMonthAndUnidad(fecha, u.getId());
 
         enDb.forEach(noct -> {
             if (!data.contains(noct)) {

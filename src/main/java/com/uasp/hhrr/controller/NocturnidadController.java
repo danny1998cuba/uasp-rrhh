@@ -54,7 +54,7 @@ public class NocturnidadController {
         if (params.get("fecha") != null) {
             try {
                 Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(params.get("fecha").toString());
-                return ResponseEntity.ok(service.getByMonth(fecha));    
+                return ResponseEntity.ok(service.getByMonth(fecha));
             } catch (ParseException ex) {
                 MessageResponse m = new MessageResponse("El formato de la fecha ingresada no es correcto");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(g.toJson(m));
@@ -65,4 +65,25 @@ public class NocturnidadController {
         }
     }
 
+    @GetMapping("/mes_unidad")
+    public ResponseEntity<?> getByMonthAndUnidad(@RequestParam Map<String, Object> params) {
+        if (params.get("fecha") != null) {
+            if (params.get("unidadId") != null) {
+                try {
+                    Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(params.get("fecha").toString());
+                    int unidadId = Integer.parseInt(params.get("unidadId").toString());
+                    return ResponseEntity.ok(service.getByMonthAndUnidad(fecha, unidadId));
+                } catch (ParseException ex) {
+                    MessageResponse m = new MessageResponse("El formato de la fecha ingresada no es correcto");
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(g.toJson(m));
+                }
+            } else {
+                MessageResponse m = new MessageResponse("Falta el id de la unidad");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(g.toJson(m));
+            }
+        } else {
+            MessageResponse m = new MessageResponse("Falta la fecha");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(g.toJson(m));
+        }
+    }
 }
