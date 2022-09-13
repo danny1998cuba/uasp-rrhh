@@ -13,7 +13,6 @@ import com.uasp.hhrr.repository.LevantamientoRepository;
 import com.uasp.hhrr.repository.TrabajadorRepository;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,14 +48,16 @@ public class F5202_07FillHelper {
         HashMap<String, Number> map = procesarPromedioTrabs(false);
         for (F5202_07.COLUMNS c : F5202_07.COLUMNS.values()) {
             if (map.get(c.getValue()) != null && map.get(c.getValue()).doubleValue() != 0d) {
-                model.addData(F5202_07.FILAS.PROM_TRAB, c, map.get(c.getValue()).doubleValue());
+                double value = map.get(c.getValue()).doubleValue();
+                model.addData(F5202_07.FILAS.PROM_TRAB, c, Math.round(value));
             }
         }
         //Mujeres
         map = procesarPromedioTrabs(true);
         for (F5202_07.COLUMNS c : F5202_07.COLUMNS.values()) {
             if (map.get(c.getValue()) != null && map.get(c.getValue()).doubleValue() != 0d) {
-                model.addData(F5202_07.FILAS.PROM_MUJERES, c, map.get(c.getValue()).doubleValue());
+                double value = map.get(c.getValue()).doubleValue();
+                model.addData(F5202_07.FILAS.PROM_MUJERES, c, Math.round(value));
             }
         }
 
@@ -70,7 +71,23 @@ public class F5202_07FillHelper {
         map = procesarTiempo();
         for (F5202_07.COLUMNS c : F5202_07.COLUMNS.values()) {
             if (map.get(c.getValue()) != null && map.get(c.getValue()).doubleValue() != 0d) {
-                model.addData(F5202_07.FILAS.TIEMPO_TRABAJADO, c, map.get(c.getValue()).doubleValue());
+                double value = map.get(c.getValue()).doubleValue();
+                value = Math.round(value);
+                model.addData(F5202_07.FILAS.TIEMPO_TRABAJADO, c, String.format("%.2f", value).replace(",", "."));
+            }
+        }
+
+        //Suma control
+        for (F5202_07.COLUMNS c : F5202_07.COLUMNS.values()) {
+            double suma = 0;
+            for (F5202_07.FILAS f : F5202_07.FILAS.values()) {
+                String value = model.getValue(f, c);
+                if (!value.equals("")) {
+                    suma += Double.parseDouble(value);
+                }
+            }
+            if (suma != 0) {
+                model.addData(F5202_07.FILAS.SUMA_CONTROL, c, String.format("%.2f", suma).replace(",", "."));
             }
         }
     }
@@ -81,7 +98,7 @@ public class F5202_07FillHelper {
         long realDisponble = isMujer ? trabajadoresRepository.countBySexoAndMision("f", false) : trabajadoresRepository.countByMision(false);
 
         double acumulado = 0d;
-        for (int i = Calendar.getInstance().get(Calendar.MONTH) + 1; i >= 1; i--) {
+        for (int i = Calendar.getInstance().get(Calendar.MONTH); i >= 1; i--) {
             int totalNoFis = 0;
             for (Levantamiento lev : levantamientoRepository.findByMes(Calendar.getInstance().get(Calendar.YEAR), i)) {
                 totalNoFis += isMujer ? lev.getTotalMujeresNoFisico() : lev.getNoFisicos();
@@ -95,7 +112,7 @@ public class F5202_07FillHelper {
             acumulado += realMes;
         }
 
-        double realAcumulado = acumulado / (Calendar.getInstance().get(Calendar.MONTH) + 1);
+        double realAcumulado = acumulado / (Calendar.getInstance().get(Calendar.MONTH));
         BigDecimal bd = new BigDecimal(realAcumulado);
         bd = bd.setScale(2, RoundingMode.HALF_UP);
 
@@ -110,14 +127,14 @@ public class F5202_07FillHelper {
         long plantillaCubierta = trabajadoresRepository.count();
 
         double acumulado = 0d;
-        for (int i = Calendar.getInstance().get(Calendar.MONTH) + 1; i >= 1; i--) {
+        for (int i = Calendar.getInstance().get(Calendar.MONTH); i >= 1; i--) {
             int totalAus = 0;
             for (Ausencias aus : ausenciasRepository.findByMes(Calendar.getInstance().get(Calendar.YEAR), i)) {
                 totalAus += aus.getTotal();
             }
             double realMes = ((plantillaCubierta * 24) - totalAus) * 7.94;
 
-            if (i == Calendar.getInstance().get(Calendar.MONTH) + 1) {
+            if (i == Calendar.getInstance().get(Calendar.MONTH)) {
                 map.put(F5202_07.COLUMNS.REAL_MES.getValue(), realMes);
             }
 

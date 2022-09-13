@@ -45,8 +45,8 @@ public class F5202_07 {
 
     //Rows    
     public static enum FILAS {
-        PROM_TRAB(100), PROM_MUJERES(110), 
-        NUM_TRAB(200), NUM_MUJERES(300), TIEMPO_TRABAJADO(500);
+        PROM_TRAB(100), PROM_MUJERES(110),
+        NUM_TRAB(200), NUM_MUJERES(300), TIEMPO_TRABAJADO(500), SUMA_CONTROL(99999999);
 
         private final int value;
 
