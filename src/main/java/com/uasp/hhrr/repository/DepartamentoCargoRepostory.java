@@ -6,6 +6,7 @@ package com.uasp.hhrr.repository;
 
 import com.uasp.hhrr.model.DepartamentoCargo;
 import com.uasp.hhrr.model.DepartamentoCargoPK;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,7 +30,7 @@ public interface DepartamentoCargoRepostory
             + "WHERE o.abreviado = :co",
             nativeQuery = true)
     Long plazasByCatOcupAbrev(@Param(value = "co") String abreviado);
-    
+
     @Query(value = "SELECT COALESCE(SUM(dc.plazas), 0) "
             + "FROM categoria_ocupacional AS o "
             + "JOIN cargo AS c ON o.id = c.id_cat_ocup "
@@ -37,4 +38,6 @@ public interface DepartamentoCargoRepostory
             + "WHERE o.id = :co",
             nativeQuery = true)
     Long plazasByCatOcupId(@Param(value = "co") int id);
+
+    List<DepartamentoCargo> findByDepartamentoIdUnidadId(int idUnidad);
 }

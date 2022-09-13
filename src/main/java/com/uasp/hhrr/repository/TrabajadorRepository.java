@@ -5,6 +5,7 @@
 package com.uasp.hhrr.repository;
 
 import com.uasp.hhrr.model.Trabajador;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -77,5 +78,7 @@ public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer>
     @Query(value = "SELECT COUNT(t.id) FROM trabajador AS t WHERE calcularEdad(t.ci) < 17 and t.sexo = :sexo and t.id_escolar = :idEscolar",
             nativeQuery = true)
     Long countByMenorEdadLaboralAndSexoAndIdEscolar(@Param(value = "sexo") String sexo, @Param(value = "idEscolar") int idEscolar);
+
+    List<Trabajador> findByIdDepartamentoIdUnidadId(int idUnidad);
 
 }

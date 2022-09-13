@@ -10,12 +10,13 @@ import com.uasp.hhrr.MessageResponse;
 import com.uasp.hhrr.exceptions.InvalidControlSumException;
 import com.uasp.hhrr.model.Ausencias;
 import com.uasp.hhrr.model.Levantamiento;
+import com.uasp.hhrr.model.Nocturnidades;
+import com.uasp.hhrr.model.Unidad;
 import com.uasp.hhrr.reports.Report;
-import com.uasp.hhrr.reports.datasources.AusentismoDataSource;
-import com.uasp.hhrr.reports.datasources.LevantamientoDataSource;
 import com.uasp.hhrr.reports.submodel.FilteredType;
 import com.uasp.hhrr.service.ReportsService;
 import com.uasp.hhrr.service.TrabajadorService;
+import com.uasp.hhrr.service.UnidadService;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -24,8 +25,6 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -55,6 +54,9 @@ public class ReportsController {
 
     @Autowired
     TrabajadorService tService;
+
+    @Autowired
+    UnidadService uService;
 
     @Autowired
     Gson g;
@@ -136,6 +138,43 @@ public class ReportsController {
             } catch (InvalidControlSumException ex) {
                 MessageResponse m = new MessageResponse(ex.getMessage());
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(m));
+            }
+        } else {
+            MessageResponse m = new MessageResponse("Falta la fecha");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(g.toJson(m));
+        }
+    }
+
+    @PostMapping("/database")
+    public ResponseEntity<?> database(
+            @RequestParam Map<String, Object> params,
+            @RequestBody List<Nocturnidades> data) {
+        if (params.get("mes") != null) {
+            if (params.get("unidadId") != null) {
+                try {
+                    Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(params.get("mes").toString());
+                    params.replace("mes", fecha);
+
+                    int unidadId = Integer.parseInt(params.get("unidadId").toString());
+
+                    Unidad u = uService.findById(unidadId).orElse(null);
+
+                    if (u != null) {
+                        params.put("unidad", u.getNombre());
+//                        return generateReport("consolidado", params, service.databaseDS(fecha, data, u));
+                        return service.database(fecha, data, u, params);
+                    } else {
+                        MessageResponse m = new MessageResponse("No se encuentra la unidad seleciconada");
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.toJson(m));
+                    }
+
+                } catch (ParseException ex) {
+                    MessageResponse m = new MessageResponse("El formato de la fecha ingresada no es correcto");
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(g.toJson(m));
+                }
+            } else {
+                MessageResponse m = new MessageResponse("Falta el id de la unidad");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(g.toJson(m));
             }
         } else {
             MessageResponse m = new MessageResponse("Falta la fecha");
