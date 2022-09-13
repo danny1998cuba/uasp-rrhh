@@ -85,7 +85,7 @@ export class DatabaseComponent implements OnInit {
       return n
     })
 
-    await firstValueFrom(this.service.database(this.selectedMonth, listado)).then(
+    await firstValueFrom(this.service.database(this.selectedMonth, listado, this.unidad.id)).then(
       r => {
         if (!r.error) {
           this.file = URL.createObjectURL(r.data)
@@ -99,6 +99,7 @@ export class DatabaseComponent implements OnInit {
   }
 
   reset() {
+    this.file = ''
     this.mes = 'Selección del mes'
     this.loadUnidades()
     this.stepper.reset()

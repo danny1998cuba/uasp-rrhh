@@ -1,4 +1,7 @@
 <ng-container *ngIf="!isLoading; else noData;">
+    <p>
+        Asigne a cada trabajador el n&uacute;mero de nocturnidades que realiz&oacute; en el mes en procesamiento.
+    </p>
     <h2>Trabajadores de {{unidad.nombre}}</h2>
     <mat-form-field>
         <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" matTooltip="Buscar Trabajadores" #filter1>
@@ -29,8 +32,8 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Acciones </th>
                 <td mat-cell *matCellDef="let row">
-                    <button mat-button class="" type="button" matTooltip="Asignar nocturnidad" aria-label="Edit"
-                        (click)="addNoct(false, row)">
+                    <button mat-button class="" type="button" matTooltip="Asignar nocturnidad"
+                        matTooltipPosition="right" aria-label="Edit" (click)="addNoct(false, row)">
                         <fa-icon [icon]="faMoon"></fa-icon>
                     </button>
                 </td>
@@ -90,8 +93,8 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Acciones </th>
                 <td mat-cell *matCellDef="let row">
-                    <button mat-button class="" type="button" matTooltip="Modificar nocturnidad" aria-label="Edit"
-                        (click)="addNoct(true, row)">
+                    <button mat-button class="" type="button" matTooltip="Modificar nocturnidad"
+                        matTooltipPosition="right" aria-label="Edit" (click)="addNoct(true, row)">
                         <fa-icon [icon]="faEdit"></fa-icon>
                     </button>
                 </td>

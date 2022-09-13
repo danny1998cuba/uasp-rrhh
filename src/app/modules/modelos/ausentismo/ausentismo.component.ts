@@ -64,6 +64,7 @@ export class AusentismoComponent implements OnInit {
   }
 
   reset() {
+    this.file = ''
     this.mes = 'Selección del mes'
     this.isLoading = true
     setTimeout(() => { this.isLoading = false }, 200);

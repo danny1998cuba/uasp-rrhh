@@ -43,7 +43,7 @@
 
             <ng-container *ngIf="!isLoading; else noData;">
                 <ng-container *ngIf="file != ''; else noFile">
-                    <app-pdf-viewer [src]="file" [downloadFileName]="'Base de datos - ' + mes + '.pdf'">
+                    <app-pdf-viewer [src]="file" [downloadFileName]="'Base de datos - ' + unidad.nombre + ' - ' + mes + '.pdf'">
                     </app-pdf-viewer>
                 </ng-container>
             </ng-container>

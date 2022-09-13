@@ -119,11 +119,11 @@ export class ReportsService extends ApiClass {
       );
   }
 
-  database(mes: Date, data: Nocturnidades[]): Observable<ResponseHandler> {
+  database(mes: Date, data: Nocturnidades[], idUnidad: number): Observable<ResponseHandler> {
     const response = new ResponseHandler()
 
     return this.http.post<any>(REPORTS.DATABASE +
-      '?tipo=pdf&mes=' + new DatePipe('es-ES').transform(mes, 'yyyy-MM-dd'),
+      '?tipo=pdf&unidadId=' + idUnidad + '&mes=' + new DatePipe('es-ES').transform(mes, 'yyyy-MM-dd'),
       data,
       { headers: this.headers, withCredentials: true })
       .pipe(
