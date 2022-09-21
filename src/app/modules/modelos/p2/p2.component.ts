@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { firstValueFrom } from 'rxjs';
 import { Unidad } from 'src/app/data/schema';
 import { ReportsService, UnidadService } from 'src/app/data/services';
 import { UnidadesComponent } from '../../sistema/unidades/unidades.component';
@@ -33,9 +34,12 @@ export class P2Component implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.unidades = this.unidadComp.data
-    }, 1000);
+    this.loadUnidades()
+  }
+
+  async loadUnidades() {
+    await this.unidadComp.refreshData()
+    this.unidades = this.unidadComp.data
   }
 
   sendMsg(msg: string) {
@@ -44,13 +48,13 @@ export class P2Component implements OnInit {
 
   compareObjects(ob1: any, ob2: any) { return (ob1 && ob2) ? ob1.id === ob2.id : false }
 
-  changedUni() {
+  async changedUni() {
     this.isLoading = true
     if (this.unidad == null) {
       this.file = ''
       this.isLoading = false
     } else {
-      this.reportService.p2(this.unidad.id).subscribe(
+      await firstValueFrom(this.reportService.p2(this.unidad.id)).then(
         r => {
           if (!r.error) {
             this.file = URL.createObjectURL(r.data)
@@ -59,9 +63,9 @@ export class P2Component implements OnInit {
             this.sendMsg("Error")
         }
       )
-      setTimeout(() => { console.log(this.file); this.isLoading = false }, 1000);
-
+      this.isLoading = false
     }
   }
-
 }
+
+

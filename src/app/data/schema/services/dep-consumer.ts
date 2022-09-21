@@ -1,5 +1,6 @@
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
+import { firstValueFrom } from "rxjs";
 import { DepartamentoService, RolService } from "../../services";
 import { Departamento } from "../model/departamento";
 import { ServicesConsumer } from "./services-consumer";
@@ -14,17 +15,17 @@ export class DepsConsumer extends ServicesConsumer<Departamento, number> {
         super(service, router);
     }
 
-    override refreshData() {
-        this.service.getAll().subscribe(
+    override async refreshData() {
+        await firstValueFrom(this.service.getAll()).then(
             r => {
                 if (!r.error) {
                     this.data = r.data;
-                    setTimeout(() => this.isLoading = false, 1000)
                 } else {
                     this.router.navigateByUrl('/home');
                 }
             }
         )
+        this.isLoading = false
     }
 
     override sendMsg(msg: string) {

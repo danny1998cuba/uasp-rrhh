@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { firstValueFrom } from 'rxjs';
 import { Departamento, DepsConsumer, ServicesConsumer, Unidad } from 'src/app/data/schema';
 import { DepartamentoService } from 'src/app/data/services';
 import { DelDialogComponent } from 'src/app/shared/components';
@@ -39,13 +40,11 @@ export class DepartamentosComponent implements OnInit {
     this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
   }
 
-  listDeps() {
-    this.service.getByUnidad(this.unidad.id).subscribe(
+  async listDeps() {
+    await firstValueFrom(this.service.getByUnidad(this.unidad.id)).then(
       r => {
         if (!r.error) {
           this.deps = r.data;
-
-          setTimeout(() => { }, 1000)
         } else {
           this.router.navigateByUrl('/home');
         }

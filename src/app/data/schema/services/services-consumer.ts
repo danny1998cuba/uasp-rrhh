@@ -15,7 +15,7 @@ export class ServicesConsumer<T, PK> {
         this.refreshData()
     }
 
-    refreshData() { }
+    async refreshData() { }
     sendMsg(msg: string) { }
 
     add(cont: T) {

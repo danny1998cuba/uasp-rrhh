@@ -103,7 +103,7 @@ export class AusentismoFormComponent implements OnInit {
       ))
     }
 
-    setTimeout(() => { this.isLoading = false }, 1000);
+    this.isLoading = false
   }
 
   sendMsg(msg: string) {

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { firstValueFrom } from 'rxjs';
 import { Departamento, ServicesConsumer, Unidad } from 'src/app/data/schema';
 import { DepartamentoService, UnidadService } from 'src/app/data/services';
 import { DelDialogComponent } from 'src/app/shared/components';
@@ -28,19 +29,18 @@ export class UnidadesComponent extends ServicesConsumer<Unidad, number> {
     super(service, router)
   }
 
-  override refreshData() {
-    this.service.getAll().subscribe(
+  override async refreshData() {
+    await firstValueFrom(this.service.getAll()).then(
       r => {
         if (!r.error) {
           this.data = r.data;
           this.unidades = this.data;
-
-          setTimeout(() => this.isLoading = false, 1000)
         } else {
           this.router.navigateByUrl('/home');
         }
       }
     )
+    this.isLoading = false
   }
 
   override sendMsg(msg: string) {
@@ -82,7 +82,7 @@ export class UnidadesComponent extends ServicesConsumer<Unidad, number> {
     });
   }
 
-  refresh(){
+  refresh() {
     this.isLoading = true
     this.refreshData()
   }

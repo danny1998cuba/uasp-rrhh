@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, Optional, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
+import { REGEX_NOMBRE } from 'src/app/data/constants';
 import { Cargo, CatDoc, Cla, Departamento, NivelEscolar, Trabajador } from 'src/app/data/schema';
 
 @Component({
@@ -39,8 +40,8 @@ export class FiltersSelectorComponent {
     this.object = new Trabajador()
 
     this.form = new FormGroup({
-      nombre: new FormControl(this.object.nombre),
-      apellidos: new FormControl(this.object.apellidos),
+      nombre: new FormControl(this.object.nombre, Validators.pattern(REGEX_NOMBRE)),
+      apellidos: new FormControl(this.object.apellidos, Validators.pattern(REGEX_NOMBRE)),
       ci: new FormControl(this.object.ci, Validators.pattern('[0-9]{11}')),
       sexo: new FormControl(this.object.sexo),
       maestria: new FormControl(this.object.maestria),

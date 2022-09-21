@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { firstValueFrom } from 'rxjs';
 import { Authenticated } from 'src/app/core/utils';
 import { Rol, RolConsumer, ServicesConsumer, Usuario } from 'src/app/data/schema';
 import { RolService, UserService } from 'src/app/data/services';
@@ -47,26 +48,26 @@ export class UsuariosComponent extends ServicesConsumer<Usuario, number> impleme
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.roles = this.rolCons.data
-      console.log(this.roles)
-    }, 1000);
+    this.loadDatas()
   }
 
-  override refreshData() {
-    this.service.getAll().subscribe(
+  async loadDatas() {
+    await this.rolCons.refreshData()
+    this.roles = this.rolCons.data
+  }
+
+  override async refreshData() {
+    await firstValueFrom(this.service.getAll()).then(
       r => {
         if (!r.error) {
           this.data = r.data;
           this.dataSource = new MatTableDataSource(this.data);
-
-          console.log(this.dataSource)
-          setTimeout(() => this.isLoading = false, 1000)
         } else {
           this.router.navigateByUrl('/home');
         }
       }
     )
+    this.isLoading = false
   }
 
   override sendMsg(msg: string) {

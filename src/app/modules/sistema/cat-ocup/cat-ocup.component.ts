@@ -6,6 +6,7 @@ import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
 import { faPencil, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { firstValueFrom } from "rxjs";
 import { CatOcup, ServicesConsumer } from "src/app/data/schema";
 import { CatOcupService } from "src/app/data/services";
 import { DelDialogComponent } from "src/app/shared/components";
@@ -51,20 +52,18 @@ export class CatOcupComponent extends ServicesConsumer<CatOcup, number>{
     )
   }
 
-  override refreshData() {
-    this.service.getAll().subscribe(
+  override async refreshData() {
+    await firstValueFrom(this.service.getAll()).then(
       r => {
         if (!r.error) {
           this.data = r.data;
           this.dataSource = new MatTableDataSource(this.data);
-
-          console.log(this.dataSource + '\n' + r.status)
-          setTimeout(() => this.isLoading = false, 1000)
         } else {
           this.router.navigateByUrl('/home');
         }
       }
     )
+    this.isLoading = false
   }
 
   override sendMsg(msg: string) {

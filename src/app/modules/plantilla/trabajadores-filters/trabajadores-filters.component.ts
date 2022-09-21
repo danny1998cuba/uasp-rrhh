@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { faDownload, faFilter } from '@fortawesome/free-solid-svg-icons';
+import { firstValueFrom } from 'rxjs';
 import { PLANTILLA_ROUTES } from 'src/app/data/constants';
 import { Cargo, CatDoc, Cla, Departamento, DepsConsumer, NivelEscolar, Trabajador } from 'src/app/data/schema';
 import { CargoService, CatDocService, CatOcupService, ClaService, DepartamentoService, EscalaService, NivelEscolarService, ReportsService, TrabajadorService } from 'src/app/data/services';
@@ -71,22 +72,30 @@ export class TrabajadoresFiltersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.catsDoc = this.catDocComp.data
-      this.clas = this.claComp.data
-      this.deps = this.depCons.data
-      this.cargos = this.cargoComp.data
-      this.niveles = this.nivelesComp.data
-
-      this.listas = {
-        catsDoc: this.catsDoc,
-        clas: this.clas,
-        deps: this.deps,
-        cargos: this.cargos,
-        niveles: this.niveles,
-      }
-    }, 1000);
+    this.loadDatas()
   }
+
+  async loadDatas() {
+    await this.catDocComp.refreshData()
+    this.catsDoc = this.catDocComp.data
+    await this.claComp.refreshData()
+    this.clas = this.claComp.data
+    await this.depCons.refreshData()
+    this.deps = this.depCons.data
+    await this.cargoComp.refreshData()
+    this.cargos = this.cargoComp.data
+    await this.nivelesComp.refreshData()
+    this.niveles = this.nivelesComp.data
+
+    this.listas = {
+      catsDoc: this.catsDoc,
+      clas: this.clas,
+      deps: this.deps,
+      cargos: this.cargos,
+      niveles: this.niveles,
+    }
+  }
+
 
   sendMsg(msg: string) {
     this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
@@ -104,18 +113,18 @@ export class TrabajadoresFiltersComponent implements OnInit {
     });
   }
 
-  loadFilter(object: Trabajador) {
+  async loadFilter(object: Trabajador) {
     this.lastFilter = object
-    this.service.getByFilter(object).subscribe(
+    await firstValueFrom(this.service.getByFilter(object)).then(
       r => {
         if (!r.error) {
           this.dataSource = new MatTableDataSource(r.data);
-          setTimeout(() => this.isLoading = false, 1000)
         } else {
           this.sendMsg(r.msg)
         }
       }
     )
+    this.isLoading = false
   }
 
   editTrabajador(object: Trabajador) {

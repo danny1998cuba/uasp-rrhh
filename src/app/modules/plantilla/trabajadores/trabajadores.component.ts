@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { firstValueFrom } from 'rxjs';
 import { Cargo, CatDoc, CatOcup, Cla, Departamento, DepsConsumer, NivelEscolar, ServicesConsumer, Trabajador } from 'src/app/data/schema';
 import { CargoService, CatDocService, CatOcupService, ClaService, DepartamentoService, EscalaService, NivelEscolarService, TrabajadorService } from 'src/app/data/services';
 import { DepCargoService } from 'src/app/data/services/api/dep-cargo.service';
@@ -82,47 +83,54 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
   }
 
   ngAfterViewInit(): void {
+    this.isLoading = true
     setTimeout(() => {
       this.activatedRoute.queryParams.subscribe(params => {
         this.ci = params['ci']
         this.applyFilter(new Event(''), this.ci)
       })
-    }, 1100);
+      this.isLoading = false
+    }, 100);
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.catsDoc = this.catDocComp.data
-      this.clas = this.claComp.data
-      this.deps = this.depCons.data
-      this.cargos = this.cargoComp.data
-      this.niveles = this.nivelesComp.data
-
-      this.listas = {
-        catsDoc: this.catsDoc,
-        clas: this.clas,
-        deps: this.deps,
-        cargos: this.cargos,
-        niveles: this.niveles,
-      }
-
-    }, 1000);
+    this.loadDatas()
   }
 
-  override refreshData() {
-    this.service.getAll().subscribe(
+  async loadDatas() {
+    await this.catDocComp.refreshData()
+    this.catsDoc = this.catDocComp.data
+    await this.claComp.refreshData()
+    this.clas = this.claComp.data
+    await this.depCons.refreshData()
+    this.deps = this.depCons.data
+    await this.cargoComp.refreshData()
+    this.cargos = this.cargoComp.data
+    await this.nivelesComp.refreshData()
+    this.niveles = this.nivelesComp.data
+
+    this.listas = {
+      catsDoc: this.catsDoc,
+      clas: this.clas,
+      deps: this.deps,
+      cargos: this.cargos,
+      niveles: this.niveles,
+    }
+  }
+
+  override async refreshData() {
+    await firstValueFrom(this.service.getAll()).then(
       r => {
         if (!r.error) {
           this.data = r.data;
           this.dataSource = new MatTableDataSource(this.data);
-
-          console.log(this.dataSource + '\n' + r.status)
-          setTimeout(() => this.isLoading = false, 1000)
         } else {
           this.router.navigateByUrl('/home');
         }
       }
     )
+    // this.loadParameter()
+    this.isLoading = false
   }
 
   override sendMsg(msg: string) {

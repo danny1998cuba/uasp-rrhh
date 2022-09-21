@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { faLink, faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { firstValueFrom } from 'rxjs';
 import { Cargo, CatOcup, Departamento, DepartamentoCargoPK, DepCargoConsumer, DepsConsumer, Escala, NivelEscolar, ServicesConsumer } from 'src/app/data/schema';
 import { CargoService, CatOcupService, DepartamentoService, EscalaService, NivelEscolarService } from 'src/app/data/services';
 import { DepCargoService } from 'src/app/data/services/api/dep-cargo.service';
@@ -69,35 +70,39 @@ export class CargosComponent extends ServicesConsumer<Cargo, number> implements 
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.escalas = this.escComp.data
-      this.catsOcup = this.catOcupComp.data
-      this.niveles = this.nivelesComp.data
-      this.deps = this.depCons.data
-
-      this.listas = {
-        escalas: this.escalas,
-        catsOcup: this.catsOcup,
-        niveles: this.niveles,
-        deps: this.deps
-      }
-    }, 1000);
+    this.loadDatas()
   }
 
-  override refreshData() {
-    this.service.getAll().subscribe(
+  async loadDatas() {
+    await this.escComp.refreshData()
+    this.escalas = this.escComp.data
+    await this.catOcupComp.refreshData()
+    this.catsOcup = this.catOcupComp.data
+    await this.nivelesComp.refreshData()
+    this.niveles = this.nivelesComp.data
+    await this.depCons.refreshData()
+    this.deps = this.depCons.data
+
+    this.listas = {
+      escalas: this.escalas,
+      catsOcup: this.catsOcup,
+      niveles: this.niveles,
+      deps: this.deps
+    }
+  }
+
+  override async refreshData() {
+    await firstValueFrom(this.service.getAll()).then(
       r => {
         if (!r.error) {
           this.data = r.data;
           this.dataSource = new MatTableDataSource(this.data);
-
-          console.log(this.dataSource + '\n' + r.status)
-          setTimeout(() => this.isLoading = false, 1000)
         } else {
           this.router.navigateByUrl('/home');
         }
       }
     )
+    this.isLoading = false
   }
 
   override sendMsg(msg: string) {

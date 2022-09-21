@@ -170,6 +170,6 @@ export class NoctTablesComponent implements OnInit {
     this.isLoading = true
     this.dataSource = new MatTableDataSource(this.trabs);
     this.dataSourceNoct = new MatTableDataSource(this.noct);
-    setTimeout(() => { this.isLoading = false }, 500);
+    setTimeout(() => { this.isLoading = false }, 100);
   }
 }

@@ -70,10 +70,15 @@ export class TrabajadoresUnidadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.unidades = this.unidadComp.data
-      this.trabajadores = this.trabComp.data
-    }, 1000);
+    this.loadDatas()
+  }
+
+  async loadDatas() {
+    await this.unidadComp.refreshData()
+    this.unidades = this.unidadComp.data
+    await this.trabComp.refreshData()
+    this.trabajadores = this.trabComp.data
+    this.isLoading = false
   }
 
   sendMsg(msg: string) {
@@ -82,7 +87,7 @@ export class TrabajadoresUnidadComponent implements OnInit {
 
   compareObjects(ob1: any, ob2: any) { return (ob1 && ob2) ? ob1.id === ob2.id : false }
 
-  changedUni() {
+  async changedUni() {
     this.isLoading = true
     if (this.unidad == null) {
       this.dataSource = new MatTableDataSource()
@@ -98,15 +103,15 @@ export class TrabajadoresUnidadComponent implements OnInit {
 
       this.downName = 'Trabajadores - Todas las unidades.pdf'
 
-      setTimeout(() => { this.isLoading = false }, 1000);
+      setTimeout(() => { this.isLoading = false }, 100);
     } else {
       this.allUnidsB = false
       this.dataSource = new MatTableDataSource(this.trabajadoresUnidad(this.unidad))
       console.log(this.dataSource.data)
 
-      this.downName = 'Trabajadores - ' + this.unidad.nombre + '.pdf' 
+      this.downName = 'Trabajadores - ' + this.unidad.nombre + '.pdf'
 
-      setTimeout(() => { this.isLoading = false }, 1000);
+      setTimeout(() => { this.isLoading = false }, 100);
     }
   }
 

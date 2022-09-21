@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { firstValueFrom } from 'rxjs';
 import { SigeliteService } from 'src/app/data/services';
 
 @Component({
@@ -34,9 +35,9 @@ export class OmeiComponent {
     this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
   }
 
-  load_F5202() {
+  async load_F5202() {
     this.isLoading5202 = true
-    this.service.F5202(this.observ5202 == '' ? undefined : this.observ5202).subscribe(
+    await firstValueFrom(this.service.F5202(this.observ5202 == '' ? undefined : this.observ5202)).then(
       r => {
         if (!r.error) {
           this.file = URL.createObjectURL(r.data)
@@ -47,18 +48,17 @@ export class OmeiComponent {
 
           this.download()
           this.observ5202 = ''
-          setTimeout(() => { this.isLoading5202 = false }, 1000);
         } else {
           this.sendMsg("Error")
-          setTimeout(() => { this.isLoading5202 = false }, 1000);
         }
       }
     )
+    this.isLoading5202 = false
   }
 
-  load_F5205() {
+  async load_F5205() {
     this.isLoading5205 = true
-    this.service.F5205(this.observ5205 == '' ? undefined : this.observ5205).subscribe(
+    await firstValueFrom(this.service.F5205(this.observ5205 == '' ? undefined : this.observ5205)).then(
       r => {
         if (!r.error) {
           this.file = URL.createObjectURL(r.data)
@@ -69,13 +69,12 @@ export class OmeiComponent {
 
           this.download()
           this.observ5205 = ''
-          setTimeout(() => { this.isLoading5205 = false }, 1000);
         } else {
           this.sendMsg("Error")
-          setTimeout(() => { this.isLoading5205 = false }, 1000);
         }
       }
     )
+    this.isLoading5205 = false
   }
 
   download() {

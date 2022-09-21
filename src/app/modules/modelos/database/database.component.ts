@@ -52,13 +52,13 @@ export class DatabaseComponent implements OnInit {
     this.loadUnidades()
   }
 
-  loadUnidades() {
+  async loadUnidades() {
     this.isLoading = true
-    setTimeout(() => {
-      this.unidades = this.unidadComp.data
-      this.unidades.length != 0 ? this.unidad = this.unidades[0] : this.unidad = new Unidad()
-      this.isLoading = false
-    }, 1000);
+    await this.unidadComp.refreshData()
+    this.unidades = this.unidadComp.data
+    this.unidades.length != 0 ? this.unidad = this.unidades[0] : this.unidad = new Unidad()
+    this.isLoading = false
+
   }
 
   sendMsg(msg: string) {

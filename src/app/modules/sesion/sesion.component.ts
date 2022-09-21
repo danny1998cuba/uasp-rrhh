@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import { firstValueFrom } from 'rxjs';
 import { Authenticated } from 'src/app/core/utils';
 import { passwordMatchValidator } from 'src/app/core/validators';
 import { ROLES_PERMS, STORAGE_KEYS } from 'src/app/data/constants';
@@ -57,24 +58,23 @@ export class SesionComponent {
     this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
   }
 
-  changePass() {
+  async changePass() {
     if (this.form.valid) {
       this.isLoadingPass = true
-
       let oldPass = this.form.get('oldPass')?.value
       let newPass = this.form.get('newPass')?.value
 
-      this.usService.changePass(this.usuario.id, oldPass, newPass).subscribe(
+      await firstValueFrom(this.usService.changePass(this.usuario.id, oldPass, newPass)).then(
         r => {
           if (!r.error) {
             this.sendMsg(r.data)
-            this.form.reset()
-            setTimeout(() => { this.isLoadingPass = false }, 1000);
           }
           else
             this.sendMsg(r.msg)
         }
-      );
+      )
+      this.form.reset()
+      this.isLoadingPass = false
     }
   }
 
@@ -83,20 +83,24 @@ export class SesionComponent {
     myCompDialog.afterClosed().subscribe((res) => {
       if (res)
         if (res.success) {
-          this.isLoading = true;
-          this.usService.update(res.object.id, res.object).subscribe(
-            r => {
-              if (r.status == HttpStatusCode.Ok) {
-                this.sendMsg('Usuario modificado correctamente')
-                this.setUserToLS(res.object)
-                setTimeout(() => { this.isLoading = false }, 1000);
-              } else {
-                this.sendMsg(r.msg)
-              }
-            }
-          );
+          this.update(res.object)
         }
     });
+  }
+
+  async update(usuario: Usuario) {
+    this.isLoading = true;
+    await firstValueFrom(this.usService.update(usuario.id, usuario)).then(
+      r => {
+        if (r.status == HttpStatusCode.Ok) {
+          this.sendMsg('Usuario modificado correctamente')
+          this.setUserToLS(usuario)
+        } else {
+          this.sendMsg(r.msg)
+        }
+      }
+    )
+    this.isLoading = false
   }
 
   private setUserToLS(data: any) {

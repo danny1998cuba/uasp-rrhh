@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Authenticated } from 'src/app/core/utils';
+import { REGEX_NOMBRE } from 'src/app/data/constants';
 import { Rol, Usuario } from 'src/app/data/schema';
 
 @Component({
@@ -31,8 +32,8 @@ export class UsuarioAddModComponent {
     this.form = new FormGroup({
       username: new FormControl({ value: this.object.username, disabled: this.mydata.isMod }, Validators.required),
       password: new FormControl(this.object.password, Validators.required),
-      nombre: new FormControl(this.object.nombre, Validators.required),
-      apellidos: new FormControl(this.object.apellidos, Validators.required),
+      nombre: new FormControl(this.object.nombre, [Validators.required, Validators.pattern(REGEX_NOMBRE)]),
+      apellidos: new FormControl(this.object.apellidos, [Validators.required, Validators.pattern(REGEX_NOMBRE)]),
       email: new FormControl(this.object.email, [Validators.email, Validators.required]),
       telefono: new FormControl(this.object.telefono, Validators.pattern('[0-9]{8}')),
       enabled: new FormControl(this.object.enabled, Validators.required),

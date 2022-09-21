@@ -1,0 +1,1 @@
+export const REGEX_NOMBRE = "([a-zA-ZÁÉÍÓÚáéíóú '.]+( [a-zA-ZÁÉÍÓÚáéíóú.]+)*){2,}"

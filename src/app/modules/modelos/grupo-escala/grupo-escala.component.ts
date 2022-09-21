@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { firstValueFrom } from 'rxjs';
 import { ReportsService } from 'src/app/data/services';
 
 @Component({
@@ -20,7 +21,11 @@ export class GrupoEscalaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.reportService.grupoEscala().subscribe(
+    this.loadInfo()
+  }
+
+  async loadInfo() {
+    await firstValueFrom(this.reportService.grupoEscala()).then(
       r => {
         if (!r.error) {
           this.file = URL.createObjectURL(r.data)
@@ -29,7 +34,7 @@ export class GrupoEscalaComponent implements OnInit {
           this.sendMsg("Error")
       }
     )
-    setTimeout(() => { this.isLoading = false }, 1500);
+    this.isLoading = false
   }
 
   sendMsg(msg: string) {

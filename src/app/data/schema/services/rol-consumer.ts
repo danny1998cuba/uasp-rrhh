@@ -1,4 +1,5 @@
 import { Router } from "@angular/router";
+import { firstValueFrom } from "rxjs";
 import { RolService } from "../../services";
 import { Rol } from "../model/rol";
 import { ServicesConsumer } from "./services-consumer";
@@ -13,17 +14,17 @@ export class RolConsumer extends ServicesConsumer<Rol, number> {
 
     }
 
-    override refreshData() {
-        this.service.getAll().subscribe(
+    override async refreshData() {
+        await firstValueFrom(this.service.getAll()).then(
             r => {
                 if (!r.error) {
                     this.data = r.data;
-                    setTimeout(() => this.isLoading = false, 1000)
                 } else {
                     this.router.navigateByUrl('/home');
                 }
             }
         )
+        this.isLoading = false
     }
 
     override add(cont: Rol): void {

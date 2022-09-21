@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { disponibilidadPlazasValidator, nivelEscolarValidator } from 'src/app/core/validators';
+import { REGEX_NOMBRE } from 'src/app/data/constants';
 import { Cargo, CatDoc, Cla, Departamento, NivelEscolar, Trabajador } from 'src/app/data/schema';
 import { DepCargoService } from 'src/app/data/services/api/dep-cargo.service';
 
@@ -48,8 +49,8 @@ export class TrabAddModComponent {
     }
 
     this.form = new FormGroup({
-      nombre: new FormControl(this.object.nombre, Validators.required),
-      apellidos: new FormControl(this.object.apellidos, Validators.required),
+      nombre: new FormControl(this.object.nombre, [Validators.required, Validators.pattern(REGEX_NOMBRE)]),
+      apellidos: new FormControl(this.object.apellidos, [Validators.required, Validators.pattern(REGEX_NOMBRE)]),
       ci: new FormControl(this.object.ci, [Validators.pattern('[0-9]{11}'), Validators.required]),
       sexo: new FormControl(this.object.sexo, Validators.required),
       maestria: new FormControl(this.object.maestria, Validators.required),
