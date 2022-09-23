@@ -4,10 +4,12 @@
     <div class="d-flex justify-content-between">
         <mat-form-field>
             <mat-label>Seleccione una unidad</mat-label>
-            <mat-select [(value)]="unidad" [compareWith]="compareObjects" (valueChange)="changedUni()">
-                <mat-option [value]="null">--</mat-option>
-                <mat-option [value]="allUnids">Todas las unidades</mat-option>
-                <mat-option *ngFor="let uni of unidades" [value]="uni">
+            <mat-select #select [(value)]="unidad" [compareWith]="compareObjects" (valueChange)="changedUni()">
+                <mat-select-filter [array]="unidades" [displayMember]="'nombre'" (filteredReturn)="filtered = $event"
+                    placeholder="Buscar..." *ngIf="select.focused" [showSpinner]="true"
+                    noResultsMessage="Sin coincidencias">
+                </mat-select-filter>
+                <mat-option *ngFor="let uni of filtered" [value]="uni">
                     {{uni.nombre}}
                 </mat-option>
             </mat-select>
@@ -22,8 +24,9 @@
 
         <div *ngIf="allUnidsB">
             <mat-tab-group (selectedIndexChange)="changeTab($event)">
-                <mat-tab *ngFor="let uni of unidades; let index = index" [label]="uni.nombre">
-                    <app-clickable-trabajador-table [dataSource]="dataSources[index]"></app-clickable-trabajador-table>
+                <mat-tab *ngFor="let uni of unidades.slice(1); let index = index" [label]="uni.nombre">
+                    <app-clickable-trabajador-table [dataSource]="dataSources[index+1]">
+                    </app-clickable-trabajador-table>
                 </mat-tab>
             </mat-tab-group>
         </div>

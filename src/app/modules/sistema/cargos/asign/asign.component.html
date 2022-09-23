@@ -15,10 +15,14 @@
 
             <div class="col-md-5">
                 <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Departamento" formControlName="departamento" required
+                    <mat-select #select placeholder="Departamento" formControlName="departamento" required
                         [compareWith]="compareObjects" (valueChange)="onChange($event)">
+                        <mat-select-filter [array]="deps" [displayMember]="'nombre'"
+                            (filteredReturn)="filtered = $event" placeholder="Buscar..." *ngIf="select.focused"
+                            [showSpinner]="true" noResultsMessage="Sin coincidencias">
+                        </mat-select-filter>
                         <mat-option>--</mat-option>
-                        <mat-option *ngFor="let dep of deps" [value]="dep">
+                        <mat-option *ngFor="let dep of filtered" [value]="dep">
                             {{dep.idUnidad.nombre}}/{{dep.nombre}}
                         </mat-option>
                     </mat-select>
@@ -47,7 +51,7 @@
 
         <div class="d-flex justify-content-end mt-4">
             <button mat-button [mat-dialog-close]="{success:false, object:undefined}" type="button">Cancelar</button>
-            <button mat-button  type="submit">Asignar</button>
+            <button mat-button type="submit">Asignar</button>
         </div>
     </form>
 </mat-dialog-content>

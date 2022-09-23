@@ -20,6 +20,7 @@ export class P2Component implements OnInit {
   faDown = faDownload
 
   unidades!: Unidad[]
+  filtered!: Unidad[]
   unidad!: Unidad | null
   unidadComp!: UnidadesComponent
 
@@ -40,6 +41,7 @@ export class P2Component implements OnInit {
   async loadUnidades() {
     await this.unidadComp.refreshData()
     this.unidades = this.unidadComp.data
+    this.filtered = this.unidades.slice()
   }
 
   sendMsg(msg: string) {

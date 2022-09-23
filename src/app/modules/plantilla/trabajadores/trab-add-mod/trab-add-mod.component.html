@@ -59,10 +59,14 @@
         <div class="row">
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Nivel escolar" formControlName="nivelEscolar" required
+                    <mat-select #selectNE placeholder="Nivel escolar" formControlName="nivelEscolar" required
                         [compareWith]="compareObjects">
+                        <mat-select-filter [array]="niveles" [displayMember]="'nombre'"
+                            (filteredReturn)="filteredNE = $event" placeholder="Buscar..." *ngIf="selectNE.focused"
+                            [showSpinner]="true" noResultsMessage="Sin coincidencias">
+                        </mat-select-filter>
                         <mat-option>--</mat-option>
-                        <mat-option *ngFor="let nivel of niveles" [value]="nivel">
+                        <mat-option *ngFor="let nivel of filteredNE" [value]="nivel">
                             {{nivel.nombre}}
                         </mat-option>
                     </mat-select>
@@ -92,10 +96,14 @@
         <div class="row">
             <div class="col-md-12">
                 <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Departamento" formControlName="idDepartamento" required
+                    <mat-select #selectD placeholder="Departamento" formControlName="idDepartamento" required
                         [compareWith]="compareObjects">
+                        <mat-select-filter [array]="deps" [displayMember]="'nombre'"
+                            (filteredReturn)="filteredD = $event" placeholder="Buscar..." *ngIf="selectD.focused"
+                            [showSpinner]="true" noResultsMessage="Sin coincidencias">
+                        </mat-select-filter>
                         <mat-option>--</mat-option>
-                        <mat-option *ngFor="let dep of deps" [value]="dep">
+                        <mat-option *ngFor="let dep of filteredD" [value]="dep">
                             {{dep.nombre}}/{{dep.idUnidad.nombre}}
                         </mat-option>
                     </mat-select>
@@ -110,9 +118,14 @@
         <div class="row">
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Cargo" formControlName="idCargo" required [compareWith]="compareObjects">
+                    <mat-select #selectC placeholder="Cargo" formControlName="idCargo" required
+                        [compareWith]="compareObjects">
+                        <mat-select-filter [array]="cargos" [displayMember]="'nombre'"
+                            (filteredReturn)="filteredC = $event" placeholder="Buscar..." *ngIf="selectC.focused"
+                            [showSpinner]="true" noResultsMessage="Sin coincidencias">
+                        </mat-select-filter>
                         <mat-option>--</mat-option>
-                        <mat-option *ngFor="let cargo of cargos" [value]="cargo">
+                        <mat-option *ngFor="let cargo of filteredC" [value]="cargo">
                             {{cargo.nombre}}
                         </mat-option>
                     </mat-select>
@@ -127,10 +140,14 @@
             </div>
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Categoría docente" formControlName="idcatDoc"
+                    <mat-select #selectCD placeholder="Categoría docente" formControlName="idcatDoc"
                         [compareWith]="compareObjects">
+                        <mat-select-filter [array]="catsDoc" [displayMember]="'tipo'"
+                            (filteredReturn)="filteredCD = $event" placeholder="Buscar..." *ngIf="selectCD.focused"
+                            [showSpinner]="true" noResultsMessage="Sin coincidencias">
+                        </mat-select-filter>
                         <mat-option>--</mat-option>
-                        <mat-option *ngFor="let cd of catsDoc" [value]="cd">
+                        <mat-option *ngFor="let cd of filteredCD" [value]="cd">
                             {{cd.tipo}}
                         </mat-option>
                     </mat-select>
@@ -141,10 +158,14 @@
         <div class="row">
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Condiciones laborales adicionales" formControlName="idCLA"
+                    <mat-select #selectCLA placeholder="Condiciones laborales adicionales" formControlName="idCLA"
                         [compareWith]="compareObjects">
+                        <mat-select-filter [array]="clas" [displayMember]="'grupo'"
+                            (filteredReturn)="filteredCLA = $event" placeholder="Buscar... (Solo número del grupo)"
+                            *ngIf="selectCLA.focused" [showSpinner]="true" noResultsMessage="Sin coincidencias">
+                        </mat-select-filter>
                         <mat-option>--</mat-option>
-                        <mat-option *ngFor="let cla of clas" [value]="cla">
+                        <mat-option *ngFor="let cla of filteredCLA" [value]="cla">
                             Grupo {{cla.grupo}}
                         </mat-option>
                     </mat-select>

@@ -14,6 +14,10 @@ export class CargoAddModComponent {
   catsOcup!: CatOcup[]
   niveles!: NivelEscolar[]
 
+  filteredE!: Escala[]
+  filteredCO!: CatOcup[]
+  filteredNE!: NivelEscolar[]
+
   object!: Cargo
   form: FormGroup
 
@@ -24,6 +28,10 @@ export class CargoAddModComponent {
     this.escalas = mydata.listas.escalas
     this.catsOcup = mydata.listas.catsOcup
     this.niveles = mydata.listas.niveles
+
+    this.filteredE = this.escalas.slice()
+    this.filteredCO = this.catsOcup.slice()
+    this.filteredNE = this.niveles.slice()
 
     if (mydata.isMod) {
       this.object = mydata.object

@@ -13,6 +13,7 @@ import { Rol, Usuario } from 'src/app/data/schema';
 export class UsuarioAddModComponent {
 
   roles!: Rol[]
+  filtered!: Rol[]
   object!: Usuario
   form: FormGroup
 
@@ -20,8 +21,9 @@ export class UsuarioAddModComponent {
     public dialogRef: MatDialogRef<UsuarioAddModComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public mydata: any
   ) {
-    console.log(mydata)
     this.roles = mydata.roles
+    this.filtered = this.roles.slice()
+
     if (mydata.isMod) {
       this.object = mydata.object
     } else {

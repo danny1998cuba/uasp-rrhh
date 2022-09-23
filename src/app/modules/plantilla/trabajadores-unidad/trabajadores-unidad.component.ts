@@ -1,12 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import { BaseChartDirective, NgChartsConfiguration } from 'ng2-charts';
 import { Trabajador, Unidad } from 'src/app/data/schema';
 import { CargoService, CatDocService, CatOcupService, ClaService, DepartamentoService, EscalaService, NivelEscolarService, ReportsService, TrabajadorService, UnidadService } from 'src/app/data/services';
 import { DepCargoService } from 'src/app/data/services/api/dep-cargo.service';
@@ -34,6 +31,7 @@ export class TrabajadoresUnidadComponent implements OnInit {
   trabajadores!: Trabajador[]
 
   unidades!: Unidad[]
+  filtered!: Unidad[]
   unidad!: Unidad | null
   allUnids: Unidad = {
     id: 0,
@@ -76,6 +74,9 @@ export class TrabajadoresUnidadComponent implements OnInit {
   async loadDatas() {
     await this.unidadComp.refreshData()
     this.unidades = this.unidadComp.data
+    this.unidades.unshift(this.allUnids)
+    this.filtered = this.unidades.slice()
+
     await this.trabComp.refreshData()
     this.trabajadores = this.trabComp.data
     this.isLoading = false

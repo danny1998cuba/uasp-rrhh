@@ -32,6 +32,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatSelectFilterModule } from 'mat-select-filter';
 
 @NgModule({
   imports: [
@@ -56,6 +57,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatDialogModule,
     MatSnackBarModule,
     MatSelectModule,
+    MatSelectFilterModule,
     MatCheckboxModule,
     MatTabsModule,
     MatExpansionModule,
@@ -76,11 +78,11 @@ import { MatStepperModule } from '@angular/material/stepper';
     FontAwesomeModule,
     NgChartsModule,
     PdfViewerModule,
-    
+
     ...fromComponents.components,
     ...fromPipes.pipes,
     ...fromCharts.charts,
-    
+
     //Material...
     MatTableModule,
     MatPaginatorModule,
@@ -93,6 +95,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatDialogModule,
     MatSnackBarModule,
     MatSelectModule,
+    MatSelectFilterModule,
     MatCheckboxModule,
     MatTabsModule,
     MatExpansionModule,

@@ -27,6 +27,7 @@ export class DatabaseComponent implements OnInit {
   file: string = ''
 
   unidades!: Unidad[]
+  filtered!: Unidad[]
   unidad!: Unidad
   unidadComp!: UnidadesComponent
 
@@ -56,6 +57,7 @@ export class DatabaseComponent implements OnInit {
     this.isLoading = true
     await this.unidadComp.refreshData()
     this.unidades = this.unidadComp.data
+    this.filtered = this.unidades.slice()
     this.unidades.length != 0 ? this.unidad = this.unidades[0] : this.unidad = new Unidad()
     this.isLoading = false
 

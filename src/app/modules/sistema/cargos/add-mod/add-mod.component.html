@@ -27,10 +27,14 @@
 
             <div class="col-md-6">
                 <mat-form-field>
-                    <mat-select placeholder="Escala salarial" formControlName="escala" required
+                    <mat-select #selectE placeholder="Escala salarial" formControlName="escala" required
                         [compareWith]="compareObjects">
+                        <mat-select-filter [array]="escalas" [displayMember]="'clasificador'"
+                            (filteredReturn)="filteredE = $event" placeholder="Buscar..." *ngIf="selectE.focused"
+                            [showSpinner]="true" noResultsMessage="Sin coincidencias">
+                        </mat-select-filter>
                         <mat-option>--</mat-option>
-                        <mat-option *ngFor="let escala of escalas" [value]="escala">
+                        <mat-option *ngFor="let escala of filteredE" [value]="escala">
                             {{escala.clasificador}}
                         </mat-option>
                     </mat-select>
@@ -45,10 +49,14 @@
         <div class="row">
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Categoría ocupacional" formControlName="catOcup" required
+                    <mat-select #selectCo placeholder="Categoría ocupacional" formControlName="catOcup" required
                         [compareWith]="compareObjects">
+                        <mat-select-filter [array]="catsOcup" [displayMember]="'nombre'"
+                            (filteredReturn)="filteredCO = $event" placeholder="Buscar..." *ngIf="selectCo.focused"
+                            [showSpinner]="true" noResultsMessage="Sin coincidencias">
+                        </mat-select-filter>
                         <mat-option>--</mat-option>
-                        <mat-option *ngFor="let co of catsOcup" [value]="co">
+                        <mat-option *ngFor="let co of filteredCO" [value]="co">
                             {{co.parent?co.parent.nombre + ' ('+co.nombre+')': co.nombre}}
                         </mat-option>
                     </mat-select>
@@ -61,10 +69,14 @@
 
             <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Nivel escolar mínimo requerido" formControlName="nivelEscolar" required
-                        [compareWith]="compareObjects">
+                    <mat-select #selectNE placeholder="Nivel escolar mínimo requerido" formControlName="nivelEscolar"
+                        required [compareWith]="compareObjects">
+                        <mat-select-filter [array]="niveles" [displayMember]="'tipo'"
+                            (filteredReturn)="filteredNE = $event" placeholder="Buscar..." *ngIf="selectNE.focused"
+                            [showSpinner]="true" noResultsMessage="Sin coincidencias">
+                        </mat-select-filter>
                         <mat-option>--</mat-option>
-                        <mat-option *ngFor="let nivel of niveles" [value]="nivel">
+                        <mat-option *ngFor="let nivel of filteredNE" [value]="nivel">
                             {{nivel.nombre}}
                         </mat-option>
                     </mat-select>

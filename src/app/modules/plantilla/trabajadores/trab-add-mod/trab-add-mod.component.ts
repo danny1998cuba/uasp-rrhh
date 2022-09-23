@@ -22,6 +22,12 @@ export class TrabAddModComponent {
   cargos!: Cargo[]
   niveles!: NivelEscolar[]
 
+  filteredNE!: NivelEscolar[]
+  filteredD!: Departamento[]
+  filteredC!: Cargo[]
+  filteredCD!: CatDoc[]
+  filteredCLA!: Cla[]
+
   valid!: DepCargoService
 
   constructor(
@@ -35,6 +41,12 @@ export class TrabAddModComponent {
     this.deps = mydata.listas.deps
     this.cargos = mydata.listas.cargos
     this.niveles = mydata.listas.niveles
+
+    this.filteredNE = this.niveles.slice()
+    this.filteredD = this.deps.slice()
+    this.filteredC = this.cargos.slice()
+    this.filteredCLA = this.clas.slice()
+    this.filteredCD = this.catsDoc.slice()
 
     this.valid = mydata.valid
 

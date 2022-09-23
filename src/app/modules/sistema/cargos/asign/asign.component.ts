@@ -15,6 +15,7 @@ export class AsignComponent {
   form: FormGroup
 
   deps!: Departamento[]
+  filtered!: Departamento[]
   cargo!: Cargo
 
   exists = false
@@ -27,6 +28,8 @@ export class AsignComponent {
   ) {
     this.deps = mydata.listas.deps
     this.cargo = mydata.cargo
+
+    this.filtered = this.deps.slice()
 
     this.plazas = new FormControl(0, [Validators.min(0), Validators.required])
 

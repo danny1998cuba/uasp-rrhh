@@ -29,10 +29,14 @@
         <div class="row">
             <div class="col-md-12">
                 <mat-form-field class="example-full-width">
-                    <mat-select placeholder="Categoría padre" formControlName="parent" [compareWith]="compareObjects"
-                        (valueChange)="parentChanged($event)">
+                    <mat-select #select placeholder="Categoría padre" formControlName="parent"
+                        [compareWith]="compareObjects" (valueChange)="parentChanged($event)">
+                        <mat-select-filter [array]="catsOcup" [displayMember]="'nombre'"
+                            (filteredReturn)="filtered = $event" placeholder="Buscar..." *ngIf="select.focused"
+                            [showSpinner]="true" noResultsMessage="Sin coincidencias">
+                        </mat-select-filter>
                         <mat-option>--</mat-option>
-                        <mat-option *ngFor="let co of catsOcup" [value]="co">
+                        <mat-option *ngFor="let co of filtered" [value]="co">
                             {{co.nombre}} ({{co.abreviado}})
                         </mat-option>
                     </mat-select>

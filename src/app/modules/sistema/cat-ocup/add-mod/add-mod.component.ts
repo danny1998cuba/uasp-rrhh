@@ -15,12 +15,14 @@ export class COcupAddModComponent {
   form: FormGroup
 
   catsOcup!: CatOcup[]
+  filtered!: CatOcup[]
 
   constructor(
     public dialogRef: MatDialogRef<COcupAddModComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public mydata: any
   ) {
     this.catsOcup = mydata.catsOcup
+    this.filtered = this.catsOcup.slice()
 
     if (mydata.isMod) {
       this.object = mydata.object

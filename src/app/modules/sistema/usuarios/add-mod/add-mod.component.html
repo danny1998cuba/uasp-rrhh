@@ -88,7 +88,7 @@
                 <div class="col-md-6">
                     <mat-form-field class="example-full-width">
                         <mat-label>Roles</mat-label>
-                        <mat-select formControlName="rolList" multiple [compareWith]="compareObjects">
+                        <mat-select #select formControlName="rolList" multiple [compareWith]="compareObjects">
                             <mat-select-trigger>
                                 {{form.controls['rolList'].value ? form.controls['rolList'].value[0].descripcion : ''}}
                                 <span *ngIf="form.controls['rolList'].value?.length > 1"
@@ -97,7 +97,12 @@
                                 </span>
                             </mat-select-trigger>
 
-                            <mat-option *ngFor="let rol of roles" [value]="rol">{{rol.descripcion}}</mat-option>
+                            <mat-select-filter [array]="roles" [displayMember]="'descripcion'"
+                                (filteredReturn)="filtered = $event" placeholder="Buscar..." *ngIf="select.focused"
+                                [showSpinner]="true" noResultsMessage="Sin coincidencias">
+                            </mat-select-filter>
+
+                            <mat-option *ngFor="let rol of filtered" [value]="rol">{{rol.descripcion}}</mat-option>
                         </mat-select>
                         <mat-hint>Sin errores</mat-hint>
                         <mat-error *ngIf="form.controls['rolList'].hasError('required')">

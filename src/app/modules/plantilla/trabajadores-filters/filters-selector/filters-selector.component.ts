@@ -21,6 +21,12 @@ export class FiltersSelectorComponent {
   cargos!: Cargo[]
   niveles!: NivelEscolar[]
 
+  filteredNE!: NivelEscolar[]
+  filteredD!: Departamento[]
+  filteredC!: Cargo[]
+  filteredCD!: CatDoc[]
+  filteredCLA!: Cla[]
+
   @ViewChild("maestria") maestria!: MatCheckbox
   @ViewChild("doctorado") doctorado!: MatCheckbox
   @ViewChild("mision") mision!: MatCheckbox
@@ -35,6 +41,13 @@ export class FiltersSelectorComponent {
       this.deps = mydata.listas.deps
       this.cargos = mydata.listas.cargos
       this.niveles = mydata.listas.niveles
+
+
+      this.filteredNE = this.niveles.slice()
+      this.filteredD = this.deps.slice()
+      this.filteredC = this.cargos.slice()
+      this.filteredCLA = this.clas.slice()
+      this.filteredCD = this.catsDoc.slice()
     }
 
     this.object = new Trabajador()
