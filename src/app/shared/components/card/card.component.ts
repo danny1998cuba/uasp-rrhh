@@ -7,7 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CardComponent {
 
+  @Input() text_align: 'center' | 'start' | 'end' | undefined
   @Input() title: string | undefined;
+  @Input() image_src: string | undefined;
 
   constructor() { }
 }

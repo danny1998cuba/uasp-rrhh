@@ -1,0 +1,25 @@
+.title_banner {
+    position: relative;
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.title_banner .title-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+    height: 100%;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 80%, black 40%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 80%, black 40%, transparent 100%);
+    z-index: 0;
+}
+
+.title_banner h1 {
+    z-index: 1;
+    margin: 0;
+    background: rgba(255, 255, 255, .6);
+}

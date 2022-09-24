@@ -1,4 +1,5 @@
-<h1 class="card-title">Plantilla de cargo y registro de trabajadores</h1>
+<app-title-banner title="Plantilla de cargo y registro de trabajadores" image_src="assets/images/models_banner.png">
+</app-title-banner>
 
 <div class="card-body">
     <div class="d-flex justify-content-between">
@@ -6,7 +7,8 @@
             <mat-label>Seleccione una unidad</mat-label>
             <mat-select #select [(value)]="unidad" [compareWith]="compareObjects" (valueChange)="changedUni()">
                 <mat-select-filter [array]="unidades" [displayMember]="'nombre'" (filteredReturn)="filtered = $event"
-                    placeholder="Buscar..." *ngIf="select.focused" [showSpinner]="true" noResultsMessage="Sin coincidencias">
+                    placeholder="Buscar..." *ngIf="select.focused" [showSpinner]="true"
+                    noResultsMessage="Sin coincidencias">
                 </mat-select-filter>
                 <mat-option [value]="null">--</mat-option>
                 <mat-option *ngFor="let uni of filtered" [value]="uni">

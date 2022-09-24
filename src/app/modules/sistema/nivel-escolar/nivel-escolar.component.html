@@ -1,9 +1,10 @@
-<h1 class="card-title">Nivel escolar</h1>
+<app-title-banner title="Nivel escolar" image_src="assets/images/system_banner.png"></app-title-banner>
 
 <ng-container *ngIf="!isLoading; else noData;">
     <div class="card-body">
         <div class="d-flex justify-content-end">
-            <button mat-button type="button" matTooltip="Nuevo Nivel escolar" aria-label="Add" (click)="addModDialog(false)">
+            <button mat-button type="button" matTooltip="Nuevo Nivel escolar" aria-label="Add"
+                (click)="addModDialog(false)">
                 <fa-icon [icon]="faAdd"></fa-icon>
             </button>
         </div>

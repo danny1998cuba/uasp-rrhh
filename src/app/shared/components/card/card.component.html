@@ -1,6 +1,6 @@
-<div class="card text-center">
+<div class="card {{text_align ? 'text-' + text_align : ''}} ">
     <div class="card-body">
-        <h2 class="card-title">{{title}}</h2>
+        <app-title-banner title="{{title}}" image_src="{{image_src}}"></app-title-banner>
         <p class="card-text">
             <ng-content></ng-content>
         </p>
