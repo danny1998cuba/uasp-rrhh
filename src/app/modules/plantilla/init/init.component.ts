@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { PLANTILLA_SIDEBAR } from 'src/app/data/constants';
 import { Trabajador } from 'src/app/data/schema';
 import { TrabajadorService } from 'src/app/data/services';
 
@@ -8,25 +10,36 @@ import { TrabajadorService } from 'src/app/data/services';
   templateUrl: './init.component.html',
   styleUrls: ['./init.component.css']
 })
-export class InitComponent {
+export class InitComponent implements OnInit {
 
-  trabajadores: any
-  mujeres: any
+  data = PLANTILLA_SIDEBAR
+  list!: Trabajador[]
+  mujeres!: Trabajador[]
 
   constructor(
-    private service: TrabajadorService
-  ) {
-    let example = new Trabajador()
-    this.counts(example).then(r => this.trabajadores = r.data)
+    private service: TrabajadorService,
+    private snackBar: MatSnackBar
+  ) { }
 
-    example.sexo = 'f'
-    this.counts(example).then(r => this.mujeres = r.data)
-    example = new Trabajador()
+  ngOnInit(): void {
+    this.loadInfo()
   }
 
-  async counts(example: Trabajador) {
-    const call = this.service.countByFilter(example)
-    return await lastValueFrom(call)
+  async loadInfo() {
+    await firstValueFrom(this.service.getAll()).then(
+      r => {
+        if (!r.error) {
+          this.list = r.data
+        } else {
+          this.sendMsg(r.msg)
+        }
+      }
+    )
+
+    this.mujeres = this.list.filter(t => t.sexo == 'f')
   }
 
+  sendMsg(msg: string) {
+    this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
+  }
 }

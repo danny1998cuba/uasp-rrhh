@@ -1,15 +1,19 @@
-<div class="row gap-lg-0 gap-3">
-    <div class="col-lg-4">
-        <a routerLink="aprob_cub" class="text-decoration-none text-dark">
-            <app-card title="Plantilla Aprobada y Cubierta" image_src="assets/images/models_banner.png">
-                Hola
-            </app-card>
-        </a>
-    </div>
-    <div class="col-lg-4">
-        <app-card title="Lol" image_src="assets/images/models_banner.png"></app-card>
-    </div>
-    <div class="col-lg-4 ">
-        <app-card title="Lol" image_src="assets/images/models_banner.png"></app-card>
+<div class="container-fluid py-4">
+    <h1>Opciones</h1>
+    <div class="row gap-lg-0 gap-3 gy-3">
+        <ng-container *ngFor=" let group of data.groups; let i = index">
+            <h2 class=" group-header">{{group.title}}</h2>
+            <ng-container *ngFor="let link of group.options">
+                <div class="col-lg-6" *ngIf="link.show">
+                    <a [href]="link.link" class="text-decoration-none text-dark">
+                        <app-card [title]="link.nombre" [image_src]="link.img">
+                            {{link.description}}
+                        </app-card>
+                    </a>
+                </div>
+            </ng-container>
+
+            <hr *ngIf="i < data.groups.length-1">
+        </ng-container>
     </div>
 </div>

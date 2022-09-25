@@ -18,7 +18,8 @@ export class SidebarComponent implements OnInit {
         options: [
           {
             nombre: 'Default',
-            link: ''
+            link: '',
+            show: true
           }
         ]
       }
