@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.uasp</groupId>
     <artifactId>hhrr</artifactId>
-    <version>0.8.0</version>
+    <version>0.8.5</version>
     <name>Sistema de gestion de Recursos Humanos</name>
     <description>Demo project for Spring Boot</description>
     <properties>
