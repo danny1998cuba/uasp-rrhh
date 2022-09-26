@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MODELOS_ROOT, PLANTILLA_ROOT, SISTEMA_ROOT } from 'src/app/data/constants';
+import { MODELOS_ROOT, PLANTILLA_ROOT, SISTEMA_ROOT, SITE_ROOT } from 'src/app/data/constants';
 
 @Component({
   selector: 'app-footer',
@@ -11,5 +11,5 @@ export class FooterComponent {
   constructor() { }
 
   year = new Date().getFullYear()
-  plantilla = PLANTILLA_ROOT; modelos = MODELOS_ROOT; sistema = SISTEMA_ROOT
+  plantilla = PLANTILLA_ROOT; modelos = MODELOS_ROOT; sistema = SISTEMA_ROOT; dash = SITE_ROOT
 }

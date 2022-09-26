@@ -18,6 +18,7 @@ import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { RestoreFormComponent } from './modules/auth/restore-form/restore-form.component';
 import { SesionComponent } from './modules/sesion/sesion.component';
 import { UnauthorizedComponent } from './modules/unauthorized/unauthorized.component';
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { UnauthorizedComponent } from './modules/unauthorized/unauthorized.compo
     AuthComponent,
     RestoreFormComponent,
     SesionComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -31,6 +31,15 @@ export const GESTION_ROUTES = {
     NOCT: `${API_ROUTE}/noct`
 }
 
+// Stats Routes
+export const STATS_BASE = `${API_ROUTE}/stats`
+
+export const STATS_ROUTES = {
+    PROMEDIO: `${STATS_BASE}/promedio`,
+    TIEMPO: `${STATS_BASE}/tiempo`,
+    SALARIO: `${STATS_BASE}/salario`,
+}
+
 // Reports Routes
 export const REPORTS_BASE = `${API_ROUTE}/reports`
 

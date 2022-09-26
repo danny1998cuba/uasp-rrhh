@@ -21,3 +21,5 @@ export * from './services/services-consumer'
 export * from './services/rol-consumer'
 export * from './services/dep-consumer'
 export * from './services/dc-consumer'
+
+export * from './stats-classes'

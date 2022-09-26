@@ -67,3 +67,5 @@ export const _403_ROOT = '403'
 
 // Login routes
 export const LOGIN_ROUTE = 'login'
+
+export const SITE_ROOT = 'dashboard'

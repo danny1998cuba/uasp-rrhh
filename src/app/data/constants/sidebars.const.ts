@@ -15,7 +15,7 @@ export const MODELOS_SIDEBAR: ISidebarData = {
                     nombre: 'Plantilla aprobada y cubierta',
                     link: MODELOS_ROUTES.APROB,
                     img: 'assets/images/models_banner.png',
-                    description: 'Description',
+                    description: 'Relación de plzas disponibles y ocupadas en todas las unidades.',
                     roles: [
                         ROLES.JDEP, ROLES.USER
                     ]
@@ -33,7 +33,7 @@ export const MODELOS_SIDEBAR: ISidebarData = {
                     nombre: 'Modelo Grupo - Escala',
                     link: MODELOS_ROUTES.GRUPO_ESCALA,
                     img: 'assets/images/models_banner.png',
-                    description: 'Description',
+                    description: 'Informe sobre la Distribución de los Trabajadores por Categoría Ocupacional y Grupo de la Escala',
                     roles: [
                         ROLES.JDEP, ROLES.USER
                     ]

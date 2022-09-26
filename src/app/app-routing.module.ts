@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, NoAuthGuard } from './core/guards';
-import { MODELOS_ROOT, PLANTILLA_ROOT, SESION_ROOT, SISTEMA_ROOT, _403_ROOT } from './data/constants';
+import { MODELOS_ROOT, PLANTILLA_ROOT, SESION_ROOT, SISTEMA_ROOT, SITE_ROOT, _403_ROOT } from './data/constants';
 import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { AuthComponent } from './modules/auth/auth.component';
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { SesionComponent } from './modules/sesion/sesion.component';
 import { UnauthorizedComponent } from './modules/unauthorized/unauthorized.component';
 
@@ -22,6 +23,11 @@ const routes: Routes = [
     path: '',
     component: SkeletonComponent,
     children: [
+      {
+        path: SITE_ROOT,
+        component: DashboardComponent,
+        canActivate: [AuthGuard]
+      },
       {
         path: MODELOS_ROOT,
         loadChildren: () =>
@@ -49,7 +55,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: `/${MODELOS_ROOT}`,
+        redirectTo: `/${SITE_ROOT}`,
         pathMatch: 'full'
       }
     ]
