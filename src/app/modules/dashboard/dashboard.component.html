@@ -1,1 +1,26 @@
-<p>dashboard works!</p>
+<ng-container *ngIf="!isLoading; else noData">
+    Promedio
+    <pre>
+        {{promedio | json}}
+    </pre>
+    Salarios
+    <pre>
+        {{salarios | json}}
+    </pre>
+    Tiempo
+    <pre>
+        {{tiempo | json}}
+    </pre>
+    Trabajadores <span>{{trabajadores? trabajadores.length + '' : 0}}</span>
+    <br>
+    Mujeres <span>{{mujeres? mujeres.length + '' : 0}}</span>
+    <br>
+    Trabajadores x unidad
+    <pre>
+        {{trabajadoresUnidad | json}}
+    </pre>
+</ng-container>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>

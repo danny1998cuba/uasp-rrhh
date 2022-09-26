@@ -8,15 +8,12 @@ export function evaluateRoles(roles: string[]): boolean {
         switch (r) {
             case ROLES.ADMIN:
                 flag = Authenticated.isAdmin
-                console.log(flag);
                 break
             case ROLES.JDEP:
                 flag = Authenticated.isJDep
-                console.log(flag);
                 break
             case ROLES.USER:
                 flag = Authenticated.isUser
-                console.log(flag);
                 break
             default:
                 flag = false

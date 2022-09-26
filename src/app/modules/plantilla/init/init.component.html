@@ -1,30 +1,36 @@
-<div class="container-fluid py-4">
-    <h1>Trabajadores</h1>
+<ng-container *ngIf="!isLoading;else noData">
+    <div class="container-fluid py-4">
+        <h1>Trabajadores</h1>
 
-    <div class="row gap-lg-0 gap-3 gy-3">
-        <app-card [title]="list.length + ''" class="col-lg-4">Total</app-card>
-        <app-card [title]="mujeres.length + ''" class="col-lg-4">Mujeres</app-card>
-        <app-card [title]="(list.length - mujeres.length)+ ''" class="col-lg-4">Hombres</app-card>
+        <div class="row gap-lg-0 gap-3 gy-3">
+            <app-card [title]="list.length + ''" class="col-lg-4">Total</app-card>
+            <app-card [title]="mujeres.length + ''" class="col-lg-4">Mujeres</app-card>
+            <app-card [title]="(list.length - mujeres.length)+ ''" class="col-lg-4">Hombres</app-card>
+        </div>
     </div>
-</div>
 
 
-<div class="container-fluid py-4">
-    <h1>Gesti&oacute;n</h1>
-    <div class="row gap-lg-0 gap-3 gy-3">
-        <ng-container *ngFor=" let group of data.groups; let i = index">
-            <h2 class="group-header">{{group.title}}</h2>
-            <ng-container *ngFor="let link of group.options">
-                <div class="col-lg-6" *ngIf="evaluateRoles(link.roles)">
-                    <a [href]="link.link" class="text-decoration-none text-dark">
-                        <app-card [title]="link.nombre" [image_src]="link.img">
-                            {{link.description}}
-                        </app-card>
-                    </a>
-                </div>
+    <div class="container-fluid py-4">
+        <h1>Gesti&oacute;n</h1>
+        <div class="row gap-lg-0 gap-3 gy-3">
+            <ng-container *ngFor=" let group of data.groups; let i = index">
+                <h2 class="group-header">{{group.title}}</h2>
+                <ng-container *ngFor="let link of group.options">
+                    <div class="col-lg-6" *ngIf="evaluateRoles(link.roles)">
+                        <a [href]="link.link" class="text-decoration-none text-dark">
+                            <app-card [title]="link.nombre" [image_src]="link.img">
+                                {{link.description}}
+                            </app-card>
+                        </a>
+                    </div>
+                </ng-container>
+
+                <hr *ngIf="i < data.groups.length-1">
             </ng-container>
-
-            <hr *ngIf="i < data.groups.length-1">
-        </ng-container>
+        </div>
     </div>
-</div>
+</ng-container>
+
+<ng-template #noData>
+    <app-loader></app-loader>
+</ng-template>

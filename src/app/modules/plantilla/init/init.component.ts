@@ -17,6 +17,8 @@ export class InitComponent implements OnInit {
   list!: Trabajador[]
   mujeres!: Trabajador[]
 
+  isLoading = false
+
   constructor(
     private service: TrabajadorService,
     private snackBar: MatSnackBar
@@ -27,6 +29,7 @@ export class InitComponent implements OnInit {
   }
 
   async loadInfo() {
+    this.isLoading = true
     await firstValueFrom(this.service.getAll()).then(
       r => {
         if (!r.error) {
@@ -38,6 +41,7 @@ export class InitComponent implements OnInit {
     )
 
     this.mujeres = this.list.filter(t => t.sexo == 'f')
+    this.isLoading = false
   }
 
   sendMsg(msg: string) {
