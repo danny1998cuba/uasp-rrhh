@@ -45,7 +45,7 @@ public class F5202_07FillHelper {
         model.addData(F5202_07.FILAS.PROM_TRAB, F5202_07.COLUMNS.PLAN_ANUAL, plantillaAprobada);
         model.addData(F5202_07.FILAS.PROM_TRAB, F5202_07.COLUMNS.PLAN_ACUMULADO, plantillaAprobada);
         //Mes
-        HashMap<String, Number> map = procesarPromedioTrabs(false);
+        HashMap<String, Number> map = procesarPromedioTrabs(false, Calendar.getInstance().get(Calendar.MONTH));
         for (F5202_07.COLUMNS c : F5202_07.COLUMNS.values()) {
             if (map.get(c.getValue()) != null && map.get(c.getValue()).doubleValue() != 0d) {
                 double value = map.get(c.getValue()).doubleValue();
@@ -53,7 +53,7 @@ public class F5202_07FillHelper {
             }
         }
         //Mujeres
-        map = procesarPromedioTrabs(true);
+        map = procesarPromedioTrabs(true, Calendar.getInstance().get(Calendar.MONTH));
         for (F5202_07.COLUMNS c : F5202_07.COLUMNS.values()) {
             if (map.get(c.getValue()) != null && map.get(c.getValue()).doubleValue() != 0d) {
                 double value = map.get(c.getValue()).doubleValue();
@@ -68,7 +68,7 @@ public class F5202_07FillHelper {
         model.addData(F5202_07.FILAS.NUM_MUJERES, F5202_07.COLUMNS.REAL_MES, trabajadoresRepository.countBySexo("f"));
 
         //Fila 500 Tiempo
-        map = procesarTiempo();
+        map = procesarTiempo(Calendar.getInstance().get(Calendar.MONTH));
         for (F5202_07.COLUMNS c : F5202_07.COLUMNS.values()) {
             if (map.get(c.getValue()) != null && map.get(c.getValue()).doubleValue() != 0d) {
                 double value = map.get(c.getValue()).doubleValue();
@@ -92,27 +92,27 @@ public class F5202_07FillHelper {
         }
     }
 
-    private HashMap<String, Number> procesarPromedioTrabs(boolean isMujer) {
+    public HashMap<String, Number> procesarPromedioTrabs(boolean isMujer, int mes) {
         HashMap<String, Number> map = new HashMap<>();
 
         long realDisponble = isMujer ? trabajadoresRepository.countBySexoAndMision("f", false) : trabajadoresRepository.countByMision(false);
 
         double acumulado = 0d;
-        for (int i = Calendar.getInstance().get(Calendar.MONTH); i >= 1; i--) {
+        for (int i = mes; i >= 1; i--) {
             int totalNoFis = 0;
             for (Levantamiento lev : levantamientoRepository.findByMes(Calendar.getInstance().get(Calendar.YEAR), i)) {
                 totalNoFis += isMujer ? lev.getTotalMujeresNoFisico() : lev.getNoFisicos();
             }
             double realMes = realDisponble - totalNoFis;
 
-            if (i == Calendar.getInstance().get(Calendar.MONTH) + 1) {
+            if (i == mes) {
                 map.put(F5202_07.COLUMNS.REAL_MES.getValue(), realMes);
             }
 
             acumulado += realMes;
         }
 
-        double realAcumulado = acumulado / (Calendar.getInstance().get(Calendar.MONTH));
+        double realAcumulado = acumulado / mes;
         BigDecimal bd = new BigDecimal(realAcumulado);
         bd = bd.setScale(2, RoundingMode.HALF_UP);
 
@@ -121,20 +121,20 @@ public class F5202_07FillHelper {
         return map;
     }
 
-    private HashMap<String, Number> procesarTiempo() {
+    public HashMap<String, Number> procesarTiempo(int mes) {
         HashMap<String, Number> map = new HashMap<>();
 
         long plantillaCubierta = trabajadoresRepository.count();
 
         double acumulado = 0d;
-        for (int i = Calendar.getInstance().get(Calendar.MONTH); i >= 1; i--) {
+        for (int i = mes; i >= 1; i--) {
             int totalAus = 0;
             for (Ausencias aus : ausenciasRepository.findByMes(Calendar.getInstance().get(Calendar.YEAR), i)) {
                 totalAus += aus.getTotal();
             }
             double realMes = ((plantillaCubierta * 24) - totalAus) * 7.94;
 
-            if (i == Calendar.getInstance().get(Calendar.MONTH)) {
+            if (i == mes) {
                 map.put(F5202_07.COLUMNS.REAL_MES.getValue(), realMes);
             }
 

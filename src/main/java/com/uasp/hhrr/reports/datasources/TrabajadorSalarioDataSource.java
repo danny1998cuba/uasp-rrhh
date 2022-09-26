@@ -6,6 +6,7 @@
 package com.uasp.hhrr.reports.datasources;
 
 import com.uasp.hhrr.reports.submodel.TrabajadorSalario;
+import java.util.List;
 
 /**
  *
@@ -37,5 +38,9 @@ public class TrabajadorSalarioDataSource extends CustomDataSource<TrabajadorSala
             default:
                 return null;
         }
+    }
+
+    public List<TrabajadorSalario> getList() {
+        return list;
     }
 }

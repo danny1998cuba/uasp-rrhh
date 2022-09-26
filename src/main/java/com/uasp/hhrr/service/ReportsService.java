@@ -47,8 +47,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.sql.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -260,6 +258,10 @@ public class ReportsService {
 
         nocturnidadService.actualizarDb(fecha, data, u);
 
+        return databaseDS(data, u);
+    }
+
+    public TrabajadorSalarioDataSource databaseDS(List<Nocturnidades> data, Unidad u) {
         TrabajadorSalarioDataSource ds = new TrabajadorSalarioDataSource();
         List<TrabajadorSalario> list = new ArrayList<>();
 
