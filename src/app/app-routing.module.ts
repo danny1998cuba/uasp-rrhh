@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, NoAuthGuard } from './core/guards';
-import { MODELOS_ROOT, PLANTILLA_ROOT, SESION_ROOT, SISTEMA_ROOT } from './data/constants';
+import { MODELOS_ROOT, PLANTILLA_ROOT, SESION_ROOT, SISTEMA_ROOT, _403_ROOT } from './data/constants';
 import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { AuthComponent } from './modules/auth/auth.component';
 import { SesionComponent } from './modules/sesion/sesion.component';
+import { UnauthorizedComponent } from './modules/unauthorized/unauthorized.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,11 @@ const routes: Routes = [
       {
         path: SESION_ROOT,
         component: SesionComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: _403_ROOT,
+        component: UnauthorizedComponent,
         canActivate: [AuthGuard]
       },
       {

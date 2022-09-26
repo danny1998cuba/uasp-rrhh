@@ -1,0 +1,25 @@
+.wrapper {
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.wrapper h1 {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.wrapper h1 .error-number {
+    margin-bottom: 1.5rem;
+    font-size: 5rem;
+    color: rgb(224, 86, 86);
+}
+
+.wrapper h1 p {
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* .wrapper .msg {} */

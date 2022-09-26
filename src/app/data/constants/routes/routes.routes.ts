@@ -63,6 +63,7 @@ export const SISTEMA_ROUTES = {
 
 // Sesion routes
 export const SESION_ROOT = 'sesion'
+export const _403_ROOT = '403'
 
 // Login routes
 export const LOGIN_ROUTE = 'login'

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from 'src/app/core/guards';
-import { SISTEMA_CHILDREN } from 'src/app/data/constants';
+import { AuthGuard, RoleGuard } from 'src/app/core/guards';
+import { ROLES, SISTEMA_CHILDREN } from 'src/app/data/constants';
 import { CargosComponent } from './cargos/cargos.component';
 import { CatDocComponent } from './cat-doc/cat-doc.component';
 import { CatOcupComponent } from './cat-ocup/cat-ocup.component';
@@ -26,45 +26,91 @@ export const routes: Routes = [
             {
                 path: SISTEMA_CHILDREN.UNIDADES,
                 component: UnidadesComponent,
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, RoleGuard],
+                data: {
+                    roles: [
+                        ROLES.JDEP
+                    ]
+                }
             },
             {
                 path: SISTEMA_CHILDREN.ESCALAS,
                 component: EscalasComponent,
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, RoleGuard],
+                data: {
+                    roles: [
+                        ROLES.JDEP
+                    ]
+                }
             },
             {
                 path: SISTEMA_CHILDREN.CARGOS,
                 component: CargosComponent,
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, RoleGuard],
+                data: {
+                    roles: [
+                        ROLES.JDEP
+                    ]
+                }
             },
             {
                 path: SISTEMA_CHILDREN.CAT_OCUP,
                 component: CatOcupComponent,
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, RoleGuard],
+                data: {
+                    roles: [
+                        ROLES.ADMIN
+                    ]
+                }
             },
             {
                 path: SISTEMA_CHILDREN.CAT_DOC,
                 component: CatDocComponent,
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, RoleGuard],
+                data: {
+                    roles: [
+                        ROLES.ADMIN
+                    ]
+                }
             },
             {
                 path: SISTEMA_CHILDREN.NIVEL,
                 component: NivelEscolarComponent,
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, RoleGuard],
+                data: {
+                    roles: [
+                        ROLES.ADMIN
+                    ]
+                }
             },
             {
                 path: SISTEMA_CHILDREN.CLA,
                 component: ClaComponent,
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, RoleGuard],
+                data: {
+                    roles: [
+                        ROLES.JDEP
+                    ]
+                }
             },
             {
                 path: SISTEMA_CHILDREN.USUARIOS,
                 component: UsuariosComponent,
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, RoleGuard],
+                data: {
+                    roles: [
+                        ROLES.ADMIN
+                    ]
+                }
             }
         ],
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, RoleGuard],
+        data: {
+            roles: [
+                ROLES.ADMIN,
+                ROLES.JDEP
+            ]
+        }
     }
 ]
 

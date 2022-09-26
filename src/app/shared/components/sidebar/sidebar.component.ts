@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { evaluateRoles } from 'src/app/core/utils';
 import { ISidebarData } from './sidebar.metadata';
 
 @Component({
@@ -7,7 +8,7 @@ import { ISidebarData } from './sidebar.metadata';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
 
   @Input() data: ISidebarData = {
     icon: faUser,
@@ -19,17 +20,16 @@ export class SidebarComponent implements OnInit {
           {
             nombre: 'Default',
             link: '',
-            show: true
+            roles: []
           }
         ]
       }
     ]
   }
 
-
   constructor() { }
 
-  ngOnInit(): void {
+  evaluateRoles(roles: string[]): boolean {
+    return evaluateRoles(roles)
   }
-
 }

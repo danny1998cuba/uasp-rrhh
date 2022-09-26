@@ -1,6 +1,8 @@
+import { ROLES } from "./roles.const";
+
 export const ROLES_PERMS = [
     {
-        role: 'ADMIN',
+        role: ROLES.ADMIN,
         perms: [
             "Gestión de usuarios",
             "Gestión de elementos del sistema",
@@ -8,7 +10,7 @@ export const ROLES_PERMS = [
         ]
     },
     {
-        role: 'JDEP',
+        role: ROLES.JDEP,
         perms: [
             "Gestión de la plantilla",
             "Acceso a listados de trabajadores",
@@ -18,7 +20,7 @@ export const ROLES_PERMS = [
         ]
     },
     {
-        role: 'USER',
+        role: ROLES.USER,
         perms: [
             "Acceso a listados de trabajadores",
             "Acceso a los modelos de la entidad",

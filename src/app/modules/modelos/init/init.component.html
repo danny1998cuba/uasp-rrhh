@@ -4,7 +4,7 @@
         <ng-container *ngFor=" let group of data.groups; let i = index">
             <h2 class=" group-header">{{group.title}}</h2>
             <ng-container *ngFor="let link of group.options">
-                <div class="col-lg-6" *ngIf="link.show">
+                <div class="col-lg-6" *ngIf="evaluateRoles(link.roles)">
                     <a [href]="link.link" class="text-decoration-none text-dark">
                         <app-card [title]="link.nombre" [image_src]="link.img">
                             {{link.description}}

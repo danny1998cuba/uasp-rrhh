@@ -14,11 +14,10 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AuthComponent } from './modules/auth/auth.component';
 import { CookieService } from 'ngx-cookie-service';
-import { MatPaginatorIntl } from '@angular/material/paginator';
-import { CustomPaginator } from './core/utils';
-import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { RestoreFormComponent } from './modules/auth/restore-form/restore-form.component';
 import { SesionComponent } from './modules/sesion/sesion.component';
+import { UnauthorizedComponent } from './modules/unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,8 @@ import { SesionComponent } from './modules/sesion/sesion.component';
     FooterComponent,
     AuthComponent,
     RestoreFormComponent,
-    SesionComponent
+    SesionComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,

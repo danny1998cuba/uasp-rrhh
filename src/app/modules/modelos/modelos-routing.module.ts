@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from 'src/app/core/guards';
-import { MODELOS_CHILDREN } from 'src/app/data/constants';
+import { AuthGuard, RoleGuard } from 'src/app/core/guards';
+import { MODELOS_CHILDREN, ROLES } from 'src/app/data/constants';
 import { AprobCubiertaComponent } from './aprob-cubierta/aprob-cubierta.component';
 import { AusentismoComponent } from './ausentismo/ausentismo.component';
 import { DatabaseComponent } from './database/database.component';
@@ -58,7 +58,13 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
         ],
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, RoleGuard],
+        data: {
+            roles: [
+                ROLES.USER,
+                ROLES.JDEP
+            ]
+        }
     }
 ]
 

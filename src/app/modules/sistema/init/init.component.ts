@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { evaluateRoles } from 'src/app/core/utils';
 import { SISTEMA_SIDEBAR } from 'src/app/data/constants';
 
 @Component({
@@ -12,4 +13,7 @@ export class InitComponent {
 
   constructor() { }
 
+  evaluateRoles(roles: string[]): boolean {
+    return evaluateRoles(roles)
+  }
 }

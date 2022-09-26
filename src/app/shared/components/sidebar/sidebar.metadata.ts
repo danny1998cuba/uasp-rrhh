@@ -11,7 +11,7 @@ export interface ISidebarData {
             nombre: string,
             img?: string,
             description?: string,
-            show: boolean
+            roles: string[]
         }[]
     }[]
 }

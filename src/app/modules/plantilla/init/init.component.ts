@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { evaluateRoles } from 'src/app/core/utils';
 import { PLANTILLA_SIDEBAR } from 'src/app/data/constants';
 import { Trabajador } from 'src/app/data/schema';
 import { TrabajadorService } from 'src/app/data/services';
@@ -41,5 +42,9 @@ export class InitComponent implements OnInit {
 
   sendMsg(msg: string) {
     this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end' })
+  }
+
+  evaluateRoles(roles: string[]): boolean {
+    return evaluateRoles(roles)
   }
 }
