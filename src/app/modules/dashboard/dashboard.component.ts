@@ -13,8 +13,8 @@ export class DashboardComponent implements OnInit {
 
   isLoading = false
   salarios!: SalarioResult
-  promedio!: PromResult
-  tiempo!: TiempoResult
+  promedio!: PromResult[]
+  tiempo!: TiempoResult[]
   trabajadores!: Trabajador[]
   mujeres!: Trabajador[]
   trabajadoresUnidad: { unidad: Unidad, cantTrab: number }[] = []

@@ -1,26 +1,169 @@
+<app-navbar></app-navbar>
+
 <ng-container *ngIf="!isLoading; else noData">
-    Promedio
-    <pre>
-        {{promedio | json}}
-    </pre>
-    Salarios
-    <pre>
-        {{salarios | json}}
-    </pre>
-    Tiempo
-    <pre>
-        {{tiempo | json}}
-    </pre>
-    Trabajadores <span>{{trabajadores? trabajadores.length + '' : 0}}</span>
-    <br>
-    Mujeres <span>{{mujeres? mujeres.length + '' : 0}}</span>
-    <br>
-    Trabajadores x unidad
-    <pre>
-        {{trabajadoresUnidad | json}}
-    </pre>
+    <section id="banner" class="bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 d-flex flex-column justify-content-center text-md-start text-center px-3">
+                    <h1 class="promo-title">SISTEMA DE GESTI&Oacute;N DE RECURSOS HUMANOS</h1>
+                    <h2>Unidad de Aseguramiento a la Salud P&uacute;blica, Jaruco</h2>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-3"></div>
+                        <div class="col-6 col-md-12">
+                            <img src="assets/images/favicon.png" class="img-fluid logo mat-elevation-z8" alt="">
+                        </div>
+                        <div class="col-3"></div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <img src="assets/images/wave1.png" class="bottom-img" alt="">
+    </section>
+
+
+    <section class="bg-white pb-5">
+        <app-title-dash text="Informaci&oacute;n de los trabajadores"></app-title-dash>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="container">
+                        <div class="row gap-lg-0 gap-3 gy-3">
+                            <app-card [title]="trabajadores.length + ''" class="col-lg-4">Total</app-card>
+                            <app-card [title]="mujeres.length + ''" class="col-lg-4">Mujeres</app-card>
+                            <app-card [title]="(trabajadores.length - mujeres.length)+ ''" class="col-lg-4">Hombres
+                            </app-card>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="assets/images/workers_banner.png" alt="" class="w-100 px-5">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <h2 class="w-100">Distribuci&oacute;n de trabajadores por unidad</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped
+                        table-hover	table-borderless
+                        table-primary align-middle mat-elevation-z8">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Unidades</th>
+                                    <th class="text-center">Cantidad de trabajadores</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <ng-container *ngFor="let item of trabajadoresUnidad">
+                                    <tr class="table-primary">
+                                        <td scope="row">{{item.unidad.nombre}}</td>
+                                        <td class="text-center">{{item.cantTrab}}</td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="w-100">Promedio de trabajadores. A&ntilde;o actual.</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover	
+                    table-borderless table-primary align-middle mat-elevation-z8">
+                            <thead class="table-light">
+                                <tr>
+                                    <th rowspan="2">Mes</th>
+                                    <th colspan="2" class="text-center">Promedio actual</th>
+                                    <th colspan="2" class="text-center">Promedio acumulado</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Mujeres</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Mujeres</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <ng-container *ngFor="let item of promedio">
+                                    <tr class="table-primary">
+                                        <td scope="row" class="text-capitalize">{{item.mes - 1 | month}}</td>
+                                        <td class="text-center">{{item.promTotalAct}}</td>
+                                        <td class="text-center">{{item.promMujeresAct}}</td>
+                                        <td class="text-center">{{item.promTotalAcum}}</td>
+                                        <td class="text-center">{{item.promMujeresAcum}}</td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="col-md-6"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-success  pb-5">
+        <img src="assets/images/wave2.png" alt="wave" class="footer-img">
+        <app-title-dash text="Ausentismo"></app-title-dash>
+        <div class="container">
+
+
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <h2 class="w-100">Tiempo trabajado. A&ntilde;o actual.</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped
+                    table-hover	
+                    table-borderless
+                    table-primary
+                    align-middle mat-elevation-z8   ">
+                            <thead class="table-light">
+                                <tr>
+                                    <th rowspan="2">Mes</th>
+                                    <th class="text-center">Tiempo actual</th>
+                                    <th class="text-center">Tiempo acumulado</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <ng-container *ngFor="let item of tiempo">
+                                    <tr class="table-primary">
+                                        <td scope="row" class="text-capitalize">{{item.mes - 1 | month}}</td>
+                                        <td class="text-center">{{item.tiempoAct}}</td>
+                                        <td class="text-center">{{item.tiempoAcum}}</td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gray">
+        <img src="assets/images/wave3.png" alt="wave" class="footer-img">
+        <app-title-dash text="Contabilidad"></app-title-dash>
+        <div class="container">
+            Salarios
+        </div>
+    </section>
+
 </ng-container>
 
 <ng-template #noData>
     <app-loader></app-loader>
 </ng-template>
+
+<app-footer></app-footer>

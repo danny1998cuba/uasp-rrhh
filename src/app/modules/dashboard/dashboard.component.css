@@ -1,0 +1,58 @@
+* {
+    box-sizing: border-box;
+}
+
+.mar {
+    margin-top: -10px;
+}
+
+/* Banner */
+#banner {
+    width: 100%;
+    color: #fff;
+    padding-top: 5%;
+    min-height: 100vh;
+    position: relative;
+}
+
+#banner .container {
+    height: 100%;
+}
+
+.promo-title {
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    line-height: 45px;
+}
+
+.logo {
+    background: rgba(255, 255, 255, .2);
+    border-radius: 30%;
+    margin-bottom: 50px;
+}
+
+
+#banner a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.bottom-img {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+}
+
+section {
+    position: relative;
+}
+
+section:not(#banner) .row {
+    margin-bottom: 2rem;
+}
+
+.footer-img {
+    width: 100%;
+}

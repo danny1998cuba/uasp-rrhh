@@ -20,14 +20,14 @@ const routes: Routes = [
     canActivate: [NoAuthGuard]
   },
   {
+    path: SITE_ROOT,
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: '',
     component: SkeletonComponent,
     children: [
-      {
-        path: SITE_ROOT,
-        component: DashboardComponent,
-        canActivate: [AuthGuard]
-      },
       {
         path: MODELOS_ROOT,
         loadChildren: () =>

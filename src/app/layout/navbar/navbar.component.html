@@ -2,31 +2,31 @@
   <div class="px-3 py-2 bg-dark text-white">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a [routerLink]="dash" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+        <a [href]="dash" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
           <img src="assets/images/logo.png" alt="logo" height="50" class="d-inline-block align-top">
         </a>
 
         <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
           <li>
-            <a [routerLink]="dash" class="nav-link text-white">
+            <a [href]="dash" class="nav-link text-white">
               <fa-icon [icon]="faHome" class="fa fa-home d-block mb-1 w-100 text-center" aria-hidden="true"></fa-icon>
-              Tablero
+              Inicio
             </a>
           </li>
           <li>
-            <a [routerLink]="plantilla" class="nav-link text-white">
+            <a [href]="plantilla" class="nav-link text-white">
               <fa-icon [icon]="faUsers" class="fa fa-users d-block mb-1 w-100 text-center" aria-hidden="true"></fa-icon>
               Plantilla
             </a>
           </li>
           <li>
-            <a [routerLink]="modelos" class="nav-link text-white">
+            <a [href]="modelos" class="nav-link text-white">
               <fa-icon [icon]="faFile" class="fa fa-file d-block mb-1 w-100 text-center" aria-hidden="true"></fa-icon>
               Modelos
             </a>
           </li>
           <li>
-            <a [routerLink]="sistema" class="nav-link text-white">
+            <a [href]="sistema" class="nav-link text-white">
               <fa-icon [icon]="faCog" class="fa fa-cog d-block mb-1 w-100 text-center" aria-hidden="true"></fa-icon>
               Sistema
             </a>
@@ -42,7 +42,7 @@
 
               <ul class="dropdown-menu dropdown-menu-dark p-2" aria-labelledby="triggerId">
                 <li>
-                  <a class="dropdown-item d-flex gap-2 align-items-center" [routerLink]="sesion">
+                  <a class="dropdown-item d-flex gap-2 align-items-center" [href]="sesion">
                     <fa-icon [icon]="faUser" aria-hidden="true"></fa-icon>
                     &nbsp;
                     Perfil
