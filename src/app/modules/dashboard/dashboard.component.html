@@ -1,36 +1,37 @@
 <app-navbar></app-navbar>
 
-<ng-container *ngIf="!isLoading; else noData">
-    <section id="banner" class="bg-dark">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7 d-flex flex-column justify-content-center text-md-start text-center px-3">
-                    <h1 class="promo-title">SISTEMA DE GESTI&Oacute;N DE RECURSOS HUMANOS</h1>
-                    <h2>Unidad de Aseguramiento a la Salud P&uacute;blica, Jaruco</h2>
-                </div>
 
-                <div class="col-md-5">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-3"></div>
-                        <div class="col-6 col-md-12">
-                            <img src="assets/images/favicon.png" class="img-fluid logo mat-elevation-z8" alt="">
-                        </div>
-                        <div class="col-3"></div>
+<section id="banner" class="bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 d-flex flex-column justify-content-center text-md-start text-center px-3">
+                <h1 class="promo-title">SISTEMA DE GESTI&Oacute;N DE RECURSOS HUMANOS</h1>
+                <h2>Unidad de Aseguramiento a la Salud P&uacute;blica, Jaruco</h2>
+            </div>
+
+            <div class="col-md-5">
+                <div class="row d-flex align-items-center">
+                    <div class="col-3"></div>
+                    <div class="col-6 col-md-12">
+                        <img src="assets/images/favicon.png" class="img-fluid logo mat-elevation-z8" alt="">
                     </div>
-
-
+                    <div class="col-3"></div>
                 </div>
+
+
             </div>
         </div>
+    </div>
 
-        <img src="assets/images/wave1.png" class="bottom-img" alt="">
-    </section>
+    <img src="assets/images/wave1.png" class="bottom-img" alt="">
+</section>
 
 
-    <section class="bg-white pb-5">
-        <app-title-dash text="Informaci&oacute;n de los trabajadores"></app-title-dash>
-        <div class="container">
-            <div class="row">
+<section class="bg-white pb-5">
+    <app-title-dash text="Informaci&oacute;n de los trabajadores"></app-title-dash>
+    <div class="container">
+        <div class="row">
+            <ng-container *ngIf="!isLoading; else noData">
                 <div class="col-md-6">
                     <div class="container">
                         <div class="row gap-lg-0 gap-3 gy-3">
@@ -44,19 +45,30 @@
                 <div class="col-md-6">
                     <img src="assets/images/workers_banner.png" alt="" class="w-100 px-5">
                 </div>
-            </div>
+            </ng-container>
+        </div>
 
-            <div class="row">
-                <div class="col-md-6"></div>
+        <hr>
+
+        <div class="row">
+            <h2 class="w-100 text-center mb-4 subtitle">Distribuci&oacute;n de trabajadores por unidad</h2>
+            <ng-container *ngIf="!isLoading; else noData">
                 <div class="col-md-6">
-                    <h2 class="w-100">Distribuci&oacute;n de trabajadores por unidad</h2>
+                    <div class="row w-100 d-flex align-items-center justify-content-center h-100">
+                        <div class="col-md-10 offset-md-1 mat-elevation-z8">
+                            <app-trabajador-unidad [trabajadoresUnidad]="trabajadoresUnidad">
+                            </app-trabajador-unidad>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
                     <div class="table-responsive">
                         <table class="table table-striped
                         table-hover	table-borderless
                         table-primary align-middle mat-elevation-z8">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Unidades</th>
+                                    <th>Unidad</th>
                                     <th class="text-center">Cantidad de trabajadores</th>
                                 </tr>
                             </thead>
@@ -70,13 +82,55 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
-            </div>
+            </ng-container>
+        </div>
 
-            <div class="row">
+        <hr>
+
+        <div class="row">
+            <h2 class="w-100 text-center mb-4 subtitle">Distribuci&oacute;n de trabajadores por categor&iacute;a
+                ocupacional</h2>
+            <ng-container *ngIf="!isLoading; else noData">
                 <div class="col-md-6">
-                    <h2 class="w-100">Promedio de trabajadores. A&ntilde;o actual.</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped
+                        table-hover	table-borderless
+                        table-primary align-middle mat-elevation-z8">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Categor&iacute;a</th>
+                                    <th class="text-center">Cantidad de trabajadores</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <ng-container *ngFor="let item of trabajadorescatOcup">
+                                    <tr class="table-primary">
+                                        <td scope="row">{{item.catOcup.nombre}}</td>
+                                        <td class="text-center">{{item.cantTrab}}</td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row w-100 d-flex align-items-center justify-content-center h-100">
+                        <div class="col-md-10 offset-md-1 mat-elevation-z8">
+                            <app-trab-catocup [trabajadorescatOcup]="trabajadorescatOcup">
+                            </app-trab-catocup>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <h2 class="w-100 text-center mb-4 subtitle">Promedio de trabajadores. A&ntilde;o actual.</h2>
+            <ng-container *ngIf="!isLoading; else noData">
+                <div class="col-md-5">
                     <div class="table-responsive">
                         <table class="table table-striped table-hover	
                     table-borderless table-primary align-middle mat-elevation-z8">
@@ -108,21 +162,35 @@
                     </div>
 
                 </div>
-                <div class="col-md-6"></div>
-            </div>
+                <div class="col-md-7">
+                    <div class="row w-100 d-flex align-items-center justify-content-center h-100">
+                        <div class="col-md-10 offset-md-1 mat-elevation-z8">
+                            <app-promedio-trabajadores [proms]="promedio"></app-promedio-trabajadores>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="bg-success  pb-5">
-        <img src="assets/images/wave2.png" alt="wave" class="footer-img">
-        <app-title-dash text="Ausentismo"></app-title-dash>
-        <div class="container">
+<section class="bg-success  pb-5">
+    <img src="assets/images/wave2.png" alt="wave" class="footer-img">
+    <app-title-dash text="Ausentismo"></app-title-dash>
+    <div class="container">
 
 
-            <div class="row">
-                <div class="col-md-6"></div>
-                <div class="col-md-6">
-                    <h2 class="w-100">Tiempo trabajado. A&ntilde;o actual.</h2>
+        <div class="row">
+            <h2 class="w-100 text-center mb-4 subtitle">Tiempo trabajado. A&ntilde;o actual.</h2>
+            <ng-container *ngIf="!isLoading; else noData">
+                <div class="col-md-7">
+                    <div class="row w-100 d-flex align-items-center justify-content-center h-100">
+                        <div class="col-md-10 offset-md-1 bg-light p-4 mat-elevation-z8">
+                            <app-tiempo [tiempo]="tiempo"></app-tiempo>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
                     <div class="table-responsive">
                         <table class="table table-striped
                     table-hover	
@@ -148,19 +216,83 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </ng-container>
         </div>
-    </section>
 
-    <section class="bg-gray">
-        <img src="assets/images/wave3.png" alt="wave" class="footer-img">
-        <app-title-dash text="Contabilidad"></app-title-dash>
-        <div class="container">
-            Salarios
+        <hr>
+
+        <div class="row">
+            <h2 class="w-100 text-center mb-4 subtitle">Influencia de las causas m&aacute;s comunes en el
+                &iacute;ndice de ausentismo</h2>
+            <ng-container *ngIf="!isLoading; else noData">
+                <div class="col-md-5">
+                    <div class="row w-100 d-flex align-items-center justify-content-center h-100">
+                        <div class="col-md-10 offset-md-1 bg-light p-4 mat-elevation-z8">
+                            <h2>Mes actual ({{fecha | date:'MMMM, yyyy'}})</h2>
+                            <app-no-fisico-percent [levs]="levantamientos"></app-no-fisico-percent>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="row w-100 d-flex align-items-center justify-content-center h-100">
+                        <div class="col-md-10 offset-md-1 bg-light p-4 mat-elevation-z8">
+                            <h2>&Uacute;ltimo trimestre</h2>
+                            <app-no-fisico-trim [levs]="levantamientosTrim"></app-no-fisico-trim>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
         </div>
-    </section>
+    </div>
+</section>
 
-</ng-container>
+<section class="bg-gray">
+    <img src="assets/images/wave3.png" alt="wave" class="footer-img">
+    <app-title-dash text="Contabilidad"></app-title-dash>
+    <div class="container">
+        <div class="row">
+            <h2 class="w-100 text-center mb-4 subtitle">Distribuci&oacute;n de salario por unidades
+                (estimaci&oacute;n {{fecha | date:'MMM, yyyy'}})</h2>
+            <ng-container *ngIf="!isLoading; else noData">
+                <div class="col-md-6">
+                    <div class="table-responsive">
+                        <table class="table table-striped
+                        table-hover	table-borderless
+                        table-primary align-middle mat-elevation-z8">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Unidad</th>
+                                    <th class="text-end px-3">Salario</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <ng-container *ngFor="let item of salarios">
+                                    <tr class="table-primary">
+                                        <td scope="row">{{item.unidad.nombre}}</td>
+                                        <td class="text-end px-3">$ {{item.salario | number:'1.2-2'}}</td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                            <tfoot>
+                                <tr class="table-secondary">
+                                    <th>Total</th>
+                                    <th class="text-end px-3">$ {{sumSalarios() | number:'1.2-2'}}</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row w-100 d-flex align-items-center justify-content-center h-100">
+                        <div class="col-md-10 offset-md-1 p-4">
+                            <app-salario-unidad [salarios]="salarios"></app-salario-unidad>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</section>
 
 <ng-template #noData>
     <app-loader></app-loader>

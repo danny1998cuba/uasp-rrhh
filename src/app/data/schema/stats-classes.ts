@@ -1,3 +1,5 @@
+import { Unidad } from "./model/unidad"
+
 export class PromResult {
     mes!: number
     promTotalAct!: number
@@ -13,6 +15,6 @@ export class TiempoResult {
 }
 
 export class SalarioResult {
-    unidad!: number
+    unidad!: Unidad
     salario!: number
 }

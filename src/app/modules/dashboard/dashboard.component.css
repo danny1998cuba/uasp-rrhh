@@ -56,3 +56,12 @@ section:not(#banner) .row {
 .footer-img {
     width: 100%;
 }
+
+hr {
+    width: 50%;
+    margin: 2rem auto;
+}
+
+.subtitle {
+    font-weight: 600;
+}

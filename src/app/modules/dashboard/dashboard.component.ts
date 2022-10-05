@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { firstValueFrom } from 'rxjs';
-import { PromResult, SalarioResult, TiempoResult, Trabajador, Unidad } from 'src/app/data/schema';
-import { StatsService, TrabajadorService, UnidadService } from 'src/app/data/services';
+import { CatOcup, Levantamiento, PromResult, SalarioResult, TiempoResult, Trabajador, Unidad } from 'src/app/data/schema';
+import { CatOcupService, LevantamientoService, StatsService, TrabajadorService, UnidadService } from 'src/app/data/services';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,17 +12,24 @@ import { StatsService, TrabajadorService, UnidadService } from 'src/app/data/ser
 export class DashboardComponent implements OnInit {
 
   isLoading = false
-  salarios!: SalarioResult
+  salarios!: SalarioResult[]
   promedio!: PromResult[]
   tiempo!: TiempoResult[]
   trabajadores!: Trabajador[]
   mujeres!: Trabajador[]
-  trabajadoresUnidad: { unidad: Unidad, cantTrab: number }[] = []
+  trabajadoresUnidad: { unidad: Unidad, cantTrab: number, cantMujeres: number }[] = []
+  trabajadorescatOcup: { catOcup: CatOcup, cantTrab: number, cantMujeres: number }[] = []
+
+  levantamientos!: Levantamiento[]
+  levantamientosTrim: Levantamiento[][] = []
+  fecha = new Date()
 
   constructor(
     private statsService: StatsService,
     private trabajadorService: TrabajadorService,
     private unidadService: UnidadService,
+    private catOcupService: CatOcupService,
+    private levService: LevantamientoService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -83,7 +90,8 @@ export class DashboardComponent implements OnInit {
             u => {
               this.trabajadoresUnidad.push({
                 unidad: u,
-                cantTrab: this.trabajadores.filter(trab => trab.idDepartamento.idUnidad.id == u.id).length
+                cantTrab: this.trabajadores.filter(trab => trab.idDepartamento.idUnidad.id == u.id).length,
+                cantMujeres: this.mujeres.filter(trab => trab.idDepartamento.idUnidad.id == u.id).length
               })
             }
           )
@@ -93,7 +101,50 @@ export class DashboardComponent implements OnInit {
       }
     )
 
+    await firstValueFrom(this.catOcupService.getRoots_Children(false)).then(
+      r => {
+        if (!r.error) {
+          let catOcup: CatOcup[] = r.data
+          catOcup.forEach(
+            co => {
+              this.trabajadorescatOcup.push({
+                catOcup: co,
+                cantTrab: this.trabajadores.filter(trab => trab.idCargo.idCatOcup.abreviado == co.abreviado).length,
+                cantMujeres: this.mujeres.filter(trab => trab.idCargo.idCatOcup.abreviado == co.abreviado).length
+              })
+            }
+          )
+        } else {
+          this.sendMsg('Error')
+        }
+      }
+    )
+
+    let date = new Date()
+    for (let index = 0; index < 3; index++) {
+      await firstValueFrom(this.levService.getByMonth(date)).then(
+        r => {
+          if (!r.error) {
+            this.levantamientosTrim[index] = r.data
+
+            if (index == 0) {
+              this.levantamientos = r.data
+            }
+          } else {
+            this.sendMsg('Error')
+          }
+        }
+      )
+      date.setMonth(date.getMonth() - 1)
+    }
+
     this.isLoading = false
+  }
+
+  sumSalarios(): number {
+    let sal = 0
+    this.salarios.forEach(s => sal += s.salario)
+    return sal
   }
 
   sendMsg(msg: string) {

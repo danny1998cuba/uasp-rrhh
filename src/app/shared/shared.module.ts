@@ -32,6 +32,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectFilterModule } from 'mat-select-filter';
 
 @NgModule({
@@ -67,6 +68,7 @@ import { MatSelectFilterModule } from 'mat-select-filter';
     MatNativeDateModule,
     MatMomentDateModule,
     MatStepperModule,
+    MatDividerModule
   ],
   declarations: [...fromComponents.components, ...fromPipes.pipes, ...fromCharts.charts],
   exports: [
@@ -105,6 +107,7 @@ import { MatSelectFilterModule } from 'mat-select-filter';
     MatNativeDateModule,
     MatMomentDateModule,
     MatStepperModule,
+    MatDividerModule
   ]
 })
 export class SharedModule { }
