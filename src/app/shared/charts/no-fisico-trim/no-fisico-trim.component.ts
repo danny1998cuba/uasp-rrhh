@@ -78,7 +78,7 @@ export class NoFisicoTrimComponent implements OnInit {
 
       })
       data = [madres, aislamiento, covid, noCovid, peritados, embarazo, licMat, otraLic, vacaciones, interruptos]
-      this.chartData.datasets.push({ data: data, label: formatDate(date, 'MMMM, yyyy', 'es-ES') })
+      this.chartData.datasets.unshift({ data: data, label: formatDate(date, 'MMMM, yyyy', 'es-ES') })
       date.setMonth(date.getMonth() - 1)
     })
   }
