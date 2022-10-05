@@ -4,7 +4,6 @@
  */
 package com.uasp.hhrr.service;
 
-import com.uasp.hhrr.model.Ausencias;
 import com.uasp.hhrr.model.Levantamiento;
 import com.uasp.hhrr.repository.LevantamientoRepository;
 import java.util.Calendar;

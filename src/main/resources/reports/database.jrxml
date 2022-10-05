@@ -65,16 +65,16 @@
 					</textElement>
 					<text><![CDATA[]]></text>
 				</staticText>
-				<textField>
+				<textField pattern="#,##0.00#;(#,##0.00#-)">
 					<reportElement x="394" y="0" width="42" height="25" uuid="c8161077-5a62-4ea6-b17f-5a63bd750d17">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
-					<box>
+					<box rightPadding="5">
 						<pen lineWidth="0.5"/>
 						<topPen lineWidth="1.5"/>
 						<bottomPen lineWidth="1.25"/>
 					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{parcialAdicional}]]></textFieldExpression>
@@ -122,16 +122,16 @@
 					</textElement>
 					<text><![CDATA[Total]]></text>
 				</staticText>
-				<textField>
+				<textField pattern="#,##0.00#;(#,##0.00#-)">
 					<reportElement x="352" y="0" width="42" height="25" uuid="1bd3b1ba-06ac-4004-9cb6-4f64dce0fa8d">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
-					<box>
+					<box rightPadding="5">
 						<pen lineWidth="0.5"/>
 						<topPen lineWidth="1.5"/>
 						<bottomPen lineWidth="1.25"/>
 					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{parcialSalarioEscala}]]></textFieldExpression>
@@ -150,17 +150,17 @@
 					</textElement>
 					<text><![CDATA[]]></text>
 				</staticText>
-				<textField>
+				<textField pattern="#,##0.00#;(#,##0.00#-)">
 					<reportElement x="688" y="0" width="42" height="25" uuid="5b5948f0-72da-4ac9-91d5-a748e020ea79">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
-					<box>
+					<box rightPadding="5">
 						<pen lineWidth="0.5"/>
 						<topPen lineWidth="1.5"/>
 						<bottomPen lineWidth="1.25"/>
 						<rightPen lineWidth="1.25"/>
 					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{parcialPago}]]></textFieldExpression>
@@ -533,12 +533,12 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cubierta}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
+			<textField pattern="#,##0.00#;(#,##0.00#-)" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="352" y="0" width="42" height="25" uuid="d2e6d95b-ef4d-4e44-9bbd-74e079a6e6e4"/>
-				<box>
+				<box rightPadding="5">
 					<pen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{trabajador} != null ? $F{cargo}.getIdEscala().getSalario() : null]]></textFieldExpression>
@@ -553,22 +553,22 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cargo}.getIdEscala().getClasificador()]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
+			<textField pattern="#,##0.00#;(#,##0.00#-)" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="478" y="0" width="42" height="25" uuid="6a03de53-5a80-4b56-adb1-70ae5c411d36"/>
-				<box>
+				<box rightPadding="5">
 					<pen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cla}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
+			<textField pattern="#,##0.00#;(#,##0.00#-)" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="436" y="0" width="42" height="25" uuid="7c7994dc-4f15-4724-89b8-7bff1d397146"/>
-				<box>
+				<box rightPadding="5">
 					<pen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nocturnidad}]]></textFieldExpression>
@@ -583,12 +583,12 @@
 				</textElement>
 				<textFieldExpression><![CDATA[null]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
+			<textField pattern="#,##0.00#;(#,##0.00#-)" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="394" y="0" width="42" height="25" uuid="3a242f45-7c01-484e-ad45-7ec9c5473c3f"/>
-				<box>
+				<box rightPadding="5">
 					<pen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{pagoAdicional}]]></textFieldExpression>
@@ -603,39 +603,38 @@
 				</textElement>
 				<textFieldExpression><![CDATA[null]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
+			<textField pattern="#,##0.00#;(#,##0.00#-)" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="604" y="0" width="42" height="25" uuid="2b8a623a-1622-4244-bc52-e8bbfa244ef4"/>
-				<box>
+				<box rightPadding="5">
 					<pen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{maestria_doctorado}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
+			<textField pattern="#,##0.00#;(#,##0.00#-)" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="688" y="0" width="42" height="25" uuid="44c42ca2-b735-4b23-a361-5a4e5571020b"/>
-				<box>
+				<box rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<rightPen lineWidth="1.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{totalSalario}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
+			<textField pattern="#,##0.00#;(#,##0.00#-)" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="562" y="0" width="42" height="25" uuid="979f3e60-1e27-4bce-a492-81c1520495e7"/>
-				<box>
+				<box rightPadding="5">
 					<pen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{docencia}]]></textFieldExpression>
 			</textField>
 		</band>
-                
 	</detail>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
@@ -660,7 +659,6 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="131" splitType="Stretch">
-		</band>
+		<band height="131" splitType="Stretch"/>
 	</summary>
 </jasperReport>
