@@ -9,11 +9,6 @@ import { Component, OnInit } from '@angular/core';
 export class UnauthorizedComponent {
 
   constructor(
-    private location: Location
   ) { }
-
-  back() {
-    this.location.back()
-  }
 
 }
