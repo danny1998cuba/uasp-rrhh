@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,21 +29,24 @@ import org.springframework.web.bind.annotation.PutMapping;
  */
 @CrossOrigin(origins = {"*"})
 @RestController
+@PreAuthorize("hasAnyAuthority('ADMIN')")
 @RequestMapping("/api/escolaridad")
 public class NivelEscolarController {
-    
+
     @Autowired
     NivelEscolarService service;
-    
+
     @Autowired
     Gson g;
 
     @GetMapping("")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'JDEP', 'USER')")
     public ResponseEntity<?> list() {
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'JDEP', 'USER')")
     public ResponseEntity<?> get(@PathVariable int id) {
         return ResponseEntity.of(service.findById(id));
     }
@@ -95,7 +99,8 @@ public class NivelEscolarController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable int id) {try {
+    public ResponseEntity<?> delete(@PathVariable int id) {
+        try {
             boolean deleted = service.deleteById(id);
 
             if (deleted) {
@@ -113,5 +118,5 @@ public class NivelEscolarController {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(g.toJson(m));
         }
     }
-    
+
 }

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.PutMapping;
  */
 @CrossOrigin(origins = {"*"})
 @RestController
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
 @RequestMapping("/api/catDoc")
 public class CategoriaDocenteController {
     
@@ -38,11 +40,13 @@ public class CategoriaDocenteController {
     Gson g;
 
     @GetMapping("")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'JDEP', 'USER')")
     public ResponseEntity<?> list() {
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'JDEP', 'USER')")
     public ResponseEntity<?> get(@PathVariable int id) {
         return ResponseEntity.of(service.findById(id));
     }
