@@ -1,0 +1,25 @@
+.bg-dark-x {
+    background-color: #16191c !important;
+}
+
+.form-control,
+.btn {
+    min-height: 3.125rem;
+    line-height: initial;
+    color: #fff !important;
+}
+
+.background {
+    background-image: url('/assets/images/fondo_login.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.background h2 {
+    line-height: 2.5rem;
+}
+
+.loader {
+    width: 30px;
+    height: 30px;
+}

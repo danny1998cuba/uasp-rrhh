@@ -1,51 +1,47 @@
-<section class="bg-dark vh-100">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col col-xl-10">
-                <div class="card rounded-3">
-                    <div class="row g-0">
-                        <div class="col-md-6 col-lg-5 d-none d-md-flex align-items-center justify-content-center">
-                            <img src="assets/images/favicon.png" alt="login form" class="img-fluid" />
-                        </div>
-                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
-                            <div class="card-body p-4 p-lg-5 text-black">
+<section class="bg-dark text-light min-vh-100">
+    <div class="row g-0 h-100">
+        <div class="col-md-7 background min-vh-100 d-flex justify-content-center align-items-center">
+            <h2 class="text-center" [style.font-size.rem]="2.5">Sistema de gesti&oacute;n de Recursos Humanos</h2>
+        </div>
 
-                                <form ngNativeValidate (ngSubmit)="submitLogin()">
+        <div class="col-md-5 d-flex flex-column align-items-end min-vh-100 justify-content-between">
+            <div class="px-lg-5 pt-lg-4 pb-lg-3 p-4 w-100 mb-auto text-center">
+                <img src="assets/images/logo.png" alt="" class="img-fluid w-50">
+            </div>
+            <div class="px-lg-5 pt-lg-4 pb-lg-3 p-4 w-100 align-self-center">
+                <h1 class="fw-bold mb-4" [style.font-size.rem]="2.5">Iniciar sesi&oacute;n</h1>
 
-                                    <div class="d-flex align-items-center mb-3 pb-1">
-                                        <div class="row">
-                                            <div class="col-sm-6 d-md-none">
-                                                <img src="assets/images/logo.png" alt="" class="w-100">
-                                            </div>
-                                            <div class="col-md-12 col-sm-6 text-center">
-                                                <h2 class="fw-normal">Sistema de Gesti&oacute;n de Recursos Humanos</h2>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <h1 class="fw-normal mb-3 pb-3 text-center">Iniciar sesi&oacute;n
-                                    </h1>
-
-                                    <div class="form-outline mb-4">
-                                        <input type="text" id="username" class="form-control form-control-lg" required [(ngModel)]="username" [ngModelOptions]="{standalone:true}" >
-                                        <label class="form-label" for="username">Nombre de usuario</label>
-                                    </div>
-
-                                    <div class="form-outline mb-4">
-                                        <input type="password" id="password" class="form-control form-control-lg" required [(ngModel)]="password" [ngModelOptions]="{standalone:true}" >
-                                        <label class="form-label" for="password">Contrase&ntilde;a</label>
-                                    </div>
-
-                                    <div class="pt-1 mb-4 d-flex align-items-center justify-content-between">
-                                        <a class="small text-muted" (click)="restorePass()">¿No recuerda la contraseña?</a>
-                                        <button class="btn btn-primary btn-lg btn-block"
-                                            type="submit">Confirmar</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                <form ngNativeValidate (ngSubmit)="submitLogin()">
+                    <div class="mb-4">
+                        <label for="email" class="form-label fw-bold">Nombre de usuario</label>
+                        <input type="text" class="form-control bg-dark-x border-0" name="email" id="email"
+                            aria-describedby="emailHelpId" placeholder="Ingrese su nombre de usuario" required
+                            [(ngModel)]="username" [ngModelOptions]="{standalone:true}" />
                     </div>
-                </div>
+
+                    <div class="mb-4">
+                        <label for="pass" class="form-label fw-bold">Contrase&ntilde;a</label>
+                        <input type="password" class="form-control bg-dark-x border-0 mb-2" name="pass" id="pass"
+                            placeholder="Ingrese se contrase&ntilde;a" required [(ngModel)]="password"
+                            [ngModelOptions]="{standalone:true}">
+                        <a id="emailHelpId" class="form-text small text-muted text-decoration-none"
+                            (click)="restorePass()" role="button">¿Has olvidado
+                            tu contrase&ntilde;a?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Confirmar
+
+                        <img src="assets/images/loader.gif" class="loader mx-3" alt="Loader" *ngIf="isLoading">
+                    </button>
+                </form>
+            </div>
+
+            <div class="text-center px-lg-5 pt-lg-4 pb-lg-3 p-4 w-100 mt-auto">
+                <p class="text-center text-muted">©
+                    {{year}} Unidad de Aseguramiento a la Salud
+                    P&uacute;blica, Jaruco
+                </p>
             </div>
         </div>
     </div>

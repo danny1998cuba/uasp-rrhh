@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { firstValueFrom } from 'rxjs';
 import { AuthService } from 'src/app/data/services';
 import { RestoreFormComponent } from './restore-form/restore-form.component';
 
@@ -13,6 +14,8 @@ export class AuthComponent {
 
   username: string = ''
   password: string = ''
+  year = new Date().getFullYear()
+  isLoading = false
 
   constructor(
     private authService: AuthService,
@@ -20,8 +23,9 @@ export class AuthComponent {
     private dialog: MatDialog
   ) { }
 
-  submitLogin() {
-    this.authService.login(this.username, this.password).subscribe(
+  async submitLogin() {
+    this.isLoading = true
+    await firstValueFrom(this.authService.login(this.username, this.password)).then(
       r => {
         if (r.error) {
           this.sendMsg(r.msg)
@@ -30,6 +34,7 @@ export class AuthComponent {
         }
       }
     )
+    this.isLoading = false
   }
 
   restorePass() {
@@ -61,7 +66,7 @@ export class AuthComponent {
   }
 
   sendMsg(msg: string) {
-    this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end', verticalPosition: 'top', })
+    this.snackBar.open(msg, '', { duration: 3000, horizontalPosition: 'end', verticalPosition: 'bottom', })
   }
 
 }
