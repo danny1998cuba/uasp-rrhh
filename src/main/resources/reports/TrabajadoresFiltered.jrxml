@@ -3,7 +3,7 @@
     <property name="ireport.zoom" value="1.3310000000000062"/>
     <property name="ireport.x" value="0"/>
     <property name="ireport.y" value="0"/>
-    <parameter name="logo" class="java.lang.String"/>
+    <parameter name="logo" class="java.awt.Image"/>
     <parameter name="filtrostxt" class="java.lang.String"/>
     <queryString>
 		<![CDATA[]]>

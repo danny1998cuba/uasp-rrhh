@@ -13,9 +13,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RRHH"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="net.sf.jasperreports.chart.pie.ignore.duplicated.key" value="true"/>
-	<parameter name="logo" class="java.lang.String">
-		<defaultValueExpression><![CDATA["D:\\Daniel\\Escuela\\5to\\De tesis\\Program\\Frontend\\Design\\assets\\images\\logo.png"]]></defaultValueExpression>
-	</parameter>
+	<parameter name="logo" class="java.awt.Image"/>
 	<queryString>
 		<![CDATA[SELECT rrhh.trabajador.nombre AS nombre,
 	rrhh.trabajador.apellidos AS apellidos,

@@ -6,9 +6,7 @@
 	<parameter name="unidadId" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[3]]></defaultValueExpression>
 	</parameter>
-	<parameter name="logo" class="java.lang.String">
-		<defaultValueExpression><![CDATA["D:\\Daniel\\Escuela\\5to\\De tesis\\Program\\Frontend\\Design\\assets\\images\\logo.png"]]></defaultValueExpression>
-	</parameter>
+	<parameter name="logo" class="java.awt.Image"/>
 	<queryString>
 		<![CDATA[SELECT
      cargo.`nombre` AS cargo_nombre,

@@ -5,12 +5,14 @@
  */
 package com.uasp.hhrr.reports;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.Map;
+import javax.imageio.ImageIO;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -19,6 +21,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
@@ -40,7 +43,7 @@ public class JasperReportsManager {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
         ClassPathResource resource = new ClassPathResource("images" + File.separator + "logo.png");
-        params.put("logo", resource.getFile().getAbsolutePath());
+        params.put("logo", ImageIO.read(new ByteArrayInputStream(JRLoader.loadBytes(resource.getInputStream()))));
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(compile(fileName), params, con);
 
@@ -65,7 +68,7 @@ public class JasperReportsManager {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
         ClassPathResource resource = new ClassPathResource("images" + File.separator + "logo.png");
-        params.put("logo", resource.getFile().getAbsolutePath());
+        params.put("logo", ImageIO.read(new ByteArrayInputStream(JRLoader.loadBytes(resource.getInputStream()))));
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(compile(fileName), params, source);
 
