@@ -62,7 +62,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-//    @PreAuthorize("hasAnyAuthority('CONT', 'ADMIN', 'USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'JDEP', 'USER')")
     public ResponseEntity<?> put(@PathVariable int id, @RequestBody Usuario input) {
         try {
             if (!service.existentUsername(input.getUsername(), id)) {
@@ -145,7 +145,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/pass/{id}")
-//    @PreAuthorize("hasAnyAuthority('CONT', 'ADMIN', 'USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'JDEP', 'USER')")
     public ResponseEntity<?> changePassword(@PathVariable int id, @RequestBody PassObj input) {
         ChangeState result = service.changePassword(id, input.getOldPassword(), input.getNewPassword());
 
