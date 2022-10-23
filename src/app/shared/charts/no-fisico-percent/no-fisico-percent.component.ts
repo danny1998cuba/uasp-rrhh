@@ -3,6 +3,7 @@ import { ChartOptions, ChartType, ChartData } from 'chart.js';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { BaseChartDirective } from 'ng2-charts';
 import { Levantamiento } from 'src/app/data/schema';
+import { sum } from 'lodash'
 
 @Component({
   selector: 'app-no-fisico-percent',
@@ -23,17 +24,13 @@ export class NoFisicoPercentComponent implements OnInit {
     plugins: {
       datalabels: {
         formatter: (value, ctx) => {
-          let sum = 0;
-          let dataArr: any[] = ctx.chart.data.datasets[0].data;
-          dataArr.map((data: number) => {
-            sum += data;
-          });
-
           if (value == 0) {
             return ''
           }
 
-          let percentage = (value * 100 / sum).toFixed(2) + "%";
+          let dataArr = ctx.chart.data.datasets[0].data;
+          let total = sum(dataArr);     // sum from lodash        
+          let percentage = (value * 100 / total).toFixed(2) + "%";
           return percentage;
         },
         color: '#000',

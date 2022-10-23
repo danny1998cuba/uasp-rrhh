@@ -34,8 +34,7 @@
 
 
         <div class="d-flex justify-content-end mt-4">
-            <button mat-button type="button" aria-label="Down" (click)="download()"
-                [disabled]="dataSource.data.length == 0">
+            <button mat-button type="button" aria-label="Down" (click)="download()" [disabled]="disableDown()">
                 <fa-icon [icon]="faDown"></fa-icon>
                 <span class="px-3">Descargar listado</span>
             </button>

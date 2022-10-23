@@ -10,6 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import * as fromComponents from './components/index'
 import * as fromPipes from './pipes/index'
 import * as fromCharts from './charts/index'
+import * as fromDirectives from './directives/index'
 
 //Material
 import { MatInputModule } from '@angular/material/input';
@@ -70,7 +71,7 @@ import { MatSelectFilterModule } from 'mat-select-filter';
     MatStepperModule,
     MatDividerModule
   ],
-  declarations: [...fromComponents.components, ...fromPipes.pipes, ...fromCharts.charts],
+  declarations: [...fromComponents.components, ...fromPipes.pipes, ...fromCharts.charts, ...fromDirectives.directives],
   exports: [
     CommonModule,
     RouterModule,
@@ -84,6 +85,7 @@ import { MatSelectFilterModule } from 'mat-select-filter';
     ...fromComponents.components,
     ...fromPipes.pipes,
     ...fromCharts.charts,
+    ...fromDirectives.directives,
 
     //Material...
     MatTableModule,

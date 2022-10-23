@@ -108,7 +108,6 @@ export class TrabajadoresUnidadComponent implements OnInit {
     } else {
       this.allUnidsB = false
       this.dataSource = new MatTableDataSource(this.trabajadoresUnidad(this.unidad))
-      console.log(this.dataSource.data)
 
       this.downName = 'Trabajadores - ' + this.unidad.nombre + '.pdf'
 
@@ -117,12 +116,15 @@ export class TrabajadoresUnidadComponent implements OnInit {
   }
 
   changeTab(index: number) {
-    this.dataSource = this.dataSources[index]
+    this.dataSource = this.dataSources[index + 1]
   }
 
   trabajadoresUnidad(unidad: Unidad): Trabajador[] {
-    console.log(this.trabajadores)
     return this.trabajadores.filter(trab => trab.idDepartamento.idUnidad.id == unidad.id)
+  }
+
+  disableDown(): boolean {    
+    return this.allUnidsB ? false : this.dataSource.data.length == 0
   }
 
   download() {
