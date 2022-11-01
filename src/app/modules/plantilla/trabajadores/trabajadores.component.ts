@@ -5,12 +5,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faInfo, faInfoCircle, faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { firstValueFrom } from 'rxjs';
 import { Cargo, CatDoc, CatOcup, Cla, Departamento, DepsConsumer, NivelEscolar, ServicesConsumer, Trabajador } from 'src/app/data/schema';
 import { CargoService, CatDocService, CatOcupService, ClaService, DepartamentoService, EscalaService, NivelEscolarService, TrabajadorService } from 'src/app/data/services';
 import { DepCargoService } from 'src/app/data/services/api/dep-cargo.service';
-import { DelDialogComponent } from 'src/app/shared/components';
+import { DelDialogComponent, InfoDialogComponent } from 'src/app/shared/components';
 import { FullNamePipe } from 'src/app/shared/pipes';
 import { CargosComponent } from '../../sistema/cargos/cargos.component';
 import { CatDocComponent } from '../../sistema/cat-doc/cat-doc.component';
@@ -28,7 +28,7 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
 
   displayedColumns: string[] = ['nombre', 'ci', 'cargo', 'actions'];
   dataSource = new MatTableDataSource<Trabajador>([]);
-  faAdd = faPlus; faEdit = faPencil; faDelete = faTrash
+  faAdd = faPlus; faEdit = faPencil; faDelete = faTrash; faInfo = faInfo
 
   //Arrays
   catsDoc!: CatDoc[]
@@ -177,6 +177,11 @@ export class TrabajadoresComponent extends ServicesConsumer<Trabajador, number> 
         this.sendMsg('Trabajador eliminado correctamente')
       }
     });
+  }
+
+  inforDialog(object: Trabajador) {
+    const myCompDialog = this.dialog.open(InfoDialogComponent, { data: { object: object ? object : undefined } });
+
   }
 
 }

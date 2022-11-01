@@ -1,0 +1,23 @@
+.row {
+    margin-bottom: 1rem;
+}
+
+.row .row,
+.row.lastOnSection {
+    margin-bottom: 0 !important;
+}
+
+.bold-title {
+    font-weight: bold;
+}
+
+.divisor {
+    width: 60%;
+    margin: 2rem auto;
+}
+
+@media (max-width: 768px) {
+    .row .row {
+        margin-bottom: 1rem !important;
+    }
+}

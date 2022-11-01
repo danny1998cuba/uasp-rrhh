@@ -30,6 +30,10 @@ th {
     width: 25%;
 }
 
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    padding: 0 10px !important;
+}
+
 .clickable-row:hover {
     background: #f5f5f5;
 }

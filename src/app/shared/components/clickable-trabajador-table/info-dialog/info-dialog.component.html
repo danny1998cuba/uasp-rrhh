@@ -1,0 +1,77 @@
+<h2 mat-dialog-title>Informaci&oacute;n</h2>
+<mat-dialog-content class="mat-typography">
+    <h3 class="mb-4 bold-title text-center text-decoration-underline">Informaci&oacute;n Personal</h3>
+    <div class="row">
+        <div class="col-sm-5 bold-title">Nombre y apellidos:</div>
+        <div class="col-sm-7 d-flex align-items-center">{{object | fullName}}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5 bold-title">Carne de identidad:</div>
+        <div class="col-sm-7 d-flex align-items-center">{{object.ci}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-sm-6 bold-title">Sexo:</div>
+                <div class="col-sm-6 d-flex align-items-center">{{object.sexo == 'm' ? 'Masculino' : 'Femenino'}}</div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-sm-6 bold-title">Nivel escolar:</div>
+                <div class="col-sm-6 d-flex align-items-center">{{object.idEscolar.nombre}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="row lastOnSection">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-sm-6 bold-title">Maestr&iacute;a:</div>
+                <div class="col-sm-6 d-flex align-items-center">{{object.maestria ? 'S&iacute;' : 'No'}}</div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-sm-6 bold-title">Doctorado:</div>
+                <div class="col-sm-6 d-flex align-items-center">{{object.doctorado ? 'S&iacute;' : 'No'}}</div>
+            </div>
+        </div>
+    </div>
+
+
+    <hr class="divisor">
+
+    <h3 class="mb-4 bold-title text-center text-decoration-underline">Informaci&oacute;n de contrato</h3>
+    <div class="row">
+        <div class="col-sm-5 bold-title">Departamento / Unidad:</div>
+        <div class="col-sm-7 d-flex align-items-center">{{object.idDepartamento.nombre}} /
+            {{object.idDepartamento.idUnidad.nombre}}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5 bold-title">Cargo:</div>
+        <div class="col-sm-7 d-flex align-items-center">{{object.idCargo.nombre}}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5 bold-title">Categoría docente:</div>
+        <div class="col-sm-7 d-flex align-items-center">{{object.idCatDoc ? object.idCatDoc.tipo : 'No tiene'}}</div>
+    </div>
+    <div class="row lastOnSection">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-sm-6 bold-title">Condiciones laborales adicionales:</div>
+                <div class="col-sm-6 d-flex align-items-center">{{object.idCLA ? 'Grupo ' + object.idCLA.grupo : 'No
+                    tiene'}}</div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-sm-6 bold-title">Cumpliendo misi&oacute;n:</div>
+                <div class="col-sm-6 d-flex align-items-center">{{object.mision ? 'S&iacute;' : 'No'}}</div>
+            </div>
+        </div>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close="">Cerrar</button>
+</mat-dialog-actions>

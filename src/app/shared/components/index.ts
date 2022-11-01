@@ -1,5 +1,6 @@
 import { CardComponent } from "./card/card.component";
 import { ClickableTrabajadorTableComponent } from "./clickable-trabajador-table/clickable-trabajador-table.component";
+import { InfoDialogComponent } from "./clickable-trabajador-table/info-dialog/info-dialog.component";
 import { DelDialogComponent } from "./del-dialog/del-dialog.component";
 import { LoaderComponent } from "./loader/loader.component";
 import { MonthPickerComponent } from "./month-picker/month-picker.component";
@@ -12,6 +13,7 @@ export const components: any[] = [
     CardComponent,
     ClickableTrabajadorTableComponent,
     DelDialogComponent,
+    InfoDialogComponent,
     LoaderComponent,
     MonthPickerComponent,
     MyPdfViewerComponent,
@@ -23,6 +25,7 @@ export const components: any[] = [
 export * from "./card/card.component";
 export * from "./clickable-trabajador-table/clickable-trabajador-table.component";
 export * from "./del-dialog/del-dialog.component";
+export * from "./clickable-trabajador-table/info-dialog/info-dialog.component";
 export * from "./loader/loader.component";
 export * from "./month-picker/month-picker.component";
 export * from "./my-pdf-viewer/my-pdf-viewer.component";
