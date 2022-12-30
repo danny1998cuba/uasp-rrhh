@@ -3,7 +3,7 @@
     <action>
         <actionName>run</actionName>
         <packagings>
-            <packaging>jar</packaging>
+            <packaging>war</packaging>
         </packagings>
         <goals>
             <goal>spring-boot:run</goal>
@@ -17,7 +17,7 @@
     <action>
         <actionName>debug</actionName>
         <packagings>
-            <packaging>jar</packaging>
+            <packaging>war</packaging>
         </packagings>
         <goals>
             <goal>spring-boot:run</goal>
@@ -32,7 +32,7 @@
     <action>
         <actionName>profile</actionName>
         <packagings>
-            <packaging>jar</packaging>
+            <packaging>war</packaging>
         </packagings>
         <goals>
             <goal>process-classes</goal>

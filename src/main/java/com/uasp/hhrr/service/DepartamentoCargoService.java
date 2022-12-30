@@ -76,7 +76,7 @@ public class DepartamentoCargoService implements Services<DepartamentoCargo, Dep
     }
 
     public boolean disponibilidad(int idDep, int idCargo) {
-        return disponibilidad(depRep.getById(idDep), cargoRep.getById(idCargo));
+        return disponibilidad(depRep.getOne(idDep), cargoRep.getOne(idCargo));
     }
 
     public boolean disponibilidad(int idDep, int idCargo, int idTrab) {
@@ -90,7 +90,7 @@ public class DepartamentoCargoService implements Services<DepartamentoCargo, Dep
         if (finded.isPresent()) {
             return true;
         } else {
-            return disponibilidad(depRep.getById(idDep), cargoRep.getById(idCargo));
+            return disponibilidad(depRep.getOne(idDep), cargoRep.getOne(idCargo));
         }
     }
 

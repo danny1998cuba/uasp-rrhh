@@ -101,7 +101,7 @@ public class TrabajadorController {
             return ResponseEntity.status(HttpStatus.CREATED).body(g.toJson(m));
         } catch (DataIntegrityViolationException ex) {
             if (ex.getCause().getCause().getMessage().contains("Duplicate entry")) {
-                MessageResponse m = new MessageResponse("Ya existe untrabajador con este carné de identidad");
+                MessageResponse m = new MessageResponse("Ya existe un trabajador con este carné de identidad");
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(m));
             } else {
                 MessageResponse m = new MessageResponse(ex.getMessage());

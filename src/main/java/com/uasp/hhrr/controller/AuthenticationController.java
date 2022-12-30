@@ -8,9 +8,7 @@ import com.google.gson.Gson;
 import com.uasp.hhrr.MessageResponse;
 import com.uasp.hhrr.model.UserAuth;
 import com.uasp.hhrr.model.Usuario;
-import com.uasp.hhrr.security.userDetails.MyUserDetails;
 import com.uasp.hhrr.service.UsuarioService;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +18,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.RequestContextHolder;
 
 /**
  *
@@ -54,27 +49,32 @@ public class AuthenticationController {
             authObj = auth.authenticate(
                     new UsernamePasswordAuthenticationToken(input.getUsername(), input.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authObj);
-            return ResponseEntity.status(HttpStatus.OK).body(g.toJson(new MessageResponse(RequestContextHolder.currentRequestAttributes().getSessionId())));
+            Usuario u = userService.findByUsername(input.getUsername()).orElse(null);
+
+            return ResponseEntity.status(HttpStatus.OK).body(g.toJson(u != null ? u : "Anonymous"));
         } catch (BadCredentialsException ex) {
             MessageResponse msg = new MessageResponse("Credenciales incorrectas");
             return ResponseEntity.status(HttpStatus.CONFLICT).body(g.toJson(msg));
         }
     }
 
-    @GetMapping("/userAuth")
-    public ResponseEntity<?> getAuthenticated() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Usuario u;
-
-        if (principal != "anonymousUser") {
-            String uN = ((MyUserDetails) principal).getUser().getUsername();
-            u = userService.findByUsername(uN).orElse(null);
-        } else {
-            u = null;
-        }
-
-        return ResponseEntity.of(Optional.ofNullable(u));
-    }
+//    @GetMapping("/userAuth")
+//    public ResponseEntity<?> getAuthenticated() {
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Usuario u;
+//
+//        if (principal != "anonymousUser") {
+//            String uN = ((MyUserDetails) principal).getUser().getUsername();
+//            System.out.println(uN);
+//            u = userService.findByUsername(uN).orElse(null);
+//            System.out.println(u);
+//        } else {
+//            System.out.println("anonymus");
+//            u = null;
+//        }
+//
+//        return ResponseEntity.of(Optional.ofNullable(u));
+//    }
 
     @PostMapping("/restorePass")
     public ResponseEntity<?> restorePass(@RequestBody String ident) {
