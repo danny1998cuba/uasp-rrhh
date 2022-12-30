@@ -1,4 +1,4 @@
-# Trabajo de dipoma
+# Trabajo de diploma
 ### Título: Sistema de gestión de información de recursos humanos para las unidades de Salud Pública del municipio Jaruco.
 #### Autor: [Daniel González Cuétara](http://linktr.ee/danny98cuba "Daniel González Cuétara")
 
