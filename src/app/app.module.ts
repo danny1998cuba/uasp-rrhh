@@ -1,4 +1,5 @@
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 import es from '@angular/common/locales/es';
@@ -19,6 +20,7 @@ import { RestoreFormComponent } from './modules/auth/restore-form/restore-form.c
 import { SesionComponent } from './modules/sesion/sesion.component';
 import { UnauthorizedComponent } from './modules/unauthorized/unauthorized.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { AuthInterceptor } from './core/interceptors';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,11 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
     { provide: LOCALE_ID, useValue: "es-ES" },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'CUP' },
     { provide: MatBottomSheetRef, useValue: {} },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     CookieService
   ],
   bootstrap: [AppComponent]

@@ -22,11 +22,13 @@ export class AuthService extends ApiClass {
 
   login(username: string, password: string): Observable<ResponseHandler> {
 
-    if (this.cookies.check(STORAGE_KEYS.SESSIONID)) {
-      this.cookies.delete(STORAGE_KEYS.SESSIONID)
+    if (this.cookies.check(STORAGE_KEYS.AUTH_TOKEN)) {
+      this.cookies.delete(STORAGE_KEYS.AUTH_TOKEN)
     }
 
     const response = new ResponseHandler()
+    this.headers.append("authorization", this.createBasicAuthToken(username, password))
+
     return this.http.post<any>(LOGIN_ROUTES.LOGIN,
       { username: username, password: password },
       { headers: this.headers })
@@ -35,55 +37,63 @@ export class AuthService extends ApiClass {
           response.msg = "Autenticado con exito"
           response.status = HttpStatusCode.Ok
 
-          this.cookies.set(STORAGE_KEYS.SESSIONID, r.msg)
-          this.getUser().subscribe()
-
-          return response;
-        }),
-        catchError(this.error)
-      );
-  }
-
-  logout(): Observable<ResponseHandler> {
-    const response = new ResponseHandler()
-    return this.http.get<any>(LOGIN_ROUTES.LOGOUT,
-      { headers: this.headers, withCredentials: true })
-      .pipe(
-        map(r => {
-          this.cookies.deleteAll()
-          sessionStorage.removeItem(STORAGE_KEYS.USER)
-
-          response.msg = "Sesion cerrada con exito"
-          response.status = HttpStatusCode.Ok
-
-          this.router.navigateByUrl('/' + LOGIN_ROUTE)
-
-          return response;
-        }),
-        catchError(this.error)
-      );
-  }
-
-  getUser(): Observable<ResponseHandler> {
-    const response = new ResponseHandler()
-    return this.http.get<any>(LOGIN_ROUTES.ACTIVE_USER,
-      { headers: this.headers, withCredentials: true })
-      .pipe(
-        map(r => {
-          response.msg = "Usuario"
-          response.data = r;
-          response.status = HttpStatusCode.Ok
-
           this.setUserToLS(r)
+          this.cookies.set(STORAGE_KEYS.AUTH_TOKEN, this.createBasicAuthToken(username, password))
 
-          if (!response.error) {
-            this.router.navigateByUrl('/' + SITE_ROOT)
-          }
+          this.router.navigateByUrl('/' + SITE_ROOT)
           return response;
         }),
         catchError(this.error)
       );
   }
+
+
+
+
+  logout() {
+    // const response = new ResponseHandler()
+    // return this.http.get<any>(LOGIN_ROUTES.LOGOUT,
+    //   { headers: this.headers })
+    //   .pipe(
+    //     map(r => {
+    //       this.cookies.deleteAll()
+    //       sessionStorage.removeItem(STORAGE_KEYS.USER)
+
+    //       response.msg = "Sesion cerrada con exito"
+    //       response.status = HttpStatusCode.Ok
+
+    //       this.router.navigateByUrl('/' + LOGIN_ROUTE)
+
+    //       return response;
+    //     }),
+    //     catchError(this.error)
+    //   );
+
+    sessionStorage.removeItem(STORAGE_KEYS.USER)
+    this.cookies.deleteAll()
+    this.router.navigateByUrl('/' + LOGIN_ROUTE)
+  }
+
+  // getUser(): Observable<ResponseHandler> {
+  //   const response = new ResponseHandler()
+  //   return this.http.get<any>(LOGIN_ROUTES.ACTIVE_USER,
+  //     { headers: this.headers, withCredentials: true })
+  //     .pipe(
+  //       map(r => {
+  //         response.msg = "Usuario"
+  //         response.data = r;
+  //         response.status = HttpStatusCode.Ok
+
+  //         this.setUserToLS(r)
+
+  //         if (!response.error) {
+  //           this.router.navigateByUrl('/' + SITE_ROOT)
+  //         }
+  //         return response;
+  //       }),
+  //       catchError(this.error)
+  //     );
+  // }
 
   restorePass(identificador: String): Observable<ResponseHandler> {
     const response = new ResponseHandler()
@@ -102,5 +112,9 @@ export class AuthService extends ApiClass {
 
   private setUserToLS(data: any) {
     sessionStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(data))
+  }
+
+  createBasicAuthToken(username: String, password: String) {
+    return 'Basic ' + window.btoa(username + ":" + password)
   }
 }

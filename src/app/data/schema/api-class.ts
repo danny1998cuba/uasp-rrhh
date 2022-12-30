@@ -9,6 +9,7 @@ export class ApiClass {
     public headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
         'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
         'Access-Control-Allow-Headers': 'Origin,Content-Type,append,delete,entries,foreach,get,has,keys,set,values,Authorization,accept'
     })

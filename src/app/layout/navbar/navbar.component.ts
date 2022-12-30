@@ -23,13 +23,6 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout().subscribe(r => {
-      if (r.error) {
-        console.log('algo paso ' + r.msg)
-      } else {
-        console.log(r)
-      }
-    })
-
+    this.authService.logout()
   }
 }

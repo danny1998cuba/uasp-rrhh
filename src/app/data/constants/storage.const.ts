@@ -1,4 +1,4 @@
 export const STORAGE_KEYS = {
-    SESSIONID: 'JSESSIONID',
+    AUTH_TOKEN: 'token',
     USER: 'currentUser'
 }
