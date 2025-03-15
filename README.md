@@ -11,7 +11,7 @@ Sistema de gestión de información centrado en los datos personales de trabajad
 - Modelos o  reportes
 - Sistema
 
-> Descargue el manual de usuario [aquí](http://bitly.ws/yo4a "").
+> Descargue el manual de usuario [aquí](https://mega.nz/file/YdFm0BBA#VNbyt3iC4uqy62bCAKEW5kF4y5au-UiDtSbLJDn6R3M).
 
 ![Init](https://i.ibb.co/kx6ZysS/init-crop.png "Init")
 
